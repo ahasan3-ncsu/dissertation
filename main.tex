@@ -1,0 +1,43 @@
+\documentclass[12pt]{book}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx, subcaption, booktabs}
+\usepackage{amsmath, amssymb, siunitx}
+\usepackage{placeins, hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=cyan,
+	pdftitle={Atomsky's dissertation},
+}
+\usepackage{setspace}
+\onehalfspacing
+\renewcommand*\contentsname{Table of Contents}
+
+
+\begin{document}
+
+\title{
+	Application of computational methods
+	for the evaluation of U-Mo monolithic fuel
+}
+\author{ATM Jahid Hasan}
+
+\maketitle
+
+What's in here?
+Abstract?
+Frontmatter!
+
+\tableofcontents
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\include{intro/intro}
+
+\include{methods/methods}
+
+\end{document}
