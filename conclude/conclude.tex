@@ -40,3 +40,18 @@ models of creep mechanisms.
 Overall, the results obtained from this work will provide insight
 into the various phenomena related to the fuel performance
 of the $\gamma$U-Mo fuels.
+
+\section{Inverse UQ}
+
+This work establishes a way
+to perform IUQ on unknown fission-gas-behavior parameters of $\gamma$U-Mo
+utilized in DART.
+A dataset compiled from 3200 DART simulations are used for the study.
+Only three parameters ("dGrainHBS", "FaceCovMax", and "SwellLink") out of seven
+affects the fission gas swelling value in a significant way.
+The other four parameters are inconsequential.
+For surrogate modeling, GP with an RBF kernel is found to work the best.
+MCMC sampling with this surrogate leads to
+converged posterior probability distributions for the three parameters.
+Forward propagations using these posteriors provide a way
+to verify the whole process as well.

@@ -1,0 +1,257 @@
+\chapter{Inverse UQ}
+
+\section{Surrogate modeling}
+
+Figure \ref{fig:linear} depicts the surrogate prediction vs actual test data
+for three linear surrogate models: OLS, Lasso, and Ridge.
+The performance of the linear surrogate models are assessed
+with the test data.
+The R$^2$ scores for all of them are at least 0.997,
+and the root mean squared errors (RMSEs)
+and the mean absolute errors (MAEs)
+are about 0.25 and 0.17 swelling\%, respectively.
+Table \ref{tab:surrogates} details a few performance metrics
+for all the surrogate models.
+Among the three linear surrogate models,
+the Lasso model provided the most noteworthy insight.
+The regression coefficients for the parameters
+"vResol", "DatomFissGBx", "fNucleate", and "aAtomDifFiss"
+are equal to 0 in the Lasso surrogate.
+Therefore, it is possible to ignore these four parameters
+without losing any accuracy in the prediction.
+
+\begin{figure}[!ht]
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/ols.png}
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/lasso.png}
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/ridge.png}
+\end{subfigure}
+\caption{
+	Surrogate prediction vs actual test data for linear surrogates.
+}
+\label{fig:linear}
+\end{figure}
+
+The prediction vs true test data for three non-linear surrogate models:
+GP, NN, and SVR, are shown in Figure \ref{fig:nonlin}.
+The NN and SVR are trained with 7 parameters
+and 70\% of the total data (the train split),
+similar to the linear models.
+The GP model is trained with only 3 significant parameters
+(as identified by Lasso) and 14\% of the total data (448 samples).
+However, this model is evaluated with the same test data as others.
+The rationale behind using fewer training samples for the GP model
+is to reduce the computational cost.
+It is apparent from Figure \ref{fig:nonlin}
+that the GP model predict swelling values with high accuracy.
+This is also reflected by its higher R$^2$ score
+and lower RMSE and MAE scores than other models.
+As a result, the GP model is utilized in the MCMC sampling for IUQ.
+
+\begin{figure}[!ht]
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/gp.png}
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/nn.png}
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/svr.png}
+\end{subfigure}
+\caption{
+	Surrogate prediction vs actual test data for non-linear surrogates.
+}
+\label{fig:nonlin}
+\end{figure}
+
+\begin{table}[ht]
+\centering
+\caption{
+	Comparison of surrogate performance on test data.
+}
+\label{tab:surrogates}
+\begin{tabular}{lccc}
+\toprule
+Surrogate Model           & R$^2$   & RMSE  & MAE   \\
+\midrule
+Ordinary Least Squares    & 0.99708 & 0.253 & 0.174 \\
+Lasso                     & 0.99706 & 0.255 & 0.174 \\
+Ridge                     & 0.99708 & 0.253 & 0.174 \\
+Gaussian Processes        & 0.99981 & 0.065 & 0.044 \\
+Neural Network            & 0.99366 & 0.374 & 0.279 \\
+Support Vector Regression & 0.99365 & 0.374 & 0.172 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{MCMC sampling}
+
+Figure \ref{fig:trace} displays the trace plots of the MCMC samples
+of the three fission-gas-behavior parameters.
+Two chains of 100,000 samples are overlaid on the trace plots.
+The cumulative averages of the blue and orange traces
+are shown in black and red, respectively.
+After an initial period, the cumulative averages of both chains converge.
+The density plots of the parameter posterior samples
+are shown in Figure \ref{fig:hist}.
+Again, the density plots from both chains show similar trends.
+The posterior of "dGrainHBS" is reminiscent of a Gaussian distribution,
+whereas the posteriors of the other two parameters
+are more akin to a uniform distribution.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/trace.png}
+	\caption{
+		Trace plots of the posterior samples
+		of the fission-gas-behavior parameters from MCMC sampling.
+	}
+	\label{fig:trace}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{invuq/images/hist.png}
+	\caption{
+		Density plots of the posterior samples
+		of the fission-gas-behavior parameters from MCMC sampling.
+	}
+	\label{fig:hist}
+\end{figure}
+
+The acceptance rate of the MCMC sampling was about 24\% for both chains,
+which is close to the optimal value for mixing
+for a random walk Metropolis algorithm.
+To be sure of the convergence of the MCMC samples,
+the Gelman-Rubin statistic and the effective sample size (ESS)
+of the MCMC samples are also calculated and listed in Table \ref{tab:conv}.
+The Gelman-Rubin statistic
+is either 1 or very close to 1 for the posterior samples,
+which indicates that no convergence issues were detected.
+For all three parameters, the ESS is about 2000,
+which is sufficient for stable estimates.
+The MCMC samples were thus thinned by picking every 100th value
+to reduce auto-correlation.
+The remaining 2000 posterior samples are investigated for the IUQ process.
+
+\begin{table}[ht]
+\centering
+\caption{
+	Convergence diagnostics for the MCMC samples.
+}
+\label{tab:conv}
+\begin{tabular}{lccc}
+\toprule
+Statistic              & dGrainHBS & FaceCovMax & SwellLink \\
+\midrule
+Effective Sample Size  & 2019      & 1878       & 2122      \\
+Gelman-Rubin statistic & 1.0       & 1.0        & 1.001     \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{IUQ}
+
+The diagonal subfigures in Figure \ref{fig:iuq}
+shows the posterior distributions of the fission-gas-behavior parameters
+after the IUQ process.
+The distributions in this figure are from the thinned samples
+unlike the distributions shown in Figure \ref{fig:hist}.
+Thinning the samples did not change the characteristics of the distributions.
+The means, standard deviations, and the 95\% credible intervals
+of the posterior distributions are reported in Table \ref{tab:iuq}.
+
+Besides the posteriors,
+the correlations among the posteriors are also displayed
+as contour plots in the off-diagonal of Figure \ref{fig:iuq}.
+Even though the prior distributions of the parameters
+are assumed to be independent,
+Bayesian IUQ can still identify the correlations
+among the parameter posteriors through MCMC sampling.
+For instance, the posteriors of "dGrainHBS" and "FaceCovMax"
+have a strong positive correlation ($\rho = 0.9$),
+and the posteriors of "dGrainHBS" and "SwellLink"
+have a weak positive correlation ($\rho = 0.25$).
+Consequently, the correlation among the parameter posteriors
+need to be taken into account when generating new samples.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{invuq/images/iuq.png}
+	\caption{
+		Posterior distributions of 3 fission-gas-behavior parameters.
+		Marginal densities are in the diagonal
+		and the pair-wise joint densities are in the off-diagonal.
+	}
+	\label{fig:iuq}
+\end{figure}
+
+\begin{table}[ht]
+\centering
+\caption{
+	Posterior means, standard deviations, and 95\% credible intervals
+	for all the fission-gas-behavior parameters.
+}
+\label{tab:iuq}
+\begin{tabular}{lccc}
+\toprule
+Parameter  & Mean
+		   & Std. deviation
+		   & 95\% credible interval               \\
+\midrule
+dGrainHBS  & \num{3.72e-5}
+		   & \num{3.42e-6}
+		   & {[} \num{3.11e-5}, \num{4.37e-5} {]} \\
+FaceCovMax & \num{7.57e-1}
+		   & \num{8.82e-2}
+		   & {[} \num{6.09e-1}, \num{8.99e-1} {]} \\
+SwellLink  & \num{2.53e-2}
+		   & \num{5.22e-3}
+		   & {[} \num{1.66e-2}, \num{3.37e-2} {]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section{FUQ and validation}
+
+To validate the results from IUQ,
+we propagated the posterior samples using two surrogate models: GP and Lasso.
+The results from the forward propagation are shown in Figure \ref{fig:fuq}.
+Both surrogate models predict
+fuel swelling aligning closely with the experimental data,
+even though IUQ was performed only with the GP surrogate.
+This process does not lead to a proper validation of the IUQ results
+since we are using the same surrogate for both IUQ and FUQ.
+A more rigorous validation process would be generating new samples
+from the joint posteriors of the parameters
+and propagating them directly through DART.
+
+\begin{figure}[!ht]
+\begin{subfigure}{0.49\textwidth}
+	\centering
+	\caption{GP}
+	\includegraphics[width=\textwidth]{invuq/images/fuq_gp.png}
+\end{subfigure}
+\begin{subfigure}{0.49\textwidth}
+	\centering
+	\caption{Lasso}
+	\includegraphics[width=\textwidth]{invuq/images/fuq_las3.png}
+\end{subfigure}
+\caption{
+	Forward propagation using (a) GP, and (b) Lasso surrogate models.
+}
+\label{fig:fuq}
+\end{figure}
