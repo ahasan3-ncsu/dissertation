@@ -2,6 +2,410 @@
 
 Here we go!
 
-\section{Why?}
+\section{UMo GB diffusion}
 
-\subsection{Why me?}
+The United States High-Performance Research Reactor (USHPRR) program
+is pursuing a replacement of highly enriched uranium (HEU) fuels
+in high-power research reactors to low enriched uranium (LEU) fuels.
+This effort originates from the necessity
+of moving away from weapons-grade nuclear material
+and minimizing potential proliferation threats.
+To achieve this feat, a new fuel with increased uranium density is required
+to offset the reduction in enrichment \cite{snelgrove1997, wilson2020},
+while maintaining adequate power and flux levels in research reactors.
+
+High-performance research reactors need fuel
+that can operate at low temperatures
+and provide high fission density at high specific power.
+The fission density requirement of a candidate fuel
+is in the range of $3 \times 10^{21}$ fission/cm$^3$
+to $6 \times 10^{21}$ fission/cm$^3$.
+Only a few fuels, such as stable $\gamma$U alloys,
+have the suitable combination of high uranium density
+and stable behavior at such a high burnup \cite{meyer2014}.
+The $\gamma$ phase of uranium has a body-centered cubic (bcc) structure,
+eliminating the problem of anisotropic swelling behavior
+observed in orthorhombic $\alpha$U \cite{hofman1990, mahbuba2021}.
+Alloying the $\gamma$ phase with molybdenum
+leads to a metastable $\gamma$ phase that shows sluggish transformation
+to the equilibrium phases (namely $\alpha$U and $\gamma$'U$_2$Mo)
+upon cooling \cite{saller1955, dwight1960},
+allowing for the presence of the $\gamma$ phase at lower temperatures
+than predicted by the phase diagram.
+Also, $\gamma$U-Mo alloys exhibit phase reversion
+to the $\gamma$ phase from the equilibrium phases
+under irradiation \cite{meyer2014, willard1965}.
+$\gamma$U-Mo alloys thus provide the largest region
+of $\gamma$ phase metastability under reactor conditions.
+As a result, the USHPRR program is pursuing fuel designs with $\gamma$U-Mo
+as the monolithic fuel foil with a zirconium diffusion barrier
+in aluminum cladding \cite{robinson2009, cole2016, miller2021}.
+
+Knowledge of microstructure evolution under irradiation
+is crucial for designing nuclear fuels.
+For $\gamma$U-Mo, fission gas bubble formation and its impact on fuel swelling
+need to be quantified to ensure predictable fuel performance.
+Mechanistic models are being developed to evaluate
+microstructure-based fuel performance,
+such as fuel swelling, fuel creep,
+and degradation of mechanical and thermal properties
+based on fuel parameters and irradiation conditions.
+Accurate calculation of fuel swelling requires
+diffusion coefficients of the related species in the fuel.
+Furthermore, creep modeling also requires diffusion coefficients
+to determine creep rates and evaluate the evolving microstructure.
+Therefore, it is essential to understand
+the diffusion behavior of the $\gamma$U-Mo fuel.
+
+The bulk diffusion coefficients of U, Mo, and Xe in $\gamma$U-Mo fuel
+have already been calculated \cite{smirnova2015, park2021}
+or measured \cite{huang2013}.
+However, the diffusion coefficients of the relevant species
+in $\gamma$U-Mo grain boundaries (GBs) are yet unknown.
+As a consequence, models of fuel swelling, gas bubble evolution,
+irradiation creep, and other properties needed for fuel performance evaluation
+either utilize estimated GB diffusion values
+or make the diffusion coefficients adjustable parameters.
+The current assumptions of the GB diffusion coefficients
+are $10^2$ to $10^7$ times greater than
+the bulk diffusion coefficients \cite{annualreport2021, ye2015}.
+This much uncertainty in the estimated GB diffusion coefficients
+can have a significant impact
+on the predicted fuel swelling behavior \cite{annualreport2022}.
+The fuel swelling model of $\gamma$U-Mo
+in the Dispersion Analysis Research Tool \cite{dart}
+needs the GB diffusion coefficients
+to advise the GB enhancement factor \cite{cui2015, annualreport2021}.
+The phase-field models of gas bubble evolution in $\gamma$U-Mo
+require the diffusivity of gas atoms \cite{hu2021, annualreport2021}.
+The GB diffusion coefficients are also needed for the irradiation creep model
+of the $\gamma$U-Mo fuel \cite{annualreport2022}.
+
+In the literature, there are many examples
+of the use of molecular dynamics (MD) to compute GB diffusion coefficients
+in nuclear fuels.
+Vincent-Aublant et al. \cite{vincent2009} calculated
+the self-diffusion of UO$_2$ near GBs using MD.
+Govers et al. investigated
+GB diffusion in nano-polycrystalline UO$_2$ \cite{govers2013}.
+Nishina et al. studied the GB diffusion of actinides and oxygen in oxide fuels
+using MD \cite{nishina2011}.
+MD has also been used by Beeler et al. to compute GB energies in $\gamma$U-Mo
+and U$_3$Si$_2$ fuels \cite{beeler2018gb, beeler2019}.
+Besides nuclear fuels, MD has also been used to study
+GB diffusion in other bcc materials, such as bcc iron \cite{yang2018},
+bcc tungsten \cite{fu2021}, etc.
+
+In this work, the diffusivities of U, Mo, and Xe in $\gamma$U-Mo GBs
+are computed using classical MD simulations.
+Different types of symmetric tilt, asymmetric tilt, and twist GBs
+are utilized for the calculations.
+The effect of fuel composition on diffusion is also examined.
+The results from this study will inform
+the rate-theory-based fuel swelling models,
+the phase-field models of gas bubble evolution,
+and the irradiation creep models.
+
+\section{Xe gas bubble re-solution}
+
+A $\gamma$U-10Mo alloy-based monolithic fuel design was identified
+as the fuel type for converting U.S. High-Performance Research Reactors (HPRRs)
+\cite{meyer2014} from high enriched fuel to low enriched fuel.
+To understand the fuel's behavior under irradiation,
+mesoscale and engineering-level fuel performance models
+require knowledge of the fundamental mechanistic behavior
+of fission products within the fuel to describe key phenomena,
+such as swelling \cite{beeler2018gb, annualreport2021}.
+Specifically, understanding the progression of Xe gas bubbles in the fuel
+is crucial for optimizing reactor performance and safety.
+These Xe gas bubbles act as a sink for individual Xe atoms,
+trapping them and causing the bubbles to grow after absorption.
+Under irradiation, the Xe atoms in the gas bubble are reintroduced
+into the fuel matrix through fission-product-induced cascades
+and thermal spikes---a process known as re-solution.
+The relative rates of the re-solution affect the overall size and density
+of the bubbles \cite{ye2023, olander2006re, parfitt2008},
+in turn impacting bubble evolution and subsequent fuel swelling.
+Re-solution of fission gas in nuclear fuels involves
+two commonly accepted mechanisms: homogeneous re-solution
+and heterogeneous re-solution.
+In homogeneous re-solution, atoms from the gas bubbles are ejected individually
+through collisions with fission products
+or the recoil atoms that traverse the bubbles.
+These atomic collision cascades are primarily governed
+by the nuclear stopping power of the material.
+In the heterogeneous model, a portion of gas bubbles are dissolved
+by a passing fission fragment in the vicinity.
+The driving mechanism is the local heating of the material
+containing the gas bubbles,
+through the electronic stopping of the fission fragments \cite{setyawan2018}.
+The fact that both these mechanisms occur on a short timescale
+makes it challenging to conduct experiments for determining re-solution rates
+that contribute to the fission gas release models.
+Thus, atomistic-scale modeling is necessary
+for determining the re-solution rate
+and for elucidating the fundamental mechanism
+behind re-solution in $\gamma$U-10Mo.
+
+In the literature up to this point, atomistic simulations have been widely used
+to evaluate the re-solution rate in various nuclear materials.
+For instance, in 2008, Parfitt et al. \cite{parfitt2008} used simulations
+of primary knock-on atoms (PKAs) in uranium dioxide (UO$_2$)
+to assess the re-solution of helium gas bubbles.
+In 2009, Schwen et al. \cite{schwen2009md} investigated
+the homogeneous re-solution of Xe gas bubbles in UO$_2$,
+using a binary collision model and molecular dynamics (MD) simulations.
+The following year, Huang et al. \cite{huang2010md} examined
+the impact of thermal spikes on Xe re-solution in UO$_2$.
+In 2012, Govers et al. \cite{govers2012} performed
+PKA and thermal spike simulations of Xe gas bubbles in UO$_2$
+and proposed a mathematical model for the re-solution rate.
+However, the most comprehensive work on Xe gas bubble re-solution in UO$_2$
+was conducted  in 2018 by Setyawan et al. \cite{setyawan2018}.
+They reconciled the inconsistencies found in the conclusions of previous works
+on Xe bubble re-solution in UO$_2$
+and evaluated the re-solution rate as a function of bubble radius.
+Their findings suggest that heterogeneous re-solution of gas bubbles
+is the dominant method of re-solution in UO$_2$.
+In addition to UO$_2$, the re-solution rate of fission gas bubbles
+was also evaluated in uranium carbide (UC)
+by Matthews et al. \cite{matthews2015diss}, using binary collision methods.
+The thermal spike model was not employed in UC
+because it was assumed that the local heating does not exceed
+the melting temperature \cite{matthews2015diss, ronchi1986}.
+In summary, the binary collision model and MD simulations were used
+to determine the re-solution rate in nuclear fuels.
+
+In MD simulations of homogeneous re-solution,
+a regular lattice atom is typically endowed with high kinetic energy
+to emulate a PKA.
+The PKA then interacts ballistically with other atoms,
+initiating a collision cascade near the gas bubble
+and inducing disorder \cite{parfitt2008, govers2012}.
+One alternative approach in MD is to simulate only a portion of the cascade
+(i.e., a subcascade) by imparting energy
+to a random gas atom within the bubble.
+In doing so, the simulation avoids unnecessary cascade events
+that may not significantly influence the re-solution process.
+However, a binary collision model must be utilized in this approach
+to first obtain an energy spectrum of the gas atom PKAs \cite{schwen2009md}.
+One challenge in using MD simulations to model homogeneous re-solution
+is the channeling of PKAs or their recoils over long distances,
+without any collisions \cite{jarrin2021}.
+This can make collecting statistics on the interactions
+between PKAs and gas bubble atoms computationally demanding,
+especially when the PKA direction is random.
+A potential solution
+is to direct the PKAs toward a high index lattice direction \cite{stoller2000}.
+Moreover, collision cascades end up in heat spikes due to nuclear stopping.
+In that regard, the simulation of PKAs
+also encompasses the heterogeneous re-solution.
+To identify atoms that are re-solved ballistically, a threshold atomic speed,
+above which it is improbable to find atoms in thermal equilibrium,
+can be utilized \cite{parfitt2008}.
+For MD simulations of heterogeneous re-solution due to swift heavy ions,
+the thermal spike model is normally employed.
+This model is useful for describing the interaction
+between the fission fragments and the fuel.
+These interactions occur primarily
+via electronic stopping of the energetic particles
+that initially raise the electronic subsystem temperature.
+The energy deposited in the electronic subsystem can then transfer
+to the lattice as thermal energy via electron-phonon coupling.
+Finally, the energy is transferred among the atoms,
+leading to a rapid increase in lattice temperature within a cylindrical zone
+of typically a few nm in radius.
+This increase is known as
+a thermal spike \cite{wang1994, toulemonde2002, patra2019}.
+In MD simulations, electronic interactions cannot be treated directly.
+However, the final step described above can be emulated
+by raising the temperature of atoms within a cylindrical region.
+
+% Normally, heat spikes and thermal spikes are used interchangeably. However,
+% in this work, we use "heat spike" to mean the spike due to nuclear stopping
+% at the end of collision (sub)cascades. The word "thermal spike" is reserved
+% for describing local heating due to heavy electronic stopping.
+
+For qualification of $\gamma$U-Mo fuel,
+the ability to accurately predict the fission gas atom evolution
+under various operational and transient conditions is crucial.
+The Dispersion Analysis Research Tool (DART),
+developed by Argonne National Laboratory \cite{ye2023},
+is a mesoscale code that can calculate fission gas swelling
+in $\gamma$U-Mo under different operational situations.
+One of the many parameters required to model swelling behavior
+is the re-solution rate of fission gas bubbles.
+DART employs a simple re-solution model
+that includes a piecewise function to account for the bubble radius.
+The parameters in this function are calibrated
+by fitting the computed swelling value to experimental data,
+meaning that we can only roughly estimate the re-solution rate.
+A physics-based re-solution rate for fission gas bubbles would make
+the swelling calculations of higher-length-scale models more rigorous.
+
+In the present study, we utilized MD simulations to investigate
+the re-solution of Xe gas bubbles in $\gamma$U-Mo fuel---considering
+both the homogeneous and heterogeneous re-solution mechanisms
+by simulating PKAs and thermal spikes.
+We also calculated the electronic stopping power
+of representative fission products
+so as to determine the energy imparted on gas bubbles
+by fission events at a certain distance.
+Finally, we evaluated an overall re-solution rate of Xe gas bubbles
+as a function of bubble radius, bubble pressure, and fission rate.
+
+\section{Inverse UQ}
+
+Dispersion Analysis Research Tool (DART) is a computational code
+capable of modeling the swelling behavior of Uranium-Molybdenum ($\gamma$U-Mo)
+under the operating conditions of high-power research and test reactors (RTRs).
+DART is based on a rate-theory-based mechanistic model for fission gas behavior
+and a phase-field method for grain-size-specific recrystallization kinetics.
+The DART code has been validated against experimental data
+and has been used to study the effects of various operational and
+microstructural parameters on fuel swelling \cite{annualreport2021, ye2023}.
+
+The key challenges in simulating fuel swelling with a mechanistic model
+are obtaining key material properties related to gas bubble behavior,
+as many of them cannot be measured experimentally
+with the currently available techniques.
+Some of the parameters can be calculated using atomic-scale simulation methods.
+For the parameters that do not have measurement data
+or atomic-scale simulation results,
+they are usually estimated by either fitting to measured bubble morphology
+or by borrowing from other similar fuel systems where the data is available.
+The fission-gas-behavior parameters used in the GRASS module of DART
+were calibrated in a previous study,
+using the bubble size distributions
+measured from irradiated $\gamma$U-10Mo dispersion fuel particles.
+However, this set of parameters needs recalibration
+because new atomic-scale data have become available
+since the previous calibration \cite{annualreport2021, ye2023}.
+
+Inverse uncertainty quantification (IUQ) is a process
+to quantify uncertainties in the input parameters of a computer model,
+such as DART, given experimental data.
+IUQ is an essential step in computational model validation
+because it provides a concrete and quantifiable measure of uncertainty
+in model predictions
+\cite{wu2018inverse, nagel2019bayesian, wu2021comprehensive}.
+The concept of IUQ is in contrast to forward uncertainty quantification (FUQ),
+which quantifies the uncertainty in the output of a computer model
+given the input parameters.
+FUQ is often used to predict the uncertainty in the results of a simulation,
+while IUQ is used to quantify the uncertainty in the model itself.
+IUQ is often used in engineering and scientific applications
+where there is a high degree of uncertainty in the input parameters.
+By quantifying the uncertainty in the input parameters,
+IUQ can help to improve the accuracy and reliability
+of the model predictions \cite{wu2021comprehensive, xie2024functional}.
+
+In this work, IUQ is performed to obtain probability distributions
+of a few fission-gas-behavior parameters used in DART.
+First, the data compiled from some DART calculations is visualized.
+Afterward, surrogate models are built using the data.
+A variety of linear and non-linear models are used for this purpose.
+Afterward, Bayesian inference methods are applied
+to find the posterior probability distributions of the DART parameters.
+Finally, the surrogate model is used again along with the parameter posteriors
+to compute the forward propagation as FUQ and validation.
+
+\subsection{Problem definition}
+
+Table \ref{tab:uqparam} shows the DART parameters of interest and their ranges.
+The orders of magnitude of the parameters vary considerably.
+The parameter "dGrainHBS" denotes the high burunup structure grain diameter.
+"FaceCovMax" dictates the grain face coverage needed for interlinkage.
+"SwellLink" determines the swelling starting interlinkage of the grain edges.
+"vResol" is the probability that a gas bubble interacts with fission fragments.
+"DatomFissGBx" is the grain boundary diffusion enhancement factor.
+"fNucleate" indicates the adjustment factor
+for the probability of bubble nucleation on the grain boundary.
+Finally, 'aAtomDifFiss" is the linear coefficient
+of radiation-driven gas atom diffusivity
+\cite{annualreport2021, ye2023, annualreport2022}.
+
+There are 3200 samples relating the 7 fission-gas-behavior parameters
+with fuel swelling at a fission density of $7 \times 10^{21}$ fiss/cm$^3$.
+The training and testing are done on a 70/30 split of this data.
+Figure \ref{fig:scatter} shows scatter plots of fuel swelling
+against all the fission-gas-behavior parameters.
+Except for the parameters "dGrainHBS" and "FaceCovMax",
+all other parameters have weak correlation with fuel swelling.
+To also understand the correlation among the parameters,
+a correlation heatmap is depicted in Figure \ref{fig:heatmap}.
+It is apparent that there is negligible correlation among the parameters.
+This is expected since the compiled dataset was created
+using fission-gas-behavior parameters sampled independently of each other.
+
+\begin{table}[ht]
+\centering
+\caption{
+	Fission gas behavior parameters and their ranges.
+}
+\label{tab:uqparam}
+\begin{tabular}{lccc}
+\toprule
+Parameter    & Minimum value & Maximum value & Reference value \\
+\midrule
+dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
+FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
+SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
+vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
+DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
+fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
+aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{invuq/images/scatter.png}
+	\caption{
+		Scatter plots of fuel swelling
+		against the fission-gas-behavior parameters.
+	}
+	\label{fig:scatter}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{invuq/images/corrheat.png}
+	\caption{
+		Correlation heatmap of
+		fission-gas-behavior parameters and fuel swelling.
+	}
+	\label{fig:heatmap}
+\end{figure}
+
+The goal of this IUQ study is to find parameter distributions
+that lead to fuel swelling predictions
+in agreement with the experimental observations.
+There have been a few experimental studies
+on the fuel swelling of $\gamma$U-Mo fuel.
+Robinson et al. have developed a predictive swelling correlation
+using the experimental data collected on
+74 irradiated $\gamma$U-10Mo monolithic test fuel plates
+over a range of irradiation conditions
+\cite{rabin2017preliminary, robinson2021}.
+The correlation is as follows.
+\begin{align}
+	\% Swelling = 6.13 \times 10^{-43} F_d^2 + 4 \times 10^{-21} F_d
+\end{align}
+where $F_d$ is the fission density.
+The 95\% confidence interval of the swelling prediction
+at $7 \times 10^{21}$ fiss/cm$^3$ spans about 5 swelling\%.
+This swelling correlation is utilized as the experimental observation
+for IUQ purposes in this work.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{invuq/images/target.png}
+	\caption{
+		Histogram of the fuel swelling prediction from DART
+		at $7 \times 10^{21}$ fiss/cm$^3$
+		along with the experimental observation.
+	}
+	\label{fig:target}
+\end{figure}
