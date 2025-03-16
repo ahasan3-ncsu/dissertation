@@ -1,6 +1,41 @@
 \chapter{Inverse UQ}
 
+\section{Sensitivity analysis}
+
+Figure \ref{fig:scatter} shows scatter plots of fuel swelling
+against all the fission-gas-behavior parameters.
+Except for the parameters "dGrainHBS" and "FaceCovMax",
+all other parameters have weak correlation with fuel swelling.
+To also understand the correlation among the parameters,
+a correlation heatmap is depicted in Figure \ref{fig:heatmap}.
+It is apparent that there is negligible correlation among the parameters.
+This is expected since the compiled dataset was created
+using fission-gas-behavior parameters sampled independently of each other.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{invuq/images/scatter.png}
+	\caption{
+		Scatter plots of fuel swelling
+		against the fission-gas-behavior parameters.
+	}
+	\label{fig:scatter}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{invuq/images/corrheat.png}
+	\caption{
+		Correlation heatmap of
+		fission-gas-behavior parameters and fuel swelling.
+	}
+	\label{fig:heatmap}
+\end{figure}
+
 \section{Surrogate modeling}
+
+% TODO: this sentence needs to go somewhere
+The training and testing are done on a 70/30 split of this data.
 
 Figure \ref{fig:linear} depicts the surrogate prediction vs actual test data
 for three linear surrogate models: OLS, Lasso, and Ridge.

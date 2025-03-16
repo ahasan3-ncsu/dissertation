@@ -262,6 +262,8 @@ as a function of bubble radius, bubble pressure, and fission rate.
 
 \subsection{Inverse UQ}
 
+% TODO: need to make it Inverse UQ review
+
 Dispersion Analysis Research Tool (DART) is a computational code
 capable of modeling the swelling behavior of Uranium-Molybdenum ($\gamma$U-Mo)
 under the operating conditions of high-power research and test reactors (RTRs).
@@ -316,109 +318,12 @@ to find the posterior probability distributions of the DART parameters.
 Finally, the surrogate model is used again along with the parameter posteriors
 to compute the forward propagation as FUQ and validation.
 
-% TODO: this should go to methods
-\subsection{Problem definition}
-
-Table \ref{tab:uqparam} shows the DART parameters of interest and their ranges.
-The orders of magnitude of the parameters vary considerably.
-The parameter "dGrainHBS" denotes the high burunup structure grain diameter.
-"FaceCovMax" dictates the grain face coverage needed for interlinkage.
-"SwellLink" determines the swelling starting interlinkage of the grain edges.
-"vResol" is the probability that a gas bubble interacts with fission fragments.
-"DatomFissGBx" is the grain boundary diffusion enhancement factor.
-"fNucleate" indicates the adjustment factor
-for the probability of bubble nucleation on the grain boundary.
-Finally, 'aAtomDifFiss" is the linear coefficient
-of radiation-driven gas atom diffusivity
-\cite{annualreport2021, ye2023, annualreport2022}.
-
-There are 3200 samples relating the 7 fission-gas-behavior parameters
-with fuel swelling at a fission density of $7 \times 10^{21}$ fiss/cm$^3$.
-The training and testing are done on a 70/30 split of this data.
-Figure \ref{fig:scatter} shows scatter plots of fuel swelling
-against all the fission-gas-behavior parameters.
-Except for the parameters "dGrainHBS" and "FaceCovMax",
-all other parameters have weak correlation with fuel swelling.
-To also understand the correlation among the parameters,
-a correlation heatmap is depicted in Figure \ref{fig:heatmap}.
-It is apparent that there is negligible correlation among the parameters.
-This is expected since the compiled dataset was created
-using fission-gas-behavior parameters sampled independently of each other.
-
-\begin{table}[ht]
-\centering
-\caption{
-	Fission gas behavior parameters and their ranges.
-}
-\label{tab:uqparam}
-\begin{tabular}{lccc}
-\toprule
-Parameter    & Minimum value & Maximum value & Reference value \\
-\midrule
-dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
-FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
-SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
-vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
-DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
-fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
-aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.9\textwidth]{invuq/images/scatter.png}
-	\caption{
-		Scatter plots of fuel swelling
-		against the fission-gas-behavior parameters.
-	}
-	\label{fig:scatter}
-\end{figure}
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.6\textwidth]{invuq/images/corrheat.png}
-	\caption{
-		Correlation heatmap of
-		fission-gas-behavior parameters and fuel swelling.
-	}
-	\label{fig:heatmap}
-\end{figure}
-
-The goal of this IUQ study is to find parameter distributions
-that lead to fuel swelling predictions
-in agreement with the experimental observations.
-There have been a few experimental studies
-on the fuel swelling of $\gamma$U-Mo fuel.
-Robinson et al. have developed a predictive swelling correlation
-using the experimental data collected on
-74 irradiated $\gamma$U-10Mo monolithic test fuel plates
-over a range of irradiation conditions
-\cite{rabin2017preliminary, robinson2021}.
-The correlation is as follows.
-\begin{align}
-	\% Swelling = 6.13 \times 10^{-43} F_d^2 + 4 \times 10^{-21} F_d
-\end{align}
-where $F_d$ is the fission density.
-The 95\% confidence interval of the swelling prediction
-at $7 \times 10^{21}$ fiss/cm$^3$ spans about 5 swelling\%.
-This swelling correlation is utilized as the experimental observation
-for IUQ purposes in this work.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.6\textwidth]{invuq/images/target.png}
-	\caption{
-		Histogram of the fuel swelling prediction from DART
-		at $7 \times 10^{21}$ fiss/cm$^3$
-		along with the experimental observation.
-	}
-	\label{fig:target}
-\end{figure}
-
 \section{Classical Molecular Dynamics}
+
+\subsection{Angular Dependent Potential}
 
 \section{\textit{Ab Initio} Molecular Dynamics}
 
 \section{Machine-Learned Interatomic Potential}
+
+\subsection{Moment Tensor Potential}
