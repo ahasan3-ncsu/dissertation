@@ -1,6 +1,269 @@
-\chapter{Inverse UQ}
+\chapter{Inverse Uncertainty Quantification
+of \texorpdfstring{$\gamma$}{gamma}U-10Mo Fission-Gas-Behavior Parameters}
 
-\section{Sensitivity analysis}
+\section{Problem Definition}
+
+Table \ref{tab:uqparam} shows the DART parameters of interest and their ranges.
+The orders of magnitude of the parameters vary considerably.
+The parameter "dGrainHBS" denotes the high burunup structure grain diameter.
+"FaceCovMax" dictates the grain face coverage needed for interlinkage.
+"SwellLink" determines the swelling starting interlinkage of the grain edges.
+"vResol" is the probability that a gas bubble interacts with fission fragments.
+"DatomFissGBx" is the grain boundary diffusion enhancement factor.
+"fNucleate" indicates the adjustment factor
+for the probability of bubble nucleation on the grain boundary.
+Finally, 'aAtomDifFiss" is the linear coefficient
+of radiation-driven gas atom diffusivity
+\cite{annualreport2021, ye2023, annualreport2022}.
+
+% TODO: need to talk about dataset generation
+
+There are 3200 samples relating the 7 fission-gas-behavior parameters
+with fuel swelling at a fission density of $7 \times 10^{21}$ fiss/cm$^3$.
+
+\begin{table}[ht]
+\centering
+\caption{
+	Fission gas behavior parameters and their ranges.
+}
+\label{tab:uqparam}
+\begin{tabular}{lccc}
+\toprule
+Parameter    & Minimum value & Maximum value & Reference value \\
+\midrule
+dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
+FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
+SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
+vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
+DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
+fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
+aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The goal of this IUQ study is to find parameter distributions
+that lead to fuel swelling predictions
+in agreement with the experimental observations.
+There have been a few experimental studies
+on the fuel swelling of $\gamma$U-Mo fuel.
+Robinson et al. have developed a predictive swelling correlation
+using the experimental data collected on
+74 irradiated $\gamma$U-10Mo monolithic test fuel plates
+over a range of irradiation conditions
+\cite{rabin2017preliminary, robinson2021}.
+The correlation is as follows.
+\begin{align}
+	\% Swelling = 6.13 \times 10^{-43} F_d^2 + 4 \times 10^{-21} F_d
+\end{align}
+where $F_d$ is the fission density.
+The 95\% confidence interval of the swelling prediction
+at $7 \times 10^{21}$ fiss/cm$^3$ spans about 5 swelling\%.
+This swelling correlation is utilized as the experimental observation
+for IUQ purposes in this work.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{invuq/images/target.png}
+	\caption{
+		Histogram of the fuel swelling prediction from DART
+		at $7 \times 10^{21}$ fiss/cm$^3$
+		along with the experimental observation.
+	}
+	\label{fig:target}
+\end{figure}
+
+\section{Methodology}
+
+\subsection{Formulation of the Inverse Problem}
+
+Let's define the unknown reality or true value of an output as $y^R(x)$,
+where $x$ denotes the vector of design variables
+specifying experimental conditions.
+A computer model simulation can predict that reality only as an approximation:
+\begin{align}
+	\label{eq:real}
+	y^R(x) = y^M(x, \theta^*) + \delta(x)
+\end{align}
+where $\theta^*$ is a vector of true but unknown values
+of calibration parameters $\theta$
+and $\delta(x)$ is the model uncertainty/discrepancy
+due to an incomplete understanding of the underlying physics of the model.
+
+To learn the reality $y^R(x)$,
+experiments may be performed to obtain an observation $y^E(x)$.
+However, the measurement process also introduces uncertainty:
+\begin{align}
+	\label{eq:exp}
+	y^E(x) = y^R(x) + \epsilon
+\end{align}
+where $\epsilon \sim \mathcal{N} (\mu, \Sigma_{\epsilon})$
+indicates the measurement error/noise.
+It is typical to assume $\mu = 0$
+and $\Sigma_{\epsilon} = \sigma_{\epsilon}^2 I$ for experiments
+having no systematic bias and having homoscedastic experimental errors.
+Combining equations \ref{eq:real} and \ref{eq:exp},
+we can obtain the "model updating equation"
+\cite{wu2021comprehensive, kennedy2001bayesian, arendt2012quant}:
+\begin{align}
+	\label{eq:upd}
+	y^E(x) = y^M(x, \theta^*) + \delta(x) + \epsilon
+\end{align}
+Equation \ref{eq:upd} is the starting point for Bayesian IUQ.
+Assuming experimental uncertainty is Gaussian,
+$\epsilon = y^E(x) - y^M(x, \theta^*) - \delta(x)$
+follows a multi-dimensional Gaussian distribution
+with a mean of zero and a covariance matrix of $\Sigma_{\epsilon}$.
+The posteriors of the true parameters $p(\theta^* | y^E, y^M)$
+can then be written as:
+\begin{align}
+	p(\theta^* | y^E, y^M)
+		&\propto p(\theta^*) \cdot p(y^E, y^M | \theta^*) \\
+		&\propto p(\theta^*) \cdot \frac{1}{\sqrt{|\Sigma|}}
+			\exp \bigg[-\frac{1}{2} (y^E-y^M-\delta)^T
+			\Sigma^{-1} (y^E-y^M-\delta) \bigg]
+\end{align}
+where $p(\theta^*)$ is the prior distribution provided by expert opinion,
+and $p(y^E, y^M | \theta^*)$ is the likelihood function.
+$\Sigma$ is the covariance of the likelihood consisting of three parts:
+\begin{align}
+	\Sigma &= \Sigma_{exp} + \Sigma_{bias} + \Sigma_{code}
+\end{align}
+where $\Sigma_{exp}$ represents experimental uncertainty
+due to measurement error,
+$\Sigma_{bias}$ means model uncertainty due to an inherent bias in the model,
+and $\Sigma_{code}$ means code/interpolation uncertainty
+due to the use of surrogate models to reduce the computational cost.
+In this work, we assumed $\Sigma_{bias} = 0$ and $\Sigma_{code} = 0$
+because of the lack of experimental observations
+and high fidelity of the surrogate models.
+To get the posterior distributions of the calibration parameters,
+the Metropolis-Hastings algorithm is used
+to generate Markov Chain Monte Carlo (MCMC) samples
+\cite{robert2004metropolis, van2018simple}.
+
+\subsection{Surrogate Modeling}
+
+Surrogate models, also called metamodels, response surfaces or emulators,
+are approximations of the input/output relation of the original computer model.
+They are built from a limited number of full model runs (training data)
+and a learning algorithm.
+Metamodels usually take much less computational time than the full model
+while maintaining the input/output relation to a desirable accuracy.
+Once validated, metamodels can be used in uncertainty, sensitivity,
+validation and optimization studies,
+for which the original computer model can incur
+an excessive computational burden
+as hundreds or thousands of computer model simulations are needed
+\cite{wu2018inverse}.
+
+Any machine learning model that can learn from the training data
+and predict an output relatively quickly
+compared to the original computer model can be used as a surrogate model.
+Typical examples of surrogate models include Moving Least-Squares (MLS),
+Radial Basis Functions (RBF), Neural Networks (NN),
+Support Vector Machines (SVM), Gaussian Processes (GP),
+Polynomial Chaos Expansion (PCE), etc.,
+with GP being the most commonly used surrogate
+\cite{wu2018inverse, wu2021comprehensive}.
+In this work, we have used three linear
+and three non-linear models as surrogates.
+A brief discussion of these models follows.
+
+Considering $X$ as an input matrix and $y$ as an output vector,
+a linear model would have the following formulation:
+\begin{align}
+	y = \beta X + \varepsilon
+\end{align}
+where $\beta$ is the vector of unknown coefficients
+and $\varepsilon$ is the vector of random errors.
+In Ordinary Least-Squares (OLS),
+the estimated coefficients $\hat{\beta}$ is determined
+by minimizing the sum of squared residuals (the loss function).
+\begin{align}
+	\hat{\beta} = \arg \min_{\beta} || y - \beta X ||^2
+\end{align}
+In Least Absolute Shrinkage and Selection Operator (Lasso),
+$\hat{\beta}$ is determined
+by adding an $L1$ penalty term to the loss function.
+\begin{align}
+	\hat{\beta} = \arg \min_{\beta} (|| y - \beta X ||^2
+					+ \lambda \sum |\beta_i|)
+\end{align}
+where $\lambda$ is the regularization parameter
+that adds a penalty for the magnitude of the coefficients $\beta$.
+The benefit in using Lasso is that the added penalty
+shrinks some coefficients to zero.
+As a result, this regression model also acts as a selection operator.
+Ridge regression is different from Lasso
+because it uses an $L2$ regularization term to the loss function
+\cite{yang2018ridge, thevaraja2019recent}.
+The estimated coefficients then become:
+\begin{align}
+	\hat{\beta} = \arg \min_{\beta} (|| y - \beta X ||^2
+					+ \lambda ||\beta||^2)
+\end{align}
+
+Gaussian processes (GP) are a popular choice for surrogate models
+because they provide a straightforward estimation of the code uncertainty.
+A GP is a probabilistic model
+that describes a distribution over possible functions.
+Given a set of points, a GP can be used to predict the value
+of an unknown function at any other point.
+Additionally, GP can be used to represent the uncertainty
+in the output of the computer model,
+which is important for Bayesian inference and calibration
+\cite{wu2018inverse, wang2020}.
+The mathematical form of a GP model is as follows:
+\begin{align}
+	y = f^T(x) \beta + z(x)
+\end{align}
+The first term here is a linear regression of the data
+modeling the drift of the mean.
+The set of basis functions $f$ is chosen by the user
+and $\beta$ are the regression coefficients.
+$z(x)$ is a stationary Gaussian random process with zero mean and covariance
+$Cov[z(x^{(i)}), z(x^{(j)})] = \sigma^2 \mathcal{R} (x^{(i)}, x^{(j)})$,
+where $\sigma^2$ is the process variance
+and $\mathcal{R} (\cdot, \cdot)$ is the correlation function or kernel.
+A kernel in GP is a function that defines
+the similarity between pairs of data points.
+There are many different kernels that can be used with GP,
+each of which has its own advantages and disadvantages.
+Some of the most commonly used kernel functions include the RBF kernel,
+the Mat\'ern kernel, and the rational quadratic kernel \cite{wang2020}.
+
+NN models consist of one input layer,
+hidden layers with non-linear activation functions,
+and one output layer for regression.
+All these layers have nodes (also called neurons)
+that connect to the nodes of the previous layer.
+Each connection between two nodes has an optimizable weight
+and each node has an associated bias and an activation function.
+The number of hidden layers in the model,
+the number of nodes in each layer,
+and the activation functions of the nodes are to be tuned
+to find an optimal model for a particular dataset
+\cite{goodfellow2016, de2013neural}.
+
+Support Vector Regressor (SVR) is a regression model
+that uses SVMs, aiming to find a function $f(X)$
+that fits the data while keeping the errors within a predefined margin.
+\begin{align}
+	f(X) = w^T X + b
+\end{align}
+where $w$ is the weight vector and $b$ is the bias.
+SVR uses an $\varepsilon$-insensitive loss function,
+where the model allows errors within a certain margin $\varepsilon$.
+SVRs can handle non-linear relationships through the use of kernels,
+which map input data to a higher-dimensional space
+\cite{cortes1995support, gunn1997support}.
+In this work, all the surrogate models are implemented
+using the sklearn python library \cite{sklearn}.
+
+\section{Results}
+
+\subsection{Sensitivity Analysis}
 
 Figure \ref{fig:scatter} shows scatter plots of fuel swelling
 against all the fission-gas-behavior parameters.
@@ -32,7 +295,7 @@ using fission-gas-behavior parameters sampled independently of each other.
 	\label{fig:heatmap}
 \end{figure}
 
-\section{Surrogate modeling}
+\subsection{Surrogate Modeling}
 
 % TODO: this sentence needs to go somewhere
 The training and testing are done on a 70/30 split of this data.
@@ -129,8 +392,7 @@ Support Vector Regression & 0.99365 & 0.374 & 0.172 \\
 \end{tabular}
 \end{table}
 
-
-\section{MCMC sampling}
+\subsection{MCMC Sampling}
 
 Figure \ref{fig:trace} displays the trace plots of the MCMC samples
 of the three fission-gas-behavior parameters.
@@ -196,8 +458,7 @@ Gelman-Rubin statistic & 1.0       & 1.0        & 1.001     \\
 \end{tabular}
 \end{table}
 
-
-\section{IUQ}
+\subsection{IUQ}
 
 The diagonal subfigures in Figure \ref{fig:iuq}
 shows the posterior distributions of the fission-gas-behavior parameters
@@ -259,8 +520,7 @@ SwellLink  & \num{2.53e-2}
 \end{tabular}
 \end{table}
 
-
-\section{FUQ and validation}
+\subsection{FUQ and Validation}
 
 To validate the results from IUQ,
 we propagated the posterior samples using two surrogate models: GP and Lasso.
@@ -290,3 +550,18 @@ and propagating them directly through DART.
 }
 \label{fig:fuq}
 \end{figure}
+
+\section{Conclusions}
+
+This work establishes a way
+to perform IUQ on unknown fission-gas-behavior parameters of $\gamma$U-Mo
+utilized in DART.
+A dataset compiled from 3200 DART simulations are used for the study.
+Only three parameters ("dGrainHBS", "FaceCovMax", and "SwellLink") out of seven
+affects the fission gas swelling value in a significant way.
+The other four parameters are inconsequential.
+For surrogate modeling, GP with an RBF kernel is found to work the best.
+MCMC sampling with this surrogate leads to
+converged posterior probability distributions for the three parameters.
+Forward propagations using these posteriors provide a way
+to verify the whole process as well.

@@ -1,6 +1,181 @@
-\chapter{Xe gas bubble re-solution}
+\chapter{Re-solution of Xe Gas Bubbles
+in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 
-\section{PKA simulations}
+\section{Computational Details}
+
+The LAMMPS software package \cite{lammps} was utilized for the MD work,
+in conjunction with a U-Mo-Xe angular-dependent potential (ADP)
+\cite{smirnova2013, starikov2018, beelerADP}.
+This ADP can accurately describe the body-centered cubic phase
+of $\gamma$U-Mo alloys, reproducing their stable structure,
+modulus of elasticity, room temperature density, and melting point.
+Given that the present work focuses on high-energy interactions
+pertaining to PKAs and thermal spike events,
+the distance between the ions and atoms can become extremely small.
+On its own, the classical interatomic potential
+does not accurately describe these interactions.
+To address this issue in all the simulations,
+the Ziegler, Biersack, and Littmark (ZBL) \cite{ziegler1985}
+repulsive potential,
+which provides a realistic depiction of ion-ion repulsive interactions,
+was combined with the ADP.
+The inner and outer cutoff distances for the ZBL potential
+were chosen to be 1 \r{A} and 2 \r{A}, respectively.
+
+For both the PKA and thermal spike simulations,
+the system was equilibrated at 400 K at a pressure of 0 bar in an NPT ensemble,
+using the Nos\'e-Hoover barostat and thermostat.
+Utilizing the resulting configurations,
+spherical bubbles of radius $R_{bubble}$ were created
+by removing U and Mo atoms and depositing gaseous Xe atoms
+at a given density within the resulting void.
+The system was then further equilibrated in the NPT ensemble.
+The simulations were ultimately performed using an NVE ensemble
+with a canonical sampling thermostat \cite{bussi2007}
+at the edges of the simulation box to act as a heat sink.
+This enabled the resulting local heating to slowly dissipate
+from the simulation by modeling a constant long-range temperature.
+Electronic stopping was incorporated into the simulation
+by applying a frictional force to each atom.
+This frictional force was calculated
+based on the stopping power of the related atom species in the fuel.
+These values were determined using the Stopping and Range of Ions in Matter
+(SRIM) software \cite{ziegler2010srim}.
+The frictional force due to electronic stopping is applied to atoms
+whose kinetic energy exceeds a specified threshold.
+This threshold is often set to 10 eV or double the cohesive energy for metals \cite{nordlund1998, duffy2006}.
+In the present work, electronic stopping was applied
+only when an atom's kinetic energy exceeded 9 eV,
+which is double the U-U cohesive energy of 4.5 eV.
+The cohesive energy was evaluated by Beeler et al. \cite{beeler2018disp}
+using the same ADP potential applied in the present work.
+A variable timestep size was also implemented for all simulations,
+such that any atom's maximum displacement between two successive timesteps
+was less than or equal to 0.01 \r{A}.
+
+For the PKA model, a $160 \times 160 \times 160$ \r{A}$^3$ supercell
+was utilized, holding around 8 million atoms.
+Such a large supercell was needed to prevent the self-interaction of cascades
+through their periodic images.
+The thermostatted sink was implemented in all three directions.
+Figure \ref{fig:struct} gives a cross section of such a supercell.
+Within a 20 \r{A} radius gas bubble,
+the investigation was conducted on 200 and 400 Xe atoms,
+corresponding to pressures of 124 MPa and 787 MPa, respectively.
+The bubbles with 200 Xe atoms were underpressurized,
+whereas those with 400 Xe atoms led to an overpressurized bubble.
+For reference,
+the equilibrium pressure of such a bubble is 436 MPa \cite{beelerADP}.
+The cascade was initiated by selecting a single PKA,
+located approximately 5.5 nm from the bubble's center.
+The PKA was directed toward the bubble at high velocity.
+PKAs featuring kinetic energies of up to 500 keV were simulated.
+These simulations were executed to model the initial 120 ps of the cascade,
+ensuring that the total temperature of all the examined systems
+fell below 600 K.
+For each bubble pressure and PKA energy value,
+five simulations were performed---using different initial atomic configurations
+and PKA directions---to gather statistical data.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[height=6cm]{resol/images/struct.png}
+	\caption{
+		Initial configuration for an MD simulation of the PKA.
+		The supercell is sliced through the middle
+		to show the 20 \r{A} radius Xe gas bubble (black).
+		The red and blue dots represent U and Mo atoms, respectively.
+	}
+	\label{fig:struct}
+\end{figure}
+
+In the thermal spike model, a $120 \times 120 \times 50$ \r{A}$^3$ supercell
+was simulated, containing approximately 1.5 million atoms.
+The thermal spike axis was aligned
+with the shortest dimension of the supercell,
+and the thermostatted sink was applied only in directions
+perpendicular to the thermal spike axis.
+Atoms within a cylindrical zone of 35 \r{A} radius along the thermal spike axis
+were excited via high kinetic energy
+in order to simulate local heating due to electronic stopping.
+This was achieved by rescaling the atom velocities.
+To understand the role played independently by bubble size,
+the Xe/vacancy ratio was at first kept constant.
+The Xe/vacancy ratio here is defined as the ratio of the number of Xe atoms
+in the bubble to the number of lattice sites occupied by the bubble.
+This ratio determines the bubble pressure.
+A Xe/vacancy ratio of 0.2 was chosen for this purpose,
+since it ensures an equilibrium bubble pressure, as per Beeler et al.
+\cite{beeler2020improved}.
+The thermal spike's position within the supercell was varied
+to account for both on- and off-centered collisions
+between the gas bubble and thermal spike.
+For on-centered thermal spikes, gas bubbles
+with radii of 5--40 \r{A} were simulated,
+with the thermal spike energies varying from 5 to 30 keV/nm.
+For off-centered thermal spikes, gas bubbles of radii 15
+\r{A}, 25 \r{A}, and 35 \r{A} were examined,
+with a thermal spike energy of 15 keV/nm.
+The off-centered distance was varied---at an interval of 10 \r{A}---up to
+a specific cutoff value (discussed later).
+Bubbles with different Xe/vacancy ratios were also simulated
+to account for the bubble pressure's effect on re-solution.
+Xe/vacancy ratios of 0.1, 0.3, and 0.5 were used for bubbles of
+radii 15 \r{A}, 25 \r{A}, and 35 \r{A}.
+Only on-centered thermal spikes were employed in this case,
+and their energies were varied over a range of 5--30 keV/nm.
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\caption{}
+		\includegraphics[height=6cm]{resol/images/temp_time.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\caption{}
+		\includegraphics[height=6cm]{resol/images/resol_time.pdf}
+	\end{subfigure}
+	\caption{
+		(a) System temperature vs. time for 40 \r{A} radius Xe gas bubble
+		simulations featuring different thermal spike energies.
+		(b) Number of re-solved Xe atoms vs. time.
+		The vertical dotted lines represent 450 ps.
+	}
+	\label{fig:cooldown}
+\end{figure}
+
+The thermal spike simulations were run for at least 450 ps,
+which is sufficient for all systems to cool down to under 800 K.
+Figure \ref{fig:cooldown} shows the system temperature
+and the number of re-solved Xe atoms over time
+in regard to a few 40 \r{A} radius bubble simulations
+featuring various thermal spike energies.
+As seen in the figure, the number of re-solved atoms stabilizes
+well before 450 ps.
+For further verification, longer simulations were also conducted
+to allow the systems to cool down to under 500 K.
+The re-solution behavior remains unchanged
+throughout the cooldown from 800 to 500 K.
+Thus, a minimum simulation time of 450 ps was chosen
+so as to optimize the use of computing resources.
+Cluster analysis was performed on the Xe atoms in the system,
+using OVITO \cite{ovito}.
+The cutoff distance among clusters was chosen as 10 \r{A}.
+Initially, all the Xe atoms in the system formed a single cluster,
+representing the original Xe bubble.
+However, after introducing the PKAs or thermal spikes,
+multiple Xe clusters could be identified due to re-solution of Xe atoms.
+The cluster containing the most Xe atoms
+was considered the original Xe gas bubble,
+and all Xe atoms in the other clusters were classified as re-solved atoms.
+When only a single atom remained in the original bubble,
+that gas bubble was considered completely re-solved.
+
+\section{Results}
+
+\subsection{PKA Simulations}
 
 Limited re-solution was observed in the PKA simulations.
 Figure \ref{fig:pka} showcases snapshots from one such simulation,
@@ -71,8 +246,7 @@ it is reasonable to assume that the homogeneous re-solution is negligible.
 	\label{fig:pka}
 \end{figure}
 
-
-\section{Thermal spike simulations}
+\subsection{Thermal Spike Simulations}
 
 % On-centered thermal spike
 
@@ -273,8 +447,7 @@ that can remain in a low-energy configuration outside the original bubble.
 	\label{fig:pres}
 \end{figure}
 
-
-\section{Re-solution rate}
+\subsection{Re-solution Rate}
 
 The re-solution rate can be defined
 as the probability of a Xe atom in a gas bubble getting re-solved
@@ -581,7 +754,6 @@ decreases with both these variables.
 	\label{fig:3d}
 \end{figure}
 
-
 \section{Discussion}
 
 Re-solution rate is a crucial parameter
@@ -670,3 +842,30 @@ and thus the rate does not represent a pure re-solution rate.
 	}
 	\label{fig:dart}
 \end{figure}
+
+\section{Conclusions}
+
+This study utilized MD simulations
+to determine the re-solution rate of Xe gas bubbles in $\gamma$U-10Mo fuel.
+Both the homogeneous and heterogeneous re-solution mechanisms
+were investigated using PKA and thermal spike simulations.
+However, homogeneous re-solution was found negligible
+in describing the overall re-solution behavior.
+On- and off-centered thermal spikes were both simulated to obtain
+the spatial correlation between re-solution and thermal spike distance.
+The Xe/vacancy ratio in the bubble was also varied
+to better understand the role of bubble pressure.
+Additionally, the electronic stopping power
+of fission products (Xe and Sr) in $\gamma$U-10Mo was simulated
+to determine the distance-dependent electronic stopping power.
+All this information was then used to calculate
+the overall re-solution rate of Xe gas bubbles in the fuel.
+The re-solution rate of intragranular Xe gas bubbles
+under equilibrium pressure in $\gamma$U-10Mo
+was found to be on the order of $10^{-4}$--$10^{-2}$ s$^{-1}$
+for a fission rate of $10^{14}$ fissions/cm$^3$/s.
+An analytical form of re-solution rate---dependent on
+bubble radius, bubble pressure, and fission rate---was also provided.
+The outcomes generated by this work will inform
+higher-length-scale models of $\gamma$U-10Mo
+with a physics-based description of the Xe gas bubble re-solution rate.

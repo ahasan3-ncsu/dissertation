@@ -11,6 +11,7 @@
 \usepackage{setspace}
 \onehalfspacing
 \renewcommand*\contentsname{Table of Contents}
+\renewcommand{\bibname}{References}
 
 
 \begin{document}
@@ -37,7 +38,7 @@ Frontmatter!
 
 \include{intro/intro}
 
-\include{methods/methods}
+\include{theory/theory}
 
 \include{diffusion/diffusion}
 
@@ -49,5 +50,6 @@ Frontmatter!
 
 \bibliographystyle{unsrt}
 \bibliography{ref.bib}
+\addcontentsline{toc}{chapter}{References}
 
 \end{document}
