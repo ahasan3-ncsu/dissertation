@@ -65,6 +65,7 @@ the Nos\'e-Hoover thermostat is the most popular one \cite{hoover}.
 
 \section{Interatomic Potential}
 
+% TODO: citation needed
 Interatomic potentials come in different forms
 to accomodate different physical motivations.
 Historically, most interatomic potentials could be described as "parametric",
@@ -99,6 +100,7 @@ from atom $j$ at the location of atom $i$,
 and $F_{\alpha}$ is an embedding function that represents
 the energy required to place atom $i$ into the electron cloud.
 
+% TODO: citation needed
 The non-parametric potentials are often referred to
 as machine-learned interatomic potentials (MLIPs).
 While non-parametric models are especially suitable for the application of ML,
@@ -120,30 +122,32 @@ and a suitable machine learning framework for the descriptor.
 
 \subsection{Angular Dependent Potential}
 
-The potential energy $V_i$ of an atom $i$ is given by
+% TODO: why ADP?
+
+The angular dependent potential (ADP) formalism
+is a generalization of the EAM type potential.
+The potential energy $V_i$ of an atom $i$ in ADP is given by
 \begin{align}
 	V_i
-	= \frac{1}{2} \sum_{j \ne i} \phi_{\alpha\beta} (r_{ij})
+	&= \frac{1}{2} \sum_{j \ne i} \phi_{\alpha\beta} (r_{ij})
 		+ F_{\alpha} \bigg( \sum_{j \ne i} \rho_{\beta} (r_{ij}) \bigg)
 		+ \frac{1}{2} \sum_{s} (\mu_i^s)^2
 		+ \frac{1}{2} \sum_{s, t} (\lambda_i^{st})^2
-		- \frac{1}{6} \sum_i \nu_i^2
-\end{align}
-
-\begin{align}
+		- \frac{1}{6} \sum_i \nu_i^2 \\
 	\mu_i^s
-	= \sum_{j \ne i} u_{\alpha\beta} (r_{ij}) r_{ij}^s
-\end{align}
-
-\begin{align}
+	&= \sum_{j \ne i} u_{\alpha\beta} (r_{ij}) r_{ij}^s \\
 	\lambda_i^{st}
-	= \sum_{j \ne i} w_{\alpha\beta} (r_{ij}) r_{ij}^s r_{ij}^t
-\end{align}
-
-\begin{align}
+	&= \sum_{j \ne i} w_{\alpha\beta} (r_{ij}) r_{ij}^s r_{ij}^t \\
 	\nu_i
-	= \sum_s \lambda_i^{ss}
+	&= \sum_s \lambda_i^{ss}
 \end{align}
+where $i$, $j$, $\alpha$, $\beta$, $\phi_{\alpha\beta}$, and $F_{\alpha}$
+have the same definitions as in the EAM formalism.
+Additionally, $s$ and $t = 1, 2, 3$ and refer to the Cartesian coordinates.
+The $\mu$ and $\lambda$ terms represent dipole and quadrupole distortions
+of the local atomic environment.
+This formalism extends the EAM by introducing angular forces
+as dipole and quadrupole moments.
 
 \subsection{Moment Tensor Potential}
 
