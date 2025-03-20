@@ -65,60 +65,84 @@ the Nos\'e-Hoover thermostat is the most popular one \cite{hoover}.
 
 \section{Interatomic Potential}
 
-The simplest interatomic potentials for MD
-only consider pairwise interactions between atoms.
-These two-body (pairwise) potentials are poor for metal systems.
-Few different schemes to construct many-body potentials for metals exist,
-based fundamentally on the following form.
-\begin{align}
-	V = \frac{1}{2} \sum_{i=1}^N \sum_{\substack{j=1\\j\ne i}}^N
-		\phi(r_{ij}) + \sum_{i=1}^N F_i(n_i) = \sum_{i=1}^N V_i
-\end{align}
-where $\phi(r_{ij})$ is the pairwise interaction potential
-between atoms $i$ and $j$,
-$F_i$ is the embedding energy of atom $i$ as a function
-of a "generalized coordination" $n_i$.
-This coordination $n_i$ is a superposition of contributions
-from the neighboring atoms of atom $i$,
-and it can be expressed as $n_i = \sum_{j\ne i} \rho(r_{ij})$
-\cite{ercolessi, carlsson}.
+Interatomic potentials come in different forms
+to accomodate different physical motivations.
+Historically, most interatomic potentials could be described as "parametric",
+since they are developed with a fixed number of physical terms and parameters.
+In non-parametric potentials,
+the total number of terms and parameters are flexible.
+This allows systematic optimization of potentials
+using complex local neighbor descriptors
+and separate mappings to predict different system properties.
+Even though the non-parametric potentials can be more accurate,
+the lack of physical meaning behind the parameters
+can make justification of extrapolation and uncertainty quantification harder.
 
-%The Finnis-Sinclair potentials follow the above many-body potential model, and
-%the potential energy of an atom $i$ in these potentials can be expressed as
-%\begin{align}
-%	V_i = \frac{1}{2} \sum_{\substack{j=1\\j \ne i}}^N \phi_{ij} (r_{ij}) +
-%	F_i \bigg( \sum_{\substack{j=1\\j \ne i}}^N \rho_{ij} (r_{ij}) \bigg)
-%\end{align}
-%where $\rho_{ij}$ refers to the density contributed by a neighbor atom $j$ at
-%the site of atom $i$. This density is dependent on both atom $j$ and atom $i$,
-%meaning the neighboring atoms will contribute differently to the electron
-%density at an atomic site depending on the identity of the atom present at that
-%atomic site \cite{fs, mendelev}.
+The simplest parametric interatomic potential
+would only consider pairwise interactions between atoms,
+using pairwise potential function $\phi_{\alpha\beta}$
+between atom types $\alpha$ and $\beta$.
+These two-body (pairwise) potentials are poor for metallic systems.
+The embedded-atom method (EAM) overcomes this problem
+by adding an embedding energy term to the pairwise potential
+\cite{daw1984eam, daw1993eam}.
+In EAM, the potential energy $V_i$ of an atom $i$ is given by
+\begin{align}
+	V_i
+	= \frac{1}{2} \sum_{j \ne i} \phi_{\alpha\beta} (r_{ij})
+		+ F_{\alpha} \bigg( \sum_{j \ne i} \rho_{\beta} (r_{ij}) \bigg)
+\end{align}
+where $r_{ij}$ is the distance
+between atom $i$ of type $\alpha$ and neighbors $j$ of type $\beta$,
+$\rho_{\beta}$ is the contribution to the electro charge density
+from atom $j$ at the location of atom $i$,
+and $F_{\alpha}$ is an embedding function that represents
+the energy required to place atom $i$ into the electron cloud.
+
+The non-parametric potentials are often referred to
+as machine-learned interatomic potentials (MLIPs).
+While non-parametric models are especially suitable for the application of ML,
+it is to be noted that
+parametric potentials can also be optimized using machine learning,
+The potential energy of a system in an MLIP is written as
+\begin{align}
+	V_{tot}
+	= \sum_i V_i (\bm{q}_i)
+\end{align}
+where $\bm{q}_i$ is a mathematical representation
+of the atomic environment surrounding the atom $i$,
+commonly known as the descriptor.
+$V_i$ is a machine-learning model that provides energy prediction
+based on the descriptor.
+An MLIP requires a robust descriptor
+that maintains certain physical symmetries,
+and a suitable machine learning framework for the descriptor.
 
 \subsection{Angular Dependent Potential}
 
+The potential energy $V_i$ of an atom $i$ is given by
 \begin{align}
-	E_{tot}
-	= \frac{1}{2} \sum_{i,j (j \ne i)} \phi_{s_i s_j} (r_{ij})
-		+ \sum_i F_{s_i} (\bar{\rho_i})
-		+ \frac{1}{2} \sum_{i, \alpha} (\mu_i^{\alpha})^2
-		+ \frac{1}{2} \sum_{i, \alpha, \beta} (\lambda_i^{\alpha\beta})^2
+	V_i
+	= \frac{1}{2} \sum_{j \ne i} \phi_{\alpha\beta} (r_{ij})
+		+ F_{\alpha} \bigg( \sum_{j \ne i} \rho_{\beta} (r_{ij}) \bigg)
+		+ \frac{1}{2} \sum_{s} (\mu_i^s)^2
+		+ \frac{1}{2} \sum_{s, t} (\lambda_i^{st})^2
 		- \frac{1}{6} \sum_i \nu_i^2
 \end{align}
 
 \begin{align}
-	\bar{\phi_i}
-	= \sum_{j \ne i} \rho_{s_j} (r_{ij})
+	\mu_i^s
+	= \sum_{j \ne i} u_{\alpha\beta} (r_{ij}) r_{ij}^s
 \end{align}
 
 \begin{align}
-	\mu_i^{\alpha}
-	= \sum_{j \ne i} u_{s_i s_j} (r_{ij}) r_{ij}^{\alpha}
+	\lambda_i^{st}
+	= \sum_{j \ne i} w_{\alpha\beta} (r_{ij}) r_{ij}^s r_{ij}^t
 \end{align}
 
 \begin{align}
-	\lambda_i^{\alpha\beta}
-	= \sum_{j \ne i} w_{s_i s_j} (r_{ij}) r_{ij}^{\alpha} r_{ij}^{\beta}
+	\nu_i
+	= \sum_s \lambda_i^{ss}
 \end{align}
 
 \subsection{Moment Tensor Potential}
