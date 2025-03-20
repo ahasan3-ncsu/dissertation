@@ -42,6 +42,8 @@ and $j$, $F_i$ is the embedding energy of atom $i$ as a function of a
 contributions from the neighboring atoms of atom $i$, and it can be expressed
 as $n_i = \sum_{j\ne i} \rho(r_{ij})$ \cite{ercolessi, carlsson}.
 
+% TODO: Finnis-Sinclair to be replaced with ADP
+
 The Finnis-Sinclair potentials follow the above many-body potential model, and
 the potential energy of an atom $i$ in these potentials can be expressed as
 \begin{align}
@@ -65,6 +67,30 @@ many methods introduced to control the temperature in a MD simulation, the
 Nos\'{e}-Hoover thermostat is the most popular one \cite{hoover}.
 
 \subsection{Angular Dependent Potential}
+
+\begin{align}
+	E_{tot}
+	= \frac{1}{2} \sum_{i,j (j \ne i)} \phi_{s_i s_j} (r_{ij})
+		+ \sum_i F_{s_i} (\bar{\rho_i})
+		+ \frac{1}{2} \sum_{i, \alpha} (\mu_i^{\alpha})^2
+		+ \frac{1}{2} \sum_{i, \alpha, \beta} (\lambda_i^{\alpha\beta})^2
+		- \frac{1}{6} \sum_i \nu_i^2
+\end{align}
+
+\begin{align}
+	\bar{\phi_i}
+	= \sum_{j \ne i} \rho_{s_j} (r_{ij})
+\end{align}
+
+\begin{align}
+	\mu_i^{\alpha}
+	= \sum_{j \ne i} u_{s_i s_j} (r_{ij}) r_{ij}^{\alpha}
+\end{align}
+
+\begin{align}
+	\lambda_i^{\alpha\beta}
+	= \sum_{j \ne i} w_{s_i s_j} (r_{ij}) r_{ij}^{\alpha} r_{ij}^{\beta}
+\end{align}
 
 \section{\textit{Ab Initio} Molecular Dynamics}
 
