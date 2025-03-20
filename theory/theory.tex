@@ -1,6 +1,68 @@
 \chapter{Theoretical Background}
 
-\section{Classical Molecular Dynamics}
+\section{Molecular Dynamics}
+
+Molecular dynamics (MD) is a computer simulation technique where the time
+evolution of a set of interacting atoms is calculated using equations of
+motion. The laws of classical mechanics, such as Newton's second law, is
+followed in this technique. For example, in a closed system consisting of $N$
+atoms, the force acting on an atom $i$ is
+\begin{align}
+	\bm{F}_i = m \bm{a}_i = m \frac{d^2 \bm{r}_i}{dt^2}
+\end{align}
+This force is a result of the interactions of atom $i$ with all the other atoms
+in the system. If the force acting on an atom is known, its movement can be
+predicted given the initial position and velocity \cite{ercolessi}.
+
+In \textit{ab initio} MD, quantum mechanics is used for finding the interatomic
+forces. Although calculations from first principle are accurate, they are
+computationally expensive and sometimes infeasible. Another way to derive these
+forces is to compute the gradients of the potential energy of the system with
+respect to atomic displacements.
+\begin{align}
+	\bm{F}_i = - \nabla_{\bm{r}_i} V(\bm{r}_1,\ldots,\bm{r}_N)
+\end{align}
+This approach is called classical MD (referred as only MD from here on).
+Finding a practical and efficient description of the potential energy is the
+crux of MD. The interatomic potentials, in this case, tries to approximate the
+true nature of atomic interactions at the expense of accuracy, the advantage
+being reduced computational cost \cite{marx}.
+
+The simplest interatomic potentials for MD only consider pairwise interactions
+between atoms. These two-body (pairwise) potentials are poor for metal systems.
+Few different schemes to construct many-body potentials for metals exist, based
+fundamentally on the following form.
+\begin{align}
+	V = \frac{1}{2} \sum_{i=1}^N \sum_{\substack{j=1\\j\ne i}}^N
+		\phi(r_{ij}) + \sum_{i=1}^N F_i(n_i) = \sum_{i=1}^N V_i
+\end{align}
+where $\phi(r_{ij})$ is the pairwise interaction potential between atoms $i$
+and $j$, $F_i$ is the embedding energy of atom $i$ as a function of a
+"generalized coordination" $n_i$. This coordination $n_i$ is a superposition of
+contributions from the neighboring atoms of atom $i$, and it can be expressed
+as $n_i = \sum_{j\ne i} \rho(r_{ij})$ \cite{ercolessi, carlsson}.
+
+The Finnis-Sinclair potentials follow the above many-body potential model, and
+the potential energy of an atom $i$ in these potentials can be expressed as
+\begin{align}
+	V_i = \frac{1}{2} \sum_{\substack{j=1\\j \ne i}}^N \phi_{ij} (r_{ij}) +
+	F_i \bigg( \sum_{\substack{j=1\\j \ne i}}^N \rho_{ij} (r_{ij}) \bigg)
+\end{align}
+where $\rho_{ij}$ refers to the density contributed by a neighbor atom $j$ at
+the site of atom $i$. This density is dependent on both atom $j$ and atom $i$,
+meaning the neighboring atoms will contribute differently to the electron
+density at an atomic site depending on the identity of the atom present at that
+atomic site \cite{fs, mendelev}.
+
+After defining the interactions among atoms through a potential, new positions
+and velocities of atoms can be calculated using time integration.
+Velocity-Verlet is the most commonly used integration scheme in MD
+\cite{verlet, tuckerman}.
+
+MD simulations are mainly done in the microcanonical ensemble. However, in many
+situations, the simulated system needs to have a constant temperature. Among
+many methods introduced to control the temperature in a MD simulation, the
+Nos\'{e}-Hoover thermostat is the most popular one \cite{hoover}.
 
 \subsection{Angular Dependent Potential}
 
