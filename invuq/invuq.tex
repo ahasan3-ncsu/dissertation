@@ -79,70 +79,12 @@ for IUQ purposes in this work.
 
 \subsection{Formulation of the Inverse Problem}
 
-Let's define the unknown reality or true value of an output as $y^R(x)$,
-where $x$ denotes the vector of design variables
-specifying experimental conditions.
-A computer model simulation can predict that reality only as an approximation:
-\begin{align}
-	\label{eq:real}
-	y^R(x) = y^M(x, \theta^*) + \delta(x)
-\end{align}
-where $\theta^*$ is a vector of true but unknown values
-of calibration parameters $\theta$
-and $\delta(x)$ is the model uncertainty/discrepancy
-due to an incomplete understanding of the underlying physics of the model.
+% TODO: define the inverse problem
+% refer to the theory section
 
-To learn the reality $y^R(x)$,
-experiments may be performed to obtain an observation $y^E(x)$.
-However, the measurement process also introduces uncertainty:
-\begin{align}
-	\label{eq:exp}
-	y^E(x) = y^R(x) + \epsilon
-\end{align}
-where $\epsilon \sim \mathcal{N} (\mu, \Sigma_{\epsilon})$
-indicates the measurement error/noise.
-It is typical to assume $\mu = 0$
-and $\Sigma_{\epsilon} = \sigma_{\epsilon}^2 I$ for experiments
-having no systematic bias and having homoscedastic experimental errors.
-Combining equations \ref{eq:real} and \ref{eq:exp},
-we can obtain the "model updating equation"
-\cite{wu2021comprehensive, kennedy2001bayesian, arendt2012quant}:
-\begin{align}
-	\label{eq:upd}
-	y^E(x) = y^M(x, \theta^*) + \delta(x) + \epsilon
-\end{align}
-Equation \ref{eq:upd} is the starting point for Bayesian IUQ.
-Assuming experimental uncertainty is Gaussian,
-$\epsilon = y^E(x) - y^M(x, \theta^*) - \delta(x)$
-follows a multi-dimensional Gaussian distribution
-with a mean of zero and a covariance matrix of $\Sigma_{\epsilon}$.
-The posteriors of the true parameters $p(\theta^* | y^E, y^M)$
-can then be written as:
-\begin{align}
-	p(\theta^* | y^E, y^M)
-		&\propto p(\theta^*) \cdot p(y^E, y^M | \theta^*) \\
-		&\propto p(\theta^*) \cdot \frac{1}{\sqrt{|\Sigma|}}
-			\exp \bigg[-\frac{1}{2} (y^E-y^M-\delta)^T
-			\Sigma^{-1} (y^E-y^M-\delta) \bigg]
-\end{align}
-where $p(\theta^*)$ is the prior distribution provided by expert opinion,
-and $p(y^E, y^M | \theta^*)$ is the likelihood function.
-$\Sigma$ is the covariance of the likelihood consisting of three parts:
-\begin{align}
-	\Sigma &= \Sigma_{exp} + \Sigma_{bias} + \Sigma_{code}
-\end{align}
-where $\Sigma_{exp}$ represents experimental uncertainty
-due to measurement error,
-$\Sigma_{bias}$ means model uncertainty due to an inherent bias in the model,
-and $\Sigma_{code}$ means code/interpolation uncertainty
-due to the use of surrogate models to reduce the computational cost.
-In this work, we assumed $\Sigma_{bias} = 0$ and $\Sigma_{code} = 0$
+In this work, we assumed $\bm{\Sigma}_{bias} = 0$ and $\bm{\Sigma}_{code} = 0$
 because of the lack of experimental observations
 and high fidelity of the surrogate models.
-To get the posterior distributions of the calibration parameters,
-the Metropolis-Hastings algorithm is used
-to generate Markov Chain Monte Carlo (MCMC) samples
-\cite{robert2004metropolis, van2018simple}.
 
 \subsection{Surrogate Modeling}
 
@@ -262,6 +204,16 @@ which map input data to a higher-dimensional space
 \cite{cortes1995support, gunn1997support}.
 In this work, all the surrogate models are implemented
 using the sklearn python library \cite{sklearn}.
+
+\subsection{Markov Chain Monte Carlo sampling}
+
+% TODO: put some theory in here
+% talk about how it solves the bayesian problem
+
+To get the posterior distributions of the calibration parameters,
+the Metropolis-Hastings algorithm is used
+to generate Markov Chain Monte Carlo (MCMC) samples
+\cite{robert2004metropolis, van2018simple}.
 
 \section{Results}
 
