@@ -151,6 +151,31 @@ as dipole and quadrupole moments.
 
 \subsection{Moment Tensor Potential}
 
+Moment tensor potential (MTP) is a polynomial-like MLIP
+based on the tensors of inertia of atomistic environments.
+MTP is a local potential, i.e., the energy $E^{MTP}$ of a system
+is the sum of contributions $V^{MTP} (n_i)$ of atomic neighborhoods $n_i$
+for $N$ atoms.
+\begin{align}
+	E^{MTP} = \sum_{i=1}^N V^{MTP} (n_i)
+\end{align}
+Each neighborhood is a tuple
+$n_i = (\{r_{i1}, z_i, z_1\}, \ldots, \{r_{ij}, z_i, z_j\}, \ldots,
+\{r_{iN_{nbh}}, z_i, z_{N_{nbh}}\})$,
+where $r_{ij}$ are relative atomic positions,
+$z_i$, $z_j$ are the element types of central and neighboring atoms,
+and $N_{nbh}$ is the number of atoms in the neighborhood.
+
+Each contribution $V^{MTP} (n_i)$ in the potential energy $E^{MTP}$
+expands through a set of basis functions.
+\begin{align}
+	V^{MTP} (n_i)
+	= \sum_{\alpha=1}^{N_{lin}} \xi_{\alpha} B_{\alpha} (n_i)
+\end{align}
+where $B_{\alpha}$ are the MTP basis functions,
+$\xi_{\alpha}$ are the linear parameters to be found,
+and $N_{lin}$ is the number of these parameters.
+
 \section{Inverse Uncertainty Quantification}
 
 Inverse uncertainty quantification (IUQ) is a process
