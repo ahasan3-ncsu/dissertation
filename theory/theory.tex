@@ -149,6 +149,8 @@ of the local atomic environment.
 This formalism extends the EAM by introducing angular forces
 as dipole and quadrupole moments.
 
+% TODO: cite Mishin and Beeler
+
 \subsection{Moment Tensor Potential}
 
 Moment tensor potential (MTP) is a polynomial-like MLIP
@@ -157,7 +159,7 @@ MTP is a local potential, i.e., the energy $E^{MTP}$ of a system
 is the sum of contributions $V^{MTP} (n_i)$ of atomic neighborhoods $n_i$
 for $N$ atoms.
 \begin{align}
-	E^{MTP} = \sum_{i=1}^N V^{MTP} (n_i)
+	E^{mtp} (cfg) = \sum_{i=1}^N V (n_i)
 \end{align}
 Each neighborhood is a tuple
 $n_i = (\{r_{i1}, z_i, z_1\}, \ldots, \{r_{ij}, z_i, z_j\}, \ldots,
@@ -166,15 +168,48 @@ where $r_{ij}$ are relative atomic positions,
 $z_i$, $z_j$ are the element types of central and neighboring atoms,
 and $N_{nbh}$ is the number of atoms in the neighborhood.
 
-Each contribution $V^{MTP} (n_i)$ in the potential energy $E^{MTP}$
+Each contribution $V (n_i)$ in the potential energy $E^{mtp}$
 expands through a set of basis functions.
 \begin{align}
-	V^{MTP} (n_i)
-	= \sum_{\alpha=1}^{N_{lin}} \xi_{\alpha} B_{\alpha} (n_i)
+	V (n_i)
+	= \sum_{\alpha} \xi_{\alpha} B_{\alpha} (n_i)
 \end{align}
 where $B_{\alpha}$ are the MTP basis functions,
-$\xi_{\alpha}$ are the linear parameters to be found,
-and $N_{lin}$ is the number of these parameters.
+$\xi = \{\xi_{\alpha}\}$ are the parameters to be found
+by fitting them to the training set.
+
+To define the functional form of the basis functions $B_{\alpha}$,
+moment tensor descriptors, or simply \textit{moments}, are introduced:
+\begin{align}
+	M_{\mu, \nu} (n_i)
+	= \sum_j f_{\mu} (|r_{ij}|, z_i, z_j) r_{ij}^{\otimes \nu}
+\end{align}
+These descriptors consist of the radial and the angular part.
+The radial part has the following form.
+\begin{align}
+	f_{\mu} (|r_{ij}, z_i, z_j)
+	= \sum_{\beta=1}^Q c_{\mu, z_i, z_j}^{(\beta)} Q^{(\beta)} (|r_{ij}|)
+\end{align}
+where $\bm{c} = \{ c_{\mu, z_i, z_j}^{(\beta)} \}$
+is the set of radial parameters,
+and $Q^{\beta} (|r_{ij}|)$ are the radial basis functions.
+\begin{align}
+	Q^{(\beta)} (|r_{ij}|) =
+	\begin{cases}
+		\varphi^{(\beta)} (|r_{ij}|) (R_{cut} - |r_{ij}|)^2
+			& |r_{ij}| < R_{cut} \\
+		0
+			& |r_{ij}| \geq R_{cut}
+	\end{cases}
+\end{align}
+Here $\varphi^{(\beta)}$ are polynomial functions (e.g. Chebyshev polynomials)
+on the interval $[R_{min}, R_{cut}]$,
+where $R_{min}$ is the minimal distance between atoms in the system,
+$R_{cut}$ is the cutoff radius which ensures smooth behavior of the potential
+when atoms leave or enter the interaction neighborhood.
+
+
+% TODO: cite Shapeev and Novikov
 
 \section{Inverse Uncertainty Quantification}
 
