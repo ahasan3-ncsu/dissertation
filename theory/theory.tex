@@ -125,7 +125,8 @@ and a suitable machine learning framework for the descriptor.
 % TODO: why ADP?
 
 The angular dependent potential (ADP) formalism
-is a generalization of the EAM type potential.
+is a generalization of the EAM type potential
+\cite{mishin2005adp, beelerUMoXe}.
 The potential energy $V_i$ of an atom $i$ in ADP is given by
 \begin{align}
 	V_i
@@ -149,17 +150,16 @@ of the local atomic environment.
 This formalism extends the EAM by introducing angular forces
 as dipole and quadrupole moments.
 
-% TODO: cite Mishin and Beeler
-
 \subsection{Moment Tensor Potential}
 
 Moment tensor potential (MTP) is a polynomial-like MLIP
-based on the tensors of inertia of atomistic environments.
-MTP is a local potential, i.e., the energy $E^{MTP}$ of a system
-is the sum of contributions $V^{MTP} (n_i)$ of atomic neighborhoods $n_i$
+based on the tensors of inertia of atomistic environments
+\cite{shapeev2016mtp}.
+MTP is a local potential, i.e., the energy $E^{mtp}$ of a system
+is the sum of contributions $V (n_i)$ of atomic neighborhoods $n_i$
 for $N$ atoms.
 \begin{align}
-	E^{mtp} (cfg) = \sum_{i=1}^N V (n_i)
+	E^{mtp} = \sum_{i=1}^N V (n_i)
 \end{align}
 Each neighborhood is a tuple
 $n_i = (\{r_{i1}, z_i, z_1\}, \ldots, \{r_{ij}, z_i, z_j\}, \ldots,
@@ -208,8 +208,38 @@ where $R_{min}$ is the minimal distance between atoms in the system,
 $R_{cut}$ is the cutoff radius which ensures smooth behavior of the potential
 when atoms leave or enter the interaction neighborhood.
 
+The angular part $r_{ij}^{\otimes \nu}$ contains angular information
+about the neighborhood $\nu$.
+Here, the symbol '$\otimes$' denotes the outer product of vectors,
+and, thus, the angular part is a tensor of rank $\nu$.
 
-% TODO: cite Shapeev and Novikov
+By definition, the MTP basis function $B_{\alpha}$ is a contraction
+of one or more moment tensor descriptors, yielding a scalar, e.g.
+\begin{align}
+	M_{1,0}, (M_{1,2} M_{0,1}) \cdot M_{0,1}, M_{1,2} : M_{3,2}, \ldots,
+\end{align}
+where '$\cdot$' is an inner product of vectors,
+and '$:$' is a Frobenius product of matrices.
+Each basis function is invariant to
+atomic permutations, rotations, and reflections.
+In order to construct the basis functions $B_{\alpha}$,
+and in turn, determine a particular functional form of MTP,
+\textit{level} of moments $M_{\mu, \nu}$ and basis functions $B_{\alpha}$
+are defined:
+\begin{align}
+	\lev M_{\mu, \nu}
+		&= 2 + 4 \mu + \nu \\
+	\lev B_{\alpha}
+		&= \lev \prod_{p=1}^P M_{\mu_p, \nu_p}
+		= \sum_{p=1}^P (2 + 4 \mu_p + \nu_p)
+\end{align}
+A set of MTP basis functions,
+and thus, a particular form of MTP
+depends on the maximum allowed level $\lev_{max}$,
+which is also called the level of MTP.
+The set of basis functions included in the MTP
+are the ones with $\lev B_{\alpha} \leq \lev_{max}$
+\cite{novikov2020mlip, podryabinkin2023mlip}.
 
 \section{Inverse Uncertainty Quantification}
 
