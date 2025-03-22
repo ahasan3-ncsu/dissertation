@@ -6,21 +6,23 @@
 % Page layout
 \RequirePackage[margin=1in]{geometry}
 
-% Packages
-\RequirePackage{graphicx, subcaption, booktabs, multirow}
-\RequirePackage{amsmath, amssymb, bm, mathtools, siunitx}
-\RequirePackage{placeins, hyperref}
-
-% Hyperref settings
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    pdftitle={Atomsky's dissertation},
-}
-
 % Onehalfspacing
 \RequirePackage{setspace}
 \onehalfspacing
+
+% Figures, Tables & Math
+\RequirePackage{graphicx, subcaption, booktabs, multirow}
+\RequirePackage{amsmath, amssymb, bm, mathtools, siunitx}
+
+% Math operators
+\DeclareMathOperator{\lev}{lev}
+
+% Hyperref settings
+\RequirePackage[
+    colorlinks=true,
+    linkcolor=blue,
+    pdftitle={Atomsky's dissertation},
+]{hyperref}
 
 % No header, page number at the bottom
 \RequirePackage{fancyhdr}
@@ -33,5 +35,22 @@
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\bibname}{References}
 
-% MTP level operator
-\DeclareMathOperator{\lev}{lev}
+% Title of chapter*
+\makeatletter
+\def\@makeschapterhead#1{%
+  %%%%%\vspace*{50\p@}% %%% removed!
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \large \bfseries  #1\par\nobreak
+    \vskip 20\p@
+  }}
+\makeatother
+
+% Abstract
+\newcommand{\abstractname}{Abstract}
+\newenvironment{abstract}{
+	\chapter*{\centering\MakeUppercase{\abstractname}}
+	\thispagestyle{empty}
+	\pagestyle{empty}
+}{\clearpage}
