@@ -1,6 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{dissncsu}[2025/04/04 Dissertation class for NCSU ETD]
 
+% Hardcoded 12pt everywhere
 \LoadClass[12pt,oneside]{book}
 
 % Page layout
@@ -14,15 +15,24 @@
 \RequirePackage{graphicx, subcaption, booktabs, multirow}
 \RequirePackage{amsmath, amssymb, bm, mathtools, siunitx}
 
-% Math operators
-\DeclareMathOperator{\lev}{lev}
-
 % Hyperref settings
 \RequirePackage[
     colorlinks=true,
     linkcolor=blue,
     pdftitle={Atomsky's dissertation},
 ]{hyperref}
+
+% Math operators
+\DeclareMathOperator{\lev}{lev}
+
+% Title & names
+\newcommand{\dissTitle}[1]{\def\dTitle{#1}}
+\newcommand{\dissAuthor}[2]{\def\dAuthorFirst{#1} \def\dAuthorLast{#2}}
+
+\newcommand{\dissChair}[1]{\def\dChair{#1}}
+\newcommand{\dissMemberI}[1]{\def\dMemberI{#1}}
+\newcommand{\dissMemberII}[1]{\def\dMemberII{#1}}
+\newcommand{\dissMemberIII}[1]{\def\dMemberIII{#1}}
 
 % No header, page number at the bottom
 \RequirePackage{fancyhdr}
@@ -53,4 +63,13 @@
 	\chapter*{\centering\MakeUppercase{\abstractname}}
 	\thispagestyle{empty}
 	\pagestyle{empty}
-}{\clearpage}
+
+	\begin{singlespace}
+		\MakeUppercase{\dAuthorLast, \dAuthorFirst.}
+		\dTitle.
+		(Under the direction of \dChair).
+	\end{singlespace}
+	\vspace{12pt}
+}{
+	\clearpage
+}
