@@ -121,11 +121,11 @@
 			by \\
 			\dAuthorFirst\space\dAuthorLast
 			\vfill
-   			A dissertation submitted to the Graduate Faculty of\\
-   			North Carolina State University\\
-   			in partial fulfillment of the\\
-   			requirements for the Degree of\\
-   			Doctor of Philosophy
+			A dissertation submitted to the Graduate Faculty of\\
+			North Carolina State University\\
+			in partial fulfillment of the\\
+			requirements for the Degree of\\
+			Doctor of Philosophy
 			\vfill
 			Nuclear Engineering
 			\vfill
