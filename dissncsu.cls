@@ -58,10 +58,8 @@
 \makeatother
 
 % Abstract
-\newcommand{\abstractname}{Abstract}
 \newenvironment{abstract}{
-	%\chapter*{\centering\MakeUppercase{\abstractname}}
-	\chapter*{\abstractname}
+	\chapter*{Abstract}
 	\thispagestyle{empty}
 	\pagestyle{empty}
 
@@ -91,4 +89,53 @@
 		\vfill
 	\end{center}
 	\thispagestyle{empty}
+}
+
+% Title page
+\newcommand{\signatureline}[2][]{
+	\begin{minipage}[t]{0.4\textwidth}
+		\centering
+		\hrule
+		\vspace{0.5ex}
+		#2\\ #1
+	\end{minipage}
+}
+
+\newcommand{\committeesignatures}{
+	\begin{tabular}[t]{c@{\hspace{0.5in}}c}
+		\signatureline[]{\dMemberI} &
+		\signatureline[]{\dMemberII} \\[6em]
+		\signatureline[]{\dMemberIII} &
+		\signatureline[Chair of Advisory Committee]{\dChair} \\
+	\end{tabular}
+}
+
+\newcommand{\maketitlepage}{
+	\clearpage
+	\setcounter{page}{1}
+	\thispagestyle{empty}
+	\begin{singlespace}
+		\begin{center}
+			\dTitle
+			\vfill
+			by \\
+			\dAuthorFirst\space\dAuthorLast
+			\vfill
+   			A dissertation submitted to the Graduate Faculty of\\
+   			North Carolina State University\\
+   			in partial fulfillment of the\\
+   			requirements for the Degree of\\
+   			Doctor of Philosophy
+			\vfill
+			Nuclear Engineering
+			\vfill
+			Raleigh, North Carolina\\[2ex]
+			\the\year
+			\vfill
+			APPROVED BY:
+			\vfill
+			\committeesignatures
+		\end{center}
+	\end{singlespace}
+	\clearpage
 }
