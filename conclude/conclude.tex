@@ -14,39 +14,55 @@ Overall, this dissertation achieves the following:
 \item
 Fully quantifies the GB diffusion coefficients of U, Mo, and Xe in $\gamma$U-Mo
 for various compositions, temperatures, and GB orientations.
+The findings provide critical insight into the anisotropy of GB diffusion.
 This quantification enables comparison between bulk and GB diffusion
 and in turn effective diffusivity calculations in the fuel.
 
 \item
 Provides a mathematical model for re-solution rate of Xe gas bubbles,
 taking into account both bubble size and pressure.
-The model is readily usable in mesoscale- and engineering-scale codes
+The model also considers
+both the heterogeneous and the homogeneous mechanisms of re-solution.
+This analytical model is readily usable
+in mesoscale- and engineering-scale codes
 trying to predict gas bubble evolution and swelling in $\gamma$U-Mo.
 
 \item
-Performs IUQ on still unknown fission-gas-behavior parameters of $\gamma$U-Mo.
+Performs IUQ on still unknown fission-gas-behavior parameters of $\gamma$U-Mo
+as implemented in DART.
+Three significant parameters are identified and subsequently optimized
+for better meso-scale simulation of the U-Mo fuel.
 In the process, it also sets a precedent for parameter optimization
 as more data and material properties become available in the future.
 \end{itemize}
 
 \section{Future Work}
 
+Some of the studies included in this report is still unfinished.
+Future work will attempt the completion of these studies
+by achieving the following:
+
 \begin{itemize}
 \item
-Xe re-solution study needs more work.
-It is possible that the homogeneous mechanism of re-solution
-is not negligible compared to the heterogeneous mechanism.
+Futher investigation is needed to evaluate the re-solution process of Xe.
+Preliminary findings suggest that the homogeneous mechanism of re-solution
+might not be negligible compared to the heterogeneous mechanism.
 The two-temperature model will be employed
 to quantify the amount of energy transferred
 from the electronic subsystem to the ionic subsystem.
 
 \item
-The IUQ process will be extended to the newly generated data,
-which takes into account variable fission rate and grain size.
-Surrogate models will be built for the new dataset,
-and IUQ will be performed again
-to better quantify fission-gas-behavior parameter distributions
-applicable to a broad range of reactor conditions.
+The IUQ process will be expanded to incorporate newly generated data,
+which takes into account variations in fission rate and grain size.
+Surrogate models will be developed for the new dataset,
+enabling a refined IUQ to better quantify
+fission-gas-behavior parameter distributions
+applicable to a wide range of reactor conditions.
 
-% TODO: add blistering and mtp
+\item
+MLIPs of U and Mo will be developed and evaluated.
+Provided MLIPs can achieve reasonable accuracy compared to the existing ADP,
+additions of other elements to the potential will be explored.
+Successful implementation of this
+will enable MD simulations U-Mo fuel with liners and/or claddings.
 \end{itemize}
