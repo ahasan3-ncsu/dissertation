@@ -18,11 +18,6 @@ Finally, 'aAtomDifFiss" is the linear coefficient
 of radiation-driven gas atom diffusivity
 \cite{annualreport2021, ye2023, annualreport2022}.
 
-% TODO: need to talk about dataset generation
-
-There are 3200 samples relating the 7 fission-gas-behavior parameters
-with fuel swelling at a fission density of $7 \times 10^{21}$ fiss/cm$^3$.
-
 \begin{table}[ht]
 \centering
 \caption{
@@ -77,10 +72,87 @@ for IUQ purposes in this work.
 
 \section{Methodology}
 
-\subsection{Formulation of the Inverse Problem}
+Inverse uncertainty quantification (IUQ) is a process
+to quantify uncertainties in the input parameters of a computer model
+given experimental data.
+IUQ is an essential step in computational model validation
+because it provides a concrete and quantifiable measure of uncertainty
+in model predictions
+\cite{wu2018inverse, nagel2019bayesian, wu2021comprehensive}.
+The concept of IUQ is in contrast to forward uncertainty quantification (FUQ),
+which quantifies the uncertainty in the output of a computer model
+given the input parameters.
+FUQ is often used to predict the uncertainty in the results of a simulation,
+while IUQ is used to quantify the uncertainty in the model itself.
+IUQ is often used in engineering and scientific applications
+where there is a high degree of uncertainty in the input parameters.
+By quantifying the uncertainty in the input parameters,
+IUQ can help to improve the accuracy and reliability
+of the model predictions \cite{wu2021comprehensive, xie2024functional}.
 
-% TODO: define the inverse problem
-% refer to the theory section
+\subsection{Bayesian Framework for IUQ}
+
+Let's define the unknown reality or true value of an output as $y^R(x)$,
+where $x$ denotes the vector of design variables
+specifying experimental conditions.
+A computer model simulation can predict that reality only as an approximation:
+\begin{align}
+	\label{eq:real}
+	\bm{y}^R(\bm{x}) = \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x})
+\end{align}
+where $\bm{\theta}^*$ is a vector of true but unknown values
+of calibration parameters $\bm{\theta}$
+and $\delta(\bm{x})$ is the model uncertainty/discrepancy
+due to an incomplete understanding of the underlying physics of the model.
+
+To learn the reality $\bm{y}^R(\bm{x})$,
+experiments may be performed to obtain an observation $\bm{y}^E(\bm{x})$.
+However, the measurement process also introduces uncertainty:
+\begin{align}
+	\label{eq:exp}
+	\bm{y}^E(\bm{x}) = \bm{y}^R(\bm{x}) + \bm{\epsilon}
+\end{align}
+where $\bm{\epsilon} \sim \mathcal{N} (\bm{\mu}, \bm{\Sigma}_{exp})$
+indicates the measurement error/noise.
+It is typical to assume $\bm{\mu} = 0$
+and $\bm{\Sigma}_{exp} = \sigma_{exp}^2 \bm{I}$ for experiments
+having no systematic bias and having homoscedastic experimental errors.
+Combining equations \ref{eq:real} and \ref{eq:exp},
+we can obtain the "model updating equation"
+\cite{wu2021comprehensive, kennedy2001bayesian, arendt2012quant}:
+\begin{align}
+	\label{eq:upd}
+	\bm{y}^E(\bm{x})
+	= \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x}) + \bm{\epsilon}
+\end{align}
+Equation \ref{eq:upd} is the starting point for Bayesian IUQ.
+
+Assuming experimental uncertainty is Gaussian,
+$\bm{\epsilon}
+= \bm{y}^E(\bm{x}) - \bm{y}^M(\bm{x}, \bm{\theta}^*) - \delta(\bm{x})$
+follows a multi-dimensional Gaussian distribution
+with a mean of zero and a covariance matrix of $\bm{\Sigma}$.
+The posteriors of the true parameters $p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)$
+can then be written as:
+\begin{align}
+	p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)
+	&\propto p(\bm{\theta}^*) \cdot p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*) \\
+	&\propto p(\bm{\theta}^*) \cdot \frac{1}{\sqrt{|\bm{\Sigma}|}}
+		\exp \bigg[-\frac{1}{2} (\bm{y}^E-\bm{y}^M-\delta)^T
+		\bm{\Sigma}^{-1} (\bm{y}^E-\bm{y}^M-\delta) \bigg]
+\end{align}
+where $p(\bm{\theta}^*)$ is the prior distribution provided by expert opinion,
+and $p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*)$ is the likelihood function.
+$\bm{\Sigma}$ is the covariance of the likelihood consisting of three parts:
+\begin{align}
+	\bm{\Sigma} &= \bm{\Sigma}_{exp} + \bm{\Sigma}_{bias} + \bm{\Sigma}_{code}
+\end{align}
+where $\bm{\Sigma}_{exp}$ represents experimental uncertainty
+due to measurement error,
+$\bm{\Sigma}_{bias}$ means model uncertainty
+due to an inherent bias in the model,
+and $\bm{\Sigma}_{code}$ means code/interpolation uncertainty
+due to the use of surrogate models to reduce the computational cost.
 
 In this work, we assumed $\bm{\Sigma}_{bias} = 0$ and $\bm{\Sigma}_{code} = 0$
 because of the lack of experimental observations
@@ -205,20 +277,12 @@ which map input data to a higher-dimensional space
 In this work, all the surrogate models are implemented
 using the sklearn python library \cite{sklearn}.
 
-\subsection{Markov Chain Monte Carlo sampling}
-
-% TODO: put some theory in here
-% talk about how it solves the bayesian problem
-
-To get the posterior distributions of the calibration parameters,
-the Metropolis-Hastings algorithm is used
-to generate Markov Chain Monte Carlo (MCMC) samples
-\cite{robert2004metropolis, van2018simple}.
-
 \section{Results}
 
 \subsection{Sensitivity Analysis}
 
+There are 3200 samples relating the 7 fission-gas-behavior parameters
+with fuel swelling at a fission density of $7 \times 10^{21}$ fiss/cm$^3$.
 Figure \ref{fig:scatter} shows scatter plots of fuel swelling
 against all the fission-gas-behavior parameters.
 Except for the parameters "dGrainHBS" and "FaceCovMax",
@@ -251,9 +315,8 @@ using fission-gas-behavior parameters sampled independently of each other.
 
 \subsection{Surrogate Modeling}
 
-% TODO: this sentence needs to go somewhere
-The training and testing are done on a 70/30 split of this data.
-
+The training and testing of the surrogate models
+are done on a 70/30 split of the DART dataset.
 Figure \ref{fig:linear} depicts the surrogate prediction vs actual test data
 for three linear surrogate models: OLS, Lasso, and Ridge.
 The performance of the linear surrogate models are assessed
@@ -347,6 +410,11 @@ Support Vector Regression & 0.99365 & 0.374 & 0.172 \\
 \end{table}
 
 \subsection{MCMC Sampling}
+
+To get the posterior distributions of the calibration parameters,
+the Metropolis-Hastings algorithm is used
+to generate Markov Chain Monte Carlo (MCMC) samples
+\cite{robert2004metropolis, van2018simple}.
 
 Figure \ref{fig:trace} displays the trace plots of the MCMC samples
 of the three fission-gas-behavior parameters.
