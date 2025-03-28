@@ -22,8 +22,21 @@
     pdftitle={Atomsky's dissertation},
 ]{hyperref}
 
-% Math operators
-\DeclareMathOperator{\lev}{lev}
+% No header, page number at the bottom
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+
+% tocbibind
+\RequirePackage[nottoc]{tocbibind}
+
+% Rename TOC, Bibliography
+\renewcommand{\contentsname}{TABLE OF CONTENTS}
+\renewcommand{\listtablename}{LIST OF TABLES}
+\renewcommand{\listfigurename}{LIST OF FIGURES}
+\renewcommand{\bibname}{REFERENCES}
 
 % Title & names
 \newcommand{\dissTitle}[1]{\def\dTitle{#1}}
@@ -33,17 +46,6 @@
 \newcommand{\dissMemberI}[1]{\def\dMemberI{#1}}
 \newcommand{\dissMemberII}[1]{\def\dMemberII{#1}}
 \newcommand{\dissMemberIII}[1]{\def\dMemberIII{#1}}
-
-% No header, page number at the bottom
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyfoot[C]{\thepage}
-
-% Rename TOC, Bibliography
-\renewcommand{\contentsname}{Table of Contents}
-\renewcommand{\bibname}{References}
 
 % Title of chapter*
 \makeatletter
