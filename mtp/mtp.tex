@@ -2,16 +2,18 @@
 
 \section{Computational Details}
 
-Various U and Mo phases and alloys are simulated using AIMD.
-The resulting data is then used to generate an MTP for the two elements
-with $\lev_{max} = 10$.
+Various U and Mo phases and alloys are simulated with AIMD
+using the Vienna \textit{Ab Initio} Simulation Package (VASP)
+\cite{kresse1996}.
+The resulting data is then used
+to generate an MTP for the two elements with $\lev_{max} = 10$.
 To validate this potential,
 MD simulations of $\alpha$U, $\gamma$U, bcc Mo, U$_2$Mo, and U-10Mo
 are performed with the airm of extracting
 lattice constants, radial distribution fucntions (RDFs),
-and other properties as a function of temperature.
+and elastic constants as a function of temperature.
 $\alpha$U has an orthorombic crystal structure,
-whereas U$_2$Mo has a tetragonal structure.
+and U$_2$Mo has a tetragonal structure.
 The three other simulated systems have a bcc structure.
 
 The LAMMPS software package is utilized for MD simulations \cite{lammps}.
@@ -42,22 +44,27 @@ for interatomic potentials.
 \begin{figure}[!ht]
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_alphaU.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_gammaU.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_bccMo.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_u2mo.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_U-10Mo.pdf}
 \end{subfigure}
 \caption{
@@ -88,18 +95,22 @@ for both first and second nearest neighbors.
 \begin{figure}[!ht]
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_alphaU_500K.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_gammaU_950K.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_bccMo_1600K.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
+	\centering
 	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_u2mo_500K.pdf}
 \end{subfigure}
 \caption{
@@ -112,11 +123,63 @@ for both first and second nearest neighbors.
 \label{fig:rdfs}
 \end{figure}
 
+\subsection{Elastic Constants}
+
+Figure \ref{fig:ecs} displays the elastic constants
+$C_{11}$, $C_{12}$, and $C_{44}$
+for $\alpha$U, $\gamma$U, bcc Mo, and U$_2$Mo.
+In all cases, the MTP overpredicts the elastic constants
+by two to three times compared to the ADP.
+Thus, the simulated system with the MTP
+is significantly more rigid than expected.
+This will lead to simulations of systems with
+inaccurate mechanical properties, defect energies,
+and provide unrealistic phase stability.
+Given that the training data for the MTP came from
+simple AIMD simulations of U and Mo systems without any deformation,
+it is fair to assume that the potential is lacking training
+with descriptors of deformed configurations.
+
+\begin{figure}[!ht]
+\begin{subfigure}{0.495\textwidth}
+	\caption{}
+	\centering
+	\includegraphics[width=0.9\textwidth]{mtp/images/elConst_alphaU.pdf}
+\end{subfigure}
+\begin{subfigure}{0.495\textwidth}
+	\caption{}
+	\centering
+	\includegraphics[width=0.9\textwidth]{mtp/images/elConst_gammaU.pdf}
+\end{subfigure}
+\begin{subfigure}{0.495\textwidth}
+	\caption{}
+	\centering
+	\includegraphics[width=0.9\textwidth]{mtp/images/elConst_bccMo.pdf}
+\end{subfigure}
+\begin{subfigure}{0.495\textwidth}
+	\caption{}
+	\centering
+	\includegraphics[width=0.9\textwidth]{mtp/images/elConst_u2mo.pdf}
+\end{subfigure}
+\caption{
+	Elastic constants $C_{11}$, $C_{12}$, and $C_{44}$ for
+	(a) $\alpha$U,
+	(b) $\gamma$U,
+	(c) bcc Mo, and
+	(d) U$_2$Mo,
+	using ADP and MTP potentials.
+}
+\label{fig:ecs}
+\end{figure}
+
 \section{Discussion}
 
 The MTP demonstrates considerable promise in its capabilities
-to predict cystal structures involving U and Mo.
-However, further testing is required to assess to accurately predict
-elastic constants, melting points, and other thermodynamic properties.
+to predict stable cystal structures involving U and Mo.
+However, it cannot predict elastic constants well.
+Therefore, further training is needed to make it usable.
+Also, more testing is required to assess
+if the MTP can accurately predict formation energies, melting points,
+and other thermodynamic properties.
 Following the validation of the two-element potential,
 our next step will be to incorporate a third element (Al or Zr) to the MTP.
