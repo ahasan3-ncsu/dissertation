@@ -564,7 +564,7 @@ where $S_{e,i}$ is the electronic stopping power of the fission product $i$,
 and $\zeta = S_{e,eff} / S_{e}$ is the fraction of fission product energy
 imparted to the lattice.
 In this work, $\zeta$ is assumed to be an unknown parameter
-ranging somewhere between 0.55 and 0.95. % TODO: change range of zeta
+ranging somewhere between 0.001 and 0.1.
 Introducing this parameter is necessary to account for
 the fraction of the fission product energy
 that is not transferred to the thermal spike.
@@ -628,11 +628,7 @@ for fitting the computed re-solution rate:
 where $R_{bubble}$ is in \r{A},
 $\dot{F}$ is in fissions per cubic centimeter per second (fiss/cm$^3$/s),
 and $a$, $c$, and $d$ are adjustable parameters.
-The parameter values for different $\zeta$ are listed in Table 1.
-For all $\zeta$ values, the parameter $d$ remains consistent
-up to three decimal places.
-To determine the re-solution rate of any arbitrary $\zeta$
-of between 0.55 and 0.95, linear interpolation would be sufficient.
+Table \ref{tab:zeta} lists the parameter values for different $\zeta$.
 
 \begin{figure}[ht]
 	\centering
@@ -654,11 +650,9 @@ of between 0.55 and 0.95, linear interpolation would be sufficient.
 \toprule
 $\zeta$     & $a$        & $c$     & $d$      \\
 \midrule
-0.55        & 0.0167     & 2.717   & 1.225    \\
-0.65        & 0.0163     & 3.184   & 1.225    \\
-0.75        & 0.0161     & 3.635   & 1.225    \\
-0.85        & 0.0159     & 4.073   & 1.225    \\
-0.95        & 0.0158     & 4.502   & 1.225    \\
+0.001       & 0.9        & 0.0002  & 1.11     \\
+0.01        & 0.7        & 0.01    & 1.31     \\
+0.1         & 0.037      & 0.32    & 1.2      \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -746,11 +740,11 @@ decreases with both these variables.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[height=7cm]{resol/images/3d.pdf}
+	\includegraphics[trim={2cm 2cm 2cm 2cm}, clip, height=9cm]{resol/images/3d.pdf}
 	\caption{
 		Xe gas bubble re-solution rate in $\gamma$U-10Mo
 		as a function of bubble radius and Xe/vacancy ratio
-		at a fission rate of $10^{14}$ fiss/cm$^3$/s for $\zeta=0.75$.
+		at a fission rate of $10^{14}$ fiss/cm$^3$/s for $\zeta=0.01$.
 	}
 	\label{fig:3d}
 \end{figure}
@@ -820,19 +814,6 @@ Figure \ref{fig:dart} shows the re-solution rates
 for bubble radii up to 100 \r{A}.
 Unlike the DART model prediction, the re-solution rate computed
 in the present work is a smooth decaying function of bubble radius.
-For very small bubbles, the calculated re-solution rate
-is about two orders of magnitude higher than the DART prediction.
-For bubbles with a radius of around 50 \r{A},
-the difference is less than one order of magnitude.
-This difference suddenly increases to about three orders of magnitude
-for bubbles having greater than 50 \r{A} radii
-due to the discontinuous nature of the rate in DART.
-The $\zeta$ value does not impact this comparison,
-as the re-solution rate at $\zeta=0.95$ is, at most,
-double that at $\zeta=0.55$.
-The large bubble size regime ($R_{bubble} > 50$ \r{A}) is where
-DART adds a strong trapping effect to the re-solution rate,
-and thus the rate does not represent a pure re-solution rate.
 
 \begin{figure}[ht]
 	\centering
@@ -863,7 +844,7 @@ All this information was then used to calculate
 the overall re-solution rate of Xe gas bubbles in the fuel.
 The re-solution rate of intragranular Xe gas bubbles
 under equilibrium pressure in $\gamma$U-10Mo
-was found to be on the order of $10^{-4}$--$10^{-2}$ s$^{-1}$
+was found to be on the order of $10^{-6}$--$10^{-3}$ s$^{-1}$
 for a fission rate of $10^{14}$ fissions/cm$^3$/s.
 An analytical form of re-solution rate---dependent on
 bubble radius, bubble pressure, and fission rate---was also provided.
