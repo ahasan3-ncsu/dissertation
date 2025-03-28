@@ -2,32 +2,63 @@
 
 \section{Computational Details}
 
+Various U and Mo phases and alloys are simulated using AIMD.
+The resulting data is then used to generate an MTP for the two elements
+with $\lev_{max} = 10$.
+To validate this potential,
+MD simulations of $\alpha$U, $\gamma$U, bcc Mo, U$_2$Mo, and U-10Mo
+are performed with the airm of extracting
+lattice constants, radial distribution fucntions (RDFs),
+and other properties as a function of temperature.
+$\alpha$U has an orthorombic crystal structure,
+whereas U$_2$Mo has a tetragonal structure.
+The three other simulated systems have a bcc structure.
+
+The LAMMPS software package is utilized for MD simulations \cite{lammps}.
+For all simulations,
+supercells of $20 \times 20 \times 20$ in lattice units are used.
+Each simulations runs for a total of 100 ps.
+NPT ensembles are employed,
+with anisotropic control of the x, y, and z dimensions.
+The length of dimensional length are averaged every 1 ps,
+and data from the last 1 ps is used for analysis.
+RDFs are computed using the atomic positions
+in the last timestep of the simulations.
+
 \section{Results}
 
 \subsection{Lattice Constants}
 
-Explain Figure \ref{fig:latConst}.
+Figure \ref{fig:latConst} shows
+the lattice constants of the five simulated systems.
+The lattice constants computed using the ADP potential \cite{beelerADP}
+are also shown in the figure.
+The lattice constants from the MTP agree with the ADP calculations.
+Even for the noncubic systems, such as $\alpha$U and U$_2$Mo,
+the MTP is capable of producing comparable results.
+Noncubic systems are generally harder to replicate than cubic systems
+for interatomic potentials.
 
 \begin{figure}[!ht]
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/latConst_alphaU.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_alphaU.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/latConst_gammaU.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_gammaU.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/latConst_bccMo.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_bccMo.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/latConst_u2mo.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_u2mo.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/latConst_U-10Mo.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/latConst_U-10Mo.pdf}
 \end{subfigure}
 \caption{
 	Lattice constants of
@@ -43,24 +74,33 @@ Explain Figure \ref{fig:latConst}.
 
 \subsection{Radial Distributions Functions}
 
-Explain Figure \ref{fig:rdfs}.
+Figure \ref{fig:rdfs} depicts the RDFs of a select few pair distances
+from the simulated systems.
+The U-U pair RDFs in $\alpha$U, $\gamma$U, and U$_2$Mo are reported
+along with the Mo-Mo pair RDF in bcc Mo.
+The RDFs computed using both MTP and ADP display similar characteristics.
+The most noticeable discrepancy is observed in the RDFs of U$_2$Mo.
+The ADP predicts slightly higher density for the first nearest neighbor
+than the second nearest neighbor for U-U pairs,
+whereas MTP predicts the same density
+for both first and second nearest neighbors.
 
 \begin{figure}[!ht]
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/rdf_alphaU_500K.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_alphaU_500K.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/rdf_gammaU_950K.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_gammaU_950K.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/rdf_bccMo_1600K.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_bccMo_1600K.pdf}
 \end{subfigure}
 \begin{subfigure}{0.495\textwidth}
 	\caption{}
-	\includegraphics[width=0.9\textwidth]{mtp/images/rdf_u2mo_500K.pdf}
+	\includegraphics[width=0.8\textwidth]{mtp/images/rdf_u2mo_500K.pdf}
 \end{subfigure}
 \caption{
 	Radial distribution functions for
@@ -74,3 +114,9 @@ Explain Figure \ref{fig:rdfs}.
 
 \section{Discussion}
 
+The MTP demonstrates considerable promise in its capabilities
+to predict cystal structures involving U and Mo.
+However, further testing is required to assess to accurately predict
+elastic constants, melting points, and other thermodynamic properties.
+Following the validation of the two-element potential,
+our next step will be to incorporate a third element (Al or Zr) to the MTP.
