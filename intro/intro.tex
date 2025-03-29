@@ -2,11 +2,20 @@
 
 \section{Motivation}
 
-% TODO: rewrite these paragraphs
+Research reactors (RRs) are nuclear facilities
+that supply high neutron and/or gamma radiation
+for research into basic/applied sciences \cite{martens1967}.
+These reactors operate at lower temperature and pressure than power reactors
+and are often simpler in design \cite{couturier2019}.
+However, RRs normally require fuel
+that is much more enriched in U-235 than the fuel used in power reactors.
+Generally, highly enriched uranium (HEU) fuels are defined
+as those containing greater than 20\% U-235 content,
+whereas low enriched uranium (LEU) fuels contains less than 20\% U-235 content.
+RRs have historically employed HEU for their operation \cite{keiser2003}.
 
 The United States High-Performance Research Reactor (USHPRR) program
-aims to replace highly enriched uranium (HEU) fuels
-in high-power research reactors with low enriched uranium (LEU) fuels.
+aims to replace HEU fuels in high-power research reactors with LEU fuels.
 This transition is driven by the need
 to move away from weapons-grade nuclear material
 and reduce proliferation risks.
@@ -18,11 +27,17 @@ to sustain sufficient power and flux levels in research reactors
 High-performance research reactors require fuel
 capable of operating at low temperatures
 while maintaining high fission density at high specific power.
+Peak fuel centerline temperature in these reactors
+is typically less than 250$^{\circ}$C,
+with fuel in most reactors operating at significantly lower temperatures
+\cite{kim2011}.
 The fission density for a candidate fuel
 falls between $3 \times 10^{21}$ and $6 \times 10^{21}$ fission/cm$^3$.
 Only a few fuels, such as stable $\gamma$U alloys, combine high uranium density
 with stable behavior at such high burnup levels \cite{meyer2014}.
-The $\gamma$ phase of uranium has a body-centered cubic (bcc) structure,
+
+The $\gamma$ phase of uranium
+has a body-centered cubic (bcc) crystal structure,
 avoiding the anisotropic swelling issues
 seen in orthorhombic $\alpha$U \cite{hofman1990, mahbuba2021}.
 Alloying $\gamma$ phase with molybdenum produces a metastable $\gamma$ phase,
@@ -33,7 +48,8 @@ allowing $\gamma$ phase retention at lower temperatures
 than expected from the phase diagram.
 Additionally, $\gamma$U-Mo alloys can revert to the $\gamma$ phase
 from equilibrium phases under irradiation \cite{meyer2014, willard1965},
-offering the widest metastable $\gamma$ phase region under reactor conditions.
+offering a large region of $\gamma$ phase metastability
+under reactor conditions.
 Consequently, the USHPRR program is developing fuel designs
 using $\gamma$U-Mo as a monolithic fuel foil,
 incorporating a zirconium diffusion barrier
@@ -41,10 +57,20 @@ within aluminum cladding \cite{robinson2009, cole2016, miller2021}.
 
 There exists a knowledge gap in the material properties of $\gamma$U-Mo,
 which constrains the evaluation of its fuel performance.
-This work aims to bridge these gaps using computational methods,
+This work aims to bridge this gap using computational methods,
 enhancing the accuracy of engineering-scale modeling of $\gamma$U-Mo.
 
 \section{Literature Review}
+
+\subsection{\texorpdfstring{$\gamma$}{gamma}U-Mo Evolution Under Operation}
+
+Formation of fission gas superlattice.
+
+Grain refinement.
+
+Accelerated swelling.
+
+Material background information.
 
 \subsection{Diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
 
@@ -117,9 +143,23 @@ trapping them and causing the bubbles to grow after absorption.
 Under irradiation, the Xe atoms in the gas bubble are reintroduced
 into the fuel matrix through fission-product-induced cascades
 and thermal spikes---a process known as re-solution.
-The relative rates of the re-solution affect the overall size and density
+The relative rates of re-solution affect the overall size and number density
 of the bubbles \cite{ye2023, olander2006re, parfitt2008},
 in turn impacting bubble evolution and subsequent fuel swelling.
+
+The Dispersion Analysis Research Tool (DART),
+developed by Argonne National Laboratory \cite{ye2023},
+is a mesoscale code that can calculate fission gas swelling
+in $\gamma$U-Mo under different operational situations.
+One of the many parameters required to model swelling behavior
+is the re-solution rate of fission gas bubbles.
+DART employs a simple re-solution model
+that includes a piecewise function to account for the bubble radius.
+The parameters in this function are calibrated
+by fitting the computed swelling value to experimental data,
+meaning that we can only roughly estimate the re-solution rate.
+A physics-based re-solution rate for fission gas bubbles would make
+the swelling calculations of higher-length-scale models more rigorous.
 
 Re-solution of fission gas in nuclear fuels involves
 two commonly accepted mechanisms: homogeneous re-solution
@@ -142,13 +182,13 @@ for determining the re-solution rate
 and for elucidating the fundamental mechanism
 behind re-solution in $\gamma$U-10Mo.
 
-In the literature up to this point, atomistic simulations have been widely used
+In the literature up to this point, atomistic simulations have been used
 to evaluate the re-solution rate in various nuclear materials.
 For instance, in 2008, Parfitt et al. \cite{parfitt2008} used simulations
 of primary knock-on atoms (PKAs) in uranium dioxide (UO$_2$)
 to assess the re-solution of helium gas bubbles.
 In 2009, Schwen et al. \cite{schwen2009md} investigated
-the homogeneous re-solution of Xe gas bubbles in UO$_2$,
+the homogeneous re-solution of Xe gas bubbles in UO$_2$
 using a binary collision model and molecular dynamics (MD) simulations.
 The following year, Huang et al. \cite{huang2010md} examined
 the impact of thermal spikes on Xe re-solution in UO$_2$.
@@ -164,7 +204,7 @@ Their findings suggest that heterogeneous re-solution of gas bubbles
 is the dominant method of re-solution in UO$_2$.
 In addition to UO$_2$, the re-solution rate of fission gas bubbles
 was also evaluated in uranium carbide (UC)
-by Matthews et al. \cite{matthews2015diss}, using binary collision methods.
+by Matthews et al. \cite{matthews2015diss} using binary collision methods.
 The thermal spike model was not employed in UC
 because it was assumed that the local heating does not exceed
 the melting temperature \cite{matthews2015diss, ronchi1986}.
@@ -172,8 +212,7 @@ In summary, the binary collision model and MD simulations were used
 to determine the re-solution rate in nuclear fuels.
 
 In MD simulations of homogeneous re-solution,
-a regular lattice atom is typically endowed with high kinetic energy
-to emulate a PKA.
+a lattice atom is endowed with high kinetic energy to emulate a PKA.
 The PKA then interacts ballistically with other atoms,
 initiating a collision cascade near the gas bubble
 and inducing disorder \cite{parfitt2008, govers2012}.
@@ -185,7 +224,7 @@ that may not significantly influence the re-solution process.
 However, a binary collision model must be utilized in this approach
 to first obtain an energy spectrum of the gas atom PKAs \cite{schwen2009md}.
 One challenge in using MD simulations to model homogeneous re-solution
-is the channeling of PKAs or their recoils over long distances,
+is the channeling of PKAs or their recoils over long distances
 without any collisions \cite{jarrin2021}.
 This can make collecting statistics on the interactions
 between PKAs and gas bubble atoms computationally demanding,
@@ -193,11 +232,10 @@ especially when the PKA direction is random.
 A potential solution
 is to direct the PKAs toward a high index lattice direction \cite{stoller2000}.
 Moreover, collision cascades end up in heat spikes due to nuclear stopping.
-In that regard, the simulation of PKAs
-also encompasses the heterogeneous re-solution.
 To identify atoms that are re-solved ballistically, a threshold atomic speed,
 above which it is improbable to find atoms in thermal equilibrium,
 can be utilized \cite{parfitt2008}.
+
 For MD simulations of heterogeneous re-solution due to swift heavy ions,
 the thermal spike model is normally employed.
 This model is useful for describing the interaction
@@ -220,23 +258,6 @@ by raising the temperature of atoms within a cylindrical region.
 % in this work, we use "heat spike" to mean the spike due to nuclear stopping
 % at the end of collision (sub)cascades. The word "thermal spike" is reserved
 % for describing local heating due to heavy electronic stopping.
-
-For qualification of $\gamma$U-Mo fuel,
-the ability to accurately predict the fission gas atom evolution
-under various operational and transient conditions is crucial.
-The Dispersion Analysis Research Tool (DART),
-developed by Argonne National Laboratory \cite{ye2023},
-is a mesoscale code that can calculate fission gas swelling
-in $\gamma$U-Mo under different operational situations.
-One of the many parameters required to model swelling behavior
-is the re-solution rate of fission gas bubbles.
-DART employs a simple re-solution model
-that includes a piecewise function to account for the bubble radius.
-The parameters in this function are calibrated
-by fitting the computed swelling value to experimental data,
-meaning that we can only roughly estimate the re-solution rate.
-A physics-based re-solution rate for fission gas bubbles would make
-the swelling calculations of higher-length-scale models more rigorous.
 
 \subsection{Unknown Fission-Gas-Behavior Parameters}
 
@@ -268,7 +289,6 @@ since the previous calibration \cite{annualreport2021, ye2023}.
 % TODO: what fission-gas-behavior parameters?
 % need to talk about them here; maybe an overview
 
-\clearpage
 \section{Objectives}
 
 Based on the identified knowledge gaps in $\gamma$U-Mo, the following
