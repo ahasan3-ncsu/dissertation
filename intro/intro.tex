@@ -28,18 +28,22 @@ High-performance research reactors require fuel
 capable of operating at low temperatures
 while maintaining high fission density at high specific power.
 Peak fuel centerline temperature in these reactors
-is typically less than 250$^{\circ}$C,
+is typically less than $250^{\circ}$C,
 with fuel in most reactors operating at significantly lower temperatures
 \cite{kim2011}.
 The fission density for a candidate fuel
 falls between $3 \times 10^{21}$ and $6 \times 10^{21}$ fission/cm$^3$.
+
+% historic RR fuels here and why they failed
+
 Only a few fuels, such as stable $\gamma$U alloys, combine high uranium density
 with stable behavior at such high burnup levels \cite{meyer2014}.
-
 The $\gamma$ phase of uranium
 has a body-centered cubic (bcc) crystal structure,
 avoiding the anisotropic swelling issues
 seen in orthorhombic $\alpha$U \cite{hofman1990, mahbuba2021}.
+% all types of gamma U alloys
+
 Alloying $\gamma$ phase with molybdenum produces a metastable $\gamma$ phase,
 which transforms sluggishly into equilibrium phases
 (namely $\alpha$U and $\gamma$'U$_2$Mo)
@@ -50,6 +54,7 @@ Additionally, $\gamma$U-Mo alloys can revert to the $\gamma$ phase
 from equilibrium phases under irradiation \cite{meyer2014, willard1965},
 offering a large region of $\gamma$ phase metastability
 under reactor conditions.
+% dispersion fuels too
 Consequently, the USHPRR program is developing fuel designs
 using $\gamma$U-Mo as a monolithic fuel foil,
 incorporating a zirconium diffusion barrier
@@ -62,15 +67,59 @@ enhancing the accuracy of engineering-scale modeling of $\gamma$U-Mo.
 
 \section{Literature Review}
 
-\subsection{\texorpdfstring{$\gamma$}{gamma}U-Mo Evolution Under Operation}
+\subsection{\texorpdfstring{$\gamma$}{gamma}U-Mo Irradiation Behavior}
 
-Formation of fission gas superlattice.
+Under irradiation, $\gamma$U-Mo fuel undergoes
+a series of microstructural evolution that impact its performance.
+Initially, at low fission densities
+of less than $2.5$--$3.5 \times 10^{21}$ fissions/cm$^3$
+or a burnup of $6$--$7.2\%$ fission per initial metal atoms (FIMA)
+and temperatures typically below $250^{\circ}$,
+fuel swelling exhibits a quasi-linear trend \cite{kim2011, ye2015}.
+A key feature during this early stage
+is the formation of an ordered array of nanobubbles,
+known as the gas bubble superlattice (GBS).
+$\gamma$U-Mo is the only nuclear fuel in which a GBS has been observed to form
+\cite{salvato2024}.
+This GBS is typically a face-centered cubic (fcc) superlattice
+registered on the underlying
+body-centered cubic (bcc) $\gamma$U-Mo crystal lattice,
+with nanobubbles around 4 nm in diameter
+and a lattice parameter of approximately 12 nm \cite{salvato2024, meyer2014}.
+The concentration of fission gas in the GBS
+progressively increases with fission density,
+reflecting an evolution of the nanobubble.
 
-Grain refinement.
-
-Accelerated swelling.
-
-Material background information.
+The initial swelling is primarily attributed to
+the accumulation of fission products
+either in solid solution within the fuel lattice or within the ordered GBS.
+As irradiation continues and the fuel reaches higher fission densities,
+a significant microstructural transformation---grain refinement---occurs.
+This leads to the development of the high burnup structure (HBS).
+The HBS is characterized by
+the formation of sub-micron sized grains (200--300 nm)
+and a large number of intergranular pores.
+The GBS collapses at this stage, and most of the fission gas inventory
+collects into the relatively large intergranular bubbles
+that nucleate at the grain boundaries of the newly formed refined grains.
+HBS formation is common in fuel types operating at temperatures
+where defect annealing is limited
+due to progressive accumulation of radiation defects.
+In $\gamma$U-Mo, HBS is usually first observed
+at the high-angle grain boundaries.
+The driving mechanisms for grain refinement
+are proposed to be polygonization initially,
+followed by dynamic recrystallization at a critical local fission density,
+marked by the transformation of low-angle to high-angle grain boundaries.
+The formation of HBS leads to accelerated fuel swelling.
+The increased grain boundary area per unit volume in the recrystallized fuel
+enhances fission gas bubble swelling.
+Three classes of porosity are observed in irradiated $\gamma$U-Mo fuel:
+small gas bubbles within fuel particles and interaction layers,
+as-fabricated pores,
+and large pores at the interaction layer-matrix interface,
+all of which can reduce thermal conductivity
+and contribute to fuel plate swelling.
 
 \subsection{Diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
 
