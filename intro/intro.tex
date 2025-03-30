@@ -3,47 +3,86 @@
 \section{Motivation}
 
 Research reactors (RRs) are nuclear facilities
-that supply high neutron and/or gamma radiation
-for research into basic/applied sciences \cite{martens1967}.
-These reactors operate at lower temperature and pressure than power reactors
-and are often simpler in design \cite{couturier2019}.
+that act as high neutron and/or gamma radiation sources
+for use in training and education, production of radioisotopes,
+material testing and characterization, transmutation, activation
+or other irradiation services \cite{martens1967, mishra2023}.
+In general, RRs operate close to atmospheric pressure
+and at relatively low temperatures
+(typically with a fuel temperature of less than $250^{\circ}$C
+and a coolant temperature of less than $50^{\circ}$C,
+compared to a fuel temperature of 1000--1500$^{\circ}$C
+in 350 $^{\circ}$C coolant for power reactors)
+\cite{couturier2019, mishra2023}.
 However, RRs normally require fuel
-that is much more enriched in U-235 than the fuel used in power reactors.
-Generally, highly enriched uranium (HEU) fuels are defined
+that is much more enriched in U-235 than the fuel used in power reactors,
+and have historically employed highly enriched uranium (HEU)
+for their operation.
+HEU fuels are ususally defined
 as those containing greater than 20\% U-235 content,
-whereas low enriched uranium (LEU) fuels contains less than 20\% U-235 content.
-RRs have historically employed HEU for their operation \cite{keiser2003}.
+whereas low enriched uranium (LEU) fuels contain less than 20\% U-235 content
+\cite{keiser2003}.
 
-The United States High-Performance Research Reactor (USHPRR) program
-aims to replace HEU fuels in high-power research reactors with LEU fuels.
-This transition is driven by the need
+Early research reactor fuels included monolithic alloys like U-Al,
+chosen for their structural similarity to aluminum cladding.
+However, to achieve higher uranium loadings required
+for lengthening the reactor cycle, dispersion fuels were developed.
+Dispersion fuels consist of fine fuel particles
+dispersed within an inert matrix, typically aluminum or an aluminum alloy.
+This design contains most fission products within the fuel particles,
+with only a fraction escaping into the matrix by recoil \cite{jamison2022}.
+
+Due to the stable performance of UO$_2$ in power reactors,
+UO$_2$-Al was the first developed dispersion fuel,
+offering high uranium loading than monolithic U-Al.
+However, a significant reaction between UO$_2$ and Al during hot rolling
+in the fabrication process posed challenges.
+During irradiation, an interaction layer of UAl$_4$ and Al$_2$O$_3$ forms,
+even at low temperatures.
+To avoid this problem, the U$_3$O$_8$-Al dispersion fuel was evaluated,
+and it showed better fabrication characteristics than UO$_2$-Al.
+Thus, it was adopted for reactors
+like the High Flux Isotope Reactor (HFIR) in the US.
+Meanwhile, the UAl$_x$ dispersion fuel,
+where UAl$_x$ represents a mixture of UAl$_2$, UAl$_3$, and UAl$_4$,
+was adopted by reactors like
+the Advanced Test Reactor (ATR) and the Belgian Reactor 2 (BR2)
+due to its excellent performance,
+although its uranium density is lower than U$_3$O$_8$ \cite{jamison2022}.
+
+With the inception of
+the Reduced Enrichment for Research and Test Reactors (RERTR) program in 1978,
+there had been an effort to replace
+HEU fuels in high-power research reactors with LEU fuels \cite{travelli1980}.
+This transition was driven by the need
 to move away from weapons-grade nuclear material
 and reduce proliferation risks.
 To compensate for the lower enrichment,
-a higher-density uranium fuel is required
+a higher-density uranium fuel was required
 to sustain sufficient power and flux levels in research reactors
 \cite{snelgrove1997, wilson2020}.
+U$_3$Si$_2$ was developed and qualified in the US for the RERTR program.
+The U$_3$Si$_2$ dispersion fuel drastically increased the uranium density
+compared to the oxide and UAl$_x$-based fuels.
+It became the first LEU fuel intended for the conversion of HEU reactors,
+and still has the highest uranium density among the qualified dispersion fuels.
+Since the 1980s, the UAl$_x$ fuel has generally been replaced with U$_3$Si$_2$.
+All fuels developed and used before U$_3$Si$_2$ were practically based on HEU
+\cite{jamison2022, mishra2023}.
 
-High-performance research reactors require fuel
-capable of operating at low temperatures
+U$_3$Si$_2$ by itself is insufficient for the conversion
+of High-Performance Research Reactors (HPRRs) from HEU to LEU based fuels.
+This conversion is the aim
+of the United States High-Performance Research Reactor (USHPRR) program.
+HPRRs require fuel capable of operating at low temperatures
 while maintaining high fission density at high specific power.
-Peak fuel centerline temperature in these reactors
-is typically less than $250^{\circ}$C,
-with fuel in most reactors operating at significantly lower temperatures
-\cite{kim2011}.
 The fission density for a candidate fuel
 falls between $3 \times 10^{21}$ and $6 \times 10^{21}$ fission/cm$^3$.
-
-% historic RR fuels here and why they failed
-
 Only a few fuels, such as stable $\gamma$U alloys, combine high uranium density
-with stable behavior at such high burnup levels \cite{meyer2014}.
-The $\gamma$ phase of uranium
-has a body-centered cubic (bcc) crystal structure,
+with stable behavior at such high burnup levels.
+The $\gamma$ phase of uranium has a body-centered cubic (bcc) structure,
 avoiding the anisotropic swelling issues
 seen in orthorhombic $\alpha$U \cite{hofman1990, mahbuba2021}.
-% all types of gamma U alloys
-
 Alloying $\gamma$ phase with molybdenum produces a metastable $\gamma$ phase,
 which transforms sluggishly into equilibrium phases
 (namely $\alpha$U and $\gamma$'U$_2$Mo)
@@ -54,11 +93,25 @@ Additionally, $\gamma$U-Mo alloys can revert to the $\gamma$ phase
 from equilibrium phases under irradiation \cite{meyer2014, willard1965},
 offering a large region of $\gamma$ phase metastability
 under reactor conditions.
-% dispersion fuels too
-Consequently, the USHPRR program is developing fuel designs
-using $\gamma$U-Mo as a monolithic fuel foil,
-incorporating a zirconium diffusion barrier
-within aluminum cladding \cite{robinson2009, cole2016, miller2021}.
+
+Therefore, $\gamma$U-Mo alloys, particularly the ones with 7--10 wt.\% Mo,
+have emerged as promising candidates for LEU conversion of HPRRs
+\cite{meyer2014}.
+In the dispersion form, $\gamma$U-Mo alloy particles
+are dispersed in an aluminum matrix, similar to other dispersion fuels.
+However, irradiation testing revealed a pattern of breakaway swelling
+at intermediate burnup, associated with the formation of
+a molybdenum-stabilized high aluminum intermetallic phase.
+To address the issues with dispersion fuel, the monolithic form was developed
+to minimize the interfacial area
+between the $\gamma$U-Mo fuel meat and the aluminum cladding.
+A typical design involves a solid $\gamma$U-10Mo fuel meat
+bonded to Al-6061 cladding with a zirconium diffusion barrier
+to improve bonding and prevent undesirable interactions
+\cite{jamison2022, mishra2023}.
+Consequently, the USHPRR program has selected
+the $\gamma$U-10Mo monolithic fuel for qualification
+\cite{robinson2009, miller2021, cole2016, wilson2019}.
 
 There exists a knowledge gap in the material properties of $\gamma$U-Mo,
 which constrains the evaluation of its fuel performance.
@@ -315,11 +368,25 @@ capable of modeling the swelling behavior of Uranium-Molybdenum ($\gamma$U-Mo)
 under the operating conditions of high-power research and test reactors (RTRs).
 DART is based on a rate-theory-based mechanistic model for fission gas behavior
 and a phase-field method for grain-size-specific recrystallization kinetics.
+It was originally developed to simulate irradiation-induced phenomena
+in dispersion fuels (U$_3$Si$_2$-Al and U-Mo/Al).
+In 2018, a computational module for $\gamma$U-10Mo was added
+to separate its calculations from those of dispersion systems.
+The fission gas induced swelling, one of the main causes of fuel swelling,
+is simulated using this module,
+named Gas Release and Swelling Subroutine (GRASS).
+GRASS tracks bubble nucleation, re-solution, and growth processes
+both within the grains and on grain boundaries
+by solving a series of non-linear differential equations.
+The output from DART includes
+total porosity, intra- and inter-granular bubble size distributions
+at various locations (bulk, grain face, grain edge, and grain corner).
 The DART code has been validated against experimental data
 and has been used to study the effects of various operational and
 microstructural parameters on fuel swelling \cite{annualreport2021, ye2023}.
-The key challenges in simulating fuel swelling with a mechanistic model
-are obtaining key material properties related to gas bubble behavior,
+
+The key challenge in simulating fission gas swelling with a mechanistic model
+is obtaining key material properties related to gas bubble behavior,
 as many of them cannot be measured experimentally
 with the currently available techniques.
 Some of the parameters can be calculated using atomic-scale simulation methods.
