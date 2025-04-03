@@ -1,6 +1,6 @@
 \documentclass[10pt]{beamer}
 \usepackage{booktabs, subcaption, multirow}
-\usepackage{amsmath, amssymb, bm}
+\usepackage{amsmath, amssymb, bm, siunitx}
 
 \usetheme{Boadilla}
 \usecolortheme{seahorse}
@@ -35,6 +35,25 @@ North Carolina State University}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
+			\includegraphics[width=5cm]{sfigs/historic_fuels.png}
+			\caption{
+				asdf
+			}
+			% \label{fig:design}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Introduction}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Put empty slides with a certain template.
+			\item Populate with all the figures after that.
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
 			\includegraphics[width=5cm]{sfigs/umo_design.jpg}
 			\caption{
 				Depiction of monolithic fuel cross-section
@@ -49,6 +68,42 @@ North Carolina State University}
 					\item This is a good style!
 				\end{itemize}
 		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Swelling}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=4cm]{sfigs/umo_burnup.png}
+			\caption{
+				asdf
+			}
+			% \label{fig:design}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Dispersion Analysis Research Tool}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=6cm]{sfigs/dart_schematic.png}
+			\caption{
+				asdf
+			}
+			% \label{fig:design}
+		\end{figure}
 	\end{columns}
 \end{frame}
 
@@ -473,7 +528,7 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				to form intergranular bubbles
 				where they can grow by addition of gas and vacancies.
 			\item Fission also strongly limits bubble size
-				and maintains a substantial fission-gas atom population
+				(or fission-gas atom population)
 				in the fuel lattice by re-solution of gas bubbles.
 			\item Individual gas atoms can be ejected from the gas bubble
 				through collisions with energetic fission fragments
@@ -501,7 +556,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				Illustration of
 				(a) homogeneous and (b) heterogeneous re-solution.
 			}
-			\label{fig:schematic}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -510,7 +564,7 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 	\begin{itemize}
 		\item Two types of simulations are performed:
 			primary knock-on atom (PKA)
-			and thermal spike simulations (fission track)
+			and thermal spike (fission track) simulations
 			for low- and high-energy interactions.
 			These simulations account for re-solution
 			through ballistic and thermal processes.
@@ -576,7 +630,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				at (a) 0, (b) 1.5, (c) 44.5, and (d) 114.5 ps.
 				U, Mo, and Xe atoms are shown in red, blue, and black.
 			}
-			\label{fig:pka}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -585,8 +638,8 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item The thermal spike imparts a large amount of kinetic energy,
-				which propagates out.
+			\item The thermal spike imparts a large amount of kinetic energy
+				to the atoms, which propagates out quickly.
 			\item Thermal spikes induce significant re-solution,
 				seeming to break apart the entire bubble
 				into a loose collection of Xe atoms.
@@ -625,7 +678,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				at (a) 0, (b) 1.5, (c) 44.5, and (d) 114.5 ps.
 				U, Mo, and Xe atoms are shown in red, blue, and black.
 			}
-			\label{fig:spike}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -651,18 +703,19 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 			\centering
 			\begin{subfigure}{\textwidth}
 				\centering
-				\includegraphics[height=3.0cm]{resol/images/resolutionVsRadius.pdf}
+				\includegraphics[height=3.0cm]
+					{resol/images/resolutionVsRadius.pdf}
 			\end{subfigure}
 			\begin{subfigure}{\textwidth}
 				\centering
-				\includegraphics[height=2.5cm]{resol/images/saturationFactor.pdf}
+				\includegraphics[height=2.5cm]
+					{resol/images/saturationFactor.pdf}
 			\end{subfigure}
 			\caption{
 				(Top) Fraction of re-solved Xe atoms
 				as a function of the energy deposited to the lattice.
 				(Bottom) Saturation factor as a function of bubble radius.
 			}
-			\label{fig:frac}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -681,7 +734,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				as a function of normalized off-centered distance
 				can be modeled with a logistic equation:
 				$
-					\label{eq:off}
 					\frac{\chi}{\chi_0}
 						= \frac{1.058}{1 + \exp \big[8.168
 						\big(\frac{r}{r_c}\big) - 3.331 \big]}
@@ -695,7 +747,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				Xe re-solution caused by
 				off-centered thermal spikes (15 keV/nm).
 			}
-			\label{fig:off}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -708,7 +759,7 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				Bubbles with different Xe/vac ratios were simulated
 				to evaluate the effect of pressure.
 			\item The number of re-solved Xe atoms is apparently invariant
-				with respect to Xe/vac ratio.
+				with respect to the Xe/vac ratio.
 			\item With increasing thermal spike energy,
 				more atoms are re-solved as expected.
 			\item Similar trends were observed in bubbles
@@ -722,7 +773,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				Number of re-solved Xe atoms from 25 \r{A} radius bubbles
 				as a function of Xe/vacancy ratio.
 			}
-			\label{fig:pres}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -739,9 +789,9 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				around the Xe gas bubble,
 				and these regions facilitate the separation of Xe atoms
 				from the bubble.
-			\item Thermal spike energy dictates
+			\item Therefore, thermal spike energy dictates
 				the volume of these low-energy regions,
-				and thus affects the number of re-solved atoms.
+				and thus affects the total number of re-solved atoms.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -752,7 +802,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				Data from identical-radius bubbles
 				with different Xe/vacancy ratios were averaged.
 			}
-			\label{fig:NvsRad}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -788,7 +837,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				Cylindrical coordinate system for calculating
 				the heterogeneous re-solution rate.
 			}
-			\label{fig:coord}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -832,18 +880,35 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item The re-solution rate for the nominal pressure
+				is then computed using numerical integration.
+			\item An approximate analytical form is:
+				$ f(R_{bubble}, \dot{F}) $
+				$ = \frac{a}{1+(R_{bubble}/c)^d} 10^{-14} \dot{F} $
+			\item The DART model is defined as:
+				$ b_{dart} = b_0 \cdot \dot{F} \cdot G $
+				where
+				$ b_0 = R_{spike}^2 \cdot \mu_{ff} $
+				and
+				$ G =
+					\begin{cases}
+						1 \qquad \qquad \qquad \;\;\; ,
+							R_{bubble} \leq \lambda \\
+						1 - (\frac{R_{bubble}-R_{resol}}{R_{bubble}})^3,
+							R_{bubble} > \lambda
+					\end{cases} $
+			\item We have a smooth function for re-solution rate now
+				instead of a piecewise one.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=6cm]{resol/images/resRate_withDart.pdf}
 			\caption{
-				An example caption!
+				Xe gas bubble re-solution rate in $\gamma$U-10Mo
+				as a function of bubble radius for Xe/vac ratio of 0.2
+				at a fission rate of $10^{14}$ fiss/cm$^3$/s for $\zeta=0.01$.
 			}
-			\label{fig:resdart}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -852,9 +917,10 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item With all this information, we can provide
-				an equation for the re-solution rate,
-				which account for both bubble size and pressure.
+			\item With the re-solution rate
+				for the nominal pressure already provided,
+				accounting for bubble pressure is straightforward
+				due to the pressure invariance we have observed.
 			\item
 				$ b_{het}(R_{bubble}, \dot{F}, \phi) $
 				$ = f(R_{bubble}, \dot{F}) \cdot g(\phi) $
@@ -874,7 +940,6 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				as a function of bubble radius and Xe/vacancy ratio
 				at a fission rate of $10^{14}$ fiss/cm$^3$/s for $\zeta=0.01$.
 			}
-			\label{fig:3d}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -893,11 +958,226 @@ fission-gas-behavior parameters}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=5cm]{example-image-a}
+			\includegraphics[width=6cm]{sfigs/wu_iuq.png}
 			\caption{
 				An example caption!
 			}
 			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Fission-gas-behavior parameters}
+	\begin{table}[ht]
+	\centering
+	\caption{
+		Fission gas behavior parameters and their ranges.
+	}
+	\label{tab:uqparam}
+	\begin{tabular}{lccc}
+	\toprule
+	Parameter    & Minimum value & Maximum value & Reference value \\
+	\midrule
+	dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
+	FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
+	SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
+	vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
+	DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
+	fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
+	aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
+	\bottomrule
+	\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{Target}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{\textwidth}
+				\centering
+				\includegraphics[width=0.7\textwidth]
+					{sfigs/robinson_corr.png}
+			\end{subfigure}
+			\begin{subfigure}{\textwidth}
+				\centering
+				\includegraphics[width=0.7\textwidth]
+					{invuq/images/robinson_vs_dart.png}
+			\end{subfigure}
+			\caption{
+				asf
+			}
+			% \label{fig:schematic}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Target}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=5cm]{invuq/images/target.png}
+			\caption{
+				An example caption!
+			}
+			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Scatterplots}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=8cm]{invuq/images/scatter.png}
+		\caption{
+			An example caption!
+		}
+		% \label{fig:template}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Correlation heatmap}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=5cm]{invuq/images/corrheat.png}
+			\caption{
+				An example caption!
+			}
+			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Surrogate models}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{0.49\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]
+					{invuq/images/ols.png}
+			\end{subfigure}
+			\begin{subfigure}{0.49\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]
+					{invuq/images/lasso.png}
+			\end{subfigure}
+			\begin{subfigure}{0.49\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]
+					{invuq/images/gp.png}
+			\end{subfigure}
+			\begin{subfigure}{0.49\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]
+					{invuq/images/nn.png}
+			\end{subfigure}
+			\caption{
+				asf
+			}
+			% \label{fig:schematic}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{MCMC samples}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=9cm]{invuq/images/trace.png}
+		\caption{
+			An example caption!
+		}
+		% \label{fig:template}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Posterior distributions}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[width=9cm]{invuq/images/hist.png}
+		\caption{
+			An example caption!
+		}
+		% \label{fig:template}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Joint probability distributions}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=5cm]{invuq/images/iuq.png}
+			\caption{
+				An example caption!
+			}
+			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{FUQ and validation}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{0.7\textwidth}
+				\centering
+				% \caption{}
+				\includegraphics[width=\textwidth]
+					{invuq/images/fuq_gp.png}
+			\end{subfigure}
+			\begin{subfigure}{0.7\textwidth}
+				\centering
+				% \caption{}
+				\includegraphics[width=\textwidth]
+					{invuq/images/fuq_gp_synth.png}
+			\end{subfigure}
+			\caption{
+				asdf
+			}
+			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
 \end{frame}
