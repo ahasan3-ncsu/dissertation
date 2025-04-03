@@ -1,9 +1,10 @@
 \documentclass[10pt]{beamer}
-\usepackage{booktabs, subcaption}
+\usepackage{booktabs, subcaption, multirow}
 \usepackage{amsmath, amssymb, bm}
 
 \usetheme{Boadilla}
 \usecolortheme{seahorse}
+%\usefonttheme{serif}
 \setbeamertemplate{caption}[numbered]
 \setbeamerfont{caption}{size=\scriptsize}
 
@@ -22,30 +23,8 @@ North Carolina State University}
 	\tableofcontents
 \end{frame}
 
-
-% \section{sectiontitle}
-% \begin{frame}{frametitle}
-% 	\begin{columns}
-% 	\column{0.5\textwidth}
-% 		\begin{itemize}
-% 			\item Item 1
-% 			\item Item 2
-% 			\item Item 3
-% 		\end{itemize}
-% 	\column{0.5\textwidth}
-% 		\begin{figure}[ht]
-% 			\centering
-% 			\includegraphics[width=5cm]{example-image-a}
-% 			\caption{
-% 				An example caption!
-% 			}
-% 			\label{fig:template}
-% 		\end{figure}
-% 	\end{columns}
-% \end{frame}
-
-
 \section{Introduction}
+
 \begin{frame}{Introduction}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -73,8 +52,8 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-
 \section{Grain boundary diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
+
 \begin{frame}{GB diffusion}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -95,9 +74,397 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Simulation setup}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{1.0\textwidth}
+				\centering
+				% \caption{}
+				\includegraphics[width=\textwidth]
+					{diffusion/images/configuration.png}
+			\end{subfigure}
+
+			\begin{subfigure}{0.7\textwidth}
+				\centering
+				% \caption{}
+				\includegraphics[width=0.7\textwidth]
+					{diffusion/images/gb_def.png}
+			\end{subfigure}
+			\caption{
+				asf
+			}
+			% \label{fig:schematic}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{GB validation}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=6cm]{diffusion/images/gbe.pdf}
+			\caption{
+				An example caption!
+			}
+			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{GB width}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=6cm]{diffusion/images/d_gb_sym.pdf}
+			\caption{
+				An example caption!
+			}
+			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{GB diffusivities}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item Item 1
+			\item Item 2
+			\item Item 3
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=6cm]{diffusion/images/u10mo_U_Dz.pdf}
+			\caption{
+				An example caption!
+			}
+			% \label{fig:template}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Symmetric tilt GB diffusivities}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.325\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/u10mo_U_Dz.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.325\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/u10mo_Mo_Dz.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.325\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/u10mo_Xe_Dz.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Asymmetric tilt \& Twist GB diffusivities}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/asym_twist_U_Dz.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/asym_twist_Mo_Dz.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Orientation-averaged GB diffusivities}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/comp_U_Dz.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/comp_Mo_Dz.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Comparison with literature}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=0.9\textwidth]
+				{diffusion/images/newLitComp.pdf}
+			\caption{
+				ssdfw
+			}
+			% \label{fig:NvsRad}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Effect of the misorientation angle}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/DvsTilt_600K.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/DvsTilt_1200K.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{GB diffusivity vs energy}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/DvsGBE_600K.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/DvsGBE_1200K.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Anisotropic nature of diffusion}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.325\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/ratio_U.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.325\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/ratio_Mo.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.325\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/ratio_Xe.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Anisotropy}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{0.48\textwidth}
+				\centering
+				\caption{}
+				\includegraphics[width=\textwidth]
+					{diffusion/images/130at700cs.png}
+			\end{subfigure}
+			\begin{subfigure}{0.48\textwidth}
+				\centering
+				\caption{}
+				\includegraphics[width=\textwidth]
+					{diffusion/images/130at1100cs.png}
+			\end{subfigure}
+			\begin{subfigure}{0.48\textwidth}
+				\centering
+				\caption{}
+				\includegraphics[width=\textwidth]
+					{diffusion/images/190at700cs.png}
+			\end{subfigure}
+			\begin{subfigure}{0.48\textwidth}
+				\centering
+				\caption{}
+				\includegraphics[width=\textwidth]
+					{diffusion/images/190at1100cs.png}
+			\end{subfigure}
+			\caption{
+				asf
+			}
+			% \label{fig:schematic}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Anisotropy}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{0.95\textwidth}
+				\centering
+				\includegraphics[height=3cm]
+					{diffusion/images/130at1100xyz.pdf}
+			\end{subfigure}
+			\begin{subfigure}{0.95\textwidth}
+				\centering
+				\includegraphics[height=3cm]
+					{diffusion/images/190at1100xyz.pdf}
+			\end{subfigure}
+			\caption{
+				asf
+			}
+			% \label{fig:schematic}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Two diffusion regimes}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/2reg_U_Dz.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\caption{}
+			\includegraphics[width=\textwidth]
+				{diffusion/images/2reg_Mo_Dz.pdf}
+		\end{subfigure}
+		\caption{
+			asf
+		}
+		% \label{fig:schematic}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Two diffusion regimes}
+	\begin{table}[!ht]
+	\centering
+	\caption{
+		Prefactors and activation energies for the Arrhenius equation fits
+		to $\overline{D}^{i}_{\parallel}$ ($i=$ U or Mo)
+		in $\gamma$U-7Mo, $\gamma$U-10Mo, and $\gamma$U-12Mo
+		for the two different temperature regimes.
+		$D_0$ is in m$^2$s$^{-1}$ and $E_a$ is in eV.
+	}
+	\label{tab:2reg}
+	\begin{tabular}{ccllll}
+	\toprule
+	Composition & Temp. (K)
+		& $D_{0}^U$      & $E_{a}^U$
+		& $D_{0}^{Mo}$   & $E_{a}^{Mo}$ \\
+	\midrule
+	\multirow{2}{*}{ $\gamma$U-7Mo }
+		& 600 - 800
+		& 1.03 $\times 10^{-09}$ & 0.433
+		& 8.87 $\times 10^{-11}$ & 0.366 \\
+		& 900 - 1200
+		& 4.10 $\times 10^{-08}$ & 0.715
+		& 2.77 $\times 10^{-08}$ & 0.806 \vspace{0.2cm } \\
+	\multirow{2}{*}{ $\gamma$U-10Mo }
+		& 600 - 800
+		& 1.96 $\times 10^{-10}$ & 0.362
+		& 5.26 $\times 10^{-11}$ & 0.353 \\
+		& 900 - 1200
+		& 2.10 $\times 10^{-08}$ & 0.712
+		& 1.31 $\times 10^{-08}$ & 0.779 \vspace{0.2cm } \\
+	\multirow{2}{*}{ $\gamma$U-12Mo }
+		& 600 - 800
+		& 1.81 $\times 10^{-10}$ & 0.380
+		& 6.17 $\times 10^{-11}$ & 0.375 \\
+		& 900 - 1200
+		& 1.33 $\times 10^{-08}$ & 0.700
+		& 6.62 $\times 10^{-09}$ & 0.738 \\
+	\bottomrule
+	\end{tabular}
+	\end{table}
+\end{frame}
 
 \section{Re-solution of Xe gas bubbles
 in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
+
 \begin{frame}{Bubble re-solution}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -512,9 +879,9 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 	\end{columns}
 \end{frame}
 
-
 \section{IUQ of \texorpdfstring{$\gamma$}{gamma}U-10Mo
 fission-gas-behavior parameters}
+
 \begin{frame}{IUQ}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -535,8 +902,8 @@ fission-gas-behavior parameters}
 	\end{columns}
 \end{frame}
 
-
 \section{U-Mo moment tensor potential}
+
 \begin{frame}{MTP}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -653,8 +1020,8 @@ fission-gas-behavior parameters}
 	\end{columns}
 \end{frame}
 
-
 \section{Conclusions}
+
 \begin{frame}{Conclusions}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -695,12 +1062,11 @@ fission-gas-behavior parameters}
 	\end{columns}
 \end{frame}
 
-
 \section*{Thanks}
+
 \begin{frame}
 	\centering \Large
 	\emph{Thank you!}
 \end{frame}
-
 
 \end{document}
