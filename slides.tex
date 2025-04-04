@@ -59,8 +59,7 @@ North Carolina State University}
 			\item $\gamma$U-10Mo monolithic fuel design involves
 				a solid $\gamma$U-10Mo fuel meat monded to Al-6061 cladding
 				with a zirconium diffusion barrier.
-			\item Before the monolithic design,
-				the U-Mo dispersion fuel had been tested.
+			\item The U-Mo dispersion fuel design has also been tested.
 				The dispersion fuel shows breakaway swelling,
 				associated with the formation of Mo-stabilized high-Al
 				intermetallic phase.
@@ -137,29 +136,24 @@ North Carolina State University}
 \section{Grain boundary diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
 
 \begin{frame}{Grain boundary (GB) diffusion in $\gamma$U-Mo}
-	Accurate calculation of fuel swelling requires
-	diffusion coefficients of the related species in the fuel.
-	\vfill
-
-	Furthermore, creep modeling also requires diffusion coefficients
-	to determine creep rates and evaluate the evolving microstructure.
-	\vfill
-
-	Therefore, it is essential to understand
-	the diffusion behavior of the $\gamma$U-Mo fuel.
-	\vfill
-
-	The diffusion coefficients of the relevant species
-	in $\gamma$U-Mo grain boundaries (GBs) are yet unknown.
+	\begin{itemize}
+		\item Accurate calculation of fuel swelling requires
+			diffusion coefficients of the related species in the fuel.
+		\item  Furthermore, creep modeling also requires diffusion coefficients
+			to determine creep rates and evaluate the evolving microstructure.
+		\item Therefore, it is essential to understand
+			the diffusion behavior of the $\gamma$U-Mo fuel.
+		\item The diffusion coefficients of the relevant species
+			in $\gamma$U-Mo grain boundaries (GBs) are yet unknown.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Simulation setup}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item The dimensions of the supercells are at least
-				$50 \times 200 \times 50$ \AA$^3$.
-				This corresponds to at least 35,000 atoms.
+			\item Bicrystals for simulations are created
+				by rotating two halves of the system around a tilt axis.
 			\item Two GBs: one in the middle and one at the edge.
 			\item GB region is defined using atomic trajectories.
 			\item We tracked lattice point jumps.
@@ -186,6 +180,36 @@ North Carolina State University}
 			}
 		\end{figure}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Explored GBs}
+	\begin{itemize}
+		\item Three compositions: $\gamma$U-7Mo, $\gamma$U-10Mo, and $\gamma$U-12Mo
+			are examined.
+		\item The temperature of the simulated GBs ranged from 600 K to 1200 K
+			with an interval of 100 K.
+			The dimensions of the supercells are at least
+			$50 \times 200 \times 50$ \AA$^3$.
+			This corresponds to at least 35,000 atoms.
+		\item The following symmetric tilt GBs are studied:
+			\begin{itemize}
+				\item (120)
+				\item (130)
+				\item (150)
+				\item (190)
+				\item (340)
+				\item (350)
+			\end{itemize}
+		\item Other simulated systems are:
+			\begin{itemize}
+				\item asymmetric (110)
+				\item asymmetric (130)
+				\item asymmetric (190)
+				\item asymmetric (350)
+				\item twist (110)
+				\item twist (230)
+			\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{GB validation}
@@ -619,21 +643,17 @@ North Carolina State University}
 in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 
 \begin{frame}{Xe gas bubble re-solution}
-	Xe gas bubbles act as a sink for individual Xe atoms,
-	trapping them and causing the bubbles to grow after absorption.
-	\vfill
-
-	Under irradiation, the Xe atoms in the gas bubble are reintroduced
-	into the fuel matrix through fission-product-induced cascades
-	and thermal spikes---a process known as re-solution.
-	\vfill
-
-	The relative rates of re-solution
-	affect the overall size and number density of the bubbles,
-	in turn impacting bubble evolution and subsequent fuel swelling.
-	\vfill
-
-	There is no model for Xe re-solution rate in $\gamma$U-Mo yet.
+\begin{itemize}
+	\item Xe gas bubbles act as a sink for individual Xe atoms,
+		trapping them and causing the bubbles to grow after absorption.
+	\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
+		into the fuel matrix through fission-product-induced cascades
+		and thermal spikes---a process known as re-solution.
+	\item The relative rates of re-solution
+		affect the overall size and number density of the bubbles,
+		in turn impacting bubble evolution and subsequent fuel swelling.
+	\item There is no model for Xe re-solution rate in $\gamma$U-Mo yet.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Bubble re-solution}
@@ -1064,27 +1084,23 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 fission-gas-behavior parameters}
 
 \begin{frame}{Quantifying unknown DART parameters}
-	The key challenge in simulating fission gas swelling
-	with a mechanistic model is
-	obtaining key material properties related to gas bubble behavior,
-	as many of them cannot be measured experimentally.
-	\vfill
-
-	For the parameters that do not have measurement data
-	or atomic-scale simulation results,
-	they are usually estimated by either fitting to measured bubble morphology
-	or by borrowing from other similar fuel systems where the data is available.
-	\vfill
-
-	The fission-gas-behavior parameters used in the GRASS module of DART
-	were calibrated in a previous study,
-	using the bubble size distributions
-	measured from irradiated $\gamma$U-10Mo dispersion fuel particles.
-	\vfill
-
-	However, this set of parameters needs recalibration
-	because new atomic-scale data have become available
-	since the previous calibration.
+	\begin{itemize}
+		\item The key challenge in simulating fission gas swelling
+			with a mechanistic model is
+			obtaining key material properties related to gas bubble behavior,
+			as many of them cannot be measured experimentally.
+		\item For the parameters that do not have measurement data
+			or atomic-scale simulation results,
+			they are usually estimated by either fitting to measured bubble morphology
+			or by borrowing from other similar fuel systems where the data is available.
+		\item The fission-gas-behavior parameters used in the GRASS module of DART
+			were calibrated in a previous study,
+			using the bubble size distributions
+			measured from irradiated $\gamma$U-10Mo dispersion fuel particles.
+		\item However, this set of parameters needs recalibration
+			because new atomic-scale data have become available
+			since the previous calibration.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Fission-gas-behavior parameters}
@@ -1497,7 +1513,7 @@ fission-gas-behavior parameters}
 			\centering
 			\includegraphics[width=5cm, angle=90]{sfigs/blistering_md.png}
 			\caption{
-				Simulation of blistering.
+				Simulation of Xe gas bubbles on grain edges.
 				Red, blue, and yellow spheres represent U, Mo, and Xe.
 			}
 		\end{figure}
@@ -1510,11 +1526,11 @@ fission-gas-behavior parameters}
 			using VASP.
 			The simulated systems are:
 			\begin{itemize}
-				\item orthorombic $\alpha$U
-				\item bcc $\gamma$U
-				\item bcc Mo
-				\item tetragonal U$_2$Mo
-				\item bcc $\gamma$U-10Mo
+				\item $\alpha$U (orthorombic)
+				\item $\gamma$U (bcc)
+				\item Mo (bcc)
+				\item U$_2$Mo (tetragonal)
+				\item $\gamma$U-10Mo (bcc)
 			\end{itemize}
 		\item The resulting data is then used with MLIP-3 package
 			to train an MTP.
