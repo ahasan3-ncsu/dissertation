@@ -89,7 +89,7 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Dispersion Analysis Research Tool}
+\begin{frame}{Dispersion Analysis Research Tool (DART)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -113,7 +113,6 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
 			\item Item 2
 			\item Item 3
 		\end{itemize}
@@ -124,7 +123,6 @@ North Carolina State University}
 			\caption{
 				An example caption!
 			}
-			\label{fig:diffusion}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -133,30 +131,33 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item The dimensions of the supercells are at least
+				$50 \times 200 \times 50$ \AA$^3$.
+				This corresponds to at least 35,000 atoms.
+			\item Two GBs: one in the middle and one at the edge.
+			\item GB region is defined using atomic trajectories.
+			\item We tracked lattice point jumps.
+				GB region can be differentiated from the bulk
+				by determining lattice points associated with jumps.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\begin{subfigure}{1.0\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{diffusion/images/configuration.png}
 			\end{subfigure}
 
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=0.7\textwidth]
 					{diffusion/images/gb_def.png}
 			\end{subfigure}
 			\caption{
-				asf
+				(Top) $\Sigma 5$ Symmetric tilt GB initial configuration.
+				(Bottom) Definition of GB based on atomic trajectories.
 			}
-			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -165,18 +166,21 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item For validation, we computed GB energies
+				with the configurations first.
+			\item The energies are within 2$\sigma$ of the values
+				reported by Beeler et al.
+			\item Beeler et al. employed roughly 10 times fewer atoms.
+			\item The average GB energy for the examined systems
+				is about 0.68 Jm$^{-2}$.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=6cm]{diffusion/images/gbe.pdf}
 			\caption{
-				An example caption!
+				GB energies as a function of misorientation angle.
 			}
-			% \label{fig:template}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -185,18 +189,22 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item GB width in this work means the structural width of a GB.
+			\item This is different from the diffusional width,
+				where width is calculated using the number of mobile GB atoms.
+			\item GB width increases linearly with temperature.
+			\item The width is about 6 \r{A} at 600 K
+				and increases to about 12 \r{A} at 1200 K.
+			\item In literature, GB width assumptions fall between
+				5 \r{A} to 15 \r{A}.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=6cm]{diffusion/images/d_gb_sym.pdf}
 			\caption{
-				An example caption!
+				Widths of symmetric tilt GBs as a function of temperature.
 			}
-			% \label{fig:template}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -205,18 +213,22 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item Diffusion behavior is generally Arrhenius.
+			\item The spread in diffusion coefficients due to tilt angles
+				is about one order or magnitude.
+			\item Diffusivity ranges from $10^{-14}$
+				to $10^{-11}$ m$^2$s$^{-1}$.
+			\item The activation energy is about 0.4--0.7 eV for U.
+			\item Diffusion perpendicular to the tilt axis
+				has similar characteristics.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=6cm]{diffusion/images/u10mo_U_Dz.pdf}
 			\caption{
-				An example caption!
+				Diffusion coefficients of U parallel to the GB tilt axis.
 			}
-			% \label{fig:template}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -226,27 +238,31 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.325\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/u10mo_U_Dz.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.325\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/u10mo_Mo_Dz.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.325\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/u10mo_Xe_Dz.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Diffusion coefficients parallel to the GB tilt axis
+			for symmetric tilts GBs.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item Mo diffusivity is lower than that of U.
+		\item Xe diffusivity is the higher than that of other species
+			at high temperatures.
+		\item At low tempeartures, all three species have similar coefficients.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Asymmetric tilt \& Twist GB diffusivities}
@@ -254,21 +270,27 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/asym_twist_U_Dz.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/asym_twist_Mo_Dz.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Diffusion coefficients parallel to the GB tilt axis
+			for asymmetric tilt and twist GBs.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item The diffusion behavior is similar
+			for asymmetric tilt and twist GBs.
+		\item U diffusivity is higher than that of Mo.
+		\item Overall impact of orientation of GBs on diffusivity
+			appears to be minimal.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Orientation-averaged GB diffusivities}
@@ -276,28 +298,44 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/comp_U_Dz.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/comp_Mo_Dz.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Orientation-averaged GB diffusivities parallel to the tilt axis
+			for $\gamma$U-7Mo, $\gamma$U-10Mo, and $\gamma$U-12Mo.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item To compare diffusion of different compositions,
+			diffusivities parallel to the tilt axis of all symmetric tilt GBs
+			are averaged.
+		\item GB diffusivity is negatively correlated with the Mo content.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Comparison with literature}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item The difference between GB diffusivity and self-diffusivity
+				grows larger with decreasing temperature.
+			\item With GB diffusion enhancement factors and GB widths,
+				we can calculate effective diffusion coefficient $D_{eff}$:
+				$ D_{eff} = f D_{gb} + (1-f) D_l $,
+				where $D_l$ is the bulk diffusion coefficient
+				and $f$ is the volume fraction of GBs.
+			\item Assuming 10 $\mu$m grain size,
+				we find that $D_{eff} \approx 1.5 \times 10^3 D_l$ at 600 K
+				and $D_{eff} \approx 1.1 D_l$ at 1200 K.
+			\item Overall diffusion is dominated by GB diffusion
+				at lower temperatures.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -305,9 +343,8 @@ North Carolina State University}
 			\includegraphics[width=0.9\textwidth]
 				{diffusion/images/newLitComp.pdf}
 			\caption{
-				ssdfw
+				GB vs bulk diffusivities.
 			}
-			% \label{fig:NvsRad}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -317,21 +354,26 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/DvsTilt_600K.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/DvsTilt_1200K.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Diffusivites against misorientation angle at 600 K and 1200 K.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item U GB diffusivity is higher than that of Mo and Xe at 600 K.
+			At 1200 K, U GB diffusivity is still higher than that of Mo.
+			However, Xe diffusivity becomes larger than that of U.
+		\item In general, the greater the misorientation angle,
+			the greater the diffusivity.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{GB diffusivity vs energy}
@@ -339,21 +381,24 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/DvsGBE_600K.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/DvsGBE_1200K.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Diffusivity vs GB energy at 600 K and 1200 K.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item There is not a statiscally significant correlation
+			between diffusion coefficients and GB energies.
+		\item The R$^2$ of linear fit is 0.02 at 600 K and 0.36 at 1200 K.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Anisotropic nature of diffusion}
@@ -361,34 +406,44 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.325\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/ratio_U.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.325\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/ratio_Mo.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.325\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/ratio_Xe.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Ratios of diffusion coefficients parallel to the tilt axis
+			to the diffusion coefficients perpendicular to the tilt axis
+			of U, Mo, and Xe.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item The solid black line represents isotropic GB diffusion.
+		\item All high-angle GBs, diffusion behavior is almost isotropic.
+		\item (190) and (340) low-angle GBs show highly anisotropic behavior.
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Anisotropy}
+\begin{frame}{Anisotropic nature (cont.)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item For some GBs like (190), diffusion is similar to
+				dislocation pipe diffusion.
+			\item A symmetric tilt low-angle GB is essnetially
+				an array of parallel edge dislocations.
+			\item Even at high temperatures,
+				the anisotropic nature of diffusion remains.
+			\item Isotropic behavior of (130) is shown for comparison.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -418,18 +473,26 @@ North Carolina State University}
 					{diffusion/images/190at1100cs.png}
 			\end{subfigure}
 			\caption{
-				asf
+				Cross-sectional view of atomic trajectories at
+				(a) 700 K and (b) 1100 K of (130),
+				and (c) 700 K and (d) 1100 K of (190).
 			}
-			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Anisotropy}
+\begin{frame}{Anisotropic nature (cont.)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item To add to the visual example,
+				mean squared displacements (MSDs) are shown here.
+			\item In the isotropic case,
+				MSDs parallel and perpendicular to the tilt axis
+				are quite similar.
+			\item In the anisotropic case, MSD perpendicular to the tilt axis
+				is similar to MSD perpendicular to the GB plane,
+				indicating an almost one dimensional diffusion.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -445,9 +508,9 @@ North Carolina State University}
 					{diffusion/images/190at1100xyz.pdf}
 			\end{subfigure}
 			\caption{
-				asf
+				Mean squared displacements of
+				(Top) (130) and (Bottom) (190) at 1100 K.
 			}
-			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -457,21 +520,25 @@ North Carolina State University}
 		\centering
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/2reg_U_Dz.pdf}
 		\end{subfigure}
 		\begin{subfigure}{0.45\textwidth}
 			\centering
-			\caption{}
 			\includegraphics[width=\textwidth]
 				{diffusion/images/2reg_Mo_Dz.pdf}
 		\end{subfigure}
 		\caption{
-			asf
+			Arrhenius fits to the two diffusion regimes.
 		}
-		% \label{fig:schematic}
 	\end{figure}
+
+	\begin{itemize}
+		\item GB diffusivities don't follow Arrhenius equation exactly.
+		\item There's concavity, which indicates sub-Arrhenius behavior.
+		\item Arrhenius fits are thus separated
+			into two different diffusion regimes.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Two diffusion regimes}
@@ -484,7 +551,6 @@ North Carolina State University}
 		for the two different temperature regimes.
 		$D_0$ is in m$^2$s$^{-1}$ and $E_a$ is in eV.
 	}
-	\label{tab:2reg}
 	\begin{tabular}{ccllll}
 	\toprule
 	Composition & Temp. (K)
@@ -515,6 +581,12 @@ North Carolina State University}
 	\bottomrule
 	\end{tabular}
 	\end{table}
+
+	\begin{itemize}
+		\item This table is the culmination of the GB diffusion study.
+		\item These values can be readily employed
+			in higher-length-scale modeling of $\gamma$U-Mo.
+	\end{itemize}
 \end{frame}
 
 \section{Re-solution of Xe gas bubbles
@@ -1427,7 +1499,7 @@ fission-gas-behavior parameters}
 				are calculated using the last five timesteps
 				of the simulations of 100 ps runs with a 1 fs timestep size.
 			\item RDFs computed with MTP and ADP are similar in all cases
-				up to 10 \AA.
+				up to 10 \r{A}.
 			\item There are slight discrepancies in the peak heights,
 				but general trends are correct.
 		\end{itemize}
