@@ -1339,7 +1339,7 @@ fission-gas-behavior parameters}
 
 \section{U-Mo moment tensor potential}
 
-\begin{frame}{MTP}
+\begin{frame}{Moment tensor potential (MTP)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -1354,7 +1354,6 @@ fission-gas-behavior parameters}
 			\caption{
 				An example caption!
 			}
-			% \label{fig:template}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -1363,96 +1362,180 @@ fission-gas-behavior parameters}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item Different U and Mo phases and intermetallics
+				are simulated using the MTP.
+				All simulations are run for 100 ps in NPT ensembles
+				to get equilibrated supercell dimensions.
+			\item The MTP can accurately predict lattice constants
+				of different phases of U, bcc Mo, and U-Mo compounds.
+			\item Noncubic systems are generally harder to replicate
+				than cubic systems for potentials.
+			\item The MTP doesn't struggle with
+				$\alpha$U (orthorombic) and U$_2$Mo (tetragonal).
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{mtp/images/latConst_alphaU.pdf}
 			\end{subfigure}
 
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{mtp/images/latConst_gammaU.pdf}
 			\end{subfigure}
 			\caption{
 				Lattice constants of $\alpha$U and $\gamma$U.
 			}
-			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Lattice constants (cont.)}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]
+				{mtp/images/latConst_bccMo.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]
+				{mtp/images/latConst_u2mo.pdf}
+		\end{subfigure}
+		\caption{
+			Lattice constants of bcc Mo and U$_2$Mo.
+		}
+	\end{figure}
+
+	\begin{itemize}
+		\item The lattice constants of bcc Mo and U$_2$Mo
+			from MTP and ADP agree with each other
+			for the entire temperature range.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Radial distribution functions}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item The radial distribution functions (RDFs)
+				are calculated using the last five timesteps
+				of the simulations of 100 ps runs with a 1 fs timestep size.
+			\item RDFs computed with MTP and ADP are similar in all cases
+				up to 10 \AA.
+			\item There are slight discrepancies in the peak heights,
+				but general trends are correct.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{mtp/images/rdf_alphaU_500K.pdf}
 			\end{subfigure}
 
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{mtp/images/rdf_gammaU_950K.pdf}
 			\end{subfigure}
 			\caption{
 				RDFs of $\alpha$U and $\gamma$U.
 			}
-			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Radial distribution functions (cont.)}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]
+				{mtp/images/rdf_bccMo_1600K.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]
+				{mtp/images/rdf_u2mo_500K.pdf}
+		\end{subfigure}
+		\caption{
+			RDFs of bcc Mo and U$_2$Mo.
+		}
+	\end{figure}
+
+	\begin{itemize}
+		\item Most noticeable discrepancy occurs for U$_2$Mo.
+			The first and second nearest neighbor densities for U-U pairs
+			are predicted differently by MTP and ADP.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Elastic constants}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item Elastic constants $C_{11}$, $C_{12}$, and $C_{44}$
+				are calculated for all systems.
+			\item In all cases, the MTP overpredicts the elastic constants
+				by two to three times compared to the ADP.
+			\item Thus, the simulated systems are more rigid
+				than they are supposed to be.
+			\item This will lead to systems with
+				inaccurate mechanical properties, defect energies,
+				and unrealistic phase stability.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{mtp/images/elConst_alphaU.pdf}
 			\end{subfigure}
 
 			\begin{subfigure}{0.7\textwidth}
 				\centering
-				% \caption{}
 				\includegraphics[width=\textwidth]
 					{mtp/images/elConst_gammaU.pdf}
 			\end{subfigure}
 			\caption{
 				Elastic constants of $\alpha$U and $\gamma$U.
 			}
-			% \label{fig:schematic}
 		\end{figure}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Elastic constants (cont.)}
+	\begin{figure}[ht]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]
+				{mtp/images/elConst_bccMo.pdf}
+		\end{subfigure}
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]
+				{mtp/images/elConst_u2mo.pdf}
+		\end{subfigure}
+		\caption{
+			Elastic constants of bcc Mo and U$_2$Mo.
+		}
+	\end{figure}
+
+	\begin{itemize}
+		\item Apart from the constants being higher generally,
+			the temperature dependence of elastic constants
+			are also predicted differently by the MTP
+			for bcc Mo and U$_2$Mo.
+	\end{itemize}
 \end{frame}
 
 \section{Conclusions}
