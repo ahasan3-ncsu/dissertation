@@ -4,7 +4,6 @@
 
 \usetheme{Boadilla}
 \usecolortheme{seahorse}
-%\usefonttheme{serif}
 \setbeamertemplate{caption}[numbered]
 \setbeamerfont{caption}{size=\scriptsize}
 
@@ -1613,43 +1612,45 @@ fission-gas-behavior parameters}
 \section{Conclusions}
 
 \begin{frame}{Conclusions}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=5cm]{example-image-a}
-			\caption{
-				An example caption!
-			}
-			% \label{fig:template}
-		\end{figure}
-	\end{columns}
+	With the application of various computational methods,
+	we quantified crucial material properties of $\gamma$U-Mo fuel.
+	This will assist the higher-length-scale models
+	in making more robust predictions.
+	Overall, this dissertation achieves the following:
+	\begin{itemize}
+		\item Fully quantifies GB diffusion coefficients of U, Mo, and Xe
+			in $\gamma$U-Mo for various composition, temperatures,
+			and GB orientations.
+			The findings also provide insight into GB anisotropy.
+		\item Provides a mathematical model for Xe re-solution rate,
+			taking into account both bubble size and pressure.
+			This work considered
+			both homogeneous and heterogeneous re-solution rate.
+		\item Performs IUQ on still unknown fission-gas-behavior parameters.
+			Three influential parameters are identified
+			and subsequently optimized for better meso-scale simulation
+			of $\gamma$U-Mo fuel.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Future work}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=5cm]{example-image-a}
-			\caption{
-				An example caption!
-			}
-			% \label{fig:template}
-		\end{figure}
-	\end{columns}
+	\begin{itemize}
+		\item Further investigation is needed to evaluate
+			the relative dominance of homogeneous and heterogeneous mechanisms.
+			The two-temperature model will be employed to quantify
+			the amount of energy transferred
+			from the electronic subsystem to the ionic subsystem.
+		\item The IUQ process will be expanded to incorporate new data,
+			which takes into account variations in fission rate and grain size.
+			Surrogate models will be developed for new data,
+			enabling a refined IUQ to better quantify parameter distributions
+			pertient to a wide range of reactor conditions.
+		\item Machine-learned interatomic potentials describing U, Mo
+			and other elements, such as Al and Zr,
+			will be developed and evaluated.
+			Successful implementation of this will enable MD simulations
+			of $\gamma$U-Mo fuel with liners and/or claddings.
+	\end{itemize}
 \end{frame}
 
 \section*{Thanks}
