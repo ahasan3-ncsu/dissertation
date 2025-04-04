@@ -28,27 +28,42 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Put empty slides with a certain template.
-			\item Populate with all the figures after that.
+			\item Research reactors operate at low temperature and pressure
+				but at high fission density and specific power.
+				Thus, RRs historically needed highly enriched uranium (HEU).
+			\item With the inception of RERTR in 1978,
+				there has been an ongoing effort
+				to change HEU into low enriched uranium (LEU).
+			\item U$_3$Si$_2$ is the only qualified LEU for RRs.
+			\item High-performance RRs need even higher uranium density.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=5cm]{sfigs/historic_fuels.png}
+			\includegraphics[width=6cm]{sfigs/historic_fuels.png}
 			\caption{
-				asdf
+				U-density of research reactor fuel vs time of first use.
+				(Jamison et al.
+				{\color{blue}\url{https://doi.org/10.2172/1890226}}).
 			}
-			% \label{fig:design}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Introduction}
+\begin{frame}{Introduction (cont.)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Put empty slides with a certain template.
-			\item Populate with all the figures after that.
+			\item US High-Performance Research Reactor (USHPRR) program
+				selected $\gamma$U-10Mo fuel for qualification.
+			\item $\gamma$U-10Mo monolithic fuel design involves
+				a solid $\gamma$U-10Mo fuel meat monded to Al-6061 cladding
+				with a zirconium diffusion barrier.
+			\item Before the monolithic design,
+				the U-Mo dispersion fuel had been tested.
+				The dispersion fuel shows breakaway swelling,
+				associated with the formation of Mo-stabilized high-Al
+				intermetallic phase.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -59,31 +74,35 @@ North Carolina State University}
 				(Meyer et al.
 				{\color{blue}\url{https://doi.org/10.5516/NET.07.2014.706}}).
 			}
-			\label{fig:design}
 		\end{figure}
-		\begin{itemize}
-			\item \textbf{Goals:}
-				\begin{itemize}
-					\item This is a good style!
-				\end{itemize}
-		\end{itemize}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Swelling}
+\begin{frame}{Swelling in $\gamma$U-Mo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item Excessive swelling during operation is a major concern
+				for $\gamma$U-Mo fuels.
+			\item With increasing bunrup,
+				the bubble population increases in the grain boundaries
+				and newer grain boundaries form.
+			\item This grain refinement is accompanied by an increase
+				in bubble size and number,
+				which increases ffuel swelling rate.
+			\item To account for it in the fuel design,
+				fuel swelling needs to be predicted
+				for different operational conditions.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=4cm]{sfigs/umo_burnup.png}
 			\caption{
-				asdf
+				$\gamma$U-Mo microstructure as a function of burnup
+				(Kim et al. {\color{blue}
+				\url{https://doi.org/10.1016/j.jnucmat.2011.08.018}}).
 			}
-			% \label{fig:design}
 		\end{figure}
 	\end{columns}
 \end{frame}
@@ -92,38 +111,46 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item DART is a mechanistic rate-theory-based meso-scale model
+				for the calculation of fuel swelling.
+			\item The code uses material properties,
+				such as gas atom diffusivity, recrystallization kinetics,
+				and gas re-solution rate.
+			\item Many of material properties used by DART are still unknown.
+			\item These properties can be gleaned
+				from lower-length-scale studies
+				or through parameter optimization using experimental data.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=6cm]{sfigs/dart_schematic.png}
 			\caption{
-				asdf
+				DART schematic.
+				(Ye et al. {\color{blue}
+				\url{https://doi.org/10.1016/j.jnucmat.2023.154542}}).
 			}
-			% \label{fig:design}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
 \section{Grain boundary diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
 
-\begin{frame}{GB diffusion}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Item 2
-			\item Item 3
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=5cm]{example-image-a}
-			\caption{
-				An example caption!
-			}
-		\end{figure}
-	\end{columns}
+\begin{frame}{Grain boundary (GB) diffusion in $\gamma$U-Mo}
+	Accurate calculation of fuel swelling requires
+	diffusion coefficients of the related species in the fuel.
+	\vfill
+
+	Furthermore, creep modeling also requires diffusion coefficients
+	to determine creep rates and evaluate the evolving microstructure.
+	\vfill
+
+	Therefore, it is essential to understand
+	the diffusion behavior of the $\gamma$U-Mo fuel.
+	\vfill
+
+	The diffusion coefficients of the relevant species
+	in $\gamma$U-Mo grain boundaries (GBs) are yet unknown.
 \end{frame}
 
 \begin{frame}{Simulation setup}
@@ -591,6 +618,24 @@ North Carolina State University}
 \section{Re-solution of Xe gas bubbles
 in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 
+\begin{frame}{Xe gas bubble re-solution}
+	Xe gas bubbles act as a sink for individual Xe atoms,
+	trapping them and causing the bubbles to grow after absorption.
+	\vfill
+
+	Under irradiation, the Xe atoms in the gas bubble are reintroduced
+	into the fuel matrix through fission-product-induced cascades
+	and thermal spikes---a process known as re-solution.
+	\vfill
+
+	The relative rates of re-solution
+	affect the overall size and number density of the bubbles,
+	in turn impacting bubble evolution and subsequent fuel swelling.
+	\vfill
+
+	There is no model for Xe re-solution rate in $\gamma$U-Mo yet.
+\end{frame}
+
 \begin{frame}{Bubble re-solution}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -1018,6 +1063,60 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 \section{IUQ of \texorpdfstring{$\gamma$}{gamma}U-10Mo
 fission-gas-behavior parameters}
 
+\begin{frame}{Quantifying unknown DART parameters}
+	The key challenge in simulating fission gas swelling
+	with a mechanistic model is
+	obtaining key material properties related to gas bubble behavior,
+	as many of them cannot be measured experimentally.
+	\vfill
+
+	For the parameters that do not have measurement data
+	or atomic-scale simulation results,
+	they are usually estimated by either fitting to measured bubble morphology
+	or by borrowing from other similar fuel systems where the data is available.
+	\vfill
+
+	The fission-gas-behavior parameters used in the GRASS module of DART
+	were calibrated in a previous study,
+	using the bubble size distributions
+	measured from irradiated $\gamma$U-10Mo dispersion fuel particles.
+	\vfill
+
+	However, this set of parameters needs recalibration
+	because new atomic-scale data have become available
+	since the previous calibration.
+\end{frame}
+
+\begin{frame}{Fission-gas-behavior parameters}
+	\begin{table}[ht]
+	\centering
+	\caption{
+		Fission gas behavior parameters and their ranges.
+	}
+	\begin{tabular}{lccc}
+	\toprule
+	Parameter    & Minimum value & Maximum value & Reference value \\
+	\midrule
+	dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
+	FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
+	SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
+	vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
+	DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
+	fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
+	aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
+	\bottomrule
+	\end{tabular}
+	\end{table}
+
+	\begin{itemize}
+		\item DART is run with 7 fission-gas-behavior parameters perturbed
+			to compile a dataset necessary for IUQ.
+		\item 3200 samples were generated at different fission density values.
+		\item The list above contains the names of the parameters
+			we are interested in, and their probed ranges.
+	\end{itemize}
+\end{frame}
+
 \begin{frame}{Inverse uncertainty quantification (IUQ)}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -1087,36 +1186,6 @@ fission-gas-behavior parameters}
 				+ \bm{\Sigma}_{bias} + \bm{\Sigma}_{code}
 		\end{align}
 	\end{columns}
-\end{frame}
-
-\begin{frame}{Fission-gas-behavior parameters}
-	\begin{table}[ht]
-	\centering
-	\caption{
-		Fission gas behavior parameters and their ranges.
-	}
-	\begin{tabular}{lccc}
-	\toprule
-	Parameter    & Minimum value & Maximum value & Reference value \\
-	\midrule
-	dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
-	FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
-	SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
-	vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
-	DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
-	fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
-	aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
-	\bottomrule
-	\end{tabular}
-	\end{table}
-
-	\begin{itemize}
-		\item DART is run with 7 fission-gas-behavior parameters perturbed
-			to compile a dataset necessary for IUQ.
-		\item 3200 samples were generated at different fission density values.
-		\item The list above contains the names of the parameters
-			we are interested in, and their probed ranges.
-	\end{itemize}
 \end{frame}
 
 \begin{frame}{Experimental observation}
@@ -1410,23 +1479,50 @@ fission-gas-behavior parameters}
 
 \section{U-Mo moment tensor potential}
 
-\begin{frame}{Moment tensor potential (MTP)}
+\begin{frame}{Machine-learned interatomic potential (MLIP)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Item 1
-			\item Item 2
-			\item Item 3
+			\item Currently, MD simulations of the fuel are limited to
+				the use of only three elements: U, Mo, and Xe.
+			\item This limits the number of complex scenarios we can simulate.
+			\item The figure shows our attempt
+				to understand blistering mechanism using MD,
+				where we used Mo as a liner.
+			\item We want to use elements like Al or Zr in simulations.
+				Thus, we are trying to build MLIPs.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=5cm]{example-image-a}
+			\includegraphics[width=5cm, angle=90]{sfigs/blistering_md.png}
 			\caption{
-				An example caption!
+				Simulation of blistering.
+				Red, blue, and yellow spheres represent U, Mo, and Xe.
 			}
 		\end{figure}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Moment tensor potential (MTP)}
+	\begin{itemize}
+		\item Various U and Mo phases and alloys are simulated with AIMD
+			using VASP.
+			The simulated systems are:
+			\begin{itemize}
+				\item orthorombic $\alpha$U
+				\item bcc $\gamma$U
+				\item bcc Mo
+				\item tetragonal U$_2$Mo
+				\item bcc $\gamma$U-10Mo
+			\end{itemize}
+		\item The resulting data is then used with MLIP-3 package
+			to train an MTP.
+		\item So far, the potential only has two elements: U and Mo.
+		\item The LAMMPS package is utilized
+			along with an MLIP-3 interface layer
+			to run MD simulations with the trained MTP.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Lattice constants}
