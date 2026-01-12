@@ -12,8 +12,11 @@
 \onehalfspacing
 
 % Figures, Tables & Math
-\RequirePackage{graphicx, subcaption, booktabs, multirow}
+\RequirePackage{graphicx, subcaption}
+\RequirePackage{booktabs, multirow}
+\RequirePackage{placeins, xspace}
 \RequirePackage{amsmath, amssymb, bm, mathtools, siunitx}
+\RequirePackage[version=4]{mhchem}
 
 % Hyperref settings
 \RequirePackage[
