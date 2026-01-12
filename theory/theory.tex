@@ -1,5 +1,9 @@
 \chapter{Theoretical Background}
 
+\section{Binary Collision Approximation}
+
+Placeholder text
+
 \section{Molecular Dynamics}
 
 Molecular dynamics (MD) is a computer simulation technique
@@ -149,94 +153,3 @@ The $\mu$ and $\lambda$ terms represent dipole and quadrupole distortions
 of the local atomic environment.
 This formalism extends the EAM by introducing angular forces
 as dipole and quadrupole moments.
-
-\subsection{Moment Tensor Potential}
-
-Moment tensor potential (MTP) is a polynomial-like MLIP
-based on the tensors of inertia of atomistic environments
-\cite{shapeev2016mtp}.
-MTP is a local potential, i.e., the energy $E^{mtp}$ of a system
-is the sum of contributions $V (n_i)$ of atomic neighborhoods $n_i$
-for $N$ atoms.
-\begin{align}
-	E^{mtp} = \sum_{i=1}^N V (n_i)
-\end{align}
-Each neighborhood is a tuple
-$n_i = (\{r_{i1}, z_i, z_1\}, \ldots, \{r_{ij}, z_i, z_j\}, \ldots,
-\{r_{iN_{nbh}}, z_i, z_{N_{nbh}}\})$,
-where $r_{ij}$ are relative atomic positions,
-$z_i$, $z_j$ are the element types of central and neighboring atoms,
-and $N_{nbh}$ is the number of atoms in the neighborhood.
-
-Each contribution $V (n_i)$ in the potential energy $E^{mtp}$
-expands through a set of basis functions.
-\begin{align}
-	V (n_i)
-	= \sum_{\alpha} \xi_{\alpha} B_{\alpha} (n_i)
-\end{align}
-where $B_{\alpha}$ are the MTP basis functions,
-$\xi = \{\xi_{\alpha}\}$ are the parameters to be found
-by fitting them to the training set.
-
-To define the functional form of the basis functions $B_{\alpha}$,
-moment tensor descriptors, or simply \textit{moments}, are introduced:
-\begin{align}
-	M_{\mu, \nu} (n_i)
-	= \sum_j f_{\mu} (|r_{ij}|, z_i, z_j) r_{ij}^{\otimes \nu}
-\end{align}
-These descriptors consist of the radial and the angular part.
-The radial part has the following form.
-\begin{align}
-	f_{\mu} (|r_{ij}|, z_i, z_j)
-	= \sum_{\beta=1}^Q c_{\mu, z_i, z_j}^{(\beta)} Q^{(\beta)} (|r_{ij}|)
-\end{align}
-where $\bm{c} = \{ c_{\mu, z_i, z_j}^{(\beta)} \}$
-is the set of radial parameters,
-and $Q^{\beta} (|r_{ij}|)$ are the radial basis functions.
-\begin{align}
-	Q^{(\beta)} (|r_{ij}|) =
-	\begin{cases}
-		\varphi^{(\beta)} (|r_{ij}|) (R_{cut} - |r_{ij}|)^2
-			& |r_{ij}| < R_{cut} \\
-		0
-			& |r_{ij}| \geq R_{cut}
-	\end{cases}
-\end{align}
-Here $\varphi^{(\beta)}$ are polynomial functions (e.g. Chebyshev polynomials)
-on the interval $[R_{min}, R_{cut}]$,
-where $R_{min}$ is the minimal distance between atoms in the system,
-$R_{cut}$ is the cutoff radius which ensures smooth behavior of the potential
-when atoms leave or enter the interaction neighborhood.
-
-The angular part $r_{ij}^{\otimes \nu}$ contains angular information
-about the neighborhood $\nu$.
-Here, the symbol '$\otimes$' denotes the outer product of vectors,
-and, thus, the angular part is a tensor of rank $\nu$.
-
-By definition, the MTP basis function $B_{\alpha}$ is a contraction
-of one or more moment tensor descriptors, yielding a scalar, e.g.
-\begin{align}
-	M_{1,0}, (M_{1,2} M_{0,1}) \cdot M_{0,1}, M_{1,2} : M_{3,2}, \ldots,
-\end{align}
-where '$\cdot$' is an inner product of vectors,
-and '$:$' is a Frobenius product of matrices.
-Each basis function is invariant to
-atomic permutations, rotations, and reflections.
-In order to construct the basis functions $B_{\alpha}$,
-and in turn, determine a particular functional form of MTP,
-\textit{level} of moments $M_{\mu, \nu}$ and basis functions $B_{\alpha}$
-are defined:
-\begin{align}
-	\lev M_{\mu, \nu}
-		&= 2 + 4 \mu + \nu \\
-	\lev B_{\alpha}
-		&= \lev \prod_{p=1}^P M_{\mu_p, \nu_p}
-		= \sum_{p=1}^P (2 + 4 \mu_p + \nu_p)
-\end{align}
-A set of MTP basis functions,
-and thus, a particular form of MTP
-depends on the maximum allowed level $\lev_{\max}$,
-which is also called the level of MTP.
-The set of basis functions included in the MTP
-are the ones with $\lev B_{\alpha} \leq \lev_{\max}$
-\cite{novikov2020mlip, podryabinkin2023mlip}.

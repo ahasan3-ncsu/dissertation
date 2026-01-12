@@ -1,12 +1,12 @@
-\chapter{Xe gas bubble re-solution in U-10Mo nuclear fuel}
+\chapter{Xe Gas Bubble Re-solution in U-10Mo Nuclear Fuel}
 
-\section{Computational methods}
+\section{Computational Methods}
 
 In this section, we discuss the general computational methods.
 Specific simulation details are discussed along with the results
 for better readability.
 
-\subsection{Binary collision approximation}
+\subsection{Binary Collision Approximation}
 
 RustBCA, a free and open-source software,
 was used for all BCA simulations \cite{drobny2021}.
@@ -35,7 +35,7 @@ and a constant mean-free-path model for others.
 A threshold number density of $\num{1.5e28}$ m$^{-3}$ was used to distinguish
 between gaseous and solid regions.
 
-\subsection{Molecular dynamics}
+\subsection{Molecular Dynamics}
 
 The LAMMPS software package \cite{lammps} was utilized for the MD work,
 in conjunction with a U-Mo-Xe angular-dependent potential (ADP)
@@ -91,8 +91,7 @@ and $n_{ion}$ is the ion concentration.
 The electronic pressure was used in the form $P_e = 0.5 \rho_e C_e T_e$
 \cite{norman2013, pisarev2014, kolotova2017}.
 
-
-\section{Energy loss of fission fragments in U-10Mo}
+\section{Energy Loss of Fission Fragments in U-10Mo}
 
 To understand and quantify re-solution in U-Mo,
 the behavior of FFs need to be studied first.
@@ -158,8 +157,7 @@ the interactions among FFs, U-10Mo, and Xe gas bubbles were simulated
 using the newly implemented \texttt{SPHEREINCUBOID} geometry in RustBCA,
 and this is discussed in detail in section \ref{sec:nuke}.
 
-
-\section{Re-solution due to electronic stopping}
+\section{Re-solution due to Electronic Stopping}
 \label{sec:elec}
 
 To simulate thermal spikes, a simulation cell of size
@@ -257,11 +255,10 @@ it is highly unlikely any gas bubble re-solution can occur in U-10Mo
 through the heterogeneous mechanism.
 Since U-10Mo is a metallic system, this behavior is expected.
 
-
-\section{Re-solution due to nuclear stopping}
+\section{Re-solution due to Nuclear Stopping}
 \label{sec:nuke}
 
-\subsection{Model for re-solution calculation}
+\subsection{Model for Re-solution Calculation}
 
 \begin{figure}[!ht]
 	\begin{subfigure}{\textwidth}
@@ -322,7 +319,7 @@ The re-solution rate $b$ can then be expressed as:
 where it is assumed that all fission events produce \Y and \I
 according to Eq. \ref{eq:iso}.
 
-\subsection{Reference fission fragment simulations}
+\subsection{Reference Fission Fragment Simulations}
 
 The most straightforward way to calculate $\xi_k(x, w)$ would be
 simulating a FF and a Xe gas bubble for that specific $(x, w)$ value.
@@ -465,7 +462,7 @@ as approximately $8.5$ $\mu$m and $6.5$ $\mu$m, respectively.
 The observed ranges in Figure \ref{fig:ref} are consistent
 with the data in Figure \ref{fig:stopping}.
 
-\subsection{Fission fragment interactions with Xe gas bubbles}
+\subsection{Fission Fragment Interactions with Xe Gas Bubbles}
 
 \begin{figure}[!ht]
 	\centering
@@ -777,7 +774,7 @@ Since the $\xi$ profiles are already discretized, this leads to an easy compute.
 $\xi \Delta V$ profiles are also depicted in Figure \ref{fig:xi}
 to show the significant effect of $\Delta V$ on re-solution.
 
-\subsection{Homogeneous re-solution rate}
+\subsection{Homogeneous Re-solution Rate}
 
 \begin{figure}[!ht]
 	\centering
@@ -817,7 +814,7 @@ $R_b$ is in nm, and $b / \dot{F}$ is in m$^3$/fsn.
 The functional fit has a root mean squared error of $\num{3.17e-27}$ m$^3$/fsn
 and a $R^2$ score of $0.99986$.
 
-\subsection{Effect of bubble pressure}
+\subsection{Effect of Bubble Pressure}
 
 \begin{figure}[!ht]
 	\centering
@@ -870,7 +867,6 @@ where $R_b$ is in nm, $n$ is in m$^{-3}$,
 $\dot{F}$ is in fsn m$^{-3}$ s$^{-1}$, and $b$ is in s$^{-1}$.
 Equation \ref{eq:model} now describes the fission gas bubble re-solution rate
 as a function of bubble size, bubble pressure, and fission rate.
-
 
 \section{Discussion}
 
@@ -960,8 +956,7 @@ and the re-solution rate can be set independently
 using the analytical model prescribed in this work.
 This way the re-solution rate will not be confounded with the trapping rate.
 
-
-\section{Conclusion}
+\section{Conclusions}
 
 This study utilized BCA and MD simulations
 to determine the re-solution rate of Xe gas bubbles in U-10Mo nuclear fuel.
