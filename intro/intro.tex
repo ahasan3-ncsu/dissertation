@@ -7,6 +7,7 @@ that act as high neutron and/or gamma radiation sources
 for use in training and education, production of radioisotopes,
 material testing and characterization, transmutation, activation
 or other irradiation services \cite{martens1967, mishra2023}.
+% the sentence below may be incorrect
 In general, RRs operate close to atmospheric pressure
 and at relatively low temperatures
 (typically with a fuel temperature of less than $250^{\circ}$C
@@ -234,9 +235,9 @@ bcc tungsten \cite{fu2021}, etc.
 \subsection{Fission Gas Bubble Re-Solution}
 
 To understand the fuel's behavior under irradiation,
-mesoscale and engineering-level fuel performance models
-require knowledge of the fundamental mechanistic behavior
-of fission products within the fuel to describe key phenomena,
+mesoscale and engineering-level fuel performance models require
+knowledge of the fundamental mechanistic behavior of fission products
+within the fuel to describe key phenomena,
 such as swelling \cite{beeler2018gb, annualreport2021}.
 Specifically, understanding the progression of Xe gas bubbles in the fuel
 is crucial for optimizing reactor performance and safety.
@@ -245,121 +246,132 @@ trapping them and causing the bubbles to grow after absorption.
 Under irradiation, the Xe atoms in the gas bubble are reintroduced
 into the fuel matrix through fission-product-induced cascades
 and thermal spikes---a process known as re-solution.
-The relative rates of re-solution affect the overall size and number density
+The relative rates of the re-solution affect the overall size and density
 of the bubbles \cite{ye2023, olander2006re, parfitt2008},
 in turn impacting bubble evolution and subsequent fuel swelling.
 
-The Dispersion Analysis Research Tool (DART),
-developed by Argonne National Laboratory \cite{ye2023},
-is a mesoscale code that can calculate fission gas swelling
-in $\gamma$U-Mo under different operational situations.
-One of the many parameters required to model swelling behavior
-is the re-solution rate of fission gas bubbles.
-DART employs a simple re-solution model
-that includes a piecewise function to account for the bubble radius.
-The parameters in this function are calibrated
-by fitting the computed swelling value to experimental data,
-meaning that we can only roughly estimate the re-solution rate.
-A physics-based re-solution rate for fission gas bubbles would make
-the swelling calculations of higher-length-scale models more rigorous.
-
 Re-solution of fission gas in nuclear fuels involves
-two commonly accepted mechanisms: homogeneous re-solution
-and heterogeneous re-solution.
-In homogeneous re-solution, atoms from the gas bubbles are ejected individually
+two commonly accepted mechanisms:
+homogeneous re-solution and heterogeneous re-solution \cite{olander2006re}.
+In the homogeneous model proposed by Nelson \cite{nelson1968},
+atoms from the gas bubbles are ejected individually
 through collisions with fission products
 or the recoil atoms that traverse the bubbles.
-These atomic collision cascades are primarily governed
-by the nuclear stopping power of the material.
-In the heterogeneous model, a portion of gas bubbles are dissolved
-by a passing fission fragment in the vicinity.
-The driving mechanism is the local heating of the material
-containing the gas bubbles,
-through the electronic stopping of the fission fragments \cite{setyawan2018}.
+These atomic collision cascades are primarily
+governed by the nuclear stopping power of the material.
+In the heterogeneous model proposed by Turnbull \cite{turnbull1971},
+a portion of gas bubbles are dissolved
+by a passing fission fragment (FF) in the vicinity.
+The driving mechanism is
+the local heating of the material containing the gas bubbles,
+through the electronic stopping of the FFs \cite{setyawan2018}.
 The fact that both these mechanisms occur on a short timescale
 makes it challenging to conduct experiments for determining re-solution rates
 that contribute to the fission gas release models.
 Thus, atomistic-scale modeling is necessary
 for determining the re-solution rate
 and for elucidating the fundamental mechanism
-behind re-solution in $\gamma$U-10Mo.
+behind re-solution in U-10Mo.
 
-In the literature up to this point, atomistic simulations have been used
+In the literature up to this point,
+atomistic simulations have been widely used
 to evaluate the re-solution rate in various nuclear materials.
-For instance, in 2008, Parfitt et al. \cite{parfitt2008} used simulations
-of primary knock-on atoms (PKAs) in uranium dioxide (UO$_2$)
+For instance, in 2008, Parfitt et al. \cite{parfitt2008}
+used simulations of primary knock-on atoms (PKAs) in uranium dioxide (UO$_2$)
 to assess the re-solution of helium gas bubbles.
 In 2009, Schwen et al. \cite{schwen2009md} investigated
-the homogeneous re-solution of Xe gas bubbles in UO$_2$
-using a binary collision model and molecular dynamics (MD) simulations.
-The following year, Huang et al. \cite{huang2010md} examined
-the impact of thermal spikes on Xe re-solution in UO$_2$.
-In 2012, Govers et al. \cite{govers2012} performed
-PKA and thermal spike simulations of Xe gas bubbles in UO$_2$
+the homogeneous re-solution of Xe gas bubbles in UO$_2$,
+using binary collision approximation (BCA) and molecular dynamics (MD).
+The following year, Huang et al. \cite{huang2010md}
+examined the impact of thermal spikes on Xe re-solution in UO$_2$.
+In 2012, Govers et al. \cite{govers2012}
+performed PKA and thermal spike simulations of Xe gas bubbles in UO$_2$
 and proposed a mathematical model for the re-solution rate.
 However, the most comprehensive work on Xe gas bubble re-solution in UO$_2$
-was conducted  in 2018 by Setyawan et al. \cite{setyawan2018}.
+was conducted in 2018 by Setyawan et al. \cite{setyawan2018}.
 They reconciled the inconsistencies found in the conclusions of previous works
 on Xe bubble re-solution in UO$_2$
 and evaluated the re-solution rate as a function of bubble radius.
 Their findings suggest that heterogeneous re-solution of gas bubbles
 is the dominant method of re-solution in UO$_2$.
-In addition to UO$_2$, the re-solution rate of fission gas bubbles
-was also evaluated in uranium carbide (UC)
-by Matthews et al. \cite{matthews2015diss} using binary collision methods.
-The thermal spike model was not employed in UC
-because it was assumed that the local heating does not exceed
-the melting temperature \cite{matthews2015diss, ronchi1986}.
-In summary, the binary collision model and MD simulations were used
+In addition to UO$_2$,
+the re-solution rate of fission gas bubbles has also been evaluated
+in uranium carbide (UC) by Matthews et al. \cite{matthews2015} in 2015
+and in uranium zirconium (U-Zr) alloys by Mao et al. \cite{mao2025} in 2025,
+using BCA.
+Thermal spikes are not expected to occur in UC and U-Zr systems
+due to higher electronic conductivity and thermal diffusivity
+compared to UO$_2$ \cite{matthews2015, ronchi1986, mao2025}.
+Thus, only heterogeneous re-solution has been studied in UC and U-Zr.
+In summary, BCA and MD simulations were both used
 to determine the re-solution rate in nuclear fuels.
 
 In MD simulations of homogeneous re-solution,
-a lattice atom is endowed with high kinetic energy to emulate a PKA.
+a regular lattice atom is typically endowed with high kinetic energy
+to emulate a PKA.
 The PKA then interacts ballistically with other atoms,
 initiating a collision cascade near the gas bubble
 and inducing disorder \cite{parfitt2008, govers2012}.
-One alternative approach in MD is to simulate only a portion of the cascade
-(i.e., a subcascade) by imparting energy
-to a random gas atom within the bubble.
+One alternative approach in MD is to simulate
+only a portion of the cascade (i.e., a subcascade)
+by imparting energy to a random gas atom within the bubble.
 In doing so, the simulation avoids unnecessary cascade events
 that may not significantly influence the re-solution process.
-However, a binary collision model must be utilized in this approach
+However, BCA must be utilized in this approach
 to first obtain an energy spectrum of the gas atom PKAs \cite{schwen2009md}.
 One challenge in using MD simulations to model homogeneous re-solution
-is the channeling of PKAs or their recoils over long distances
+is the channeling of PKAs or their recoils over long distances,
 without any collisions \cite{jarrin2021}.
-This can make collecting statistics on the interactions
-between PKAs and gas bubble atoms computationally demanding,
+This can make collecting statistics
+on the interactions between PKAs and gas bubble atoms computationally demanding,
 especially when the PKA direction is random.
-A potential solution
-is to direct the PKAs toward a high index lattice direction \cite{stoller2000}.
+A potential solution is to direct the PKAs
+toward a high index lattice direction \cite{stoller2000}.
 Moreover, collision cascades end up in heat spikes due to nuclear stopping.
+This can lead to damage assisted re-solution
+due to the high concentration of defects caused by these cascades.
 To identify atoms that are re-solved ballistically, a threshold atomic speed,
 above which it is improbable to find atoms in thermal equilibrium,
 can be utilized \cite{parfitt2008}.
 
 For MD simulations of heterogeneous re-solution due to swift heavy ions,
 the thermal spike model is normally employed.
-This model is useful for describing the interaction
-between the fission fragments and the fuel.
-These interactions occur primarily
-via electronic stopping of the energetic particles
+This model is useful for describing
+the interaction between the FFs and the fuel.
+These interactions occur primarily via
+electronic stopping of the energetic particles
 that initially raise the electronic subsystem temperature.
 The energy deposited in the electronic subsystem can then transfer
 to the lattice as thermal energy via electron-phonon coupling.
 Finally, the energy is transferred among the atoms,
-leading to a rapid increase in lattice temperature within a cylindrical zone
-of typically a few nm in radius.
-This increase is known as
-a thermal spike \cite{wang1994, toulemonde2002, patra2019}.
+leading to a rapid increase in lattice temperature
+within a cylindrical zone of typically a few nm in radius.
+This increase is known as a thermal spike
+\cite{wang1994, toulemonde2002, patra2019}.
 In MD simulations, electronic interactions cannot be treated directly.
-However, the final step described above can be emulated
-by raising the temperature of atoms within a cylindrical region.
+However, the thermal spike process can be emulated
+either by raising the temperature of atoms within a cylindrical region
+\cite{govers2012, setyawan2018}
+or by coupling the two-temperature model (TTM) with MD
+\cite{duffy2006, huang2010md}.
 
-% Normally, heat spikes and thermal spikes are used interchangeably. However,
-% in this work, we use "heat spike" to mean the spike due to nuclear stopping
-% at the end of collision (sub)cascades. The word "thermal spike" is reserved
-% for describing local heating due to heavy electronic stopping.
+For qualification of U-10Mo fuel,
+the ability to accurately predict the fission gas atom evolution
+under various operational and transient conditions is crucial.
+To that end, the Dispersion Analysis Research Tool (DART),
+a mesoscale code developed by Argonne National Laboratory \cite{ye2023},
+has been equipped with the ability to calculate
+fission gas swelling in U-10Mo under different operational situations.
+One of the many parameters required to model the swelling behavior
+is the re-solution rate of fission gas bubbles.
+DART employs a re-solution model
+that includes a piecewise function to account for
+both intergranular and intragranular bubbles.
+The parameters in this function are calibrated
+by fitting the computed swelling value to experimental data,
+meaning that we only have a rough estimation of the re-solution rate.
+A physics-based model of the re-solution rate of fission gas bubbles would make
+the swelling calculations of higher-length-scale models more rigorous.
 
 \subsection{Unknown Fission-Gas-Behavior Parameters}
 
