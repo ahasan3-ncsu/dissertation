@@ -261,4 +261,50 @@ the distribution of those elements approximates the posterior.
 	\label{fig:mh}
 \end{figure}
 
-\ref{fig:mh}
+One of the most foundational MCMC algorithms is Metropolis-Hastings.
+It starts with picking an initial parameter value $\theta^t = \theta^0$
+at step $t = 0$.
+At each iteration $t$, a candidate parameter $\theta^*$ is proposed
+from a transition (or proposal) distribution $q(\theta^* | \theta^t)$.
+The candidate is accepted with probability $\alpha$:
+\begin{align}
+	\alpha
+	&= \min \left( 1,
+		\frac{p(\bm{\theta}^* | \bm{Y}) q(\bm{\theta}^t | \bm{\theta}^*)}
+			{p(\bm{\theta}^t | \bm{Y}) q(\bm{\theta}^* | \bm{\theta}^t)}
+		\right)
+\end{align}
+Because the posterior appears in both the numerator and denominator of the ratio,
+the evidence $m(\bm{Y})$ cancels out:
+\begin{align}
+	\frac{p(\bm{\theta}^* | \bm{Y})}{p(\bm{\theta}^t | \bm{Y})}
+	&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta}) / m(\bm{Y})}
+		{\mathcal{L}(\bm{Y} | \bm{\theta}^t) \pi(\bm{\theta}^t) / m(\bm{Y})} \\
+	&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta})}
+		{\mathcal{L}(\bm{Y} | \bm{\theta}^t) \pi(\bm{\theta}^t)}
+\end{align}
+This allows us to sample from the posterior
+using only the likelihood and the prior.
+For symmetrical proposal distributions,
+$q(\bm{\theta}^t | \bm{\theta}^*) = q(\bm{\theta}^* | \bm{\theta}^t)$.
+If an uninformative prior, such as a uniform distribution, is used,
+the priors in the acceptance ratio cancel out as well since
+$\pi(\bm{\theta}) = \pi(\bm{\theta^t})$.
+An illustration of the Metropolis-Hastings algorithm
+is shown in Figure \ref{fig:mh}.
+
+After a sufficient number of iterations $t = B$,
+known as the \textit{burn-in} period,
+the samples {$\theta^{B+1}, \ldots, \theta^T$}
+can be treated as draws from the posterior.
+These samples are then used to estimate various statistics,
+such as the posterior mean, variance, or credible intervals:
+\begin{align}
+	E[\bm{\theta} | \bm{Y}]
+	\approx \frac{1}{T-B} \sum_{t=B+1}^{T} \bm{\theta}^t
+\end{align}
+where $T$ is the total number of iterations.
+Other popular variants of MCMC include Gibbs Sampling,
+which is useful when conditional distributions are known,
+and Hamiltonian Monte Carlo, which uses gradient information
+to explore the parameter space more efficiently.
