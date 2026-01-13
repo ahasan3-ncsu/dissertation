@@ -153,3 +153,71 @@ The $\mu$ and $\lambda$ terms represent dipole and quadrupole distortions
 of the local atomic environment.
 This formalism extends the EAM by introducing angular forces
 as dipole and quadrupole moments.
+
+\section{Bayesian Statistics}
+
+The probability of two events $A$ and $B$ happening together
+can be expressed as:
+\begin{align}
+	P(A \cap B) &= P(B) P(A|B) = P(A) P(B|A)
+\end{align}
+where $P(B)$ means the probability of $B$ occurring,
+and $P(A|B)$ denotes the probability of
+$A$ occurring given $B$ already occurred.
+Put simply, $P(A|B)$ is called
+the \textit{conditional} probability of $A$ given $B$.
+$P(A)$ and $P(B|A)$ have similar meanings.
+Rewriting the above equation leads to:
+\begin{align}
+	P(A|B) &= \frac{P(B|A)P(A)}{P(B)}
+\end{align}
+where $P(B) \ne 0$.
+This is known as the Bayes' theorem.
+
+Bayesian statistics is a subfield of statistics that utilizes
+a particular interpretation of probability based on the Bayes' theorem.
+In this interpretation, probability signifies a degree of belief in an event.
+The degree of belief may depend on prior knowledge about the event,
+such as previous experimental results or personal beliefs.
+Specifically, the Bayesian interpretation has a way of
+incorporating prior knowledge in the form of probability distributions.
+In contrast, the frequentist interpretation views probability as
+the limit of the relative frequency of an event after many trials.
+
+To expand on the Bayesian interpretation, let's assume
+$\bm{Y} = (Y_1, \ldots, Y_n)$ is the data produced by a random process
+and the random process can be modeled in terms of fixed but unknown parameters
+$\bm{\theta} = (\theta_1, \ldots, \theta_p)$.
+Then, the probability distribution $\mathcal{L}(\bm{Y} | \bm{\theta})$
+indicates the \textit{likelihood} of $\bm{Y}$ given parameters $\bm{\theta}$.
+Bayesian inference is concerned with the inverse problem of
+estimating $\bm{\theta}$ using the likelihood function.
+Since almost all data have noise, $\bm{\theta}$ cannot be estimated perfectly.
+However, Bayesian statistics can quantify
+the uncertainty of the unknown parameters by treating them as random variables.
+Treating $\bm{\theta}$ as a random variable also requires
+specifying the \textit{prior} distribution $\pi(\bm{\theta})$,
+which represents the uncertainty about the parameters before observing the data.
+Bayes' theorem can then be applied
+to obtain the \textit{posterior} distribution $p(\bm{\theta} | \bm{Y})$:
+\begin{align}
+	p(\bm{\theta} | \bm{Y})
+		&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta})}{m(\bm{Y})}
+		\propto \mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta})
+		\\
+	m(\bm{Y})
+		&= \int_{\Theta} \mathcal{L}(\bm{Y} | \bm{\theta'}
+		\cdot \pi(\bm{\theta'}) d\theta'
+\end{align}
+where $m(\bm{Y})$ is the marginal likelihood or \textit{evidence} of $\bm{Y}$.
+It represents the probability of generating the observed sample
+for all possible values of the parameters.
+Due to the integration over the parameter space,
+the evidence does not directly depend on parameters.
+Often times, the evidence is simply the normalizing constant
+that ensures the posterior is a proper probability distribution.
+The posterior quantifies the uncertainty about the parameters that remains
+after accounting for prior knowledge
+and the new information observed in the data.
+
+\subsection{Markov Chain Monte Carlo}
