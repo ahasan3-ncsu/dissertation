@@ -1,9 +1,5 @@
 \chapter{Theoretical Background}
 
-\section{Binary Collision Approximation}
-
-Placeholder text
-
 \section{Molecular Dynamics}
 
 Molecular dynamics (MD) is a computer simulation technique
@@ -52,12 +48,26 @@ The classical interatomic potentials try to approximate
 the true nature of atomic interactions at the expense of accuracy,
 the advantage being reduced computational cost \cite{marx}.
 Interatomic potentials can be either parametric or non-parametric.
-We will discuss the differences between them in the following section.
+We will discuss the differences between them in the following subsection.
 
 After defining the interactions among atoms through a potential,
 new positions and velocities of atoms can be calculated using time integration.
 Velocity-Verlet is the most commonly used integration scheme in MD
 \cite{verlet, tuckerman}.
+In this scheme, positions, velocitiies, and accelerations at time $t + \Delta t$
+are obtained from the same quantities at time $t$ in the following way:
+\begin{align}
+	\bm{r}(t + \Delta t)
+		&= \bm{r}(t) + \bm{v}(t)\Delta t + \frac{1}{2}\bm{a}(t)\Delta t^2 \\
+	\bm{v}(t + \Delta t)
+		&= \bm{v}(t) + \frac{1}{2} \bm{a}(t) \Delta t \\
+	\bm{a}(t + \Delta t)
+		&= - \frac{1}{m} \nabla V (\bm{r}(t + \Delta t)) \\
+	\bm{v}(t + \Delta t)
+		&= \bm{v}\left(t + \frac{1}{2}\Delta t\right)
+		+ \frac{1}{2}\bm{a}(t + \Delta t)\Delta t
+\end{align}
+
 This allows the simulated systems to evolve in time,
 which in turn provides insight into the behavior of complex atomic systems.
 
@@ -67,8 +77,7 @@ the simulated system needs to have a constant temperature.
 Among many methods introduced to control the temperature in a MD simulation,
 the Nos\'e-Hoover thermostat is the most popular one \cite{hoover}.
 
-% NOTE: should this be a section?
-\section{Interatomic Potential}
+\subsection{Interatomic Potential}
 
 % TODO: citation needed
 Interatomic potentials come in different forms
@@ -105,28 +114,6 @@ from atom $j$ at the location of atom $i$,
 and $F_{\alpha}$ is an embedding function that represents
 the energy required to place atom $i$ into the electron cloud.
 
-% TODO: citation needed
-The non-parametric potentials are often referred to
-as machine-learned interatomic potentials (MLIPs).
-While non-parametric models are especially suitable for the application of ML,
-it is to be noted that
-parametric potentials can also be optimized using machine learning,
-The potential energy of a system in an MLIP is written as
-\begin{align}
-	V_{tot}
-	= \sum_i V_i (\bm{q}_i)
-\end{align}
-where $\bm{q}_i$ is a mathematical representation
-of the atomic environment surrounding the atom $i$,
-commonly known as the descriptor.
-$V_i$ is a machine-learning model that provides energy prediction
-based on the descriptor.
-An MLIP requires a robust descriptor
-that maintains certain physical symmetries,
-and a suitable machine learning framework for the descriptor.
-
-\subsection{Angular Dependent Potential}
-
 % TODO: why ADP?
 
 The angular dependent potential (ADP) formalism
@@ -154,6 +141,235 @@ The $\mu$ and $\lambda$ terms represent dipole and quadrupole distortions
 of the local atomic environment.
 This formalism extends the EAM by introducing angular forces
 as dipole and quadrupole moments.
+
+% TODO: citation needed
+The non-parametric potentials are often referred to
+as machine-learned interatomic potentials (MLIPs).
+While non-parametric models are especially suitable for the application of ML,
+it is to be noted that
+parametric potentials can also be optimized using machine learning,
+The potential energy of a system in an MLIP is written as
+\begin{align}
+	V_{tot}
+	= \sum_i V_i (\bm{q}_i)
+\end{align}
+where $\bm{q}_i$ is a mathematical representation
+of the atomic environment surrounding the atom $i$,
+commonly known as the descriptor.
+$V_i$ is a machine-learning model that provides energy prediction
+based on the descriptor.
+An MLIP requires a robust descriptor
+that maintains certain physical symmetries,
+and a suitable machine learning framework for the descriptor.
+
+\section{Binary Collision Approximation}
+
+While MD provides a rigorous description of $N$-body interactions,
+it becomes computationally intractable when simulating
+high-energy ion irradiation due to small time steps and large spatial domains.
+In MD, the timestep size $\Delta t$ is typically on the order of femstoseconds,
+which is small enough to resolve the fastest atomic vibrations.
+For a high energy ion traversing a solid material,
+the vast majority of the simulation time in MD will be spent on
+calculating small-amplitude oscillations of the lattice atoms
+that do not significantly contribute to the trajectory of the ion
+or the primary radiation damage it causes.
+
+The Binary Collision Approximation (BCA) addresses this
+by approximating the many-body problem with a sequence of
+discrete two-body interactions that are assumed to be independent.
+The rationale behind this is that at high kinetic energies,
+the interaction time between a projectile and a target nucleus
+is much shorter than the period of lattice vibrations.
+Therefore, the target nuclei can be treated as stationary
+and the effect of surrounding atoms on the projectile can be neglected
+during the brief duration of the collision.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}[scale=2, >={Stealth[length=15pt]}]
+		% lab frame
+		\begin{scope}
+			\coordinate (A) at (0, 0);
+			\coordinate (B) at (4, 0);
+			\coordinate (C) at (0, 0.5);
+			\coordinate (D) at (4, 0.5);
+			\coordinate (E) at (3.5, 2);
+			\coordinate (F) at (3.5, -1);
+			\coordinate (G) at ($(C)!0.5!(D)$);
+			\coordinate (H) at ($(A)!0.5!(B)$);
+			\coordinate (I) at ($(C)+(0.2,0)$);
+
+			\node at (1, 2) {\small (a) Lab frame};
+
+			% horizontal lines
+			\draw[dashed, thin] (A) -- (B);
+			\draw[dashed, thin] (C) -- (D);
+
+			% ion
+			\shade[ball color=gray!80, opacity=0.8]
+				(I) circle (0.15);
+			\draw[yellow, line width=3pt, opacity=0.3]
+				(I) circle (0.15);
+
+			% target
+			\shade[ball color=red!80, opacity=0.8]
+				(H) circle (0.15);
+			\draw[yellow, line width=5pt, opacity=0.3]
+				(H) circle (0.15);
+
+			% trajectories
+			\draw[thick, ->]
+				(I) .. controls (G) and (G) .. (E);
+			\draw[thick, ->] (H) -- (F);
+
+			% angle
+			\draw[dashed] (G) -- (E);
+			\draw ($(G)+(1,0)$) arc (0:45:1)
+				node[midway, right, xshift=2pt] {$\theta$};
+		\end{scope}
+
+		% center of mass frame
+		\begin{scope}[shift={(0,-4)}]
+			\coordinate (A) at (0, 0);
+			\coordinate (B) at (4, 0);
+			\coordinate (C) at (0, 0.5);
+			\coordinate (D) at (4, 0.5);
+			\coordinate (I) at ($(C)+(0.6,0)$);
+			\coordinate (T) at ($(B)-(0.6,0)$);
+			\coordinate (K) at (1, -1);
+			\coordinate (M) at (3, 2);
+			\coordinate (P) at ($(K)+(0.7,0)$);
+			\coordinate (R) at ($(M)+(0.7,0)$);
+
+			\node at (1, 2) {\small (b) Center of mass frame};
+
+			% horizontal lines
+			\draw[dashed, thin, name path=ab] (A) -- (B);
+			\draw[dashed, thin, name path=cd] (C) -- (D);
+
+			% oblique lines
+			\draw[dashed, thin, name path=km] (K) -- (M);
+			\draw[dashed, thin, name path=pr] (P) -- (R);
+
+			\path[name intersections={of=km and cd, by=L}];
+			\path[name intersections={of=ab and pr, by=Q}];
+
+			% ion
+			\shade[ball color=gray!80, opacity=0.8]
+				(I) circle (0.15);
+			\draw[yellow, line width=3pt, opacity=0.3]
+				(I) circle (0.15);
+
+			% target
+			\shade[ball color=red!80, opacity=0.8]
+				(T) circle (0.15);
+			\draw[yellow, line width=5pt, opacity=0.3]
+				(T) circle (0.15);
+
+			% trajectories
+			\draw[thick, ->]
+				(I) .. controls (L) and (L) .. (M);
+			\draw[thick, ->]
+				(T) .. controls (Q) and (Q) .. (P);
+
+			% angle
+			\draw ($(L)+(0.6,0)$) arc (0:56:0.6)
+				node[midway, right, xshift=2pt] {$\Theta$};
+
+			% p and r_0
+			\begin{scope}[>={Stealth[length=5pt]}]
+				\draw[<->] ($(A)+(0.2,0)$) -- ($(C)+(0.2,0)$)
+					node[midway, right] {$p$};
+				\draw[<->] ($(L)+(-0.1,0.14)$) -- ($(Q)+(0.05,-0.10)$)
+					node[midway, right] {$r_{min}$};
+			\end{scope}
+		\end{scope}
+	\end{tikzpicture}
+	\caption{
+		Elastic collision between a projectile and a target in
+		(a) the lab frame and (b) the center of mass frame.
+	}
+\end{figure}
+
+The main event in BCA is the elastic collision
+between a projectile of mass $M_1$ and energy $E_0$
+and a stationary target of mass $M_2$.
+After transforming the collision into the center of mass (CM) frame,
+the laws of conservation of energy and momentum can be used to derive
+the kinetic energy $T$ transferred to the target nucleus:
+\begin{align}
+	T = \frac{4 M_1 M_2}{(M_1 + M_2)^2} E_0 \sin^2\left(\frac{\Theta}{2}\right)
+\end{align}
+where $\Theta$ is the scattering angle in the CM frame.
+This scattering angle is dependent on the impact parameter $p$,
+which is the perpendicular distance between the initial
+velocity vector of the projectile and the target.
+
+The angle $\Theta$ is calculated using the classical scattering integral:
+\begin{align}
+	\Theta = \pi - 2p \int_{r_{min}}^{\infty}
+		\frac{dr}{r^2 \sqrt{1 - \frac{V(r)}{E_c} - \frac{p^2}{r^2}}}
+\end{align}
+where $E_c = E_0 M_2 / (M_1 + M_2)$ is the energy in the CM frame,
+$V(r)$ is the interatomic potential,
+and $r_{min}$ is the distance of closest approach.
+The distance $r_{min}$ is the positive root of the denominator:
+\begin{align}
+	1 - \frac{V(r_{min})}{E_c} - \frac{p^2}{r_{min}^2} = 0
+\end{align}
+
+In the context of BCA,
+the interatomic potential $V(r)$ must describe
+the repulsive force at very short internuclear distances accurately.
+Unlike the EAM or ADP potentials used in MD,
+BCA usually employs screened Coulomb potentials
+to account for the electrostatic repulsion between nuclei,
+moderated by the electron clouds.
+The general form of this interatomic potential is
+\begin{align}
+	V(r) = \frac{Z_1 Z_2 e^2}{4\pi\epsilon_0 r} \Phi\left(\frac{r}{a}\right)
+\end{align}
+where $Z_1$ and $Z_2$ are the atomic numbers, $e$ is the elementary charge,
+and $\Phi(r/a)$ is a screening function with a screening length $a$.
+The Universal Ziegler-Biersack-Littmark (ZBL) potential
+is the most widely used screening function in BCA codes,
+such as TRIM \cite{ziegler1985}.
+Another popular screening function is based on the Kr-C interatomic potential
+used in Tridyn: % TODO: cite
+\begin{align}
+	\Phi(x) &= 0.19 e^{-0.28 x} + 0.46 e^{-0.64 x} + 0.34 e^{-1.9 x}
+\end{align}
+
+Beside losing energy through elastic nuclear collisions,
+ions also lose energy to the target electrons.
+This electronic stopping power is often treated as
+a continuous dissipative force, analogous to a friction term.
+The total energy loss per unit path length is thus
+the sum of nuclear and electronic losses:
+\begin{align}
+	\frac{dE}{dx} = \left( \frac{dE}{dx} \right)_{n} + \left( \frac{dE}{dx} \right)_{e}
+\end{align}
+Nuclear stopping $(dE/dx)_n$ arises from
+the discrete transfer of momentum to target nuclei ($T$),
+whereas electronic stopping $(dE/dx)_e$ accounts for
+excitations and ionizations of the target's electrons.
+
+In the BCA algorithm, the ion's energy is reduced by
+$T$ and the accumulated electronic loss along the path length iteratively.
+The ion's direction is updated based on the scattering angle $\theta$
+in the laboratory frame:
+\begin{align}
+	\theta &= \arctan \left( \frac{M_2 \sin \Theta}{M_1 + M_2 \cos \Theta} \right)
+\end{align}
+This process continues until
+the ion's energy falls below a specified cutoff energy,
+signifying that the ion has come to rest within the target.
+
+Compared to MD, the BCA allows the simulation of millions of ion impacts
+in a fraction of the time,
+making it the better choice for calculating
+sputtering yields, damage production, ion implantation profiles, etc.
 
 \section{Bayesian Statistics}
 
@@ -249,7 +465,6 @@ to generate the elements of that Markov chain.
 With sufficient Monte Carlo samples,
 the distribution of those elements approximates the posterior.
 
-% TODO: cite
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\textwidth]{sfigs/metropolis-hastings.png}
@@ -257,6 +472,7 @@ the distribution of those elements approximates the posterior.
 		Example of the Metropolis-Hastings algorithm in the Bayesian framework
 		sampling a normal one-dimensional posterior distribution,
 		where the prior is a uniform distribution.
+		% TODO: cite
 	}
 	\label{fig:mh}
 \end{figure}
@@ -301,7 +517,7 @@ These samples are then used to estimate various statistics,
 such as the posterior mean, variance, or credible intervals:
 \begin{align}
 	E[\bm{\theta} | \bm{Y}]
-	\approx \frac{1}{T-B} \sum_{t=B+1}^{T} \bm{\theta}^t
+		\approx \frac{1}{T-B} \sum_{t=B+1}^{T} \bm{\theta}^t
 \end{align}
 where $T$ is the total number of iterations.
 Other popular variants of MCMC include Gibbs Sampling,
