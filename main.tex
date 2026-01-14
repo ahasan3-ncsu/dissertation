@@ -4,6 +4,7 @@
 \usetikzlibrary{arrows.meta, calc, intersections}
 
 % Ion shorthand
+\usepackage[version=4]{mhchem}
 \newcommand{\Y}{\ce{_{39}^{97}Y}\xspace}
 \newcommand{\I}{\ce{_{53}^{136}I}\xspace}
 
@@ -23,11 +24,13 @@
 \frontmatter
 
 \include{front/abstract}
-\include{front/others}
-
+\makecopyrightpage
+\maketitlepage
+\include{front/dedbioack}
 \tableofcontents
 \listoftables
 \listoffigures
+\include{front/authorship}
 
 \mainmatter
 
