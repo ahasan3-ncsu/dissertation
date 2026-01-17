@@ -55,7 +55,7 @@ listed in Table \ref{tab:config}.
 \begin{tabular}{lcccc}
 \toprule
 Configuration name
-	& fission rate (fiss/cm$^3$/s)
+	& fission rate (fsn/cm$^3$/s)
 	& grain size ($\mu$m)
 	& fuel center temp ($^{\circ}C$) \\
 \midrule
@@ -77,7 +77,7 @@ Configuration name
 	\caption{
 		Scatter plots of fuel swelling
 		against the fission-gas-behavior parameters
-		at $F_d = \num{2.31e21}$.
+		at $F_d = \num{2.31e21}$ fsn/cm$^3$/s.
 	}
 	\label{fig:scat_lo}
 \end{figure}
@@ -88,7 +88,7 @@ Configuration name
 	\caption{
 		Scatter plots of fuel swelling
 		against the fission-gas-behavior parameters
-		at $F_d = \num{5.34e21}$.
+		at $F_d = \num{5.34e21}$ fsn/cm$^3$/s.
 	}
 	\label{fig:scat_hi}
 \end{figure}
@@ -375,47 +375,148 @@ we chose to utilize this model for the rest of the IUQ process.
 \begin{figure}[ht]
 	\begin{subfigure}{\textwidth}
 		\centering
-		\includegraphics[width=12cm]{iuq2/images/sobol_lo.pdf}
+		\caption{$F_d = \num{2.31e21}$ fsn/cm$^3$/s (\textit{RERTR5-V6018G}).}
+		\includegraphics[width=14cm]{iuq2/images/sobol_lo.pdf}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
-		\includegraphics[width=12cm]{iuq2/images/sobol_hi.pdf}
+		\caption{$F_d = \num{5.34e21}$ fsn/cm$^3$/s (\textit{RERTR12-L1P755}).}
+		\includegraphics[width=14cm]{iuq2/images/sobol_hi.pdf}
 	\end{subfigure}
 	\caption{
-		asdf
+		First-order ($S_i$) and total-effect ($S_{T_i}$) Sobol' indices
+		calculated using the neural network surrogate models.
 	}
 	\label{fig:sobol}
 \end{figure}
 
+To quntify the infuence of various fission-gas-behavior parameters on swelling,
+a global sensitivity analysis was conducted by calculating Sobol' indices
+\cite{sobol2001}.
+Figure \ref{fig:sobol} displays
+both the first-order ($S_i$) and total-effect ($S_{T_i}$) Sobol' indices.
+This provides a breakdown of how individual parameters and their interactions
+contribute to the overall variance in the swelling predictions.
+It can be observed that the sensitivity of the model is concentrated
+in a few key parameters.
+
+% NOTE: talk about physical significance
+Figure \ref{fig:sobol}a depicts how the parameter \texttt{rResolBulk}
+accounts for most of the variability in the model output at low fission density.
+Both the first-order and total-effect indices of \texttt{rResolBulk}
+are about $0.8$.
+A distinct shift is observed at high fission density,
+where \texttt{dGrainHBS} becomes the most influential parameter
+($S_i, S_{T_i} \approx 0.75$).
+At this fission density, there are also some minor influences
+from \texttt{SwellLink} and \texttt{rResolBulk}.
+Other parameters, such as \texttt{fNucleate} and \texttt{rResolGBB},
+consistently show negligible sensitivity.
+The results also reveal that
+the first-order indices are almost identical to the total-effect indices.
+This close agreement suggests that the effects of the parameters are additive,
+with almost no complex interactions between the parameters.
+
+\FloatBarrier
 \subsection{MCMC Sampling}
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{iuq2/images/mcmc_trace.png}
 	\caption{
-		asdf
+		Trace plots of the posterior samples
+		of the fission-gas-behavior parameters from MCMC sampling.
 	}
 	\label{fig:mcmc_trace}
 \end{figure}
 
+MCMC sampling is performed by proposing candidate parameter values,
+running surrogate models with them,
+and accepting or rejecting the candidate values
+according to the acceptance ratio.
+Figure \ref{fig:mcmc_trace} displays the trace plots of the MCMC samples
+of all the fission-gas-behavior parameters.
+Two chains of $200,000$ samples are overlaid on the trace plots.
+The cumulative averages of the blue and orange traces
+are shown in black and red, respectively.
+After an initial period, the cumulative averages of both chains converge.
+
+% TODO: where to talk about the boundary?
+
+The acceptance rate of the MCMC sampling was about $26 \%$ for both chains,
+which is close to the optimal value
+for mixing for a random walk Metropolis algorithm. % TODO: cite
+To be sure of the convergence of the MCMC samples,
+the Gelman-Rubin statistic and the effective sample size (ESS)
+of the MCMC samples are also calculated. % TODO: cite
+The Gelman-Rubin statistic is either $1$ or very close to $1$
+for all the posterior samples,
+which indicates that no convergence issues were detected.
+For all $9$ parameters, the ESS is at least $2100$,
+which is sufficient for stable estimates.
+The MCMC samples were thus thinned by picking every 100th value
+to reduce auto-correlation.
+The remaining $4000$ posterior samples are investigated for the IUQ process.
+
+\FloatBarrier
 \subsection{IUQ}
+
+The diagonal subplots in Figure \ref{fig:iuq}
+display the posterior distributions of the fission-gas-behavior parameters
+following the IUQ process.
+These distributions are based on thinned MCMC samples.
+% TODO: need a table
+% Summary statistics, including the means, standard deviations,
+% and 95\% confidence intervals (CIs) of the posterior means, are provided in
+% Table \ref{tab:iuq}.
+
+In addition to the marginal posteriors, the off-diagonal subplots
+in Figure \ref{fig:iuq} present the pairwise correlations as contour plots.
+Although the prior distributions were specified as independent,
+the Bayesian IUQ process captures dependencies among parameters
+through MCMC sampling.
+% TODO: need to check the corr heatmap
+% For example, the posteriors of "dGrainHBS" and "FaceCovMax" show
+% a strong positive correlation ($\rho = 0.70$),
+% as do "dGrainHBS" and "SwellLink" ($\rho = 0.66$).
+% In contrast, "FaceCovMax" and "SwellLink" appear uncorrelated.
+% These correlations must be considered when generating new samples
+% from the joint posterior distribution.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{iuq2/images/iuq.png}
 	\caption{
-		asdf
+		Posterior distributions of $9$ fission-gas-behavior parameters.
+		Marginal densities are in the diagonal
+		and the pair-wise joint densities are in the off-diagonal.
 	}
 	\label{fig:iuq}
 \end{figure}
 
+\FloatBarrier
 \subsection{FUQ and Validation}
+
+To assess the IUQ results,
+we performed FUQ by propagating the posterior samples
+through the NN surrogate models.
+The outcomes of this propagation are presented in
+Figures \ref{fig:fuq_mvn} and \ref{fig:fuq_ind},
+where the surrogate-based predictions of fuel swelling
+show good agreement with the experimental data.
+However, this procedure does not constitute
+a rigorous validation of the IUQ results,
+as the same surrogate models are used for both the IUQ and FUQ processes.
+A more robust validation would involve generating new samples
+from the joint posterior distributions
+and propagating them directly through DART.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=10cm]{iuq2/images/fuq_mvn.pdf}
 	\caption{
-		asdf
+		Joint density plot of swelling predictions calculated by
+		the forward propagation of the thinned MCMC samples.
 	}
 	\label{fig:fuq_mvn}
 \end{figure}
@@ -423,25 +524,46 @@ we chose to utilize this model for the rest of the IUQ process.
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\centering
-		\includegraphics[width=8cm]{iuq2/images/fuq_lo.pdf}
+		\includegraphics[width=\textwidth]{iuq2/images/fuq_lo.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		\centering
-		\includegraphics[width=8cm]{iuq2/images/fuq_hi.pdf}
+		\includegraphics[width=\textwidth]{iuq2/images/fuq_hi.pdf}
 	\end{subfigure}
 	\caption{
-		asdf
+		Marginal density plots of swelling predictions calculated by
+		the forward propagation of the thinned MCMC samples.
 	}
 	\label{fig:fuq_ind}
 \end{figure}
+
+% TODO: talk about fig:after
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=10cm]{iuq2/images/aftermath.pdf}
 	\caption{
-		asdf
+		Comparison of experimental observations with
+		swelling predictions from the DART data set
+		and swelling predictions from the forward propagation
+		of the surrogate models using the MCMC samples.
 	}
 	\label{fig:after}
 \end{figure}
 
+\FloatBarrier
 \section{Conclusions}
+
+This work presented a methodology for performing IUQ on
+unknown fission-gas-behavior parameters of U-10Mo utilized in DART.
+% The analysis was based on a dataset generated from 12,800 DART simulations.
+% Among the seven parameters considered,
+% only three---"dGrainHBS", "FaceCovMax", and "SwellLink"---were found
+% to significantly influence fission gas swelling,
+% while the remaining four had negligible impact.
+% For surrogate modeling, NN models demonstrated the best performance.
+MCMC sampling with these surrogates led to
+converged posterior probability distributions
+for the three influential parameters.
+Forward propagations using the resulting posteriors provided
+a means of verifying the whole IUQ process as well.
