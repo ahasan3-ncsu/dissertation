@@ -326,31 +326,48 @@ using the sklearn python library \cite{sklearn}.
 		\includegraphics[width=\textwidth]{iuq2/images/nn_hi.pdf}
 	\end{subfigure}
 	\caption{
-		asdf
+		Surrogate predictions vs actual test data for Gaussian process (GP)
+		and neural network (NN) surrogate models.
+		\textit{RERTR5-V6018G} and \textit{RERTR12-L1P755} represent
+		low and high fission density ($F_d$) data sets, respectively.
 	}
 	\label{fig:surr}
 \end{figure}
 
-% TODO: more details about the split
-% talk about potential data leaks that would have happened otherwise
-The data sets were split into two groups, $70 \%$ for training
+The data sets were split into two groups first, $70 \%$ for training
 and $30 \%$ for testing.
+The feature vectors of the training set
+were then transformed using a min-max scaler.
+Afterward, the testing set was transformed
+with the aforementioned min-max scaler fitted with the training data.
+This is to avoid preprocessing the testing set along with the training set
+since doing so can leak information from the testing set.
 The training split was then used to build the GP and NN surrogates.
 All the surrogate models take $9$ parameters as inputs.
+During the construction of the surrogates,
+the training set was further split into two groups,
+$75 \%$ for actual training and $25 \%$ for validation.
 A few kernels, such as RBF, Mat\'ern, rational quadratic and linear,
 and their combinations were used in the GP model to find the best fit.
 A GP with a linear kernel was found to perform the best
-with $R^2$ scores of $0.66$ and $0.86$
+with $R^2$ scores of $0.66$ and $0.86$,
+and mean absolute errors of $1.26$ and $4.96$,
 for emulating low and high $F_d$, respectively.
 The NN surrogate model was optimized by tuning its hyperparameters
 with a grid search.
 The model has $4$ hidden layers with $250$ neurons each,
 and $1$ output layer with one neuron to represent swelling values.
 The NN model performed better than the GP model on the test split,
-having $R^2$ scores of $0.79$ and $0.95$ for low $F_d$ and high $F_d$.
-% NOTE: maybe provide other metrics as well
+having $R^2$ scores of $0.79$ and $0.96$,
+and mean absolute errors of $0.94$ and $2.49$ for low $F_d$ and high $F_d$.
 Figure \ref{fig:surr} displays the actual vs predicted plots
 for the validation of the surrogate models.
+The GP model has noticeable weakness in the higher swelling range
+for both the low $F_d$ and the high $F_d$ data sets.
+Meanwhile, the NN model predictions are slightly spread out
+only for the low $F_d$ data set.
+Since the NN surrogate model performs better overall,
+we chose to utilize this model for the rest of the IUQ process.
 
 \FloatBarrier
 \subsection{Sensitivity Analysis}
