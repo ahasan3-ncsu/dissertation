@@ -432,7 +432,7 @@ with almost no complex interactions between the parameters.
 
 MCMC sampling is performed by proposing candidate parameter values,
 running surrogate models with them,
-and accepting or rejecting the candidate values
+and then accepting or rejecting the candidate values
 according to the acceptance ratio.
 Figure \ref{fig:mcmc_trace} displays the trace plots of the MCMC samples
 of all the fission-gas-behavior parameters.
@@ -440,48 +440,108 @@ Two chains of $200,000$ samples are overlaid on the trace plots.
 The cumulative averages of the blue and orange traces
 are shown in black and red, respectively.
 After an initial period, the cumulative averages of both chains converge.
-
-% TODO: where to talk about the boundary?
-
 The acceptance rate of the MCMC sampling was about $26 \%$ for both chains,
 which is close to the optimal value
-for mixing for a random walk Metropolis algorithm. % TODO: cite
+for mixing for a random walk Metropolis algorithm \cite{gelman1997}.
 To be sure of the convergence of the MCMC samples,
-the Gelman-Rubin statistic and the effective sample size (ESS)
-of the MCMC samples are also calculated. % TODO: cite
+the Gelman-Rubin statistic \cite{gelman1992}
+and the effective sample size (ESS) \cite{kish1965}
+of the MCMC samples are also calculated.
 The Gelman-Rubin statistic is either $1$ or very close to $1$
 for all the posterior samples,
 which indicates that no convergence issues were detected.
 For all $9$ parameters, the ESS is at least $2100$,
 which is sufficient for stable estimates.
-The MCMC samples were thus thinned by picking every 100th value
-to reduce auto-correlation.
-The remaining $4000$ posterior samples are investigated for the IUQ process.
+
+Except for \texttt{dGrainHBS}, the MCMC samples span the entire range
+defined by the parameter priors.
+The averages of the MCMC samples
+for \texttt{FaceCovMax}, \texttt{SwellLink}, and \texttt{rResolBulk}
+are slightly higher than the averages from the uniform prior distributions.
+For the other parameters, the sample averages are noninformative.
+This corroborates the findings from the global sensitivity analysis.
 
 \FloatBarrier
 \subsection{IUQ}
 
-The diagonal subplots in Figure \ref{fig:iuq}
-display the posterior distributions of the fission-gas-behavior parameters
-following the IUQ process.
-These distributions are based on thinned MCMC samples.
-% TODO: need a table
-% Summary statistics, including the means, standard deviations,
-% and 95\% confidence intervals (CIs) of the posterior means, are provided in
-% Table \ref{tab:iuq}.
-
+The MCMC samples were thinned by picking every 100th value
+to reduce auto-correlation.
+The remaining $4000$ posterior samples are investigated for the IUQ process.
+The posterior distributions obtained from these samples
+are displayed in Figure \ref{fig:iuq}.
+The diagonal subplots in Figure \ref{fig:iuq} show
+the marginal posterior distributions of the fission-gas-behavior parameters.
+\texttt{dGrainHBS} has a defined posterior resembling a normal distribution.
+\texttt{FaceCovMax}, \texttt{SwellLink}, and \texttt{rResolBulk}
+have left skewed marginal posteriors.
+All the other parameters have almost uniform posterior distirbutions.
 In addition to the marginal posteriors, the off-diagonal subplots
-in Figure \ref{fig:iuq} present the pairwise correlations as contour plots.
+present the pairwise correlations as contour plots.
 Although the prior distributions were specified as independent,
 the Bayesian IUQ process captures dependencies among parameters
 through MCMC sampling.
-% TODO: need to check the corr heatmap
-% For example, the posteriors of "dGrainHBS" and "FaceCovMax" show
-% a strong positive correlation ($\rho = 0.70$),
-% as do "dGrainHBS" and "SwellLink" ($\rho = 0.66$).
-% In contrast, "FaceCovMax" and "SwellLink" appear uncorrelated.
-% These correlations must be considered when generating new samples
-% from the joint posterior distribution.
+% NOTE: when generating new samples?
+In our case, the posterior of \texttt{dGrainHBS} shows positive correlations
+with that of \texttt{FaceCovMax}, \texttt{SwellLink}, and \texttt{rResolBulk}.
+There does not seem to be
+any other noticeable correlations between the parameters.
+
+\begin{table}[ht]
+\centering
+\caption{
+	Posterior means, standard deviations, and 95\% confidence intervals (CIs)
+	of the means for all the fission-gas-behavior parameters.
+}
+\label{tab:iuq}
+\begin{tabular}{lccc}
+\toprule
+% FIX: the values
+Parameter    & Mean
+		     & Std. deviation
+		     & 95\% CI of the mean               \\
+\midrule
+dGrainHBS    & \num{3.23e-5}
+		     & \num{5.46e-6}
+		     & {[} \num{3.21e-5}, \num{3.26e-5} {]} \\
+FaceCovMax   & \num{7.10e-1}
+		     & \num{1.16e-1}
+		     & {[} \num{7.05e-1}, \num{7.15e-1} {]} \\
+SwellLink    & \num{4.22e-2}
+		     & \num{1.42e-2}
+		     & {[} \num{4.16e-2}, \num{4.29e-2} {]} \\
+rResolBulk   & \num{3.23e-5}
+		     & \num{5.46e-6}
+		     & {[} \num{3.21e-5}, \num{3.26e-5} {]} \\
+DatomFissGBx & \num{7.10e-1}
+		     & \num{1.16e-1}
+		     & {[} \num{7.05e-1}, \num{7.15e-1} {]} \\
+StickProb    & \num{4.22e-2}
+		     & \num{1.42e-2}
+		     & {[} \num{4.16e-2}, \num{4.29e-2} {]} \\
+fNucleate    & \num{3.23e-5}
+		     & \num{5.46e-6}
+		     & {[} \num{3.21e-5}, \num{3.26e-5} {]} \\
+vResol       & \num{7.10e-1}
+		     & \num{1.16e-1}
+		     & {[} \num{7.05e-1}, \num{7.15e-1} {]} \\
+rResolGBB    & \num{4.22e-2}
+		     & \num{1.42e-2}
+		     & {[} \num{4.16e-2}, \num{4.29e-2} {]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results indicate that there is not enough information in the DART data set
+to infer meaningful posteriors for some of the parameters.
+These seemingly noninfluential parameters might be irrelevant for fuel swelling
+or their ranges in the data set may have been too narrow.
+The sensitivity analysis, the trace plots of the MCMC samples,
+and now the posterior distributions all tell a consistent story.
+Summary statistics, including the means, standard deviations,
+and $95 \%$ credible intervals (CIs) of the posterior means
+of all the fission-gas-behavior parameters, are provided in Table \ref{tab:iuq}.
+The effect of fixing the noninfluential parameters to nominal values
+are discussed in the next section.
 
 \begin{figure}[ht]
 	\centering
@@ -494,7 +554,7 @@ through MCMC sampling.
 	\label{fig:iuq}
 \end{figure}
 
-\FloatBarrier
+% \FloatBarrier
 \subsection{FUQ and Validation}
 
 To assess the IUQ results,
