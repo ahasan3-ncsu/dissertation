@@ -1,0 +1,377 @@
+\chapter{Inverse Uncertainty Quantification
+of U-10Mo Fission-Gas-Behavior Parameters}
+
+\section{Problem Definition}
+
+% FIX: rewrite this old section
+Table \ref{tab:param} shows the unknown DART fission-gas-behavior parameters of
+interest and their ranges. The orders of magnitude of the parameters vary
+considerably. The parameter "dGrainHBS" denotes the high burunup structure
+grain diameter. "FaceCovMax" dictates the grain face coverage needed for
+interlinkage. "SwellLink" determines the swelling starting interlinkage of the
+grain edges. "vResol" is the probability that a gas bubble interacts with
+fission fragments. "DatomFissGBx" is the grain boundary diffusion enhancement
+factor. "fNucleate" indicates the adjustment factor for the probability of
+bubble nucleation on the grain boundary. Finally, 'aAtomDifFiss" is the linear
+coefficient of radiation-driven gas atom diffusivity \cite{annualreport2021,
+ye2023, annualreport2022}.
+
+\begin{table}[ht]
+\centering
+\caption{
+	Fission gas behavior parameters and their ranges.
+}
+\label{tab:param}
+\begin{tabular}{lccc}
+\toprule
+Parameter    & Minimum value & Maximum value & Reference value \\
+\midrule
+dGrainHBS    & \num{2e-5 }   & \num{6e-5 }   & \num{4e-5   }   \\
+FaceCovMax   & \num{0.5  }   & \num{0.907}   & \num{0.907  }   \\
+SwellLink    & \num{0.015}   & \num{0.065}   & \num{0.025  }   \\
+vResol       & \num{2e-19}   & \num{2e-17}   & \num{2e-18  }   \\
+DatomFissGBx & \num{3e3  }   & \num{3e5  }   & \num{3e4    }   \\
+fNucleate    & \num{6e-11}   & \num{6e-8 }   & \num{6e-10  }   \\
+aAtomDifFiss & \num{5e-32}   & \num{5e-30}   & \num{5.1e-31}   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A data set is compiled using 12,800 DART simulations. These simulations
+correspond to 1600 different combinations of fission-gas-behavior parameters at
+8 different system configurations. By system configuration, we mean a specific
+fission rate, grain size, and fuel center temperature. These three variables
+are perturbed to mimic various operational conditions. The configurations are
+listed in Table \ref{tab:config}.
+
+\begin{table}[ht]
+\centering
+\caption{
+	System configuration
+}
+\label{tab:config}
+\begin{tabular}{lcccc}
+\toprule
+Configuration name
+	& fission rate (fiss/cm$^3$/s)
+	& grain size ($\mu$m)
+	& fuel center temp ($^{\circ}C$) \\
+\midrule
+\textit{hi-FR-hi-GS-160C} & \num{1.59e15} & \num{17}   & \num{160} \\
+\textit{hi-FR-hi-GS-200C} & \num{1.59e15} & \num{17}   & \num{200} \\
+\textit{hi-FR-lo-GS-160C} & \num{1.59e15} & \num{4.36} & \num{160} \\
+\textit{hi-FR-lo-GS-200C} & \num{1.59e15} & \num{4.36} & \num{200} \\
+\textit{lo-FR-hi-GS-100C} & \num{1.56e14} & \num{17}   & \num{100} \\
+\textit{lo-FR-hi-GS-160C} & \num{1.56e14} & \num{17}   & \num{160} \\
+\textit{lo-FR-lo-GS-100C} & \num{1.56e14} & \num{4.36} & \num{100} \\
+\textit{lo-FR-lo-GS-160C} & \num{1.56e14} & \num{4.36} & \num{160} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\FloatBarrier
+The goal of this IUQ study is to find parameter distributions that lead to fuel
+swelling predictions in agreement with the experimental observations. There
+have been a few experimental studies on the fuel swelling of $\gamma$U-Mo fuel.
+Robinson et al. have developed a predictive swelling correlation using the
+experimental data collected on 74 irradiated $\gamma$U-10Mo monolithic test
+fuel plates over a range of irradiation conditions \cite{rabin2017preliminary,
+robinson2021}. The correlation is as follows.
+\begin{align}
+	\% Swelling = 6.13 \times 10^{-43} F_d^2 + 4 \times 10^{-21} F_d
+\end{align}
+where $F_d$ is the fission density. The 95\% confidence interval of the
+swelling prediction at $7 \times 10^{21}$ fiss/cm$^3$ spans about 5 swelling\%.
+This swelling correlation is utilized as the experimental observation for IUQ
+purposes in this work.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=10cm]{iuq2/images/mvn_expt.pdf}
+	\caption{
+		asdf
+	}
+	\label{fig:mvn_expt}
+\end{figure}
+
+\FloatBarrier
+\section{Methodology}
+
+\subsection{Formulation of the Inverse Problem}
+
+Let's define the unknown reality or true value of an output as $y^R(x)$,
+where $x$ denotes the vector of design variables
+specifying experimental conditions.
+A computer model simulation can predict that reality only as an approximation:
+\begin{align}
+	\label{eq:real}
+	\bm{y}^R(\bm{x}) = \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x})
+\end{align}
+where $\bm{\theta}^*$ is a vector of true but unknown values
+of calibration parameters $\bm{\theta}$
+and $\delta(\bm{x})$ is the model uncertainty/discrepancy
+due to an incomplete understanding of the underlying physics of the model.
+
+To learn the reality $\bm{y}^R(\bm{x})$,
+experiments may be performed to obtain an observation $\bm{y}^E(\bm{x})$.
+However, the measurement process also introduces uncertainty:
+\begin{align}
+	\label{eq:exp}
+	\bm{y}^E(\bm{x}) = \bm{y}^R(\bm{x}) + \bm{\epsilon}
+\end{align}
+where $\bm{\epsilon} \sim \mathcal{N} (\bm{\mu}, \bm{\Sigma}_{exp})$
+indicates the measurement error/noise.
+It is typical to assume $\bm{\mu} = 0$
+and $\bm{\Sigma}_{exp} = \sigma_{exp}^2 \bm{I}$ for experiments
+having no systematic bias and having homoscedastic experimental errors.
+Combining equations \ref{eq:real} and \ref{eq:exp},
+we can obtain the "model updating equation"
+\cite{wu2021comprehensive, kennedy2001bayesian, arendt2012quant}:
+\begin{align}
+	\label{eq:upd}
+	\bm{y}^E(\bm{x})
+	= \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x}) + \bm{\epsilon}
+\end{align}
+Equation \ref{eq:upd} is the starting point for Bayesian IUQ.
+
+Assuming experimental uncertainty is Gaussian,
+$\bm{\epsilon}
+= \bm{y}^E(\bm{x}) - \bm{y}^M(\bm{x}, \bm{\theta}^*) - \delta(\bm{x})$
+follows a multi-dimensional Gaussian distribution
+with a mean of zero and a covariance matrix of $\bm{\Sigma}$.
+The posteriors of the true parameters $p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)$
+can then be written as:
+\begin{align}
+	p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)
+	&\propto p(\bm{\theta}^*) \cdot p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*) \\
+	&\propto p(\bm{\theta}^*) \cdot \frac{1}{\sqrt{|\bm{\Sigma}|}}
+		\exp \bigg[-\frac{1}{2} (\bm{y}^E-\bm{y}^M-\delta)^T
+		\bm{\Sigma}^{-1} (\bm{y}^E-\bm{y}^M-\delta) \bigg]
+\end{align}
+where $p(\bm{\theta}^*)$ is the prior distribution provided by expert opinion,
+and $p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*)$ is the likelihood function.
+$\bm{\Sigma}$ is the covariance of the likelihood consisting of three parts:
+\begin{align}
+	\bm{\Sigma} &= \bm{\Sigma}_{exp} + \bm{\Sigma}_{bias} + \bm{\Sigma}_{code}
+\end{align}
+where $\bm{\Sigma}_{exp}$ represents experimental uncertainty
+due to measurement error,
+$\bm{\Sigma}_{bias}$ means model uncertainty
+due to an inherent bias in the model,
+and $\bm{\Sigma}_{code}$ means code/interpolation uncertainty
+due to the use of surrogate models to reduce the computational cost.
+
+% TODO: needs better rationale
+In this work, $\bm{\Sigma}_{bias}$ is not considered
+due to the limited amount of experimental data to compare against.
+% and $\bm{\Sigma}_{code} = 0$
+% and high fidelity of the surrogate models.
+
+\subsection{Surrogate Modeling}
+
+% FIX: delete models that are not used
+Surrogate models, also called metamodels, response surfaces or emulators,
+are approximations of the input/output relation of the original computer model.
+They are built from a limited number of full model runs (training data) and a
+learning algorithm. Metamodels usually take much less computational time than
+the full model while maintaining the input/output relation to a desirable
+accuracy. Once validated, metamodels can be used in uncertainty, sensitivity,
+validation and optimization studies, for which the original computer model can
+incur an excessive computational burden as hundreds or thousands of computer
+model simulations are needed \cite{wu2018inverse}.
+
+Any machine learning model that can learn from the training data and predict an
+output relatively quickly compared to the original computer model can be used
+as a surrogate model. Typical examples of surrogate models include Moving
+Least-Squares (MLS), Radial Basis Functions (RBF), Neural Networks (NN),
+Support Vector Machines (SVM), Gaussian Processes (GP), Polynomial Chaos
+Expansion (PCE), etc., which GP being the most commonly used surrogate
+\cite{wu2018inverse, wu2021comprehensive}. In this work, we have used three
+linear and three non-linear models as surrogates. A brief discussion of these
+models follows.
+
+Considering $X$ as an input matrix and $y$ as an output vector, a linear model
+would have the following formulation:
+\begin{align}
+	y = \beta X + \varepsilon
+\end{align}
+where $\beta$ is the vector of unknown coefficients and $\varepsilon$ is the
+vector of random errors. In Ordinary Least-Squares (OLS), the estimated
+coefficients $\hat{\beta}$ is determined by minimizing the sum of squared
+residuals (the loss function).
+\begin{align}
+	\hat{\beta} = \arg \min_{\beta} || y - \beta X ||^2
+\end{align}
+
+Gaussian processes (GP) are a popular choice for surrogate models because they
+provide a straightforward estimation of the code uncertainty. A GP is a
+probabilistic model that describes a distribution over possible functions.
+Given a set of points, a GP can be used to predict the value of an unknown
+function at any other point. Additionally, GP can be used to represent the
+uncertainty in the output of the computer model, which is important for
+Bayesian inference and calibration \cite{wu2018inverse, wang2020}. The
+mathematical form of a GP model is as follows:
+\begin{align}
+	y = f^T(x) \beta + z(x)
+\end{align}
+The first term here is a linear regression of the data modeling the drift of
+the mean. The set of basis functions $f$ is chosen by the user and $\beta$ are
+the regression coefficients. $z(x)$ is a stationary Gaussian random process
+with zero mean and covariance $Cov[z(x^{(i)}), z(x^{(j)})] = \sigma^2
+\mathcal{R} (x^{(i)}, x^{(j)})$, where $\sigma^2$ is the process variance and
+$\mathcal{R} (\cdot, \cdot)$ is the correlation function or kernel. A kernel in
+GP is a function that defines the similarity between pairs of data points.
+There are many different kernels that can be used with GP, each of which has
+its own advantages and disadvantages. Some of the most commonly used kernel
+functions include the RBF kernel, the Mat\'ern kernel, and the rational
+quadratic kernel \cite{wang2020}.
+
+Support Vector Regressor (SVR) is a regression model that uses SVMs, aiming to
+find a function $f(X)$ that fits the data while keeping the errors within a
+predefined margin.
+\begin{align}
+	f(X) = w^T X + b
+\end{align}
+where $w$ is the weight vector and $b$ is the bias. SVR uses an
+$\varepsilon$-insensitive loss function, where the model allows errors within a
+certain margin $\varepsilon$. SVRs can handle non-linear relationships through
+the use of kernels, which map input data to a higher-dimensional space
+\cite{cortes1995support, gunn1997support}.
+
+NN models consist of one input layer, hidden layers with non-linear activation
+functions, and one output layer for regression. All these layers have nodes
+(also called neurons) that connect to the nodes of the previous layer. Each
+connection between two nodes has an optimizable weight and each node has an
+associated bias and an activation function. The number of hidden layers in the
+model, the number of nodes in each layer, and the activation functions of the
+nodes are to be tuned to find an optimal model for a particular data set
+\cite{goodfellow2016, de2013neural}. In this work, all the surrogate models are
+implemented using the sklearn python library \cite{sklearn}.
+
+\section{Results}
+
+\subsection{Surrogate Modeling}
+
+Starts with the exploration of \ref{fig:scat_lo} and \ref{fig:scat_hi}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{iuq2/images/scatter_lo.pdf}
+	\caption{
+		Scatter plots of fuel swelling
+		against the fission-gas-behavior parameters
+		at $F_d = \num{2.31e21}$.
+	}
+	\label{fig:scat_lo}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{iuq2/images/scatter_hi.pdf}
+	\caption{
+		Scatter plots of fuel swelling
+		against the fission-gas-behavior parameters.
+		at $F_d = \num{5.34e21}$.
+	}
+	\label{fig:scat_hi}
+\end{figure}
+
+\begin{figure}[ht]
+	\begin{subfigure}{0.495\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{iuq2/images/gp_lo.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.495\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{iuq2/images/gp_hi.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.495\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{iuq2/images/nn_lo.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.495\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{iuq2/images/nn_hi.pdf}
+	\end{subfigure}
+	\caption{
+		asdf
+	}
+	\label{fig:nn_surr}
+\end{figure}
+
+\FloatBarrier
+\subsection{Sensitivity Analysis}
+
+\begin{figure}[ht]
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[width=12cm]{iuq2/images/sobol_lo.pdf}
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[width=12cm]{iuq2/images/sobol_hi.pdf}
+	\end{subfigure}
+	\caption{
+		asdf
+	}
+	\label{fig:sobol}
+\end{figure}
+
+\subsection{MCMC Sampling}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{iuq2/images/mcmc_trace.png}
+	\caption{
+		asdf
+	}
+	\label{fig:mcmc_trace}
+\end{figure}
+
+\subsection{IUQ}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{iuq2/images/iuq.png}
+	\caption{
+		asdf
+	}
+	\label{fig:iuq}
+\end{figure}
+
+\subsection{FUQ and Validation}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=10cm]{iuq2/images/fuq_mvn.pdf}
+	\caption{
+		asdf
+	}
+	\label{fig:fuq_mvn}
+\end{figure}
+
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=8cm]{iuq2/images/fuq_lo.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=8cm]{iuq2/images/fuq_hi.pdf}
+	\end{subfigure}
+	\caption{
+		asdf
+	}
+	\label{fig:fuq_ind}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=10cm]{iuq2/images/aftermath.pdf}
+	\caption{
+		asdf
+	}
+	\label{fig:after}
+\end{figure}
+
+\section{Conclusions}
