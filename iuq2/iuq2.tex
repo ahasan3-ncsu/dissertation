@@ -1,6 +1,8 @@
 \chapter{Inverse Uncertainty Quantification
 of U-10Mo Fission-Gas-Behavior Parameters}
 
+% TODO: have a few intro sentences
+
 \section{Problem Definition}
 
 % FIX: rewrite this old section
@@ -160,93 +162,115 @@ $\bm{\Sigma}_{bias}$ means model uncertainty
 due to an inherent bias in the model,
 and $\bm{\Sigma}_{code}$ means code/interpolation uncertainty
 due to the use of surrogate models to reduce the computational cost.
-
-% TODO: needs better rationale
-In this work, $\bm{\Sigma}_{bias}$ is not considered
-due to the limited amount of experimental data to compare against.
-% and $\bm{\Sigma}_{code} = 0$
-% and high fidelity of the surrogate models.
+In this work, $\bm{\Sigma}_{bias}$ and $\bm{\Sigma}_{code}$ are not considered
+due to the limited amount of experimental data available for comparison
+and the use of surrogate models that do not have inherent uncertainty measures.
 
 \subsection{Surrogate Modeling}
 
 % FIX: delete models that are not used
 Surrogate models, also called metamodels, response surfaces or emulators,
 are approximations of the input/output relation of the original computer model.
-They are built from a limited number of full model runs (training data) and a
-learning algorithm. Metamodels usually take much less computational time than
-the full model while maintaining the input/output relation to a desirable
-accuracy. Once validated, metamodels can be used in uncertainty, sensitivity,
-validation and optimization studies, for which the original computer model can
-incur an excessive computational burden as hundreds or thousands of computer
-model simulations are needed \cite{wu2018inverse}.
+They are built from a limited number of full model runs (training data)
+and a learning algorithm.
+Metamodels usually take much less computational time than the full model
+while maintaining the input/output relation to a desirable accuracy.
+Once validated, metamodels can be used in uncertainty, sensitivity,
+validation and optimization studies,
+for which the original computer model can incur an excessive computational burden
+as hundreds or thousands of computer model simulations are needed
+\cite{wu2018inverse}.
 
-Any machine learning model that can learn from the training data and predict an
-output relatively quickly compared to the original computer model can be used
-as a surrogate model. Typical examples of surrogate models include Moving
-Least-Squares (MLS), Radial Basis Functions (RBF), Neural Networks (NN),
-Support Vector Machines (SVM), Gaussian Processes (GP), Polynomial Chaos
-Expansion (PCE), etc., which GP being the most commonly used surrogate
-\cite{wu2018inverse, wu2021comprehensive}. In this work, we have used three
-linear and three non-linear models as surrogates. A brief discussion of these
-models follows.
+Any machine learning model that can learn from the training data
+and predict an output relatively quickly compared to the original computer model
+can be used as a surrogate model.
+Typical examples of surrogate models include Moving Least-Squares (MLS),
+Radial Basis Functions (RBF), Neural Networks (NN),
+Support Vector Machines (SVM), Gaussian Processes (GP),
+Polynomial Chaos Expansion (PCE), etc.,
+with GP being the most commonly used surrogate
+\cite{wu2018inverse, wu2021comprehensive}.
 
-Considering $X$ as an input matrix and $y$ as an output vector, a linear model
-would have the following formulation:
+Considering $X$ as an input matrix and $y$ as an output vector,
+a linear regression model would have the following formulation:
 \begin{align}
 	y = \beta X + \varepsilon
 \end{align}
-where $\beta$ is the vector of unknown coefficients and $\varepsilon$ is the
-vector of random errors. In Ordinary Least-Squares (OLS), the estimated
-coefficients $\hat{\beta}$ is determined by minimizing the sum of squared
-residuals (the loss function).
+where $\beta$ is the vector of unknown coefficients
+and $\varepsilon$ is the vector of random errors.
+In Ordinary Least-Squares (OLS), the estimated coefficients $\hat{\beta}$
+is determined by minimizing the sum of squared residuals (the loss function).
 \begin{align}
 	\hat{\beta} = \arg \min_{\beta} || y - \beta X ||^2
 \end{align}
 
-Gaussian processes (GP) are a popular choice for surrogate models because they
-provide a straightforward estimation of the code uncertainty. A GP is a
-probabilistic model that describes a distribution over possible functions.
-Given a set of points, a GP can be used to predict the value of an unknown
-function at any other point. Additionally, GP can be used to represent the
-uncertainty in the output of the computer model, which is important for
-Bayesian inference and calibration \cite{wu2018inverse, wang2020}. The
-mathematical form of a GP model is as follows:
+Gaussian processes (GP) are a popular choice for surrogate models
+because they provide a straightforward estimation of the code uncertainty.
+A GP is a probabilistic model that describes
+a distribution over possible functions.
+Given a set of points, a GP can be used to predict
+the value of an unknown function at any other point.
+Additionally, GP can be used to represent the uncertainty
+in the output of the computer model,
+which is important for Bayesian inference and calibration
+\cite{wu2018inverse, wang2020}.
+The mathematical form of a GP model can be written as follows:
 \begin{align}
 	y = f^T(x) \beta + z(x)
 \end{align}
-The first term here is a linear regression of the data modeling the drift of
-the mean. The set of basis functions $f$ is chosen by the user and $\beta$ are
-the regression coefficients. $z(x)$ is a stationary Gaussian random process
-with zero mean and covariance $Cov[z(x^{(i)}), z(x^{(j)})] = \sigma^2
-\mathcal{R} (x^{(i)}, x^{(j)})$, where $\sigma^2$ is the process variance and
-$\mathcal{R} (\cdot, \cdot)$ is the correlation function or kernel. A kernel in
-GP is a function that defines the similarity between pairs of data points.
-There are many different kernels that can be used with GP, each of which has
-its own advantages and disadvantages. Some of the most commonly used kernel
-functions include the RBF kernel, the Mat\'ern kernel, and the rational
-quadratic kernel \cite{wang2020}.
+where $y$ is the output prediction at a general location $x$.
+The first term here is a linear regression of the data
+modeling the drift of the mean.
+The set of basis functions $f$ is chosen by the user
+and $\beta$ are the regression coefficients.
+$z(x)$ is a stationary Gaussian random process with zero mean and covariance
+$Cov[z(x^{(i)}), z(x^{(j)})] = \sigma^2 \mathcal{R} (x^{(i)}, x^{(j)})$,
+where $\sigma^2$ is the process variance
+and $\mathcal{R} (\cdot, \cdot)$ is the correlation function or kernel.
+A kernel in GP is a function that defines the similarity
+between pairs of data points.
+There are many different kernels that can be used with GP,
+each of which has its own advantages and disadvantages.
+Some of the most commonly used kernel functions include the RBF kernel,
+the Mat\'ern kernel, and the rational quadratic kernel \cite{wang2020}.
 
-Support Vector Regressor (SVR) is a regression model that uses SVMs, aiming to
-find a function $f(X)$ that fits the data while keeping the errors within a
-predefined margin.
+NNs are a flexible class of machine learning models
+inspired by biological neurons.
+These models are highly effective
+for approximating complex, high-dimensional functions.
+NN models consist of layers of interconnected nodes, also called neurons,
+that transform input data through a series of linear and non-linear operations.
+The layers are usually differentiated as one \textit{input} layer,
+\textit{hidden} layers with non-linear activation functions,
+and one \textit{output} layer for regression.
+Given a set of training data,
+the network learns to recognize the underlying patterns
+by adjusting the weights of the connections between the nodes
+to minimize a predefined loss function.
+This architecture allows NNs to serve as universal function approximators,
+capable of capturing intricate dependencies that traditional models might miss
+\cite{de2013neural, lecun2015, goodfellow2016}.
+The mathematical operation of a single layer in a neural network 
+can be written as follows:
 \begin{align}
-	f(X) = w^T X + b
+	y &= \sigma (W x + b)
 \end{align}
-where $w$ is the weight vector and $b$ is the bias. SVR uses an
-$\varepsilon$-insensitive loss function, where the model allows errors within a
-certain margin $\varepsilon$. SVRs can handle non-linear relationships through
-the use of kernels, which map input data to a higher-dimensional space
-\cite{cortes1995support, gunn1997support}.
+where $x$ represents the input vector,
+and $W$ is the weight matrix that determines
+the strength of the connections between neurons.
+$\sigma(\cdot)$ is a non-linear activation function,
+and the vector $b$ is the bias, which allows the model
+to shift the activation function to better fit the input.
+The activation function in NNs defines the output of a node.
+There are many choices for activation functions,
+each of which affects the gradient flow and convergence of the model.
+Some of the popular activation functions include
+the sigmoid function, the rectified linear unit (ReLU),
+and the hyperbolic tangent ($\tanh$) \cite{goodfellow2016}.
 
-NN models consist of one input layer, hidden layers with non-linear activation
-functions, and one output layer for regression. All these layers have nodes
-(also called neurons) that connect to the nodes of the previous layer. Each
-connection between two nodes has an optimizable weight and each node has an
-associated bias and an activation function. The number of hidden layers in the
-model, the number of nodes in each layer, and the activation functions of the
-nodes are to be tuned to find an optimal model for a particular data set
-\cite{goodfellow2016, de2013neural}. In this work, all the surrogate models are
-implemented using the sklearn python library \cite{sklearn}.
+In this work, we have used GP and NN models as surrogates.
+All the surrogate models have been implemented
+using the sklearn python library \cite{sklearn}.
 
 \section{Results}
 
