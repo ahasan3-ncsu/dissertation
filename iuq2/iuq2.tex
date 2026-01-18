@@ -558,56 +558,77 @@ are discussed in the next section.
 \subsection{FUQ and Validation}
 
 \begin{figure}[ht]
-	\centering
-	\includegraphics[width=10cm]{iuq2/images/fuq_mvn.pdf}
-	\caption{
-		Joint density plot of swelling predictions calculated by
-		the forward propagation of the thinned MCMC samples.
-	}
-	\label{fig:fuq_mvn}
-\end{figure}
-
-\begin{figure}[ht]
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{}
+		\includegraphics[width=12cm]{iuq2/images/fuq_mvn.pdf}
+	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		\centering
+		\caption{}
 		\includegraphics[width=\textwidth]{iuq2/images/fuq_lo.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		\centering
+		\caption{}
 		\includegraphics[width=\textwidth]{iuq2/images/fuq_hi.pdf}
 	\end{subfigure}
 	\caption{
-		Marginal density plots of swelling predictions calculated by
+		(a) Joint density plot of swelling predictions calculated by
 		the forward propagation of the thinned MCMC samples.
+		Marginal density plots of swelling predictions calculated by
+		the forward propagation of the thinned MCMC samples for
+		(b) $F_d = \num{2.31e21}$ fsn/cm$^3$/s,
+		and (c) $F_d = \num{5.34e21}$ fsn/cm$^3$/s.
 	}
-	\label{fig:fuq_ind}
+	\label{fig:fuq_mvn}
 \end{figure}
-
-% NOTE: why is this squished?
 
 To assess the IUQ results,
 we performed FUQ by propagating the posterior samples
 through the NN surrogate models.
 The joint swelling distribution resulting from the forward propagation
-is shown in Figure \ref{fig:fuq_mvn}.
+is shown in Figure \ref{fig:fuq_mvn}a.
 Unlike the distribution of observed swelling (Figure \ref{fig:mvn_expt}),
 the distribution from FUQ is asymmetric.
 The swelling density at low $F_d$ decreases steeply around $8 \%$.
 To better understand this phenomenon,
-the marginal distributions are plotted in Figure \ref{fig:fuq_ind}.
+the marginal distributions are also plotted
+in Figures \ref{fig:fuq_mvn}b and \ref{fig:fuq_mvn}c.
+At high $F_d$, the swelling density from FUQ matches the observation well.
+However, the density at low $F_d$ is significantly narrower
+than that of the observation.
+The density is also asymmetric and right skewed.
+This is due to the fact that the lowest predicted swelling at low $F_d$
+is about $9 \%$ (Figure \ref{fig:scat_lo}) in the DART data set.
+Thus, any combination of the fission-gas-behavior parameters
+within the provided range will not lead to
+a swelling value low enough to fit the observation.
+Also, the surrogate model used in this work for low $F_d$
+has a mean absolute error of about $0.94$,
+which explains why the distribution from FUQ go a little lower than $9 \%$.
 
-% The outcomes of this propagation are presented in
-% Figures \ref{fig:fuq_mvn} and \ref{fig:fuq_ind},
-% where the surrogate-based predictions of fuel swelling
-% show good agreement with the experimental data.
-% However, this procedure does not constitute
-% a rigorous validation of the IUQ results,
-% as the same surrogate models are used for both the IUQ and FUQ processes.
-% A more robust validation would involve generating new samples
-% from the joint posterior distributions
-% and propagating them directly through DART.
-
-% TODO: talk about fig:after
+Although the distribution from forward propagation
+does not exactly match that of the observation specially at low $F_d$,
+it shows reasonable agreement overall.
+To show the effects of the IUQ process,
+the experimental observations, swelling ranges from the DART data sets,
+and swelling ranges from the forward propagation
+are plotted in Figure \ref{fig:iuq_comp}.
+At low $F_d$,
+the mean of the values from the forward propagation matches the observation,
+but the standard deviation is narrower than that of the observation
+due to the reason explained above.
+At high $F_d$,
+the swelling range reduces massively
+from the DART predictions to the forward propagation,
+matching the observation almost exactly.
+However, this procedure does not constitute
+a rigorous validation of the IUQ results,
+as the same surrogate models are used for both the IUQ and FUQ processes.
+A more robust validation would involve generating new samples
+from the joint posterior distributions
+and propagating them directly through DART.
 
 \begin{figure}[ht]
 	\centering
@@ -618,7 +639,7 @@ the marginal distributions are plotted in Figure \ref{fig:fuq_ind}.
 		and swelling predictions from the forward propagation
 		of the surrogate models using the MCMC samples.
 	}
-	\label{fig:after}
+	\label{fig:iuq_comp}
 \end{figure}
 
 \FloatBarrier
