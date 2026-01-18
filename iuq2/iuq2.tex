@@ -6,7 +6,6 @@ of U-10Mo Fission-Gas-Behavior Parameters}
 
 \section{Problem Definition}
 
-% NOTE: cite kim-hofman, wachs, francine rice
 The United State Department of Energy initiated the RERTR program in 1978
 with the goal to develop the technology needed
 to eliminate HEU in civilian applications.
@@ -17,30 +16,32 @@ fuel plates containing atomized or machined particles were supplied by
 either the Korea Atomic Energy Research Institue (KAERI)
 or the Atomic Energy Canada Limited (AECL).
 The composition of the fuel alloys ranged from $6$ wt.\% Mo to $10$ wt.\% Mo.
-The irradiation of the fuel plates was performed in the ATR in 2001.
+The irradiation of the fuel plates was performed in the ATR in 2001
+\cite{wachs2006}.
 One of the irradiated plates was \textit{V6018G},
 which had a burnup of $36 \%$ after $116$ effective full power days (EFPD)
 of operation.
 The end-of-life fission density in the fuel plate was
 $F_d = \num{2.31e21}$ fsn/cm$^3$,
 with a life-averaged fission rate of $\num{2.3e14}$ fsn/cm$^3$/s
-and a life-averaged fuel temperature of $116.3^{\circ}$ C.
+and a life-averaged fuel temperature of $116.3^{\circ}$ C \cite{kim2013}.
 In RERTR-12,
 U-Mo monolithic fuel plates with a Zr diffusion barrier were irradiated
 to investigate the effects of fission density and fission rate on fuel behavior.
 One of the plates investigated was \textit{L1P755},
 which had a fission density of $\num{5.34e21}$ fsn/cm$^3$,
 with life-averaged fission rate and temperature
-of $\num{6.86e14}$ fsn/cm$^3$/s and $133.6^{\circ}$ C.
+of $\num{6.86e14}$ fsn/cm$^3$/s and $133.6^{\circ}$ C \cite{rice2015}.
 
 DART is a rate-theory based mesoscale model
 capable of predicting fuel swelling behavior
-based on microstructural properties of the U-Mo fuel.
-However, many of the microstructural properties of U-Mo are currently unknown.
-To be able to simulate fuel swelling accurately,
-good estimates of the unknown properties are thus needed.
+based on microstructural properties of the U-Mo fuel \cite{ye2023}.
+However, the main obstacle in predicting fuel swelling is that
+many of the microstructural properties of U-Mo are currently unknown.
+Good estimates of these unknown parameters are thus needed
+to provide accurate predictions of swelling necessary for fuel evaluation.
 Simulations have been performed in DART
-with $3,200$ different combinations of values of these properties
+with $3,200$ different combinations of the parameter values
 to predict the fuel swelling in the operational conditions
 of the plates mentioned above.
 The goal here is to find reasonable values of the uknown parameters
