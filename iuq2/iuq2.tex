@@ -480,7 +480,8 @@ present the pairwise correlations as contour plots.
 Although the prior distributions were specified as independent,
 the Bayesian IUQ process captures dependencies among parameters
 through MCMC sampling.
-% NOTE: when generating new samples?
+Thus, when generating new samples from the posteriors,
+the correlation between the parameters should be taken into account.
 In our case, the posterior of \texttt{dGrainHBS} shows positive correlations
 with that of \texttt{FaceCovMax}, \texttt{SwellLink}, and \texttt{rResolBulk}.
 There does not seem to be
@@ -489,44 +490,43 @@ any other noticeable correlations between the parameters.
 \begin{table}[ht]
 \centering
 \caption{
-	Posterior means, standard deviations, and 95\% confidence intervals (CIs)
+	Posterior means, standard deviations, and 95\% credible intervals (CIs)
 	of the means for all the fission-gas-behavior parameters.
 }
 \label{tab:iuq}
 \begin{tabular}{lccc}
 \toprule
-% FIX: the values
-Parameter    & Mean
-		     & Std. deviation
-		     & 95\% CI of the mean               \\
+Parameter				& Mean
+						& Std. deviation
+						& 95\% CI of the mean               \\
 \midrule
-dGrainHBS    & \num{3.23e-5}
-		     & \num{5.46e-6}
-		     & {[} \num{3.21e-5}, \num{3.26e-5} {]} \\
-FaceCovMax   & \num{7.10e-1}
-		     & \num{1.16e-1}
-		     & {[} \num{7.05e-1}, \num{7.15e-1} {]} \\
-SwellLink    & \num{4.22e-2}
-		     & \num{1.42e-2}
-		     & {[} \num{4.16e-2}, \num{4.29e-2} {]} \\
-rResolBulk   & \num{3.23e-5}
-		     & \num{5.46e-6}
-		     & {[} \num{3.21e-5}, \num{3.26e-5} {]} \\
-DatomFissGBx & \num{7.10e-1}
-		     & \num{1.16e-1}
-		     & {[} \num{7.05e-1}, \num{7.15e-1} {]} \\
-StickProb    & \num{4.22e-2}
-		     & \num{1.42e-2}
-		     & {[} \num{4.16e-2}, \num{4.29e-2} {]} \\
-fNucleate    & \num{3.23e-5}
-		     & \num{5.46e-6}
-		     & {[} \num{3.21e-5}, \num{3.26e-5} {]} \\
-vResol       & \num{7.10e-1}
-		     & \num{1.16e-1}
-		     & {[} \num{7.05e-1}, \num{7.15e-1} {]} \\
-rResolGBB    & \num{4.22e-2}
-		     & \num{1.42e-2}
-		     & {[} \num{4.16e-2}, \num{4.29e-2} {]} \\
+\texttt{dGrainHBS}		& \num{3.23e-5}
+						& \num{8.67e-6}
+						& {[} \num{1.67e-5}, \num{5.15e-5} {]} \\
+\texttt{FaceCovMax}		& \num{7.20e-1}
+						& \num{1.17e-1}
+						& {[} \num{5.13e-1}, \num{8.98e-1} {]} \\
+\texttt{SwellLink}		& \num{4.92e-2}
+						& \num{2.08e-2}
+						& {[} \num{1.24e-2}, \num{7.88e-2} {]} \\
+\texttt{rResolBulk}		& \num{3.03e-9}
+						& \num{1.16e-9}
+						& {[} \num{9.09e-10}, \num{4.90e-9} {]} \\
+\texttt{DatomFissGBx}	& \num{2.82e5}
+						& \num{1.29e4}
+						& {[} \num{7.00e3}, \num{4.90e4} {]} \\
+\texttt{StickProb}		& \num{2.10e-7}
+						& \num{1.16e-7}
+						& {[} \num{1.11e-8}, \num{3.92e-7} {]} \\
+\texttt{fNucleate}		& \num{1.69e-9}
+						& \num{7.81e-10}
+						& {[} \num{3.64e-10}, \num{2.93e-9} {]} \\
+\texttt{vResol}			& \num{5.18e-1}
+						& \num{2.91e-1}
+						& {[} \num{2.75e-2}, \num{9.82e-1} {]} \\
+\texttt{rResolGBB}		& \num{6.28e-7}
+						& \num{2.18e-7}
+						& {[} \num{2.68e-7}, \num{9.83e-7} {]} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -554,22 +554,8 @@ are discussed in the next section.
 	\label{fig:iuq}
 \end{figure}
 
-% \FloatBarrier
+\FloatBarrier
 \subsection{FUQ and Validation}
-
-To assess the IUQ results,
-we performed FUQ by propagating the posterior samples
-through the NN surrogate models.
-The outcomes of this propagation are presented in
-Figures \ref{fig:fuq_mvn} and \ref{fig:fuq_ind},
-where the surrogate-based predictions of fuel swelling
-show good agreement with the experimental data.
-However, this procedure does not constitute
-a rigorous validation of the IUQ results,
-as the same surrogate models are used for both the IUQ and FUQ processes.
-A more robust validation would involve generating new samples
-from the joint posterior distributions
-and propagating them directly through DART.
 
 \begin{figure}[ht]
 	\centering
@@ -596,6 +582,30 @@ and propagating them directly through DART.
 	}
 	\label{fig:fuq_ind}
 \end{figure}
+
+% NOTE: why is this squished?
+
+To assess the IUQ results,
+we performed FUQ by propagating the posterior samples
+through the NN surrogate models.
+The joint swelling distribution resulting from the forward propagation
+is shown in Figure \ref{fig:fuq_mvn}.
+Unlike the distribution of observed swelling (Figure \ref{fig:mvn_expt}),
+the distribution from FUQ is asymmetric.
+The swelling density at low $F_d$ decreases steeply around $8 \%$.
+To better understand this phenomenon,
+the marginal distributions are plotted in Figure \ref{fig:fuq_ind}.
+
+% The outcomes of this propagation are presented in
+% Figures \ref{fig:fuq_mvn} and \ref{fig:fuq_ind},
+% where the surrogate-based predictions of fuel swelling
+% show good agreement with the experimental data.
+% However, this procedure does not constitute
+% a rigorous validation of the IUQ results,
+% as the same surrogate models are used for both the IUQ and FUQ processes.
+% A more robust validation would involve generating new samples
+% from the joint posterior distributions
+% and propagating them directly through DART.
 
 % TODO: talk about fig:after
 
