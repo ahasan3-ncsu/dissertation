@@ -2,81 +2,117 @@
 of U-10Mo Fission-Gas-Behavior Parameters}
 
 % TODO: have a few intro sentences
+% find acronym clashes
 
 \section{Problem Definition}
 
-% FIX: rewrite this old section
-Table \ref{tab:param} shows the unknown DART fission-gas-behavior parameters of
-interest and their ranges. The orders of magnitude of the parameters vary
-considerably. The parameter "dGrainHBS" denotes the high burunup structure
-grain diameter. "FaceCovMax" dictates the grain face coverage needed for
-interlinkage. "SwellLink" determines the swelling starting interlinkage of the
-grain edges. "vResol" is the probability that a gas bubble interacts with
-fission fragments. "DatomFissGBx" is the grain boundary diffusion enhancement
-factor. "fNucleate" indicates the adjustment factor for the probability of
-bubble nucleation on the grain boundary. Finally, 'aAtomDifFiss" is the linear
-coefficient of radiation-driven gas atom diffusivity \cite{annualreport2021,
-ye2023, annualreport2022}.
+% NOTE: cite kim-hofman, wachs, francine rice
+The United State Department of Energy initiated the RERTR program in 1978
+with the goal to develop the technology needed
+to eliminate HEU in civilian applications.
+The eponymous irradiation tests performed by the program thus focused on
+high density LEU fuels, such as U-Mo.
+In the RERTR-5 experiment,
+fuel plates containing atomized or machined particles were supplied by
+either the Korea Atomic Energy Research Institue (KAERI)
+or the Atomic Energy Canada Limited (AECL).
+The composition of the fuel alloys ranged from $6$ wt.\% Mo to $10$ wt.\% Mo.
+The irradiation of the fuel plates was performed in the ATR in 2001.
+One of the irradiated plates was \textit{V6018G},
+which had a burnup of $36 \%$ after $116$ effective full power days (EFPD)
+of operation.
+The end-of-life fission density in the fuel plate was
+$F_d = \num{2.31e21}$ fsn/cm$^3$,
+with a life-averaged fission rate of $\num{2.3e14}$ fsn/cm$^3$/s
+and a life-averaged fuel temperature of $116.3^{\circ}$ C.
+In RERTR-12,
+U-Mo monolithic fuel plates with a Zr diffusion barrier were irradiated
+to investigate the effects of fission density and fission rate on fuel behavior.
+One of the plates investigated was \textit{L1P755},
+which had a fission density of $\num{5.34e21}$ fsn/cm$^3$,
+with life-averaged fission rate and temperature
+of $\num{6.86e14}$ fsn/cm$^3$/s and $133.6^{\circ}$ C.
+
+DART is a rate-theory based mesoscale model
+capable of predicting fuel swelling behavior
+based on microstructural properties of the U-Mo fuel.
+However, many of the microstructural properties of U-Mo are currently unknown.
+To be able to simulate fuel swelling accurately,
+good estimates of the unknown properties are thus needed.
+Simulations have been performed in DART
+with $3,200$ different combinations of values of these properties
+to predict the fuel swelling in the operational conditions
+of the plates mentioned above.
+The goal here is to find reasonable values of the uknown parameters
+to match the experimentally observed swelling values
+in the \textit{RERTR5-V6018G} and \textit{RERTR12-L1P755} fuel plates
+of $10.7 \%$ and $32 \%$, respectively.
+An analysis of fuel swelling in $74$ irradiated U-Mo test fuel plates
+over a range of irradiation conditions
+reveals that the measurement uncertainty in these experiments can be assumed
+to have a standard deviation of $2.64 \%$
+\cite{rabin2017preliminary, robinson2021}.
+The observed swelling values along with the measurement uncertainty
+is plotted in Figure \ref{fig:mvn_expt}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=10cm]{iuq2/images/mvn_expt.pdf}
+	\caption{
+		Experimentally observed fuel swelling
+		of \textit{RERTR5-V6018G} at $F_d = \num{2.32e21}$ fsn/cm$^3$
+		and \textit{RERTR12-L1P755} at $F_d = \num{5.34e21}$ fsn/cm$^3$
+		with a measurement uncertainty of $2.64 \%$.
+	}
+	\label{fig:mvn_expt}
+\end{figure}
+
+The unknown parameters perturbed in the DART simulations
+are listed in Table \ref{tab:param}.
+The table shows the name of the parameters, their reference values,
+and their ranges.
+The orders of magnitude of the parameters vary considerably.
+The parameter \texttt{dGrainHBS} denotes the high burunup
+structure grain diameter.
+\texttt{FaceCovMax} means the fraction of grain face coverage
+needed for interlinkage.
+\texttt{SwellLink} determines the grain edge swelling starting interlinkage.
+\texttt{rResolBulk} is the thickness of the destructed outer shell
+in gas bubbles due to re-solution.
+\texttt{DatomFissGBx} is the grain boundary diffusion enhancement factor.
+\texttt{StickProb} is the probability that
+two atoms stick to form a bubble nucleus.
+\texttt{fNucleate} indicates the adjustment factor
+for the probability of bubble nucleation on the grain boundary.
+\texttt{vResol} is the probability that
+a gas bubble interacts with fission fragments.
+Finally , \texttt{rResolGBB} is the average re-solution distance
+an atom is ejected from the grain boundary gas bubbles
+\cite{annualreport2021, ye2023, annualreport2022}.
 
 \begin{table}[ht]
 \centering
 \caption{
-	Fission gas behavior parameters and their ranges.
+	Fission-gas-behavior parameters and their ranges.
 }
 \label{tab:param}
 \begin{tabular}{lccc}
 \toprule
 Parameter             & Minimum value & Maximum value & Reference value \\
 \midrule
-\texttt{dGrainHBS}    & \num{2e-5 }   & \num{6e-5 }   & \num{4e-5   }   \\
-\texttt{FaceCovMax}   & \num{0.5  }   & \num{0.907}   & \num{0.907  }   \\
-\texttt{SwellLink}    & \num{0.015}   & \num{0.065}   & \num{0.025  }   \\
-\texttt{rResolBulk}   & \num{0.015}   & \num{0.065}   & \num{0.025  }   \\
-\texttt{DatomFissGBx} & \num{3e3  }   & \num{3e5  }   & \num{3e4    }   \\
-\texttt{StickProb}    & \num{2e-19}   & \num{2e-17}   & \num{2e-18  }   \\
-\texttt{fNucleate}    & \num{6e-11}   & \num{6e-8 }   & \num{6e-10  }   \\
-\texttt{vResol}       & \num{2e-19}   & \num{2e-17}   & \num{2e-18  }   \\
-\texttt{rResolGBB}    & \num{5e-32}   & \num{5e-30}   & \num{5.1e-31}   \\
+\texttt{dGrainHBS}    & \num{1e-5 }   & \num{1e-4 }   & \num{4e-5 }   \\
+\texttt{FaceCovMax}   & \num{0.5  }   & \num{0.907}   & \num{0.907}   \\
+\texttt{SwellLink}    & \num{0.01 }   & \num{0.08 }   & \num{0.025}   \\
+\texttt{rResolBulk}   & \num{6e-10}   & \num{5e-9 }   & \num{3e-9 }   \\
+\texttt{DatomFissGBx} & \num{6e3  }   & \num{5e4  }   & \num{3e4  }   \\
+\texttt{StickProb}    & \num{2e-10}   & \num{4e-7 }   & \num{2e-7 }   \\
+\texttt{fNucleate}    & \num{3e-10}   & \num{3e-9 }   & \num{6e-10}   \\
+\texttt{vResol}       & \num{1e-18}   & \num{4e-18}   & \num{2e-18}   \\
+\texttt{rResolGBB}    & \num{2e-7 }   & \num{1e-6 }   & \num{5e-7 }   \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-A data set is compiled using 12,800 DART simulations. These simulations
-correspond to 1600 different combinations of fission-gas-behavior parameters at
-8 different system configurations. By system configuration, we mean a specific
-fission rate, grain size, and fuel center temperature. These three variables
-are perturbed to mimic various operational conditions. The configurations are
-listed in Table ??.
-
-\FloatBarrier
-The goal of this IUQ study is to find parameter distributions that lead to fuel
-swelling predictions in agreement with the experimental observations. There
-have been a few experimental studies on the fuel swelling of $\gamma$U-Mo fuel.
-Robinson et al. have developed a predictive swelling correlation using the
-experimental data collected on 74 irradiated $\gamma$U-10Mo monolithic test
-fuel plates over a range of irradiation conditions \cite{rabin2017preliminary,
-robinson2021}. The correlation is as follows.
-\begin{align}
-	\% Swelling = 6.13 \times 10^{-43} F_d^2 + 4 \times 10^{-21} F_d
-\end{align}
-where $F_d$ is the fission density. The 95\% confidence interval of the
-swelling prediction at $7 \times 10^{21}$ fiss/cm$^3$ spans about 5 swelling\%.
-This swelling correlation is utilized as the experimental observation for IUQ
-purposes in this work.
-
-% TODO: talk about the source of experimental observation
-% also, what configuration were they?
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=10cm]{iuq2/images/mvn_expt.pdf}
-	\caption{
-		asdf
-	}
-	\label{fig:mvn_expt}
-\end{figure}
-
-\FloatBarrier
 \section{Methodology}
 
 \subsection{Formulation of the Inverse Problem}
@@ -255,15 +291,13 @@ using the sklearn python library \cite{sklearn}.
 
 \subsection{Surrogate Modeling}
 
-% FIX: still not sure about the placement
-
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{iuq2/images/scatter_lo.pdf}
 	\caption{
 		Scatter plots of fuel swelling
 		against the fission-gas-behavior parameters
-		at $F_d = \num{2.31e21}$ fsn/cm$^3$/s.
+		at $F_d = \num{2.31e21}$ fsn/cm$^3$.
 	}
 	\label{fig:scat_lo}
 \end{figure}
@@ -274,20 +308,22 @@ using the sklearn python library \cite{sklearn}.
 	\caption{
 		Scatter plots of fuel swelling
 		against the fission-gas-behavior parameters
-		at $F_d = \num{5.34e21}$ fsn/cm$^3$/s.
+		at $F_d = \num{5.34e21}$ fsn/cm$^3$.
 	}
 	\label{fig:scat_hi}
 \end{figure}
 
-Figures \ref{fig:scat_lo} and \ref{fig:scat_hi} show scatter plots
+First, the data is visualized in the form of scatter plots
 of fuel swelling against all the fission-gas-behavior parameters.
+in Figures \ref{fig:scat_lo} and \ref{fig:scat_hi}.
 At low $F_d$, only the parameter \texttt{rResolBulk}
 seem to have a strong correlation with fuel swelling.
 The swelling values range from about $9 \%$ to $22 \%$.
 At high $F_d$, \texttt{dGrainHBS} shows a positive correlation with swelling,
 and \texttt{SwellLink} and \texttt{rResolBulk} show a very weak correlation.
-These datasets were generated by sampling the parameters independently.
-Thus, there are no interaction effects.
+In this case, the swelling ranges from about $20 \%$ to $140 \%$.
+Many of the parameters do not seem to have any correlation with fuel swelling
+at both low and high fission densities.
 
 \begin{figure}[ht]
 	\begin{subfigure}{0.495\textwidth}
@@ -315,7 +351,7 @@ Thus, there are no interaction effects.
 	\label{fig:surr}
 \end{figure}
 
-The data sets were split into two groups first, $70 \%$ for training
+The data sets were split into two groups, $70 \%$ for training
 and $30 \%$ for testing.
 The feature vectors of the training set
 were then transformed using a min-max scaler.
@@ -330,23 +366,24 @@ the training set was further split into two groups,
 $75 \%$ for actual training and $25 \%$ for validation.
 A few kernels, such as RBF, Mat\'ern, rational quadratic and linear,
 and their combinations were used in the GP model to find the best fit.
-A GP with a linear kernel was found to perform the best
-with $R^2$ scores of $0.66$ and $0.86$,
-and mean absolute errors of $1.26$ and $4.96$,
+A GP with a Mat\'ern kernel was found to perform the best
+with $R^2$ scores of $0.98$ and $0.97$,
+and mean absolute errors of $0.24 \%$ and $2.17 \%$,
 for emulating low and high $F_d$, respectively.
 The NN surrogate model was optimized by tuning its hyperparameters
 with a grid search.
 The model has $4$ hidden layers with $250$ neurons each,
 and $1$ output layer with one neuron to represent swelling values.
 The NN model performed better than the GP model on the test split,
-having $R^2$ scores of $0.79$ and $0.96$,
-and mean absolute errors of $0.94$ and $2.49$ for low $F_d$ and high $F_d$.
+having $R^2$ scores of $0.98$ and $0.98$,
+and mean absolute errors of $0.27 \%$ and $1.54 \%$
+for low $F_d$ and high $F_d$.
 Figure \ref{fig:surr} displays the actual vs predicted plots
 for the validation of the surrogate models.
-The GP model has noticeable weakness in the higher swelling range
-for both the low $F_d$ and the high $F_d$ data sets.
-Meanwhile, the NN model predictions are slightly spread out
-only for the low $F_d$ data set.
+% The GP model has noticeable weakness in the higher swelling range
+% for both the low $F_d$ and the high $F_d$ data sets.
+% Meanwhile, the NN model predictions are slightly spread out
+% only for the low $F_d$ data set.
 Since the NN surrogate model performs better overall,
 we chose to utilize this model for the rest of the IUQ process.
 
@@ -356,12 +393,12 @@ we chose to utilize this model for the rest of the IUQ process.
 \begin{figure}[ht]
 	\begin{subfigure}{\textwidth}
 		\centering
-		\caption{$F_d = \num{2.31e21}$ fsn/cm$^3$/s (\textit{RERTR5-V6018G}).}
+		\caption{$F_d = \num{2.31e21}$ fsn/cm$^3$ (\textit{RERTR5-V6018G}).}
 		\includegraphics[width=14cm]{iuq2/images/sobol_lo.pdf}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
-		\caption{$F_d = \num{5.34e21}$ fsn/cm$^3$/s (\textit{RERTR12-L1P755}).}
+		\caption{$F_d = \num{5.34e21}$ fsn/cm$^3$ (\textit{RERTR12-L1P755}).}
 		\includegraphics[width=14cm]{iuq2/images/sobol_hi.pdf}
 	\end{subfigure}
 	\caption{
@@ -385,13 +422,15 @@ in a few key parameters.
 Figure \ref{fig:sobol}a depicts how the parameter \texttt{rResolBulk}
 accounts for most of the variability in the model output at low fission density.
 Both the first-order and total-effect indices of \texttt{rResolBulk}
-are about $0.8$.
+are about $0.7$.
+The second most important parameter here is \texttt{vResol},
+which has indices of about $0.2$.
 A distinct shift is observed at high fission density,
 where \texttt{dGrainHBS} becomes the most influential parameter
-($S_i, S_{T_i} \approx 0.75$).
+($S_i, S_{T_i} \approx 0.65$).
 At this fission density, there are also some minor influences
-from \texttt{SwellLink} and \texttt{rResolBulk}.
-Other parameters, such as \texttt{fNucleate} and \texttt{rResolGBB},
+from \texttt{rResolBulk}, \texttt{SwellLink} and \texttt{FaceCovMax}.
+Other parameters, such as \texttt{StickProb} and \texttt{fNucleate},
 consistently show negligible sensitivity.
 The results also reveal that
 the first-order indices are almost identical to the total-effect indices.
@@ -476,6 +515,7 @@ Thus, when generating new samples from the posteriors,
 the correlation between the parameters should be taken into account.
 In our case, the posterior of \texttt{dGrainHBS} shows positive correlations
 with that of \texttt{FaceCovMax}, \texttt{SwellLink}, and \texttt{rResolBulk}.
+Also, \texttt{rResolBulk} and \texttt{vResol} have a weak negative correlation.
 There does not seem to be
 any other noticeable correlations between the parameters.
 
@@ -504,7 +544,7 @@ Parameter				& Mean
 \texttt{rResolBulk}		& \num{3.03e-9}
 						& \num{1.16e-9}
 						& {[} \num{9.09e-10}, \num{4.90e-9} {]} \\
-\texttt{DatomFissGBx}	& \num{2.82e5}
+\texttt{DatomFissGBx}	& \num{2.82e4}
 						& \num{1.29e4}
 						& {[} \num{7.00e3}, \num{4.90e4} {]} \\
 \texttt{StickProb}		& \num{2.10e-7}
@@ -513,9 +553,9 @@ Parameter				& Mean
 \texttt{fNucleate}		& \num{1.69e-9}
 						& \num{7.81e-10}
 						& {[} \num{3.64e-10}, \num{2.93e-9} {]} \\
-\texttt{vResol}			& \num{5.18e-1}
-						& \num{2.91e-1}
-						& {[} \num{2.75e-2}, \num{9.82e-1} {]} \\
+\texttt{vResol}			& \num{2.58e-18}
+						& \num{8.47e-19}
+						& {[} \num{1.10e-18}, \num{3.93e-18} {]} \\
 \texttt{rResolGBB}		& \num{6.28e-7}
 						& \num{2.18e-7}
 						& {[} \num{2.68e-7}, \num{9.83e-7} {]} \\
@@ -557,8 +597,8 @@ of all the fission-gas-behavior parameters, are provided in Table \ref{tab:iuq}.
 		the forward propagation of the thinned MCMC samples.
 		Marginal density plots of swelling predictions calculated by
 		the forward propagation of the thinned MCMC samples for
-		(b) $F_d = \num{2.31e21}$ fsn/cm$^3$/s,
-		and (c) $F_d = \num{5.34e21}$ fsn/cm$^3$/s.
+		(b) $F_d = \num{2.31e21}$ fsn/cm$^3$,
+		and (c) $F_d = \num{5.34e21}$ fsn/cm$^3$.
 	}
 	\label{fig:fuq_mvn}
 \end{figure}
@@ -584,7 +624,7 @@ Thus, any combination of the fission-gas-behavior parameters
 within the provided range will not lead to
 a swelling value low enough to fit the observation.
 Also, the surrogate model used in this work for low $F_d$
-has a mean absolute error of about $0.94$,
+has a mean absolute error of about $0.27$,
 which explains why the distribution from FUQ go a little lower than $9 \%$.
 
 Although the distribution from forward propagation
