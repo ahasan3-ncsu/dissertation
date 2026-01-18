@@ -464,6 +464,17 @@ This corroborates the findings from the global sensitivity analysis.
 \FloatBarrier
 \subsection{IUQ}
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\textwidth]{iuq2/images/iuq.png}
+	\caption{
+		Posterior distributions of $9$ fission-gas-behavior parameters.
+		Marginal densities are in the diagonal
+		and the pair-wise joint densities are in the off-diagonal.
+	}
+	\label{fig:iuq}
+\end{figure}
+
 The MCMC samples were thinned by picking every 100th value
 to reduce auto-correlation.
 The remaining $4000$ posterior samples are investigated for the IUQ process.
@@ -540,19 +551,6 @@ and now the posterior distributions all tell a consistent story.
 Summary statistics, including the means, standard deviations,
 and $95 \%$ credible intervals (CIs) of the posterior means
 of all the fission-gas-behavior parameters, are provided in Table \ref{tab:iuq}.
-The effect of fixing the noninfluential parameters to nominal values
-are discussed in the next section.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=\textwidth]{iuq2/images/iuq.png}
-	\caption{
-		Posterior distributions of $9$ fission-gas-behavior parameters.
-		Marginal densities are in the diagonal
-		and the pair-wise joint densities are in the off-diagonal.
-	}
-	\label{fig:iuq}
-\end{figure}
 
 \FloatBarrier
 \subsection{FUQ and Validation}
@@ -647,14 +645,20 @@ and propagating them directly through DART.
 
 This work presented a methodology for performing IUQ on
 unknown fission-gas-behavior parameters of U-10Mo utilized in DART.
-% The analysis was based on a dataset generated from 12,800 DART simulations.
-% Among the seven parameters considered,
-% only three---"dGrainHBS", "FaceCovMax", and "SwellLink"---were found
-% to significantly influence fission gas swelling,
-% while the remaining four had negligible impact.
-% For surrogate modeling, NN models demonstrated the best performance.
-MCMC sampling with these surrogates led to
-converged posterior probability distributions
-for the three influential parameters.
-Forward propagations using the resulting posteriors provided
-a means of verifying the whole IUQ process as well.
+The analysis was based on two data sets generated from $6,400$ DART simulations,
+one for simulating the low $F_d$ conditions of \textit{RERTR5-V6018G}
+and another for simulating the high $F_d$ conditions of \textit{RERTR12-L1P755}.
+GP and NN surrogate models were built to emulate the data sets.
+The NN surrogates were then used for global sensitivity analysis.
+It was observed that the parameter \texttt{rResolBulk}
+is the most influential parameter at low fission density,
+whereas \texttt{dGrainHBS} is the major driver of variance in swelling
+at high fission density.
+MCMC sampling with the NN surrogates then led to
+converged posterior probability distributions for all the parameters.
+Only the parameter \texttt{dGrainHBS} has a well-defined
+Gaussian-like posterior distribution.
+The posteriors of other parameters span the parameter ranges fully,
+leading to almost uniform distribusions.
+Forward propagation was then performed with the posteriors,
+providing validation of the IUQ results.
