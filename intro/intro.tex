@@ -72,13 +72,14 @@ Since the 1980s, the UAl$_x$ fuel has generally been replaced with U$_3$Si$_2$.
 All fuels developed and used before U$_3$Si$_2$ were practically based on HEU
 \cite{jamison2022, mishra2023}.
 
+% TODO: mention figure
 \begin{figure}
 	\centering
 	\includegraphics[width=12cm]{sfigs/historic_fuels.png}
 	\caption{
 		Uranium density of research reactor fuel
 		vs time of first use.
-		Reproduced from Jamison et al. \cite{jamison2022}.
+		\textit{Reproduced from Jamison et al. \cite{jamison2022}.}
 	}
 \end{figure}
 
@@ -125,12 +126,13 @@ Consequently, the USHPRR program has selected
 the $\gamma$U-10Mo monolithic fuel for qualification
 \cite{robinson2009, miller2021, cole2016, wilson2019}.
 
+% TODO: mention figure
 \begin{figure}
 	\centering
 	\includegraphics[width=12cm]{sfigs/umo_design.jpg}
 	\caption{
 		Depiction of monolithic fuel cross-section (not to scale).
-		Reproduced from Meyer et al. \cite{meyer2014}.
+		\textit{Reproduced from Meyer et al. \cite{meyer2014}.}
 	}
 \end{figure}
 
@@ -142,6 +144,20 @@ enhancing the accuracy of engineering-scale modeling of $\gamma$U-Mo.
 \section{Literature Review}
 
 \subsection{\texorpdfstring{$\gamma$}{gamma}U-Mo Irradiation Behavior}
+
+% TODO: mention figure
+\begin{figure}
+	\centering
+	\includegraphics[width=14cm]{sfigs/umo_burnup_2.png}
+	\caption{
+		Scanning electron micrographs showing
+		evolution of fuel microstructure with burnup.
+		The darkest spots are fission gas bubbles.
+		The images were taken from the fracture surfaces
+		of irradiated U-10Mo fuel samples.
+		\textit{Reproduced from Kim et al. \cite{kim2011}.}
+	}
+\end{figure}
 
 Under irradiation, $\gamma$U-Mo fuel undergoes
 a series of microstructural evolution that impact its performance.
@@ -395,7 +411,7 @@ the swelling calculations of higher-length-scale models more rigorous.
 
 % FIX: this subsection needs renaming and rewriting
 % we can probably go into a lot more details about the parameters
-\subsection{Unknown Fission-Gas-Behavior Parameters}
+\subsection{Other Fission-Gas-Behavior Parameters}
 
 Dispersion Analysis Research Tool (DART) is a computational code
 capable of modeling the swelling behavior of Uranium-Molybdenum ($\gamma$U-Mo)
@@ -419,6 +435,18 @@ The DART code has been validated against experimental data
 and has been used to study the effects of various operational and
 microstructural parameters on fuel swelling \cite{annualreport2021, ye2023}.
 
+% TODO: mention figure
+\begin{figure}
+	\centering
+	\includegraphics[trim={0 14cm 0 0}, clip, width=14cm]
+		{sfigs/dart_schematic.png}
+	\caption{
+		Schematic of intergranular gas bubble morphology
+		and its evolution with fission density.
+		\textit{Reproduced from Ye et al. \cite{ye2023}.}
+	}
+\end{figure}
+
 The key challenge in simulating fission gas swelling with a mechanistic model
 is obtaining key material properties related to gas bubble behavior,
 as many of them cannot be measured experimentally
@@ -441,6 +469,7 @@ since the previous calibration \cite{annualreport2021, ye2023}.
 
 % NOTE: should we have a DART subsection here?
 
+\clearpage
 \section{Objectives}
 
 Based on the identified knowledge gaps,
