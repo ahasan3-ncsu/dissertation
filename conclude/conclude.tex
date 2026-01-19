@@ -1,11 +1,98 @@
 \chapter{Conclusions}
 \label{chap:conclude}
 
-\section{Contributions to
-\texorpdfstring{$\gamma$}{gamma}U-Mo Fuel Development}
+\section{Summary of Results}
+
+\subsection{Grain Boundary Diffusion Coefficients
+in \texorpdfstring{$\gamma$}{gamma}U-Mo}
+
+MD simulations were performed using an ADP potential
+to compute the GB diffusion coefficients of U, Mo, and Xe
+in $\gamma$U-Mo alloys \cite{starikov2018}.
+First, the GB region was identified by locating the lattice point jumps
+of atoms using the atomic trajectories.
+It was observed that the GB width increases almost linearly
+from around 6 \r{A} to around 12 \r{A} with temperature
+in the range 600 K - 1200 K.
+The MSDs of the U, Mo, and Xe atoms were then used to calculate
+the GB diffusivities of the species in several $\gamma$U-Mo alloys
+($\gamma$U-7Mo, $\gamma$U-10Mo, and $\gamma$U-12Mo)
+as a function of temperature and misorientation angle.
+The GB diffusion coefficients are typically
+on the order of $10^{-14}$ to $10^{-11}$ m$^2$s$^{-1}$.
+The U GB diffusivity is always higher than the Mo GB diffusivity
+for a specific GB at a given temperature.
+The Xe GB diffusivity is closer to the Mo GB diffusivity around 600 K
+and it steadily approaches the U GB diffusivity with increasing temperature.
+The GB diffusion coefficients parallel to the tilt axis of the GB plane
+are generally larger than the coefficients perpendicular to the tilt axis,
+with some specific GBs showing significant anisotropy.
+The orientation-averaged GB diffusion coefficients parallel to the tilt axis
+were used to evaluate the effect of composition.
+There is a significant negative correlation
+between the GB diffusivities and the concentration of Mo in the alloy.
+The orientation-averaged diffusion coefficients of U, Mo, and Xe
+are between three to fifteen orders of magnitude faster
+than the intrinsic/self-diffusion coefficients of the species in the bulk,
+and GB diffusion dominates the effective diffusion of the material
+at lower temperatures.
+The diffusional acceleration by GBs is the most prominent for Xe,
+and a quantitative account of this will improve
+the understanding of the fission gas swelling behavior.
+The calculated diffusion coefficients will also inform
+models of creep mechanisms.
+
+\subsection{Xe Gas Bubble Re-solution in U-10Mo Nuclear Fuel}
+
+BCA and MD simulations were utilized
+to determine the re-solution rate of Xe gas bubbles in U-10Mo nuclear fuel.
+Both the homogeneous and heterogeneous re-solution mechanisms were investigated.
+Thermal spikes initiated by electronic stopping cannot cause re-solution.
+Thus, the occurrence of heterogeneous re-solution in U-10Mo is not probable.
+Homogeneous re-solution, which is brought about by nuclear stopping,
+was found to be the only mechanism of re-solution in U-10Mo.
+Therefore, the re-solution rate was calculated
+by first profiling FF behavior in the fuel,
+then evaluating the FF interactions with Xe gas bubbles,
+and finally putting all the information together in a physical model.
+The computed re-solution rate $b$ is
+$\num{4.4e-26} \dot{F}$ s$^{-1}$ for the largest intergranular bubble
+and $\num{8.8e-25} \dot{F}$ s$^{-1}$ for the smallest intragranular bubble,
+where the unit of $\dot{F}$ is fission/m$^3$/s.
+Furthermore, BCA simulations with varying Xe number density in the bubble
+revealed that
+the re-solution rate is inversely proportional to the Xe number density.
+Thus, higher bubble pressure leads to a lower re-solution rate.
+The results of this study provide a physics-based description of
+the Xe gas bubble re-solution rate in U-10Mo.
+
+\subsection{Inverse Uncertainty Quantification
+of U-10Mo Fission-Gas-Behavior Parameters}
+
+This work presented a methodology for performing IUQ on
+unknown fission-gas-behavior parameters of U-10Mo utilized in DART.
+The analysis was based on two data sets generated from $6,400$ DART simulations,
+one for simulating the low $F_d$ conditions of \textit{RERTR5-V6018G}
+and another for simulating the high $F_d$ conditions of \textit{RERTR12-L1P755}.
+GP and NN surrogate models were built to emulate the data sets.
+The NN surrogates were then used for global sensitivity analysis.
+It was observed that the parameter \texttt{rResolBulk}
+is the most influential parameter at low fission density,
+whereas \texttt{dGrainHBS} is the major driver of variance in swelling
+at high fission density.
+MCMC sampling with the NN surrogates then led to
+converged posterior probability distributions for all the parameters.
+Only the parameter \texttt{dGrainHBS} has a well-defined
+Gaussian-like posterior distribution.
+The posteriors of other parameters span the parameter ranges fully,
+leading to almost uniform distribusions.
+Forward propagation was then performed with the posteriors,
+providing validation of the IUQ results.
+
+\section{Contributions to U-Mo Fuel Development}
 
 With the application of various computational methods,
-we quantified many crucial material properties of $\gamma$U-Mo fuel.
+we assessed crucial microstructural properties of the U-Mo fuel.
 This will assist the higher-length-scale models of the fuel
 in making more robust predictions,
 and thus help the fuel qualification process in general.
@@ -25,13 +112,13 @@ taking into account both bubble size and pressure.
 The model also considers
 both the heterogeneous and the homogeneous mechanisms of re-solution.
 This analytical model is readily usable
-in mesoscale- and engineering-scale codes
-trying to predict gas bubble evolution and swelling in $\gamma$U-Mo.
+in meso- and engineering-scale codes
+trying to predict gas bubble evolution and swelling in U-Mo.
 
 \item
-Performs IUQ on still unknown fission-gas-behavior parameters of $\gamma$U-Mo
+Performs IUQ on still unknown fission-gas-behavior parameters of U-Mo
 as implemented in DART.
-Three significant parameters are identified and subsequently optimized
+A few significant parameters are identified and subsequently optimized
 for better meso-scale simulation of the U-Mo fuel.
 In the process, it also sets a precedent for parameter optimization
 as more data and material properties become available in the future.
@@ -39,31 +126,30 @@ as more data and material properties become available in the future.
 
 \section{Future Work}
 
-Some of the studies included in this report is still unfinished.
-Future work will attempt the completion of these studies
-by achieving the following:
+Based on the insight gained during the research phase of this dissertation,
+the following topics would make for good research:
 
 \begin{itemize}
 \item
-Futher investigation is needed to evaluate the re-solution process of Xe.
-Preliminary findings suggest that the homogeneous mechanism of re-solution
-might not be negligible compared to the heterogeneous mechanism.
-The two-temperature model will be employed
-to quantify the amount of energy transferred
-from the electronic subsystem to the ionic subsystem.
+Assessment of blistering mechanism in U-Mo:
+The blisters are observed as a raised region on the fuel-plate surface,
+resulting from the plastic deformation of the aluminium cladding
+due to large fission gas pore pressure in the fuel meat.
+Verifying the possible causes of fuel blistering
+can provide the fuel developers with a better understanding
+of the fuel behavior under extreme conditions.
 
 \item
-The IUQ process will be expanded to incorporate newly generated data,
-which takes into account variations in fission rate and grain size.
-Surrogate models will be developed for the new dataset,
-enabling a refined IUQ to better quantify
-fission-gas-behavior parameter distributions
-applicable to a wide range of reactor conditions.
+Incorporation of cladding elements in the U-Mo potential:
+Fuel-cladding interactions need to be understood well for fuel evaluation.
+An accurate MLIP of U, Mo, and Al/Zr would be extremely helpful
+for atomistic simulations of the U-Mo fuel with liners and/or claddings.
 
 \item
-MLIPs of U and Mo will be developed and evaluated.
-Provided MLIPs can achieve reasonable accuracy compared to the existing ADP,
-additions of other elements to the potential will be explored.
-Successful implementation of this
-will enable MD simulations U-Mo fuel with liners and/or claddings.
+IUQ of fission-gas-behavior parameters:
+The IUQ work should be extended
+to incorporate quantities of interest other than fuel swelling.
+This may help quantify some parameters that seemed noninfluential in our study.
+Also, more DART simulations of swelling at different operational conditions
+can be performed to enable the evaluation of model bias.
 \end{itemize}
