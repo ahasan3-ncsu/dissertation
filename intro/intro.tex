@@ -49,7 +49,8 @@ where UAl$_x$ represents a mixture of UAl$_2$, UAl$_3$, and UAl$_4$,
 was adopted by reactors like
 the Advanced Test Reactor (ATR) and the Belgian Reactor 2 (BR2)
 due to its excellent performance,
-although its uranium density is lower than U$_3$O$_8$ \cite{jamison2022}.
+although its uranium density is lower than
+that of U$_3$O$_8$ \cite{jamison2022}.
 
 With the inception of
 the Reduced Enrichment for Research and Test Reactors (RERTR) program in 1978,
@@ -114,7 +115,7 @@ Consequently, the USHPRR program has selected
 the $\gamma$U-10Mo monolithic fuel for qualification
 \cite{robinson2009, miller2021, cole2016, wilson2019}.
 
-There exists a knowledge gap in the material properties of $\gamma$U-Mo,
+There exists a knowledge gap in the microstructural properties of $\gamma$U-Mo,
 which constrains the evaluation of its fuel performance.
 This work aims to bridge this gap using computational methods,
 enhancing the accuracy of engineering-scale modeling of $\gamma$U-Mo.
@@ -128,7 +129,7 @@ a series of microstructural evolution that impact its performance.
 Initially, at low fission densities
 of less than $2.5$--$3.5 \times 10^{21}$ fissions/cm$^3$
 or a burnup of $6$--$7.2\%$ fission per initial metal atoms (FIMA)
-and temperatures typically below $250^{\circ}$,
+and temperatures typically below $250^{\circ}$, % FIX: is it C?
 fuel swelling exhibits a quasi-linear trend \cite{kim2011, ye2015}.
 The initial swelling is primarily attributed to
 the accumulation of fission products
@@ -423,43 +424,54 @@ since the previous calibration \cite{annualreport2021, ye2023}.
 
 \section{Objectives}
 
-Based on the identified knowledge gaps in $\gamma$U-Mo, the following
-objectives will be pursued utilizing various computational methods:
+Based on the identified knowledge gaps,
+this dissertation pursues the evaluation of microstructural properties
+of the U-Mo monolithic fuel using various computational methods:
 
 \begin{itemize}
 \item
 The diffusivities of U, Mo, and Xe in $\gamma$U-Mo GBs
-will be computed using classical MD simulations.
+are computed using classical MD simulations.
 Different types of symmetric tilt, asymmetric tilt, and twist GBs
-will be utilized for the calculations.
-The effect of fuel composition on diffusion will also be examined.
+are utilized for the calculations.
+The effect of fuel composition on diffusion is also examined.
 The results from this study will inform
 the rate-theory-based fuel swelling models,
 the phase-field models of gas bubble evolution,
 and the irradiation creep models.
+The study of GB diffusion coefficients is described in detail
+in \textbf{Chapter \ref{chap:diff}}.
 
 \item
-We will utilize MD simulations to investigate
-the re-solution of Xe gas bubbles in $\gamma$U-Mo fuel---considering
-both the homogeneous and heterogeneous re-solution mechanisms
-by simulating PKAs and thermal spikes.
-We will also calculate the electronic stopping power
-of representative fission products
-so as to determine the energy imparted on gas bubbles
-by fission events at a certain distance.
-Finally, we will evaluate an overall re-solution rate of Xe gas bubbles
-as a function of bubble radius, bubble pressure, and fission rate.
+BCA and MD simulations are employed to investigate
+the re-solution of Xe gas bubbles in the U-10Mo fuel%
+---considering both the homogeneous and heterogeneous re-solution mechanisms
+by simulating collision cascades and thermal spikes.
+The behavior of representative fission products is profiled with BCA so as to
+make the simulation of fission product and gas bubble interactions tractable,
+whereas the two-temperature model (TTM) is utilized along with MD
+to emulate thermal spikes.
+Finally, an overall re-solution rate of Xe gas bubbles
+as a function of bubble radius, bubble pressure, and fission rate is derived.
+The specific details of this work are provided
+in \textbf{Chapter \ref{chap:xeres}}.
 
 \item
-Inverse uncertainty quantification wil be performed
-to obtain probability distributions
-of a few fission-gas-behavior parameters used in DART.
-First, the data compiled from some DART calculations will be visualized.
-Afterward, surrogate models will be built using the data.
-A variety of linear and non-linear models will be used for this purpose.
-Afterward, Bayesian inference methods will be applied
-to find the posterior probability distributions of the DART parameters.
-Finally, the surrogate model will be used again
-along with the parameter posteriors
-to compute the forward propagation as FUQ and validation.
+Inverse uncertainty quantification (IUQ) is performed to obtain
+probability distributions of unknown fission-gas-behavior parameters
+used in DART.
+First, the data compiled from high-throughput DART calculations are visualized.
+Afterward, surrogate models built with the data
+is used for global sensitivity analysis.
+Bayesian inference methods are then applied
+to obtain the posterior probability distributions of the DART parameters.
+Finally, the surrogate model are used again along with the parameter posteriors
+to compute the forward propagation for validation.
+The IUQ study is detailed in \textbf{Chapter \ref{chap:iuq}}.
 \end{itemize}
+
+Besides presenting technical results,
+this dissertation also briefly discusses the necessary theoretical background
+of the studies in \textbf{Chapter \ref{chap:theory}}.
+Overall conclusions and recommended future work
+feature in \textbf{Chapter \ref{chap:conclude}}.

@@ -1,5 +1,6 @@
 \chapter{Inverse Uncertainty Quantification
 of U-10Mo Fission-Gas-Behavior Parameters}
+\label{chap:iuq}
 
 % TODO: have a few intro sentences
 % find acronym clashes
@@ -294,7 +295,7 @@ using the sklearn python library \cite{sklearn}.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.9\textwidth]{iuq2/images/scatter_lo.pdf}
+	\includegraphics[width=\textwidth]{iuq2/images/scatter_lo.pdf}
 	\caption{
 		Scatter plots of fuel swelling
 		against the fission-gas-behavior parameters
@@ -305,7 +306,7 @@ using the sklearn python library \cite{sklearn}.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.9\textwidth]{iuq2/images/scatter_hi.pdf}
+	\includegraphics[width=\textwidth]{iuq2/images/scatter_hi.pdf}
 	\caption{
 		Scatter plots of fuel swelling
 		against the fission-gas-behavior parameters
@@ -395,12 +396,12 @@ we chose to utilize this model for the rest of the IUQ process.
 	\begin{subfigure}{\textwidth}
 		\centering
 		\caption{$F_d = \num{2.31e21}$ fsn/cm$^3$ (\textit{RERTR5-V6018G}).}
-		\includegraphics[width=14cm]{iuq2/images/sobol_lo.pdf}
+		\includegraphics[width=15cm]{iuq2/images/sobol_lo.pdf}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
 		\caption{$F_d = \num{5.34e21}$ fsn/cm$^3$ (\textit{RERTR12-L1P755}).}
-		\includegraphics[width=14cm]{iuq2/images/sobol_hi.pdf}
+		\includegraphics[width=15cm]{iuq2/images/sobol_hi.pdf}
 	\end{subfigure}
 	\caption{
 		First-order ($S_i$) and total-effect ($S_{T_i}$) Sobol' indices
