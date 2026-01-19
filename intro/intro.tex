@@ -72,7 +72,6 @@ Since the 1980s, the UAl$_x$ fuel has generally been replaced with U$_3$Si$_2$.
 All fuels developed and used before U$_3$Si$_2$ were practically based on HEU
 \cite{jamison2022, mishra2023}.
 
-% TODO: mention figure
 \begin{figure}
 	\centering
 	\includegraphics[width=12cm]{sfigs/historic_fuels.png}
@@ -81,6 +80,7 @@ All fuels developed and used before U$_3$Si$_2$ were practically based on HEU
 		vs time of first use.
 		\textit{Reproduced from Jamison et al. \cite{jamison2022}.}
 	}
+	\label{fig:umo_design}
 \end{figure}
 
 U$_3$Si$_2$ by itself is insufficient for the conversion
@@ -121,12 +121,11 @@ between the $\gamma$U-Mo fuel meat and the aluminum cladding.
 A typical design involves a solid $\gamma$U-10Mo fuel meat
 bonded to Al-6061 cladding with a zirconium diffusion barrier
 to improve bonding and prevent undesirable interactions
-\cite{jamison2022, mishra2023}.
+(Figure \ref{fig:umo_design}) \cite{jamison2022, mishra2023}.
 Consequently, the USHPRR program has selected
 the $\gamma$U-10Mo monolithic fuel for qualification
 \cite{robinson2009, miller2021, cole2016, wilson2019}.
 
-% TODO: mention figure
 \begin{figure}
 	\centering
 	\includegraphics[width=12cm]{sfigs/umo_design.jpg}
@@ -145,18 +144,16 @@ enhancing the accuracy of engineering-scale modeling of $\gamma$U-Mo.
 
 \subsection{\texorpdfstring{$\gamma$}{gamma}U-Mo Irradiation Behavior}
 
-% TODO: mention figure
 \begin{figure}
 	\centering
 	\includegraphics[width=14cm]{sfigs/umo_burnup_2.png}
 	\caption{
-		Scanning electron micrographs showing
-		evolution of fuel microstructure with burnup.
+		Scanning electron micrographs showing evolution of fuel microstructure.
+		With increasing burnup, large grains convert to many smaller grains.
 		The darkest spots are fission gas bubbles.
-		The images were taken from the fracture surfaces
-		of irradiated U-10Mo fuel samples.
 		\textit{Reproduced from Kim et al. \cite{kim2011}.}
 	}
+	\label{fig:recryst}
 \end{figure}
 
 Under irradiation, $\gamma$U-Mo fuel undergoes
@@ -187,7 +184,8 @@ As irradiation continues and the fuel reaches higher fission densities,
 a significant microstructural transformation---grain refinement
 or recrystallization---occurs.
 Grain refinement refers to the conversion of the original, larger grains
-to a multitude of much smaller grains \cite{leenaers2016}.
+to a multitude of much smaller grains
+(Figure \ref{fig:recryst}) \cite{leenaers2016}.
 This leads to the development of the high burnup structure (HBS) of the fuel,
 which is also observed in other fuels, such as UO$_2$, MOX, UC, and UN
 \cite{rondinella2010}.
@@ -270,13 +268,8 @@ bcc tungsten \cite{fu2021}, etc.
 
 \subsection{Fission Gas Bubble Re-Solution}
 
-To understand the fuel's behavior under irradiation,
-meso-scale and engineering-level fuel performance models require
-knowledge of the fundamental mechanistic behavior of fission products
-within the fuel to describe key phenomena,
-such as swelling \cite{beeler2018gb, annualreport2021}.
-Specifically, understanding the progression of Xe gas bubbles in the fuel
-is crucial for optimizing reactor performance and safety.
+Understanding the progression of Xe gas bubbles in the fuel
+is of paramount importance for optimizing reactor performance and safety.
 These Xe gas bubbles act as a sink for individual Xe atoms,
 trapping them and causing the bubbles to grow after absorption.
 Under irradiation, the Xe atoms in the gas bubble are reintroduced
@@ -409,18 +402,17 @@ meaning that we only have a rough estimation of the re-solution rate.
 A physics-based model of the re-solution rate of fission gas bubbles would make
 the swelling calculations of higher-length-scale models more rigorous.
 
-% FIX: this subsection needs renaming and rewriting
-% we can probably go into a lot more details about the parameters
-\subsection{Other Fission-Gas-Behavior Parameters}
+\subsection{Fission-Gas-Behavior Parameters in DART}
 
-Dispersion Analysis Research Tool (DART) is a computational code
-capable of modeling the swelling behavior of Uranium-Molybdenum ($\gamma$U-Mo)
-under the operating conditions of high-power research and test reactors (RTRs).
+The current understanding of the U-Mo fuel behavior is encapsulated
+in the rate-theory-based computational code
+Dispersion Analysis Research Tool (DART),
+developed by the Argonne National Laboratory.
 DART is based on a rate-theory-based mechanistic model for fission gas behavior
 and a phase-field method for grain-size-specific recrystallization kinetics.
 It was originally developed to simulate irradiation-induced phenomena
 in dispersion fuels (U$_3$Si$_2$-Al and U-Mo/Al).
-In 2018, a computational module for $\gamma$U-10Mo was added
+In 2018, a computational module for U-10Mo was added
 to separate its calculations from those of dispersion systems.
 The fission gas induced swelling, one of the main causes of fuel swelling,
 is simulated using this module,
@@ -428,14 +420,16 @@ named Gas Release and Swelling Subroutine (GRASS).
 GRASS tracks bubble nucleation, re-solution, and growth processes
 both within the grains and on grain boundaries
 by solving a series of non-linear differential equations.
-The output from DART includes
-total porosity, intra- and inter-granular bubble size distributions
+The output from DART includes total porosity,
+and intra- and inter-granular bubble size distributions
 at various locations (bulk, grain face, grain edge, and grain corner).
-The DART code has been validated against experimental data
+The results from DART has been validated against experimental data
 and has been used to study the effects of various operational and
 microstructural parameters on fuel swelling \cite{annualreport2021, ye2023}.
 
-% TODO: mention figure
+% DART is now capable of modeling the swelling behavior of U-Mo
+% under the operating conditions of high-power RTRs.
+
 \begin{figure}
 	\centering
 	\includegraphics[trim={0 14cm 0 0}, clip, width=14cm]
@@ -445,10 +439,35 @@ microstructural parameters on fuel swelling \cite{annualreport2021, ye2023}.
 		and its evolution with fission density.
 		\textit{Reproduced from Ye et al. \cite{ye2023}.}
 	}
+	\label{fig:dart}
 \end{figure}
 
-The key challenge in simulating fission gas swelling with a mechanistic model
-is obtaining key material properties related to gas bubble behavior,
+GRASS assumes bubbles nucleate within the grains
+as fission product gases emerge.
+These gas atoms and bubbles subsequently diffuse to the GBs
+induced by concentration and temperature gradients.
+This migration process is also affected by the rates of
+intragranular trapping and irradiation-dependent re-solution.
+When the grain face coverage by intergranular bubbles reaches saturation,
+gas atoms move to the grain edges.
+Gas atoms stay trapped on grain faces
+till interconnection of the bubbles occur,
+allowing the gas atoms to move to the grain corners.
+A schematic of this process is shown in Figure \ref{fig:dart}.
+Simulating the whole process requires the knowledge of
+many microstructural properties of the fuel.
+Two of the key properties,
+such as the GB diffusion coefficients and the Xe gas bubble re-solution rate,
+are already discussed in the previous sections.
+Other parameters include bubble formation probability (\texttt{StickProb}),
+threshold areal coverage of grain faces needed for saturation
+(\texttt{FaceCovMax}),
+threshold fuel swelling to enable gas migration from grain faces to corners
+(\texttt{SwellLink}), etc.
+
+The major challenge in simulating fission gas swelling
+with a mechanistic model such as DART
+is obtaining the microstructural properties related to gas bubble behavior,
 as many of them cannot be measured experimentally
 with the currently available techniques.
 Some of the parameters can be calculated using atomic-scale simulation methods.
@@ -463,11 +482,6 @@ measured from irradiated $\gamma$U-10Mo dispersion fuel particles.
 However, this set of parameters needs recalibration
 because new atomic-scale data have become available
 since the previous calibration \cite{annualreport2021, ye2023}.
-
-% TODO: what fission-gas-behavior parameters?
-% need to talk about them here; maybe an overview
-
-% NOTE: should we have a DART subsection here?
 
 \clearpage
 \section{Objectives}
