@@ -14,8 +14,11 @@
 % Figures, Tables & Math
 \RequirePackage{graphicx, subcaption}
 \RequirePackage{booktabs, multirow}
-\RequirePackage{placeins, xspace}
 \RequirePackage{amsmath, amssymb, bm, mathtools, siunitx}
+
+% Placement
+\RequirePackage{notoccite}
+\RequirePackage{placeins, xspace}
 
 % Hyperref settings
 \RequirePackage[
