@@ -201,7 +201,7 @@ during the brief duration of the collision.
 			\coordinate (H) at ($(A)!0.5!(B)$);
 			\coordinate (I) at ($(C)+(0.2,0)$);
 
-			\node at (1, 2) {\small (a) Lab frame};
+			\node [anchor=west] at (0, 2) {\small (a) Lab frame};
 
 			% horizontal lines
 			\draw[dashed, thin] (A) -- (B);
@@ -231,19 +231,19 @@ during the brief duration of the collision.
 		\end{scope}
 
 		% center of mass frame
-		\begin{scope}[shift={(0,-4)}]
+		\begin{scope}[shift={(0,-3.5)}]
 			\coordinate (A) at (0, 0);
 			\coordinate (B) at (4, 0);
 			\coordinate (C) at (0, 0.5);
 			\coordinate (D) at (4, 0.5);
 			\coordinate (I) at ($(C)+(0.6,0)$);
 			\coordinate (T) at ($(B)-(0.6,0)$);
-			\coordinate (K) at (1, -1);
+			\coordinate (K) at (1, -1.2);
 			\coordinate (M) at (3, 2);
 			\coordinate (P) at ($(K)+(0.7,0)$);
 			\coordinate (R) at ($(M)+(0.7,0)$);
 
-			\node at (1, 2) {\small (b) Center of mass frame};
+			\node [anchor=west] at (0, 2) {\small (b) Center of mass frame};
 
 			% horizontal lines
 			\draw[dashed, thin, name path=ab] (A) -- (B);
@@ -275,7 +275,7 @@ during the brief duration of the collision.
 				(T) .. controls (Q) and (Q) .. (P);
 
 			% angle
-			\draw ($(L)+(0.6,0)$) arc (0:56:0.6)
+			\draw ($(L)+(0.6,0)$) arc (0:58:0.6)
 				node[midway, right, xshift=2pt] {$\Theta$};
 
 			% p and r_0

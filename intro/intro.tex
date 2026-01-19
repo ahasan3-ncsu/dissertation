@@ -12,15 +12,15 @@ In general, RRs operate close to atmospheric pressure
 and at relatively low temperatures
 (typically with a fuel temperature of less than $250^{\circ}$C
 and a coolant temperature of less than $50^{\circ}$C,
-compared to a fuel temperature of 1000--1500$^{\circ}$C
-in 350 $^{\circ}$C coolant for power reactors)
+compared to a fuel temperature of $1000$--$1500^{\circ}$C
+in $350^{\circ}$C coolant for power reactors)
 \cite{couturier2019, mishra2023}.
 However, RRs normally require fuel
 that is much more enriched in U-235 than the fuel used in power reactors,
 and have historically employed highly enriched uranium (HEU)
 for their operation.
 HEU fuels are ususally defined
-as those containing greater than 20\% U-235 content,
+as those containing greater than $20 \%$ U-235 content,
 whereas low enriched uranium (LEU) fuels contain less than 20\% U-235 content
 \cite{keiser2003}.
 
@@ -72,6 +72,16 @@ Since the 1980s, the UAl$_x$ fuel has generally been replaced with U$_3$Si$_2$.
 All fuels developed and used before U$_3$Si$_2$ were practically based on HEU
 \cite{jamison2022, mishra2023}.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=12cm]{sfigs/historic_fuels.png}
+	\caption{
+		Uranium density of research reactor fuel
+		vs time of first use.
+		Reproduced from Jamison et al. \cite{jamison2022}.
+	}
+\end{figure}
+
 U$_3$Si$_2$ by itself is insufficient for the conversion
 of High-Performance Research Reactors (HPRRs) from HEU to LEU based fuels.
 This conversion is the aim
@@ -79,7 +89,7 @@ of the United States High-Performance Research Reactor (USHPRR) program.
 HPRRs require fuel capable of operating at low temperatures
 while maintaining high fission density at high specific power.
 The fission density for a candidate fuel
-falls between $3 \times 10^{21}$ and $6 \times 10^{21}$ fission/cm$^3$.
+falls between $\num{3e21}$ and $\num{6e21}$ fission/cm$^3$.
 Only a few fuels, such as stable $\gamma$U alloys, combine high uranium density
 with stable behavior at such high burnup levels.
 The $\gamma$ phase of uranium has a body-centered cubic (bcc) structure,
@@ -96,7 +106,7 @@ from equilibrium phases under irradiation \cite{meyer2014, willard1965},
 offering a large region of $\gamma$ phase metastability
 under reactor conditions.
 
-Therefore, $\gamma$U-Mo alloys, particularly the ones with 7--10 wt.\% Mo,
+Therefore, $\gamma$U-Mo alloys, particularly the ones with $7$--$10$ wt.\% Mo,
 have emerged as promising candidates for LEU conversion of HPRRs
 \cite{meyer2014}.
 In the dispersion form, $\gamma$U-Mo alloy particles
@@ -115,6 +125,15 @@ Consequently, the USHPRR program has selected
 the $\gamma$U-10Mo monolithic fuel for qualification
 \cite{robinson2009, miller2021, cole2016, wilson2019}.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=12cm]{sfigs/umo_design.jpg}
+	\caption{
+		Depiction of monolithic fuel cross-section (not to scale).
+		Reproduced from Meyer et al. \cite{meyer2014}.
+	}
+\end{figure}
+
 There exists a knowledge gap in the microstructural properties of $\gamma$U-Mo,
 which constrains the evaluation of its fuel performance.
 This work aims to bridge this gap using computational methods,
@@ -127,9 +146,9 @@ enhancing the accuracy of engineering-scale modeling of $\gamma$U-Mo.
 Under irradiation, $\gamma$U-Mo fuel undergoes
 a series of microstructural evolution that impact its performance.
 Initially, at low fission densities
-of less than $2.5$--$3.5 \times 10^{21}$ fissions/cm$^3$
-or a burnup of $6$--$7.2\%$ fission per initial metal atoms (FIMA)
-and temperatures typically below $250^{\circ}$, % FIX: is it C?
+of less than $2.5$--$\num{3.5e21}$ fissions/cm$^3$
+or a burnup of $6$--$7.2 \%$ fission per initial metal atoms (FIMA)
+and temperatures typically below $250^{\circ}$C,
 fuel swelling exhibits a quasi-linear trend \cite{kim2011, ye2015}.
 The initial swelling is primarily attributed to
 the accumulation of fission products
@@ -157,7 +176,7 @@ This leads to the development of the high burnup structure (HBS) of the fuel,
 which is also observed in other fuels, such as UO$_2$, MOX, UC, and UN
 \cite{rondinella2010}.
 The HBS is characterized by
-the formation of sub-micron sized grains (200--300 nm)
+the formation of sub-micron sized grains ($200$--$300$ nm)
 and a large number of intergranular pores.
 The GBS collapses at this stage, and most of the fission gas inventory
 collects into the relatively large intergranular bubbles
