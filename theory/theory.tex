@@ -425,8 +425,8 @@ to obtain the \textit{posterior} distribution $p(\bm{\theta} | \bm{Y})$:
 		\propto \mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta})
 		\\
 	m(\bm{Y})
-		&= \int_{\Theta} \mathcal{L}(\bm{Y} | \bm{\theta'}
-		\cdot \pi(\bm{\theta'}) d\theta'
+		&= \int_{\Theta} \mathcal{L}(\bm{Y} | \bm{\theta'})
+		\pi(\bm{\theta'}) d\theta'
 \end{align}
 where $m(\bm{Y})$ is the marginal likelihood or \textit{evidence} of $\bm{Y}$
 over the entire parameter space $\Theta$.
@@ -468,21 +468,21 @@ the distribution of those elements approximates the posterior.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\textwidth]{sfigs/metropolis-hastings.png}
+	\includegraphics[width=0.85\textwidth]{sfigs/metropolis-hastings.png}
 	\caption{
 		Example of the Metropolis-Hastings algorithm in the Bayesian framework
 		sampling a normal one-dimensional posterior distribution,
 		where the prior is a uniform distribution.
-		% TODO: cite
+		\textit{Reproduced from Lee et al. \cite{lee2015}.}
 	}
 	\label{fig:mh}
 \end{figure}
 
 One of the most foundational MCMC algorithms is Metropolis-Hastings.
-It starts with picking an initial parameter value $\theta^t = \theta^0$
-at step $t = 0$.
-At each iteration $t$, a candidate parameter $\theta^*$ is proposed
-from a transition (or proposal) distribution $q(\theta^* | \theta^t)$.
+It starts with picking an initial parameter value
+$\bm{\theta}^t = \bm{\theta}^0$ at step $t = 0$.
+At each iteration $t$, a candidate parameter $\bm{\theta}^*$ is proposed
+from a transition (or proposal) distribution $q(\bm{\theta}^* | \bm{\theta}^t)$.
 The candidate is accepted with probability $\alpha$:
 \begin{align}
 	\alpha
@@ -512,7 +512,7 @@ is shown in Figure \ref{fig:mh}.
 
 After a sufficient number of iterations $t = B$,
 known as the \textit{burn-in} period,
-the samples {$\theta^{B+1}, \ldots, \theta^T$}
+the samples {$\bm{\theta}^{B+1}, \ldots, \bm{\theta}^T$}
 can be treated as draws from the posterior.
 These samples are then used to estimate various statistics,
 such as the posterior mean, variance, or credible intervals:
