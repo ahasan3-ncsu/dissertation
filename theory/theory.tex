@@ -80,10 +80,9 @@ the Nos\'e-Hoover thermostat is the most popular one \cite{hoover}.
 
 \subsection{Interatomic Potential}
 
-% TODO: citation needed
 Interatomic potentials come in different forms
 to accomodate different physical motivations.
-Historically, most interatomic potentials could be described as "parametric",
+Historically, most interatomic potentials could be described as ``parametric",
 since they are developed with a fixed number of physical terms and parameters.
 In non-parametric potentials,
 the total number of terms and parameters are flexible.
@@ -92,7 +91,8 @@ using complex local neighbor descriptors
 and separate mappings to predict different system properties.
 Even though the non-parametric potentials can be more accurate,
 the lack of physical meaning behind the parameters
-can make justification of extrapolation and uncertainty quantification harder.
+can make justification of extrapolation and uncertainty quantification harder
+\cite{shapeev2016mtp}.
 
 The simplest parametric interatomic potential
 would only consider pairwise interactions between atoms,
@@ -115,10 +115,9 @@ from atom $j$ at the location of atom $i$,
 and $F_{\alpha}$ is an embedding function that represents
 the energy required to place atom $i$ into the electron cloud.
 
-% TODO: why ADP?
-
-The angular dependent potential (ADP) formalism
+The angular-dependent potential (ADP) formalism
 is a generalization of the EAM type potential
+to capture the anisotropy of bonds in certain materials
 \cite{mishin2005adp, beelerUMoXe}.
 The potential energy $V_i$ of an atom $i$ in ADP is given by
 \begin{align}
@@ -143,12 +142,11 @@ of the local atomic environment.
 This formalism extends the EAM by introducing angular forces
 as dipole and quadrupole moments.
 
-% TODO: citation needed
 The non-parametric potentials are often referred to
-as machine-learned interatomic potentials (MLIPs).
+as machine-learned interatomic potentials (MLIPs) \cite{shapeev2016mtp}.
 While non-parametric models are especially suitable for the application of ML,
-it is to be noted that
-parametric potentials can also be optimized using machine learning,
+it is to be noted that parametric potentials can also be optimized
+using machine learning \cite{mishin2021}.
 The potential energy of a system in an MLIP is written as
 \begin{align}
 	V_{tot}
@@ -161,7 +159,8 @@ $V_i$ is a machine-learning model that provides energy prediction
 based on the descriptor.
 An MLIP requires a robust descriptor
 that maintains certain physical symmetries,
-and a suitable machine learning framework for the descriptor.
+and a suitable machine learning framework for the descriptor
+\cite{deringer2019}.
 
 \section{Binary Collision Approximation}
 
@@ -174,7 +173,7 @@ For a high energy ion traversing a solid material,
 the vast majority of the simulation time in MD will be spent on
 calculating small-amplitude oscillations of the lattice atoms
 that do not significantly contribute to the trajectory of the ion
-or the primary radiation damage it causes.
+or the primary radiation damage it causes \cite{drobny2023}.
 
 The Binary Collision Approximation (BCA) addresses this
 by approximating the many-body problem with a sequence of
@@ -184,7 +183,7 @@ the interaction time between a projectile and a target nucleus
 is much shorter than the period of lattice vibrations.
 Therefore, the target nuclei can be treated as stationary
 and the effect of surrounding atoms on the projectile can be neglected
-during the brief duration of the collision.
+during the brief duration of the collision \cite{robinson1974, ziegler2010srim}.
 
 \begin{figure}[ht]
 	\centering
@@ -305,7 +304,7 @@ the kinetic energy $T$ transferred to the target nucleus:
 where $\Theta$ is the scattering angle in the CM frame.
 This scattering angle is dependent on the impact parameter $p$,
 which is the perpendicular distance between the initial
-velocity vector of the projectile and the target.
+velocity vector of the projectile and the target \cite{ziegler2010srim}.
 
 The angle $\Theta$ is calculated using the classical scattering integral:
 \begin{align}
@@ -337,7 +336,7 @@ The Universal Ziegler-Biersack-Littmark (ZBL) potential
 is the most widely used screening function in BCA codes,
 such as TRIM \cite{ziegler1985}.
 Another popular screening function is based on the Kr-C interatomic potential
-used in Tridyn: % TODO: cite
+used in Tridyn \cite{moller1984}:
 \begin{align}
 	\Phi(x) &= 0.19 e^{-0.28 x} + 0.46 e^{-0.64 x} + 0.34 e^{-1.9 x}
 \end{align}
@@ -371,10 +370,10 @@ Compared to MD, the BCA allows the simulation of millions of ion impacts
 in a fraction of the time,
 making it the better choice for calculating
 sputtering yields, damage production, ion implantation profiles, etc.
+\cite{drobny2023, matthews2015diss}
 
 \section{Bayesian Statistics}
 
-% TODO: citation needed
 The probability of two events $A$ and $B$ happening together
 can be expressed as:
 \begin{align}
@@ -391,7 +390,7 @@ Rewriting the above equation leads to:
 	P(A|B) &= \frac{P(B|A)P(A)}{P(B)}
 \end{align}
 where $P(B) \ne 0$.
-This is known as the Bayes' theorem.
+This is known as the Bayes' theorem \cite{downey2021}.
 
 Bayesian statistics is a subfield of statistics that utilizes
 a particular interpretation of probability based on the Bayes' theorem.
@@ -401,7 +400,8 @@ such as previous experimental results or personal beliefs.
 Specifically, the Bayesian interpretation has a way of
 incorporating prior knowledge in the form of probability distributions.
 In contrast, the frequentist interpretation views probability as
-the limit of the relative frequency of an event after many trials.
+the limit of the relative frequency of an event after many trials
+\cite{gelman1995book}.
 
 To expand on the Bayesian interpretation, let's assume
 $\bm{Y} = (Y_1, \ldots, Y_n)$ is the data produced by a random process
@@ -438,7 +438,7 @@ Often times, the evidence is simply the normalizing constant
 that ensures the posterior is a proper probability distribution.
 The posterior quantifies the uncertainty about the parameters that remains
 after accounting for prior knowledge
-and the new information observed in the data.
+and the new information observed in the data \cite{gelman1995book, reich2019}.
 
 \subsection{Markov Chain Monte Carlo}
 
@@ -450,7 +450,7 @@ over the parameter space $\Theta$.
 For complex models, this integral often lacks a closed-form solution.
 Markov chain Monte Carlo (MCMC) algorithms bypass this problem
 by sampling from the posterior distribution
-without requiring the calculation of $m(\bm{Y})$.
+without requiring the calculation of $m(\bm{Y})$ \cite{reich2019}.
 
 MCMC combines two different concepts: Monte Carlo methods and Markov chains.
 Monte Carlo methods rely on repeated random sampling to obtain results.
@@ -464,11 +464,11 @@ whose stationary distribution matches the target distribution.
 A Monte Carlo method can then be used
 to generate the elements of that Markov chain.
 With sufficient Monte Carlo samples,
-the distribution of those elements approximates the posterior.
+the distribution of those elements approximates the posterior \cite{geyer1992}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.85\textwidth]{sfigs/metropolis-hastings.png}
+	\includegraphics[width=0.8\textwidth]{sfigs/metropolis-hastings.png}
 	\caption{
 		Example of the Metropolis-Hastings algorithm in the Bayesian framework
 		sampling a normal one-dimensional posterior distribution,
@@ -501,7 +501,7 @@ the evidence $m(\bm{Y})$ cancels out:
 		{\mathcal{L}(\bm{Y} | \bm{\theta}^t) \pi(\bm{\theta}^t)}
 \end{align}
 This allows us to sample from the posterior
-using only the likelihood and the prior.
+using only the likelihood and the prior \cite{gelman1995book}.
 For symmetrical proposal distributions,
 $q(\bm{\theta}^t | \bm{\theta}^*) = q(\bm{\theta}^* | \bm{\theta}^t)$.
 If an uninformative prior, such as a uniform distribution, is used,
@@ -524,4 +524,4 @@ where $T$ is the total number of iterations.
 Other popular variants of MCMC include Gibbs Sampling,
 which is useful when conditional distributions are known,
 and Hamiltonian Monte Carlo, which uses gradient information
-to explore the parameter space more efficiently.
+to explore the parameter space more efficiently \cite{reich2019}.
