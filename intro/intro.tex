@@ -7,14 +7,12 @@ that act as high neutron and/or gamma radiation sources
 for use in training and education, production of radioisotopes,
 material testing and characterization, transmutation, activation
 or other irradiation services \cite{martens1967, mishra2023}.
-% the sentence below may be incorrect
-In general, RRs operate close to atmospheric pressure
-and at relatively low temperatures
+In general, RRs operate at relatively low temperatures and pressures
 (typically with a fuel temperature of less than $250^{\circ}$C
 and a coolant temperature of less than $50^{\circ}$C,
 compared to a fuel temperature of $1000$--$1500^{\circ}$C
 in $350^{\circ}$C coolant for power reactors)
-\cite{couturier2019, mishra2023}.
+\cite{mishra2023, couturier2019}.
 However, RRs normally require fuel
 that is much more enriched in U-235 than the fuel used in power reactors,
 and have historically employed highly enriched uranium (HEU)
@@ -404,6 +402,8 @@ the swelling calculations of higher-length-scale models more rigorous.
 
 \subsection{Fission-Gas-Behavior Parameters in DART}
 
+% TODO: citation needed
+
 The current understanding of the U-Mo fuel behavior is encapsulated
 in the rate-theory-based computational code
 Dispersion Analysis Research Tool (DART),
@@ -411,7 +411,7 @@ developed by the Argonne National Laboratory.
 DART is based on a rate-theory-based mechanistic model for fission gas behavior
 and a phase-field method for grain-size-specific recrystallization kinetics.
 It was originally developed to simulate irradiation-induced phenomena
-in dispersion fuels (U$_3$Si$_2$-Al and U-Mo/Al).
+in dispersion fuels (U$_3$Si$_2$-Al and U-Mo/Al) \cite{rest1999, ye2015}.
 In 2018, a computational module for U-10Mo was added
 to separate its calculations from those of dispersion systems.
 The fission gas induced swelling, one of the main causes of fuel swelling,
@@ -426,9 +426,6 @@ at various locations (bulk, grain face, grain edge, and grain corner).
 The results from DART has been validated against experimental data
 and has been used to study the effects of various operational and
 microstructural parameters on fuel swelling \cite{annualreport2021, ye2023}.
-
-% DART is now capable of modeling the swelling behavior of U-Mo
-% under the operating conditions of high-power RTRs.
 
 \begin{figure}
 	\centering
@@ -452,7 +449,7 @@ When the grain face coverage by intergranular bubbles reaches saturation,
 gas atoms move to the grain edges.
 Gas atoms stay trapped on grain faces
 till interconnection of the bubbles occur,
-allowing the gas atoms to move to the grain corners.
+allowing the gas atoms to move to the grain corners \cite{ye2023}.
 A schematic of this process is shown in Figure \ref{fig:dart}.
 Simulating the whole process requires the knowledge of
 many microstructural properties of the fuel.
@@ -463,7 +460,7 @@ Other parameters include bubble formation probability (\texttt{StickProb}),
 threshold areal coverage of grain faces needed for saturation
 (\texttt{FaceCovMax}),
 threshold fuel swelling to enable gas migration from grain faces to corners
-(\texttt{SwellLink}), etc.
+(\texttt{SwellLink}), etc \cite{annualreport2022, annualreport2023}.
 
 The major challenge in simulating fission gas swelling
 with a mechanistic model such as DART
