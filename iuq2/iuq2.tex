@@ -2,13 +2,10 @@
 of U-10Mo Fission-Gas-Behavior Parameters}
 \label{chap:iuq}
 
-% TODO: have a few intro sentences
-% find acronym clashes
-
 \section{Problem Definition}
 
 The United State Department of Energy initiated the RERTR program in 1978
-with the goal to develop the technology needed
+with the goal of developing the technology needed
 to eliminate HEU in civilian applications.
 The eponymous irradiation tests performed by the program thus focused on
 high density LEU fuels, such as U-Mo.
@@ -24,14 +21,14 @@ which had a burnup of $36 \%$ after $116$ effective full power days (EFPD)
 of operation.
 The end-of-life fission density in the fuel plate was
 $F_d = \num{2.31e21}$ fsn/cm$^3$,
-with a life-averaged fission rate of $\num{2.3e14}$ fsn/cm$^3$/s
+with a life-averaged fission rate density of $\num{2.3e14}$ fsn/cm$^3$/s
 and a life-averaged fuel temperature of $116.3^{\circ}$ C \cite{kim2013}.
 In RERTR-12,
 U-Mo monolithic fuel plates with a Zr diffusion barrier were irradiated
 to investigate the effects of fission density and fission rate on fuel behavior.
 One of the plates investigated was \textit{L1P755},
 which had a fission density of $\num{5.34e21}$ fsn/cm$^3$,
-with life-averaged fission rate and temperature
+with a life-averaged fission rate and temperature
 of $\num{6.86e14}$ fsn/cm$^3$/s and $133.6^{\circ}$ C \cite{rice2015}.
 
 DART is a rate-theory-based meso-scale model
@@ -54,8 +51,8 @@ over a range of irradiation conditions
 reveals that the measurement uncertainty in these experiments can be assumed
 to have a standard deviation of $2.64 \%$
 \cite{rabin2017preliminary, robinson2021}.
-The observed swelling values along with the measurement uncertainty
-is plotted in Figure \ref{fig:mvn_expt}.
+The observed swelling values, along with the measurement uncertainty,
+are plotted in Figure \ref{fig:mvn_expt}.
 
 \begin{figure}[ht]
 	\centering
@@ -92,6 +89,7 @@ Finally , \texttt{rResolGBB} is the average re-solution distance
 an atom is ejected from the grain boundary gas bubbles
 \cite{annualreport2021, ye2023, annualreport2022}.
 
+% TODO: can we put a unit column here?
 \begin{table}[ht]
 \centering
 \caption{
@@ -145,7 +143,7 @@ It is typical to assume $\bm{\mu} = 0$
 and $\bm{\Sigma}_{exp} = \sigma_{exp}^2 \bm{I}$ for experiments
 having no systematic bias and having homoscedastic experimental errors.
 Combining equations \ref{eq:real} and \ref{eq:exp},
-we can obtain the "model updating equation"
+we can obtain the ``model updating equation"
 \cite{wu2021comprehensive, kennedy2001bayesian, arendt2012quant}:
 \begin{align}
 	\label{eq:upd}
@@ -176,9 +174,9 @@ $\bm{\Sigma}$ is the covariance of the likelihood consisting of three parts:
 \end{align}
 where $\bm{\Sigma}_{exp}$ represents experimental uncertainty
 due to measurement error,
-$\bm{\Sigma}_{bias}$ means model uncertainty
+$\bm{\Sigma}_{bias}$ is the model uncertainty
 due to an inherent bias in the model,
-and $\bm{\Sigma}_{code}$ means code/interpolation uncertainty
+and $\bm{\Sigma}_{code}$ is the code/interpolation uncertainty
 due to the use of surrogate models to reduce the computational cost.
 In this work, $\bm{\Sigma}_{bias}$ and $\bm{\Sigma}_{code}$ are not considered
 due to the limited amount of experimental data available for comparison
@@ -203,7 +201,7 @@ and predict an output relatively quickly compared to the original computer model
 can be used as a surrogate model.
 Typical examples of surrogate models include Moving Least-Squares (MLS),
 Radial Basis Functions (RBF), Neural Networks (NN),
-Support Vector Machines (SVM), Gaussian Processes (GP),
+Support Vector Machines (SVM), Gaussian Process (GP),
 Polynomial Chaos Expansion (PCE), etc.,
 with GP being the most commonly used surrogate
 \cite{wu2018inverse, wu2021comprehensive}.
@@ -216,12 +214,12 @@ a linear regression model would have the following formulation:
 where $\beta$ is the vector of unknown coefficients
 and $\varepsilon$ is the vector of random errors.
 In Ordinary Least-Squares (OLS), the estimated coefficients $\hat{\beta}$
-is determined by minimizing the sum of squared residuals (the loss function).
+are determined by minimizing the sum of squared residuals (the loss function).
 \begin{align}
 	\hat{\beta} = \arg \min_{\beta} || y - \beta X ||^2
 \end{align}
 
-Gaussian processes (GP) are a popular choice for surrogate models
+GPs are a popular choice for surrogate models
 because they provide a straightforward estimation of the code uncertainty.
 A GP is a probabilistic model that describes
 a distribution over possible functions.
@@ -287,13 +285,25 @@ and the hyperbolic tangent ($\tanh$) \cite{goodfellow2016}.
 
 In this work, we have used GP and NN models as surrogates.
 All the surrogate models have been implemented
-using the sklearn python library \cite{sklearn}.
+using the scikit-learn Python library \cite{sklearn}.
 
 \section{Results}
 
 \subsection{Surrogate Modeling}
 
-\begin{figure}[ht]
+First, the data is visualized in the form of scatter plots
+of fuel swelling against all the fission-gas-behavior parameters.
+in Figures \ref{fig:scat_lo} and \ref{fig:scat_hi}.
+At low $F_d$, only the parameter \texttt{rResolBulk}
+seems to have a strong correlation with fuel swelling.
+The swelling values range from about $9 \%$ to $22 \%$.
+At high $F_d$, \texttt{dGrainHBS} shows a positive correlation with swelling,
+and \texttt{SwellLink} and \texttt{rResolBulk} show a very weak correlation.
+In this case, the swelling ranges from about $20 \%$ to $140 \%$.
+Many of the parameters do not seem to have any correlation with fuel swelling
+at both low and high fission densities.
+
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{iuq2/images/scatter_lo.pdf}
 	\caption{
@@ -304,7 +314,7 @@ using the sklearn python library \cite{sklearn}.
 	\label{fig:scat_lo}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{iuq2/images/scatter_hi.pdf}
 	\caption{
@@ -315,19 +325,43 @@ using the sklearn python library \cite{sklearn}.
 	\label{fig:scat_hi}
 \end{figure}
 
-First, the data is visualized in the form of scatter plots
-of fuel swelling against all the fission-gas-behavior parameters.
-in Figures \ref{fig:scat_lo} and \ref{fig:scat_hi}.
-At low $F_d$, only the parameter \texttt{rResolBulk}
-seem to have a strong correlation with fuel swelling.
-The swelling values range from about $9 \%$ to $22 \%$.
-At high $F_d$, \texttt{dGrainHBS} shows a positive correlation with swelling,
-and \texttt{SwellLink} and \texttt{rResolBulk} show a very weak correlation.
-In this case, the swelling ranges from about $20 \%$ to $140 \%$.
-Many of the parameters do not seem to have any correlation with fuel swelling
-at both low and high fission densities.
+The data sets were split into two groups, $70 \%$ for training
+and $30 \%$ for testing.
+The feature vectors of the training set
+were then transformed using a min-max scaler.
+Afterward, the testing set was transformed
+with the aforementioned min-max scaler fitted with the training data.
+This is to avoid preprocessing the testing set along with the training set
+since doing so can leak information from the testing set.
+The training split was then used to build the GP and NN surrogates.
+All the surrogate models take $9$ parameters as inputs.
+During the construction of the surrogates,
+the training set was further split into two groups,
+$75 \%$ for actual training and $25 \%$ for validation.
+A few kernels, such as RBF, Mat\'ern, rational quadratic, and linear,
+and their combinations were used in the GP model to find the best fit.
+A GP with a Mat\'ern kernel was found to perform the best
+with $R^2$ scores of $0.98$ and $0.97$,
+and mean absolute errors of $0.24 \%$ and $2.17 \%$,
+for emulating low and high $F_d$, respectively.
+The NN surrogate model was optimized by tuning its hyperparameters
+with a grid search.
+The model has $4$ hidden layers with $250$ neurons each,
+and $1$ output layer with one neuron to represent swelling values.
+The NN model performed better than the GP model on the test split,
+having $R^2$ scores of $0.98$ and $0.98$,
+and mean absolute errors of $0.27 \%$ and $1.54 \%$
+for low $F_d$ and high $F_d$.
+Figure \ref{fig:surr} displays the actual vs predicted plots
+for the validation of the surrogate models.
+% The GP model has noticeable weakness in the higher swelling range
+% for both the low $F_d$ and the high $F_d$ data sets.
+% Meanwhile, the NN model predictions are slightly spread out
+% only for the low $F_d$ data set.
+Since the NN surrogate model performs better overall,
+we chose to utilize this model for the rest of the IUQ process.
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 	\begin{subfigure}{0.495\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{iuq2/images/gp_lo.pdf}
@@ -353,64 +387,11 @@ at both low and high fission densities.
 	\label{fig:surr}
 \end{figure}
 
-The data sets were split into two groups, $70 \%$ for training
-and $30 \%$ for testing.
-The feature vectors of the training set
-were then transformed using a min-max scaler.
-Afterward, the testing set was transformed
-with the aforementioned min-max scaler fitted with the training data.
-This is to avoid preprocessing the testing set along with the training set
-since doing so can leak information from the testing set.
-The training split was then used to build the GP and NN surrogates.
-All the surrogate models take $9$ parameters as inputs.
-During the construction of the surrogates,
-the training set was further split into two groups,
-$75 \%$ for actual training and $25 \%$ for validation.
-A few kernels, such as RBF, Mat\'ern, rational quadratic and linear,
-and their combinations were used in the GP model to find the best fit.
-A GP with a Mat\'ern kernel was found to perform the best
-with $R^2$ scores of $0.98$ and $0.97$,
-and mean absolute errors of $0.24 \%$ and $2.17 \%$,
-for emulating low and high $F_d$, respectively.
-The NN surrogate model was optimized by tuning its hyperparameters
-with a grid search.
-The model has $4$ hidden layers with $250$ neurons each,
-and $1$ output layer with one neuron to represent swelling values.
-The NN model performed better than the GP model on the test split,
-having $R^2$ scores of $0.98$ and $0.98$,
-and mean absolute errors of $0.27 \%$ and $1.54 \%$
-for low $F_d$ and high $F_d$.
-Figure \ref{fig:surr} displays the actual vs predicted plots
-for the validation of the surrogate models.
-% The GP model has noticeable weakness in the higher swelling range
-% for both the low $F_d$ and the high $F_d$ data sets.
-% Meanwhile, the NN model predictions are slightly spread out
-% only for the low $F_d$ data set.
-Since the NN surrogate model performs better overall,
-we chose to utilize this model for the rest of the IUQ process.
-
 \FloatBarrier
 \subsection{Sensitivity Analysis}
 
-\begin{figure}[ht]
-	\begin{subfigure}{\textwidth}
-		\centering
-		\caption{$F_d = \num{2.31e21}$ fsn/cm$^3$ (\textit{RERTR5-V6018G}).}
-		\includegraphics[width=15cm]{iuq2/images/sobol_lo.pdf}
-	\end{subfigure}
-	\begin{subfigure}{\textwidth}
-		\centering
-		\caption{$F_d = \num{5.34e21}$ fsn/cm$^3$ (\textit{RERTR12-L1P755}).}
-		\includegraphics[width=15cm]{iuq2/images/sobol_hi.pdf}
-	\end{subfigure}
-	\caption{
-		First-order ($S_i$) and total-effect ($S_{T_i}$) Sobol' indices
-		calculated using the neural network surrogate models.
-	}
-	\label{fig:sobol}
-\end{figure}
-
-To quntify the infuence of various fission-gas-behavior parameters on swelling,
+To quantify the influence of
+various fission-gas-behavior parameters on swelling,
 a global sensitivity analysis was conducted by calculating Sobol' indices
 \cite{sobol2001}.
 Figure \ref{fig:sobol} displays
@@ -419,6 +400,24 @@ This provides a breakdown of how individual parameters and their interactions
 contribute to the overall variance in the swelling predictions.
 It can be observed that the sensitivity of the model is concentrated
 in a few key parameters.
+
+\begin{figure}[!ht]
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{$F_d = \num{2.31e21}$ fsn/cm$^3$ (\textit{RERTR5-V6018G}).}
+		\includegraphics[width=0.8\textwidth]{iuq2/images/sobol_lo.pdf}
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\centering
+		\caption{$F_d = \num{5.34e21}$ fsn/cm$^3$ (\textit{RERTR12-L1P755}).}
+		\includegraphics[width=0.8\textwidth]{iuq2/images/sobol_hi.pdf}
+	\end{subfigure}
+	\caption{
+		First-order ($S_i$) and total-effect ($S_{T_i}$) Sobol' indices
+		calculated using the neural network surrogate models.
+	}
+	\label{fig:sobol}
+\end{figure}
 
 % NOTE: talk about physical significance
 Figure \ref{fig:sobol}a depicts how the parameter \texttt{rResolBulk}
@@ -442,16 +441,6 @@ with almost no complex interactions between the parameters.
 \FloatBarrier
 \subsection{MCMC Sampling}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.9\textwidth]{iuq2/images/mcmc_trace.png}
-	\caption{
-		Trace plots of the posterior samples
-		of the fission-gas-behavior parameters from MCMC sampling.
-	}
-	\label{fig:mcmc_trace}
-\end{figure}
-
 MCMC sampling is performed by proposing candidate parameter values,
 running surrogate models with them,
 and then accepting or rejecting the candidate values
@@ -474,6 +463,16 @@ for all the posterior samples,
 which indicates that no convergence issues were detected.
 For all $9$ parameters, the ESS is at least $2100$,
 which is sufficient for stable estimates.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{iuq2/images/mcmc_trace.png}
+	\caption{
+		Trace plots of the posterior samples
+		of the fission-gas-behavior parameters from MCMC sampling.
+	}
+	\label{fig:mcmc_trace}
+\end{figure}
 
 Except for \texttt{dGrainHBS}, the MCMC samples span the entire range
 defined by the parameter priors.
@@ -576,13 +575,37 @@ and $95 \%$ credible intervals (CIs) of the posterior means
 of all the fission-gas-behavior parameters, are provided in Table \ref{tab:iuq}.
 
 \FloatBarrier
-\subsection{FUQ and Validation}
+\subsection{Forward Uncertainty Quantification and Validation}
 
-\begin{figure}[ht]
+To assess the IUQ results,
+we performed forward uncertainty quantification (FUQ)
+by propagating the posterior samples through the NN surrogate models.
+The joint swelling distribution resulting from the forward propagation
+is shown in Figure \ref{fig:fuq_mvn}a.
+Unlike the distribution of observed swelling (Figure \ref{fig:mvn_expt}),
+the distribution from FUQ is asymmetric.
+The swelling density at low $F_d$ decreases steeply around $8 \%$.
+To better understand this phenomenon,
+the marginal distributions are also plotted
+in Figures \ref{fig:fuq_mvn}b and \ref{fig:fuq_mvn}c.
+At high $F_d$, the swelling density from FUQ matches the observation well.
+However, the density at low $F_d$ is significantly narrower
+than that of the observation.
+The density is also asymmetric and right skewed.
+This is due to the fact that the lowest predicted swelling at low $F_d$
+is about $9 \%$ (Figure \ref{fig:scat_lo}) in the DART data set.
+Thus, any combination of the fission-gas-behavior parameters
+within the provided range will not lead to
+a swelling value low enough to fit the observation.
+Also, the surrogate model used in this work for low $F_d$
+has a mean absolute error of about $0.27$,
+which explains why the distribution from FUQ extends slightly beyond $9 \%$.
+
+\begin{figure}[!ht]
 	\begin{subfigure}{\textwidth}
 		\centering
 		\caption{}
-		\includegraphics[width=12cm]{iuq2/images/fuq_mvn.pdf}
+		\includegraphics[width=0.7\textwidth]{iuq2/images/fuq_mvn.pdf}
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		\centering
@@ -605,33 +628,9 @@ of all the fission-gas-behavior parameters, are provided in Table \ref{tab:iuq}.
 	\label{fig:fuq_mvn}
 \end{figure}
 
-To assess the IUQ results,
-we performed FUQ by propagating the posterior samples
-through the NN surrogate models.
-The joint swelling distribution resulting from the forward propagation
-is shown in Figure \ref{fig:fuq_mvn}a.
-Unlike the distribution of observed swelling (Figure \ref{fig:mvn_expt}),
-the distribution from FUQ is asymmetric.
-The swelling density at low $F_d$ decreases steeply around $8 \%$.
-To better understand this phenomenon,
-the marginal distributions are also plotted
-in Figures \ref{fig:fuq_mvn}b and \ref{fig:fuq_mvn}c.
-At high $F_d$, the swelling density from FUQ matches the observation well.
-However, the density at low $F_d$ is significantly narrower
-than that of the observation.
-The density is also asymmetric and right skewed.
-This is due to the fact that the lowest predicted swelling at low $F_d$
-is about $9 \%$ (Figure \ref{fig:scat_lo}) in the DART data set.
-Thus, any combination of the fission-gas-behavior parameters
-within the provided range will not lead to
-a swelling value low enough to fit the observation.
-Also, the surrogate model used in this work for low $F_d$
-has a mean absolute error of about $0.27$,
-which explains why the distribution from FUQ go a little lower than $9 \%$.
-
 Although the distribution from forward propagation
 does not exactly match that of the observation specially at low $F_d$,
-it shows reasonable agreement overall.
+it shows reasonable overall agreement.
 To show the effects of the IUQ process,
 the experimental observations, swelling ranges from the DART data sets,
 and swelling ranges from the forward propagation
@@ -641,7 +640,7 @@ the mean of the values from the forward propagation matches the observation,
 but the standard deviation is narrower than that of the observation
 due to the reason explained above.
 At high $F_d$,
-the swelling range reduces massively
+the range of swelling values is significantly reduced
 from the DART predictions to the forward propagation,
 matching the observation almost exactly.
 However, this procedure does not constitute
