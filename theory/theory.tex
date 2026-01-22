@@ -495,9 +495,9 @@ Because the posterior appears in both the numerator and denominator of the ratio
 the evidence $m(\bm{Y})$ cancels out:
 \begin{align}
 	\frac{p(\bm{\theta}^* | \bm{Y})}{p(\bm{\theta}^t | \bm{Y})}
-	&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta}) / m(\bm{Y})}
+	&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}^*) \pi(\bm{\theta}^*) / m(\bm{Y})}
 		{\mathcal{L}(\bm{Y} | \bm{\theta}^t) \pi(\bm{\theta}^t) / m(\bm{Y})} \\
-	&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}) \pi(\bm{\theta})}
+	&= \frac{\mathcal{L}(\bm{Y} | \bm{\theta}^*) \pi(\bm{\theta}^*)}
 		{\mathcal{L}(\bm{Y} | \bm{\theta}^t) \pi(\bm{\theta}^t)}
 \end{align}
 This allows us to sample from the posterior
@@ -506,7 +506,7 @@ For symmetrical proposal distributions,
 $q(\bm{\theta}^t | \bm{\theta}^*) = q(\bm{\theta}^* | \bm{\theta}^t)$.
 If an uninformative prior, such as a uniform distribution, is used,
 the priors in the acceptance ratio cancel out as well since
-$\pi(\bm{\theta}) = \pi(\bm{\theta^t})$.
+$\pi(\bm{\theta}^*) = \pi(\bm{\theta^t})$.
 An illustration of the Metropolis-Hastings algorithm
 is shown in Figure \ref{fig:mh}.
 
