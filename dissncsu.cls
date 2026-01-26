@@ -11,19 +11,17 @@
 \RequirePackage{setspace}
 \onehalfspacing
 
-% Figures, Tables & Math
+% Figures, tables, math, etc.
 \RequirePackage{graphicx, subcaption}
 \RequirePackage{booktabs, multirow}
 \RequirePackage{amsmath, amssymb, bm, mathtools, siunitx}
-
-% Placement
-\RequirePackage{notoccite}
 \RequirePackage{placeins, xspace}
 
 % Hyperref settings
 \RequirePackage[
-    colorlinks=true,
-    linkcolor=blue,
+    % colorlinks=true,
+    % linkcolor=blue,
+	hidelinks,
     pdftitle={Atomsky's dissertation},
 ]{hyperref}
 
@@ -34,14 +32,41 @@
 \renewcommand{\headrulewidth}{0pt}
 \fancyfoot[C]{\thepage}
 
-% tocbibind
+% Packages for lists of things
 \RequirePackage[nottoc]{tocbibind}
+\RequirePackage[titles]{tocloft}
 
-% Rename TOC, Bibliography
+% Typeset TOC titles ragged right with no hyphenation
+\renewcommand{\@tocrmarg}{2.55em plus1fil}
+
+% Put "Chapter X" in TOC
+\renewcommand{\cftchappresnum}{Chapter }
+\newlength{\chapgap}
+\settowidth{\chapgap}{\bfseries Chapter\enspace}
+\addtolength{\cftchapnumwidth}{\chapgap}
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
+
+% Put "Table X" in LOT
+\renewcommand{\cfttabpresnum}{\tablename\enspace}
+\newlength{\tabgap}
+\settowidth{\tabgap}{\cfttabpresnum\cfttabaftersnum}
+\addtolength{\cfttabnumwidth}{\tabgap}
+
+% Put "Figure X" in LOF
+\renewcommand{\cftfigpresnum}{\figurename\enspace}
+\newlength{\figgap}
+\settowidth{\figgap}{\cftfigpresnum\cftfigaftersnum}
+\addtolength{\cftfignumwidth}{\figgap}
+
+% Rename lists and bibliography
 \renewcommand{\contentsname}{TABLE OF CONTENTS}
 \renewcommand{\listtablename}{LIST OF TABLES}
 \renewcommand{\listfigurename}{LIST OF FIGURES}
 \renewcommand{\bibname}{REFERENCES}
+
+% Fix citation order in TOC; load after tocloft
+\RequirePackage{notoccite}
 
 % Title & names
 \newcommand{\dissTitle}[1]{\def\dTitle{#1}}
