@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dissncsu}[2025/04/04 Dissertation class for NCSU ETD]
+\ProvidesClass{dissncsu}[2026/01/26 Dissertation class for NCSU ETD]
 
 % Hardcoded 12pt everywhere
 \LoadClass[12pt,oneside]{book}
