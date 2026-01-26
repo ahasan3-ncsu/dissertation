@@ -2,18 +2,27 @@
 \usepackage{booktabs, subcaption, multirow}
 \usepackage{amsmath, amssymb, bm, siunitx}
 
-\usetheme{Boadilla}
-\usecolortheme{seahorse}
+\usetheme{CambridgeUS}
+\usecolortheme{beaver}
 \setbeamertemplate{caption}[numbered]
 \setbeamerfont{caption}{size=\scriptsize}
 
-\title[Computational methods for $\gamma$U-Mo]
-{Application of computational methods for the evaluation of
-\texorpdfstring{$\gamma$}{gamma}U-Mo monolithic fuel}
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\title[Evaluation of U-Mo Microstructural Properties]
+{Evaluation of Microstructural Properties
+of U-Mo Monolithic Fuel using Computational Methods}
+
 \author{ATM Jahid Hasan}
 \institute[NCSU]{Department of Nuclear Engineering\\
 North Carolina State University}
-\date{April 4, 2025}
+\date{January 28, 2026}
 
 \begin{document}
 \frame{\titlepage}
@@ -1474,12 +1483,12 @@ fission-gas-behavior parameters}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
-			\begin{subfigure}{0.65\textwidth}
+			\begin{subfigure}{0.60\textwidth}
 				\centering
 				\includegraphics[width=\textwidth]
 					{invuq/images/fuq_gp.png}
 			\end{subfigure}
-			\begin{subfigure}{0.65\textwidth}
+			\begin{subfigure}{0.60\textwidth}
 				\centering
 				\includegraphics[width=\textwidth]
 					{invuq/images/fuq_gp_synth.png}
@@ -1491,234 +1500,6 @@ fission-gas-behavior parameters}
 			}
 		\end{figure}
 	\end{columns}
-\end{frame}
-
-\section{U-Mo moment tensor potential}
-
-\begin{frame}{Machine-learned interatomic potential (MLIP)}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Currently, MD simulations of the fuel are limited to
-				the use of only three elements: U, Mo, and Xe.
-			\item This limits the number of complex scenarios we can simulate.
-			\item The figure shows our attempt
-				to understand blistering mechanism using MD,
-				where we used Mo as a liner.
-			\item We want to use elements like Al or Zr in simulations.
-				Thus, we are trying to build MLIPs.
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=5cm, angle=90]{sfigs/blistering_md.png}
-			\caption{
-				Simulation of Xe gas bubbles on grain edges.
-				Red, blue, and yellow spheres represent U, Mo, and Xe.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Moment tensor potential (MTP)}
-	\begin{itemize}
-		\item Various U and Mo phases and alloys are simulated with AIMD
-			using VASP.
-			The simulated systems are:
-			\begin{itemize}
-				\item $\alpha$U (orthorombic)
-				\item $\gamma$U (bcc)
-				\item Mo (bcc)
-				\item U$_2$Mo (tetragonal)
-				\item $\gamma$U-10Mo (bcc)
-			\end{itemize}
-		\item The resulting data is then used with MLIP-3 package
-			to train an MTP.
-		\item So far, the potential only has two elements: U and Mo.
-		\item The LAMMPS package is utilized
-			along with an MLIP-3 interface layer
-			to run MD simulations with the trained MTP.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Lattice constants}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Different U and Mo phases and intermetallics
-				are simulated using the MTP.
-				All simulations are run for 100 ps in NPT ensembles
-				to get equilibrated supercell dimensions.
-			\item The MTP can accurately predict lattice constants
-				of different phases of U, bcc Mo, and U-Mo compounds.
-			\item Noncubic systems are generally harder to replicate
-				than cubic systems for potentials.
-			\item The MTP doesn't struggle with
-				$\alpha$U (orthorombic) and U$_2$Mo (tetragonal).
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\begin{subfigure}{0.7\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]
-					{mtp/images/latConst_alphaU.pdf}
-			\end{subfigure}
-
-			\begin{subfigure}{0.7\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]
-					{mtp/images/latConst_gammaU.pdf}
-			\end{subfigure}
-			\caption{
-				Lattice constants of $\alpha$U and $\gamma$U.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Lattice constants (cont.)}
-	\begin{figure}[ht]
-		\centering
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{mtp/images/latConst_bccMo.pdf}
-		\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{mtp/images/latConst_u2mo.pdf}
-		\end{subfigure}
-		\caption{
-			Lattice constants of bcc Mo and U$_2$Mo.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item The lattice constants of bcc Mo and U$_2$Mo
-			from MTP and ADP agree with each other
-			for the entire temperature range.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Radial distribution functions}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item The radial distribution functions (RDFs)
-				are calculated using the last five timesteps
-				of the simulations of 100 ps runs with a 1 fs timestep size.
-			\item RDFs computed with MTP and ADP are similar in all cases
-				up to 10 \r{A}.
-			\item There are slight discrepancies in the peak heights,
-				but general trends are correct.
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\begin{subfigure}{0.7\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]
-					{mtp/images/rdf_alphaU_500K.pdf}
-			\end{subfigure}
-
-			\begin{subfigure}{0.7\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]
-					{mtp/images/rdf_gammaU_950K.pdf}
-			\end{subfigure}
-			\caption{
-				RDFs of $\alpha$U and $\gamma$U.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Radial distribution functions (cont.)}
-	\begin{figure}[ht]
-		\centering
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{mtp/images/rdf_bccMo_1600K.pdf}
-		\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{mtp/images/rdf_u2mo_500K.pdf}
-		\end{subfigure}
-		\caption{
-			RDFs of bcc Mo and U$_2$Mo.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item Most noticeable discrepancy occurs for U$_2$Mo.
-			The first and second nearest neighbor densities for U-U pairs
-			are predicted differently by MTP and ADP.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Elastic constants}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Elastic constants $C_{11}$, $C_{12}$, and $C_{44}$
-				are calculated for all systems.
-			\item In all cases, the MTP overpredicts the elastic constants
-				by two to three times compared to the ADP.
-			\item Thus, the simulated systems are more rigid
-				than they are supposed to be.
-			\item This will lead to systems with
-				inaccurate mechanical properties, defect energies,
-				and unrealistic phase stability.
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\begin{subfigure}{0.7\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]
-					{mtp/images/elConst_alphaU.pdf}
-			\end{subfigure}
-
-			\begin{subfigure}{0.7\textwidth}
-				\centering
-				\includegraphics[width=\textwidth]
-					{mtp/images/elConst_gammaU.pdf}
-			\end{subfigure}
-			\caption{
-				Elastic constants of $\alpha$U and $\gamma$U.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Elastic constants (cont.)}
-	\begin{figure}[ht]
-		\centering
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{mtp/images/elConst_bccMo.pdf}
-		\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{mtp/images/elConst_u2mo.pdf}
-		\end{subfigure}
-		\caption{
-			Elastic constants of bcc Mo and U$_2$Mo.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item Apart from the constants being higher generally,
-			the temperature dependence of elastic constants
-			are also predicted differently by the MTP
-			for bcc Mo and U$_2$Mo.
-	\end{itemize}
 \end{frame}
 
 \section{Conclusions}
