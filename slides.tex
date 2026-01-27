@@ -1044,6 +1044,53 @@ fission-gas-behavior parameters}
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Inverse uncertainty quantification (IUQ)}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item IUQ is a process to quantify uncertainties
+				in the input parameters of a computer model
+				given experimental data.
+			\item It's the opposite of
+				forward uncertainty quantification (FUQ),
+				which quantifies the uncertainty in the output given the input.
+			\item IUQ quantifies the uncertainty in the model itself,
+				and thus can help to improve
+				the accuracy of the model predictions.
+			\item It's helpful in situations where the underlying parameters
+				of the model are unknown.
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=6cm]{sfigs/wu_iuq.png}
+			\caption{
+				Some essential parts of modeling and simulation
+				(Wu et al. {\color{blue}
+				\url{https://doi.org/10.1016/j.nucengdes.2018.06.004}}).
+			}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{asdf}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.7\textwidth]{iuq2/images/mvn_expt.pdf}
+			\caption{
+				asdf
+			}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+% FIX: update table
 \begin{frame}{Fission-gas-behavior parameters}
 	\begin{table}[ht]
 	\centering
@@ -1074,176 +1121,36 @@ fission-gas-behavior parameters}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Inverse uncertainty quantification (IUQ)}
+\begin{frame}{asdf}
+	\label{frame:scatter_lo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item IUQ is a process to quantify uncertainties
-				in the input parameters of a computer model
-				given experimental data.
-			\item It's the opposite of
-				forward uncertainty quantification (FUQ),
-				which quantifies the uncertainty in the output given the input.
-			\item IUQ quantifies the uncertainty in the model itself,
-				and thus can help to improve
-				the accuracy of the model predictions.
-			\item It's helpful in situations where the underlying parameters
-				of the model are unknown.
+			\item asdf
 		\end{itemize}
 	\column{0.5\textwidth}
-		\begin{figure}[ht]
+		\begin{figure}
 			\centering
-			\includegraphics[width=6cm]{sfigs/wu_iuq.png}
+			\includegraphics[width=\textwidth]{iuq2/images/scatter_lo.pdf}
 			\caption{
-				Some essential parts of modeling and simulation
-				(Wu et al. {\color{blue}
-				\url{https://doi.org/10.1016/j.nucengdes.2018.06.004}}).
+				asdf
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-% NOTE: From Beeler: is this slide really necessary?
-\begin{frame}{Bayesian framework for IUQ}
-	\begin{columns}
-	\column{0.4\textwidth}
-		\begin{itemize}
-			\item $y^E$ is the observation
-				and $y^R$ is the reality.
-				$y^M$ is the model with a bias $\delta(x)$.
-			\item $\epsilon$ is the measurement error
-				and assumed to be Gaussian.
-			\item To get posterior distributions of parameters $\theta^*$,
-				Bayes' theorem can be used.
-			\item Since the error is related to $y^E$ and $y^M$,
-				the likelihood can be described in terms of the error.
-		\end{itemize}
-	\column{0.6\textwidth}
-		\begin{align}
-			\bm{y}^R(\bm{x})
-			&= \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x}) \\
-			\bm{y}^E(\bm{x})
-			&= \bm{y}^R(\bm{x}) + \bm{\epsilon} \\
-			\bm{y}^E(\bm{x})
-			&= \bm{y}^M(\bm{x}, \bm{\theta}^*)
-				+ \delta(\bm{x}) + \bm{\epsilon} \\
-			\bm{\epsilon}
-			&= \bm{y}^E(\bm{x}) - \bm{y}^M(\bm{x}, \bm{\theta}^*)
-				- \delta(\bm{x}) \\
-			\bm{\epsilon}
-			&\sim \mathcal{N} (\bm{\mu}, \bm{\Sigma}_{exp}) \\
-			p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)
-			&\propto p(\bm{\theta}^*)
-				\cdot p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*) \\
-			\propto p(\bm{\theta}^*)
-				&\cdot \frac{1}{\sqrt{|\bm{\Sigma}|}}
-				\exp \bigg[-\frac{1}{2} \bm{\epsilon}^T
-				\bm{\Sigma}^{-1} \bm{\epsilon} \bigg] \\
-			\bm{\Sigma}
-			&= \bm{\Sigma}_{exp}
-				+ \bm{\Sigma}_{bias} + \bm{\Sigma}_{code}
-		\end{align}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Experimental observation}
+\begin{frame}{asdf}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item For our problem, the observation comes from
-				the existing fuel swelling correlations.
-			\item The goal is thus to find
-				the fission-gas-behavior parameter distributions
-				that correspond to the experimental correlations.
-			\item The Robinson correlation is created
-				using data from different irradiation experiments
-				and different operational conditions.
-			\item DART predictions are very narrow at low fission densities
-				and thus not helpful for IUQ purposes.
+			\item asdf
 		\end{itemize}
 	\column{0.5\textwidth}
-		\begin{figure}[ht]
+		\begin{figure}
 			\centering
-			\begin{subfigure}{\textwidth}
-				\centering
-				\includegraphics[width=0.7\textwidth]
-					{sfigs/robinson_corr.png}
-			\end{subfigure}
-			\begin{subfigure}{\textwidth}
-				\centering
-				\includegraphics[width=0.7\textwidth]
-					{invuq/images/robinson_vs_dart.png}
-			\end{subfigure}
+			\includegraphics[width=\textwidth]{iuq2/images/scatter_hi.pdf}
 			\caption{
-				(Top) Robinson fuel swelling correlation.
-				(Bottom) Robinson correlation and DART prediction.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Target for IUQ}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item We chose the highest fission density
-				($7 \times 10^{21}$ fiss/cm$^3$) data for IUQ.
-			\item At this fission density,
-				DART prediction covers the entire prediction bound
-				of the Robinson correlation.
-			\item The goal is to find a set of parameter distributions
-				that leads to a model prediction
-				matching the experimental observation.
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=5cm]{invuq/images/target.png}
-			\caption{
-				Robinson correlation and DART prediction
-				at $7 \times 10^{21}$ fiss/cm$^3$.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Data exploration: scatter plots}
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[width=8cm]{invuq/images/scatter.png}
-		\caption{
-			Scatter plots of fuel swelling
-			against the fission-gas-behavior parameters.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item Except for the parameters "dGrainHBS" and "FaceCovMax",
-			all other parameters have weak correlations with fuel swelling.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Data exploration: correlation heatmap}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item To also understand the correlation among the parameters,
-				correlation heatmap is shown.
-			\item The parameters themselves are also
-				uncorrelated to each other.
-			\item The heatmap corroborates the observation
-				from the scatter plots.
-			\item The parameter "SwellLink" seems to have
-				a non-negligible correlation,
-				along with "dGrainHBS" and "FaceCovMax".
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=5cm]{invuq/images/corrheat.png}
-			\caption{
-				Correlation heatmap of fission-gas-behavior parameters
-				and fuel swelling.
+				asdf
 			}
 		\end{figure}
 	\end{columns}
@@ -1278,159 +1185,137 @@ fission-gas-behavior parameters}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Surrogate models}
+\begin{frame}{asdf}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item A few linear (OLS, Lasso, and Ridge)
-				and non-linear (GP, NN, and SVR)
-				are used as surrogate models.
-			\item The training and testing of most surrogate models
-				are done on a 70/30 split.
-				Only the GP model is trained with 14\% of the total data.
-			\item All surrogate models have R$^2$ scores around 0.997.
-			\item Lasso made the coefficients of 4 parameters zero,
-				thus selecting the parameters
-				"dGrainHBS", "FaceCovMax", and "SwellLink"
-				as the influential ones.
+			\item asdf
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\begin{subfigure}{0.49\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]
-					{invuq/images/ols.png}
+				\includegraphics[width=\textwidth]{iuq2/images/gp_lo.pdf}
 			\end{subfigure}
 			\begin{subfigure}{0.49\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]
-					{invuq/images/lasso.png}
+				\includegraphics[width=\textwidth]{iuq2/images/gp_hi.pdf}
 			\end{subfigure}
 			\begin{subfigure}{0.49\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]
-					{invuq/images/gp.png}
+				\includegraphics[width=\textwidth]{iuq2/images/nn_lo.pdf}
 			\end{subfigure}
 			\begin{subfigure}{0.49\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]
-					{invuq/images/nn.png}
+				\includegraphics[width=\textwidth]{iuq2/images/nn_hi.pdf}
 			\end{subfigure}
 			\caption{
-				Surroage prediction vs actual test data
-				for surrogate models.
+				asdf
+			}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{asdf}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\begin{subfigure}{\textwidth}
+				\centering
+				\includegraphics[width=0.8\textwidth]{iuq2/images/sobol_lo.pdf}
+			\end{subfigure}
+			\begin{subfigure}{\textwidth}
+				\centering
+				\includegraphics[width=0.8\textwidth]{iuq2/images/sobol_hi.pdf}
+			\end{subfigure}
+			\caption{
+				asdf
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
 % NOTE: From Beeler: did you define MCMC?
-\begin{frame}{MCMC samples}
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[width=11cm]{invuq/images/trace.png}
-		\caption{
-			Trace plots of the posterior samples
-			of the fission-gas-behavior parameters from MCMC sampling.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item Two chains of 100,000 samples are overlaid
-			on the trace plots.
-			All diagnostics point to convergence.
-		\item The cumulative averages of the blue and orange traces
-			are shown in black and red, respectively.
-		\item "FaceCovMax" and "SwellLink" are essentially bounded
-			by the priors.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Posterior distributions}
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[width=11cm]{invuq/images/hist.png}
-		\caption{
-			Density plots of the posterior samples
-			of the fission-gas-behavior parameters from MCMC sampling.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item The density plots (also posteriors) from both MCMC chains
-			are similar.
-		\item The posterior of "dGrainHBS" is reminiscent
-			of a Gaussian distribution.
-		\item The other two parameter distributions are more akin
-			to a uniform distribution.
-		\item The ranges of the parameters "FaceCovMax" and "SwellLink"
-			might have been chosen in a constricted manner.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Joint probability distributions}
+\begin{frame}{asdf}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item MCMC samples are thinned
-				so that the number of samples is approximately equal
-				to the effective sample size (ESS).
-				Thinning didn't change
-				the characteristics of the distributions.
-			\item The correlations among the posteriors are displayed
-				as contour plots.
-			\item Even though the prior distributions
-				are assumed to be independent,
-				IUQ still identified the correlations among the posteriors.
-			\item "dGrainHBS" and "FaceCovMax"
-				have a strong positive correlation,
-				and "dGrainHBS" and "SwellLink" have a weak one.
+			\item asdf
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
-			\includegraphics[width=5cm]{invuq/images/iuq.png}
+			\includegraphics[width=\textwidth]{iuq2/images/mcmc_trace.png}
 			\caption{
-				Posterior distributions of 3 fission-gas-behavior parameters.
-				Marginal densities are in the diagonal
-				and the pair-wise joint densities are in the off-diagonal.
+				asdf
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{FUQ and validation}
+\begin{frame}{asdf}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item To validate IUQ results,
-				posterior samples are propagated using the GP surroate.
-			\item A multivariate Gaussian copula is fitted to the MCMC samples.
-				Synthetic samples are then generated using the copula,
-				and then propagated using the GP surrogate.
-			\item The fitted copula does a decent job,
-				although it's not as accurate.
-				The lower accuracy is possibly due to
-				the usage of a Gaussian copula with uniform-like posteriors.
+			\item asdf
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
-			\begin{subfigure}{0.60\textwidth}
+			\includegraphics[width=\textwidth]{iuq2/images/iuq.png}
+			\caption{
+				asdf
+			}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{asdf}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+			\item Slide \ref{frame:scatter_lo}
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}
+			\begin{subfigure}{\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]
-					{invuq/images/fuq_gp.png}
+				\includegraphics[width=0.7\textwidth]{iuq2/images/fuq_mvn.pdf}
 			\end{subfigure}
-			\begin{subfigure}{0.60\textwidth}
+			\begin{subfigure}{0.49\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]
-					{invuq/images/fuq_gp_synth.png}
+				\includegraphics[width=\textwidth]{iuq2/images/fuq_lo.pdf}
+			\end{subfigure}
+			\begin{subfigure}{0.49\textwidth}
+				\centering
+				\includegraphics[width=\textwidth]{iuq2/images/fuq_hi.pdf}
 			\end{subfigure}
 			\caption{
-				Forward propagation using GP surrogate with
-				(Top) posterior samples from MCMC
-				and (Bottom) synthetic samples generated using copulas.
+				asdf
+			}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{asdf}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+			\item asdf
+		\end{itemize}
+	\column{0.5\textwidth}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=\textwidth]{iuq2/images/aftermath.pdf}
+			\caption{
+				asdf
 			}
 		\end{figure}
 	\end{columns}
@@ -1488,3 +1373,47 @@ fission-gas-behavior parameters}
 \end{frame}
 
 \end{document}
+
+% NOTE: From Beeler: is this slide really necessary?
+
+% \begin{frame}{Bayesian framework for IUQ}
+% 	\begin{columns}
+% 	\column{0.4\textwidth}
+% 		\begin{itemize}
+% 			\item $y^E$ is the observation
+% 				and $y^R$ is the reality.
+% 				$y^M$ is the model with a bias $\delta(x)$.
+% 			\item $\epsilon$ is the measurement error
+% 				and assumed to be Gaussian.
+% 			\item To get posterior distributions of parameters $\theta^*$,
+% 				Bayes' theorem can be used.
+% 			\item Since the error is related to $y^E$ and $y^M$,
+% 				the likelihood can be described in terms of the error.
+% 		\end{itemize}
+% 	\column{0.6\textwidth}
+% 		\begin{align}
+% 			\bm{y}^R(\bm{x})
+% 			&= \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x}) \\
+% 			\bm{y}^E(\bm{x})
+% 			&= \bm{y}^R(\bm{x}) + \bm{\epsilon} \\
+% 			\bm{y}^E(\bm{x})
+% 			&= \bm{y}^M(\bm{x}, \bm{\theta}^*)
+% 				+ \delta(\bm{x}) + \bm{\epsilon} \\
+% 			\bm{\epsilon}
+% 			&= \bm{y}^E(\bm{x}) - \bm{y}^M(\bm{x}, \bm{\theta}^*)
+% 				- \delta(\bm{x}) \\
+% 			\bm{\epsilon}
+% 			&\sim \mathcal{N} (\bm{\mu}, \bm{\Sigma}_{exp}) \\
+% 			p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)
+% 			&\propto p(\bm{\theta}^*)
+% 				\cdot p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*) \\
+% 			\propto p(\bm{\theta}^*)
+% 				&\cdot \frac{1}{\sqrt{|\bm{\Sigma}|}}
+% 				\exp \bigg[-\frac{1}{2} \bm{\epsilon}^T
+% 				\bm{\Sigma}^{-1} \bm{\epsilon} \bigg] \\
+% 			\bm{\Sigma}
+% 			&= \bm{\Sigma}_{exp}
+% 				+ \bm{\Sigma}_{bias} + \bm{\Sigma}_{code}
+% 		\end{align}
+% 	\end{columns}
+% \end{frame}
