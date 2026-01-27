@@ -1078,18 +1078,28 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Experimental observation}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item \textit{RERTR5-V6018G} had a burnup of $36 \%$
+				after $116$ effective full power days (EFPD).
+				The fission density was $F_d = \num{2.31e21}$ fsn/cm$^3$,
+				with a fission rate density of $\num{2.3e14}$ fsn/cm$^3$/s
+				and a fuel temperature of $116.3^{\circ}$ C.
+			\item \textit{RERTR12-L1P755} had $F_d = \num{5.34e21}$ fsn/cm$^3$,
+				with a life-averaged fission rate and temperature of
+				$\num{6.86e14}$ fsn/cm$^3$/s and $133.6^{\circ}$ C.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=0.7\textwidth]{iuq2/images/mvn_expt.pdf}
 			\caption{
-				asdf
+				Experimentally observed fuel swelling
+				of \textit{RERTR5-V6018G} at $F_d = \num{2.32e21}$ fsn/cm$^3$
+				and \textit{RERTR12-L1P755} at $F_d = \num{5.34e21}$ fsn/cm$^3$
+				with a measurement uncertainty of $2.64 \%$.
 			}
 		\end{figure}
 	\end{columns}
@@ -1100,62 +1110,84 @@ North Carolina State University}
 	\begin{table}[ht]
 	\centering
 	\caption{
-		Fission gas behavior parameters and their ranges.
+		Fission-gas-behavior parameters and their ranges.
 	}
-	\begin{tabular}{lccc}
+	\begin{tabular}{llccc}
 	\toprule
-	Parameter    & Minimum value & Maximum value & Reference value \\
+	Parameter             & Unit
+		& Minimum value & Maximum value & Reference value \\
 	\midrule
-	dGrainHBS    & \num{2.4e-5 } & \num{5.6e-5 } & \num{4e-5   }   \\
-	FaceCovMax   & \num{0.6    } & \num{0.907  } & \num{0.907  }   \\
-	SwellLink    & \num{0.016  } & \num{0.034  } & \num{0.025  }   \\
-	vResol       & \num{1.3e-18} & \num{2.7e-18} & \num{2e-18  }   \\
-	DatomFissGBx & \num{19641  } & \num{40530  } & \num{3e4    }   \\
-	fNucleate    & \num{3.5e-10} & \num{8.3e-10} & \num{6e-10  }   \\
-	aAtomDifFiss & \num{3.2e-31} & \num{7.2e-31} & \num{5.1e-31}   \\
+	\texttt{dGrainHBS}    & cm
+		& \num{1e-5 }   & \num{1e-4 }   & \num{4e-5 }   \\
+	\texttt{FaceCovMax}   & N/A
+		& \num{0.5  }   & \num{0.907}   & \num{0.907}   \\
+	\texttt{SwellLink}    & N/A
+		& \num{0.01 }   & \num{0.08 }   & \num{0.025}   \\
+	\texttt{rResolBulk}   & cm
+		& \num{6e-10}   & \num{5e-9 }   & \num{3e-9 }   \\
+	\texttt{DatomFissGBx} & N/A
+		& \num{6e3  }   & \num{5e4  }   & \num{3e4  }   \\
+	\texttt{StickProb}    & N/A
+		& \num{2e-10}   & \num{4e-7 }   & \num{2e-7 }   \\
+	\texttt{fNucleate}    & N/A
+		& \num{3e-10}   & \num{3e-9 }   & \num{6e-10}   \\
+	\texttt{vResol}       & cm$^3$
+		& \num{1e-18}   & \num{4e-18}   & \num{2e-18}   \\
+	\texttt{rResolGBB}    & cm
+		& \num{2e-7 }   & \num{1e-6 }   & \num{5e-7 }   \\
 	\bottomrule
 	\end{tabular}
 	\end{table}
 
 	\begin{itemize}
-		\item DART is run with 7 fission-gas-behavior parameters perturbed
-			to compile a dataset necessary for IUQ.
-		\item 3200 samples were generated at different fission density values.
-		\item The list above contains the names of the parameters
-			we are interested in, and their probed ranges.
+		\item 3200 different combinations of the parameters
+			were used to simulate swelling
+			for the operational conditions of the experiments.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Swelling at low $F_d$}
 	\label{frame:scatter_lo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item At $F_d = \num{2.31e21}$ fsn/cm$^3$,
+				the swelling values range from $9 \%$ to $22 \%$.
+			\item Only the parameter \texttt{rResolBulk}
+				seems to have a strong correlation with fuel swelling.
+			\item \texttt{vResol} has a weak negative correlation.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\textwidth]{iuq2/images/scatter_lo.pdf}
 			\caption{
-				asdf
+				Scatter plots of fuel swelling
+				against the fission-gas-behavior parameters
+				at $F_d = \num{2.31e21}$ fsn/cm$^3$.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Swelling at high $F_d$}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item At $F_d = \num{5.34e21}$ fsn/cm$^3$,
+				the swelling values range from $20 \%$ to $140 \%$.
+			\item \texttt{dGrainHBS} shows a positive correlation with swelling.
+			\item \texttt{SwellLink} and \texttt{rResolBulk}
+				show a weak correlations.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\textwidth]{iuq2/images/scatter_hi.pdf}
 			\caption{
-				asdf
+				Scatter plots of fuel swelling
+				against the fission-gas-behavior parameters
+				at $F_d = \num{5.34e21}$ fsn/cm$^3$.
 			}
 		\end{figure}
 	\end{columns}
@@ -1165,9 +1197,7 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item We need to perturb the parameter space
-				to match the observation.
-			\item But it's not feasible to run calculations
+			\item It's not feasible to run calculations
 				for all possible parameter combinations
 				using DART.
 			\item A surrogate model
@@ -1190,11 +1220,20 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{DART surrogates}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item A GP with a Mat\'ern kernel was found to perform the best
+				with $R^2$ scores of $0.99$ and $0.97$,
+				and mean absolute errors of $0.19 \%$ and $1.94 \%$,
+				for emulating low and high $F_d$, respectively.
+			\item The NN model has $4$ hidden layers with $250$ neurons each.
+				It has $R^2$ scores of $0.98$ and $0.98$,
+				and mean absolute errors of $0.27 \%$ and $1.54 \%$
+				for low $F_d$ and high $F_d$.
+			\item We continue with the GP surrogates since they provide
+				uncertainty estimates along with predictions.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -1216,17 +1255,27 @@ North Carolina State University}
 				\includegraphics[width=\textwidth]{iuq2/images/nn_hi.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				Surrogate predictions vs actual test data for
+				Gaussian process (GP) and neural network (NN) surrogate models.
+				\textit{RERTR5-V6018G} and \textit{RERTR12-L1P755} represent
+				low and high fission density data sets, respectively.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Global sensitivity analysis}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item At low $F_d$, \texttt{rResolBulk} and \texttt{vResol}
+				are the parameters accounting for most of the variability.
+			\item At high $F_d$, \texttt{dGrainHBS}
+				is the most influential parameter,
+				with some minor influences from
+				\texttt{rResolBulk}, \texttt{SwellLink} and \texttt{FaceCovMax}.
+			\item The effects of the parameters are additive since
+				the first-order and total-effect indices are almost identical.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -1240,53 +1289,74 @@ North Carolina State University}
 				\includegraphics[width=0.8\textwidth]{iuq2/images/sobol_hi.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				First-order ($S_i$) and total-effect ($S_{T_i}$) Sobol' indices
+				calculated using the neural network surrogate models.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
 % NOTE: From Beeler: did you define MCMC?
-\begin{frame}{asdf}
+\begin{frame}{Markov chain Monte Carlo sampling}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item Markov chain Monte Carlo (MCMC) sampling was performed
+				with the GP surrogate models.
+			\item Two chains of $200,000$ samples are overlaid on the trace plots.
+				The cumulative averages of the blue and orange traces
+				are shown in black and red, respectively.
+			\item Except for \texttt{dGrainHBS},
+				the MCMC samples span the entire range
+				defined by the parameter priors.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=\textwidth]{iuq2/images/mcmc_trace.png}
 			\caption{
-				asdf
+				Trace plots of the posterior samples
+				of the fission-gas-behavior parameters from MCMC sampling.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Parameter posteriors}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item \texttt{dGrainHBS} has a defined posterior
+				resembling a normal distribution.
+			\item \texttt{FaceCovMax}, \texttt{SwellLink}, \texttt{rResolBulk},
+				and \texttt{vResol} have left skewed marginal posteriors.
+			\item All the other parameters have
+				almost uniform posterior distirbutions.
+			\item The posterior of \texttt{dGrainHBS}
+				shows positive correlations with that of
+				\texttt{FaceCovMax}, \texttt{SwellLink}, and \texttt{rResolBulk}.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=\textwidth]{iuq2/images/iuq.png}
 			\caption{
-				asdf
+				Posterior distributions of $9$ fission-gas-behavior parameters.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Forward uncertainty quantification (FUQ)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
-			\item Slide \ref{frame:scatter_lo}
+			\item Unlike the observed swelling distribution,
+				this distribution is asymmetric.
+			\item The swelling density at low $F_d$
+				decreases steeply around $8 \%$ (Slide \ref{frame:scatter_lo}).
+			\item The slight mismatch at high $F_d$ is due to
+				the consideration of $\Sigma_{code}$ from the GP surrogate models.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}
@@ -1303,24 +1373,38 @@ North Carolina State University}
 				\includegraphics[width=\textwidth]{iuq2/images/fuq_hi.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				(Top) Joint density plot of swelling predictions calculated by
+				the forward propagation of the thinned MCMC samples.
+				(b) $F_d = \num{2.31e21}$ fsn/cm$^3$,
+				and (c) $F_d = \num{5.34e21}$ fsn/cm$^3$.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Predictions from FUQ}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item At low $F_d$,
+				the mean of the values from the forward propagation
+				matches the observation,
+				but the standard deviation is narrower than that of the observation.
+			\item At high $F_d$,
+				the range of swelling values is significantly reduced
+				from the DART predictions
+				to the predictions from the forward propagation,
+				matching the observation almost exactly.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=\textwidth]{iuq2/images/aftermath.pdf}
 			\caption{
-				asdf
+				Comparison of experimental observations with
+				swelling predictions from the DART data set
+				and swelling predictions from the forward propagation
+				of the surrogate models using the MCMC samples.
 			}
 		\end{figure}
 	\end{columns}
@@ -1329,6 +1413,10 @@ North Carolina State University}
 \section{Conclusions}
 
 \begin{frame}{Conclusions}
+	Recap the results
+\end{frame}
+
+\begin{frame}{Contributions}
 	With the application of various computational methods,
 	we quantified crucial material properties of U-Mo fuel.
 	This will assist the higher-length-scale models
@@ -1376,6 +1464,8 @@ North Carolina State University}
 	\centering \Large
 	\emph{Thank you!}
 \end{frame}
+
+% TODO: add a reference
 
 \end{document}
 
