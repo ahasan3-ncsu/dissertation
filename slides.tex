@@ -454,66 +454,7 @@ North Carolina State University}
 	\end{itemize}
 \end{frame}
 
-% NOTE: From Beeler: this slide is not needed
-\begin{frame}{GB diffusivity vs energy}
-	\begin{figure}[ht]
-		\centering
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{diffusion/images/DvsGBE_600K.pdf}
-		\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{diffusion/images/DvsGBE_1200K.pdf}
-		\end{subfigure}
-		\caption{
-			Diffusivity vs GB energy at 600 K and 1200 K.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item There is not a statiscally significant correlation
-			between diffusion coefficients and GB energies.
-		\item The R$^2$ of linear fit is 0.02 at 600 K and 0.36 at 1200 K.
-	\end{itemize}
-\end{frame}
-
-% NOTE: From Beeler: this slide is not needed
 \begin{frame}{Anisotropic nature of diffusion}
-	\begin{figure}[ht]
-		\centering
-		\begin{subfigure}{0.325\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{diffusion/images/ratio_U.pdf}
-		\end{subfigure}
-		\begin{subfigure}{0.325\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{diffusion/images/ratio_Mo.pdf}
-		\end{subfigure}
-		\begin{subfigure}{0.325\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]
-				{diffusion/images/ratio_Xe.pdf}
-		\end{subfigure}
-		\caption{
-			Ratios of diffusion coefficients parallel to the tilt axis
-			to the diffusion coefficients perpendicular to the tilt axis
-			of U, Mo, and Xe.
-		}
-	\end{figure}
-
-	\begin{itemize}
-		\item The solid black line represents isotropic GB diffusion.
-		\item All high-angle GBs, diffusion behavior is almost isotropic.
-		\item (190) and (340) low-angle GBs show highly anisotropic behavior.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Anisotropic nature (cont.)}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -622,54 +563,6 @@ North Carolina State University}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Two diffusion regimes}
-	\begin{table}[!ht]
-	\centering
-	\caption{
-		Prefactors and activation energies for the Arrhenius equation fits
-		to $\overline{D}^{i}_{\parallel}$ ($i=$ U or Mo)
-		in $\gamma$U-7Mo, $\gamma$U-10Mo, and $\gamma$U-12Mo
-		for the two different temperature regimes.
-		$D_0$ is in m$^2$s$^{-1}$ and $E_a$ is in eV.
-	}
-	\begin{tabular}{ccllll}
-	\toprule
-	Composition & Temp. (K)
-		& $D_{0}^U$      & $E_{a}^U$
-		& $D_{0}^{Mo}$   & $E_{a}^{Mo}$ \\
-	\midrule
-	\multirow{2}{*}{ $\gamma$U-7Mo }
-		& 600 - 800
-		& 1.03 $\times 10^{-09}$ & 0.433
-		& 8.87 $\times 10^{-11}$ & 0.366 \\
-		& 900 - 1200
-		& 4.10 $\times 10^{-08}$ & 0.715
-		& 2.77 $\times 10^{-08}$ & 0.806 \vspace{0.2cm } \\
-	\multirow{2}{*}{ $\gamma$U-10Mo }
-		& 600 - 800
-		& 1.96 $\times 10^{-10}$ & 0.362
-		& 5.26 $\times 10^{-11}$ & 0.353 \\
-		& 900 - 1200
-		& 2.10 $\times 10^{-08}$ & 0.712
-		& 1.31 $\times 10^{-08}$ & 0.779 \vspace{0.2cm } \\
-	\multirow{2}{*}{ $\gamma$U-12Mo }
-		& 600 - 800
-		& 1.81 $\times 10^{-10}$ & 0.380
-		& 6.17 $\times 10^{-11}$ & 0.375 \\
-		& 900 - 1200
-		& 1.33 $\times 10^{-08}$ & 0.700
-		& 6.62 $\times 10^{-09}$ & 0.738 \\
-	\bottomrule
-	\end{tabular}
-	\end{table}
-
-	\begin{itemize}
-		\item This table is the culmination of the GB diffusion study.
-		\item These values can be readily employed
-			in higher-length-scale modeling of $\gamma$U-Mo.
-	\end{itemize}
-\end{frame}
-
 \section{Re-solution of Xe gas bubbles in U-10Mo}
 
 \begin{frame}{Fission gas bubble re-solution}
@@ -708,24 +601,17 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Simulation setup}
-	\begin{itemize}
-		\item RustBCA.
-			Constant meant-free-path,
-			exponentially distributed mean-free-path.
-			\begin{itemize}
-				\item \texttt{0D}
-				\item \texttt{SPHEREINCUBOID}
-			\end{itemize}
-		\item MD/TTM
-	\end{itemize}
-\end{frame}
-
 \begin{frame}{Energy loss of fission fragments}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item Binary collision approximation (BCA) simulations
+				of two representative fission fragments (FFs) Y and I
+				were performed using RustBCA.
+			\item Peak electronic stopping power is just shy of $20$ keV/nm
+				for both FFs.
+			\item Nuclear stopping power has a characteristic Bragg peak
+				at the end of FF trajectories.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -750,7 +636,13 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item MD simulations with the two-temperature model (TTM)
+				were performed to simulate thermal spikes
+				due to electronic stopping.
+			\item No re-solution has been observed in any of the simulations.
+			\item Since U-10Mo is a metallic system
+				with high thermal conductivity,
+				the energy in the electronic subsystem dissipates quickly.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -788,7 +680,11 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item For homogeneous re-solution,
+				FFs originating at different distances from a bubble
+				need to be accounted for.
+			\item A particular rotation of fission events around the bubble
+				makes the calculation tenable.
 		\end{itemize}
 		\begin{align}
 			b &= \sum_{k = Y, I} \int_V \xi_k(x, w) \dot{F} dV \\
@@ -820,7 +716,12 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item The brute-force approach is computationally prohibitive.
+			\item If the probability of a FF going through a certain point
+				with a certain energy is known,
+				only local re-solution behavior needs to be simulated.
+			\item RustBCA was used to perform BCA simulations of ions in U-10Mo.
+			\item A discretization scheme is used to gather FF information.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -895,7 +796,13 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item A specific 3D geometry has been implemented in RustBCA
+				to allow the simulation of gas bubbles in solid materials.
+			\item A constant mean-free-path was used for solid U-10Mo,
+				and an exponentially distributed mean-free-path
+				was used for the Xe gas bubble.
+			\item Xe recoils were analyzed
+				to count the number of re-solved Xe atoms.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
@@ -926,7 +833,11 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item In BCA simulations, ion energy and off-centered distance
+				were varied.
+			\item $5,000$ simulations were performed for each configuration.
+			\item Interpolation can be used to obtain local FF-bubble behavior
+				for any energy and off-centered distance.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
