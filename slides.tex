@@ -64,9 +64,9 @@ North Carolina State University}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item US High-Performance Research Reactor (USHPRR) program
-				selected $\gamma$U-10Mo fuel for qualification.
-			\item $\gamma$U-10Mo monolithic fuel design involves
-				a solid $\gamma$U-10Mo fuel meat monded to Al-6061 cladding
+				selected U-10Mo fuel for qualification.
+			\item U-10Mo monolithic fuel design involves
+				a solid U-10Mo fuel meat monded to Al-6061 cladding
 				with a zirconium diffusion barrier.
 			\item The U-Mo dispersion fuel design has also been tested.
 				The dispersion fuel shows breakaway swelling,
@@ -86,12 +86,12 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Swelling in $\gamma$U-Mo}
+\begin{frame}{Swelling in U-Mo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item Excessive swelling during operation is a major concern
-				for $\gamma$U-Mo fuels.
+				for U-Mo fuels.
 			\item With increasing bunrup,
 				the bubble population increases in the grain boundaries
 				and newer grain boundaries form.
@@ -107,7 +107,7 @@ North Carolina State University}
 			\centering
 			\includegraphics[width=4cm]{sfigs/umo_burnup.png}
 			\caption{
-				$\gamma$U-Mo microstructure as a function of burnup
+				U-Mo microstructure as a function of burnup
 				(Kim et al. {\color{blue}
 				\url{https://doi.org/10.1016/j.jnucmat.2011.08.018}}).
 			}
@@ -141,6 +141,22 @@ North Carolina State University}
 		\end{figure}
 	\end{columns}
 \end{frame}
+
+% TODO: might be better in the intro
+%
+% \begin{frame}{Xe gas bubble re-solution}
+% \begin{itemize}
+% 	\item Xe gas bubbles act as a sink for individual Xe atoms,
+% 		trapping them and causing the bubbles to grow after absorption.
+% 	\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
+% 		into the fuel matrix through fission-product-induced cascades
+% 		and thermal spikes---a process known as re-solution.
+% 	\item The relative rates of re-solution
+% 		affect the overall size and number density of the bubbles,
+% 		in turn impacting bubble evolution and subsequent fuel swelling.
+% 	\item There is no model for Xe re-solution rate in U-Mo yet.
+% \end{itemize}
+% \end{frame}
 
 \section{Grain boundary diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
 
@@ -654,39 +670,21 @@ North Carolina State University}
 	\end{itemize}
 \end{frame}
 
-\section{Re-solution of Xe gas bubbles
-in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
+\section{Re-solution of Xe gas bubbles in U-10Mo}
 
-% TODO: combine the next two slides
-\begin{frame}{Xe gas bubble re-solution}
-\begin{itemize}
-	\item Xe gas bubbles act as a sink for individual Xe atoms,
-		trapping them and causing the bubbles to grow after absorption.
-	\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
-		into the fuel matrix through fission-product-induced cascades
-		and thermal spikes---a process known as re-solution.
-	\item The relative rates of re-solution
-		affect the overall size and number density of the bubbles,
-		in turn impacting bubble evolution and subsequent fuel swelling.
-	\item There is no model for Xe re-solution rate in $\gamma$U-Mo yet.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Bubble re-solution}
+\begin{frame}{Fission gas bubble re-solution}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Fission gases can diffuse to grain boundaries
-				to form intergranular bubbles
-				where they can grow by addition of gas and vacancies.
-			\item Fission also strongly limits bubble size
-				(or fission-gas atom population)
-				in the fuel lattice by re-solution of gas bubbles.
-			\item Individual gas atoms can be ejected from the gas bubble
+			\item Fission strongly limits bubble size in the fuel lattice
+				by reintroducing the atoms in the bubble
+				into the fuel matrix---a process known as re-solution.
+			\item In homogeneous re-solution,
+				individual gas atoms are ejected from the gas bubble
 				through collisions with energetic fission fragments
 				or recoil atoms (PKAs).
-			\item Bubbles can also be destroyed
-				by the passage of fission tracks
+			\item In heterogeneous re-solution,
+				bubbles are destroyed by the passage of fission tracks
 				where local temperature can be higher than
 				the fuel melting temperature.
 		\end{itemize}
@@ -695,24 +693,35 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 			\centering
 			\begin{subfigure}{0.6\textwidth}
 				\centering
-				\caption{}
 				\includegraphics[width=\textwidth]{sfigs/homogeneous.png}
 			\end{subfigure}
 
 			\begin{subfigure}{0.6\textwidth}
 				\centering
-				\caption{}
 				\includegraphics[width=\textwidth]{sfigs/heterogeneous.png}
 			\end{subfigure}
 			\caption{
 				Illustration of
-				(a) homogeneous and (b) heterogeneous re-solution.
+				(Top) homogeneous and (Bottom) heterogeneous re-solution.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Simulation setup}
+	\begin{itemize}
+		\item RustBCA.
+			Constant meant-free-path,
+			exponentially distributed mean-free-path.
+			\begin{itemize}
+				\item \texttt{0D}
+				\item \texttt{SPHEREINCUBOID}
+			\end{itemize}
+		\item MD/TTM
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Energy loss of fission fragments}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -731,13 +740,13 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				\includegraphics[width=\textwidth]{resol2/images/I_stopping.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				Nuclear and electronic stopping powers of (Top) Y and (Bottom) I.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Heterogeneous re-solution}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -748,33 +757,44 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 			\centering
 			\begin{subfigure}{0.49\textwidth}
 				\centering
+				\caption{}
 				\includegraphics[width=\textwidth]{resol2/images/ttm1.png}
 			\end{subfigure}
 			\begin{subfigure}{0.49\textwidth}
 				\centering
+				\caption{}
 				\includegraphics[width=\textwidth]{resol2/images/ttm2.png}
 			\end{subfigure}
 			\begin{subfigure}{0.49\textwidth}
 				\centering
+				\caption{}
 				\includegraphics[width=\textwidth]{resol2/images/ttm3.png}
 			\end{subfigure}
 			\begin{subfigure}{0.49\textwidth}
 				\centering
+				\caption{}
 				\includegraphics[width=\textwidth]{resol2/images/ttm4.png}
 			\end{subfigure}
 			\caption{
-				asdf
+				Snapshots of a thermal spike ($30$ keV/nm) simulation at
+				(a) $0$, (b) $2.4$, (c) $10.1$, and (d) $29.1$ ps.
+				U, Mo and Xe atoms are shown in red, blue and black.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Model for homogeneous re-solution}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item asdf
 		\end{itemize}
+		\begin{align}
+			b &= \sum_{k = Y, I} \int_V \xi_k(x, w) \dot{F} dV \\
+			&= \dot{F} \sum_{k = Y, I} \int_{x=0}^{\infty} \int_{w=0}^{\infty}
+				\xi_k(x, w) 2 \pi w dw dx
+		\end{align}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
@@ -788,13 +808,15 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				\includegraphics[width=0.5\textwidth]{resol2/images/coord.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				(Top) Rotation of fission events around the origin.
+				(Bottom) A coordinate system with a bubble at the origin
+				and all FFs pointing to the $-x$ direction.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Reference fission fragment simulations}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -810,16 +832,18 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 
 			\begin{subfigure}{\textwidth}
 				\centering
-				\includegraphics[width=0.6\textwidth]{resol2/images/surf_grid.pdf}
+				\includegraphics[width=0.5\textwidth]{resol2/images/surf_grid.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				(Top) Trajectories of $100$ Y ions in U-10Mo.
+				(Bottom) Surface discretization
+				of fission fragment information across volume.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Ion profiles}
 	\begin{figure}[ht]
 		\centering
 		\begin{subfigure}{0.32\textwidth}
@@ -859,12 +883,15 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				{resol2/images/I_a.pdf}
 		\end{subfigure}
 		\caption{
-			asdf
+			(Top, left to right) Y ion
+			incidence probability per unit surface area, energy, and angle.
+			(Bottom, left to right) I ion
+			incidence probability per unit surface area, energy, and angle.
 		}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Fission fragment and bubble interactions}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -887,13 +914,15 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				\includegraphics[width=\textwidth]{resol2/images/xe_hist.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				(Top) BCA simulation of a $64$ nm radius bubble
+				with a $5$ MeV Y ion.
+				(Bottom) Xe recoil distribution.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Local re-solution behavior}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -919,92 +948,117 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 				\includegraphics[width=\textwidth]{resol2/images/chi_64nm_I.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				Re-solved bubble fraction
+				as a function of energy and off-centered distance.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Re-solution due to any fission fragment}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item asdf
 		\end{itemize}
+		{\scriptsize
+			\begin{align}
+				\xi(x, w) &= \sum_{m \in S}
+					p(r_m) \frac{A_m}{\cos \alpha(x, w)}
+					\chi(E(r_m), ||r_m - r_c||)
+			\end{align}
+		}
 	\column{0.5\textwidth}
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=\textwidth]{resol2/images/surf_mesh.pdf}
 			\caption{
-				asdf
+				Illustration of an arbitrary
+				fission fragment and bubble interaction.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Re-solution profiles}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item asdf
 		\end{itemize}
+		{\scriptsize
+			\begin{align}
+				b / \dot{F}
+					&= \sum_{k=Y,I} \sum \xi_k \Delta V
+			\end{align}
+		}
 	\column{0.5\textwidth}
 		\begin{figure}
 			\centering
-			\begin{subfigure}{\textwidth}
+			\begin{subfigure}{0.9\textwidth}
 				\centering
 				\includegraphics
 					[width=\textwidth, trim={0.8cm 0 1.4cm 0.7cm}, clip]
 					{resol2/images/64nm_Y_xi.pdf}
 			\end{subfigure}
-			\begin{subfigure}{\textwidth}
+			\begin{subfigure}{0.9\textwidth}
 				\centering
 				\includegraphics
 					[width=\textwidth, trim={0.8cm 0 1.4cm 0.7cm}, clip]
 					{resol2/images/64nm_Y_db.pdf}
 			\end{subfigure}
 			\caption{
-				asdf
+				(Top) $\xi$ and (Bottom) $\xi \Delta V$
+				for Y incident on a bubble of radius $64$ nm.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Homogeneous re-solution rate}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item asdf
 		\end{itemize}
+		\begin{align}
+			b / \dot{F} = a R_b^k + c
+		\end{align}
 	\column{0.5\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\textwidth]{resol2/images/bhom.pdf}
 			\caption{
-				asdf
+				Homogeneous re-solution rate at equilibrium Xe number density.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Effect of bubble pressure}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item asdf
 		\end{itemize}
+		\begin{align}
+			b &\propto \xi \propto \chi \\
+			b / b_{eq} &= n_{eq} / n \\
+			b &= \left( a R_b^k + c \right)
+				\left( \frac{n_{eq}}{n} \right) \dot{F}
+		\end{align}
 	\column{0.5\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\textwidth]{resol2/images/pressure.pdf}
 			\caption{
-				asdf
+				Effect of Xe number density on homogeneous re-solution rate.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{asdf}
+\begin{frame}{Comparison with other fuels}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -1015,14 +1069,13 @@ in \texorpdfstring{$\gamma$}{gamma}U-10Mo}
 			\centering
 			\includegraphics[width=\textwidth]{resol2/images/comp.pdf}
 			\caption{
-				asdf
+				Comparison of re-solution rates of different nuclear fuels.
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-\section{IUQ of \texorpdfstring{$\gamma$}{gamma}U-10Mo
-fission-gas-behavior parameters}
+\section{IUQ of U-10Mo fission-gas-behavior parameters}
 
 \begin{frame}{Quantifying unknown DART parameters}
 	\begin{itemize}
@@ -1037,7 +1090,7 @@ fission-gas-behavior parameters}
 		\item The fission-gas-behavior parameters used in the GRASS module of DART
 			were calibrated in a previous study,
 			using the bubble size distributions
-			measured from irradiated $\gamma$U-10Mo dispersion fuel particles.
+			measured from irradiated U-10Mo dispersion fuel particles.
 		\item However, this set of parameters needs recalibration
 			because new atomic-scale data have become available
 			since the previous calibration.
@@ -1325,7 +1378,7 @@ fission-gas-behavior parameters}
 
 \begin{frame}{Conclusions}
 	With the application of various computational methods,
-	we quantified crucial material properties of $\gamma$U-Mo fuel.
+	we quantified crucial material properties of U-Mo fuel.
 	This will assist the higher-length-scale models
 	in making more robust predictions.
 	Overall, this dissertation achieves the following:
@@ -1341,7 +1394,7 @@ fission-gas-behavior parameters}
 		\item Performs IUQ on still unknown fission-gas-behavior parameters.
 			Three influential parameters are identified
 			and subsequently optimized for better meso-scale simulation
-			of $\gamma$U-Mo fuel.
+			of U-Mo fuel.
 	\end{itemize}
 \end{frame}
 
@@ -1361,7 +1414,7 @@ fission-gas-behavior parameters}
 			and other elements, such as Al and Zr,
 			will be developed and evaluated.
 			Successful implementation of this will enable MD simulations
-			of $\gamma$U-Mo fuel with liners and/or claddings.
+			of U-Mo fuel with liners and/or claddings.
 	\end{itemize}
 \end{frame}
 
