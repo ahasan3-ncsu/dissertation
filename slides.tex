@@ -91,12 +91,12 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Swelling in U-Mo}
+\begin{frame}{Swelling in $\gamma$U-Mo}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item Excessive swelling during operation is a major concern
-				for U-Mo fuels.
+				for $\gamma$U-Mo fuels.
 			\item With increasing bunrup,
 				the bubble population increases in the grain boundaries
 				and newer grain boundaries form.
@@ -129,7 +129,7 @@ North Carolina State University}
 			\item The code uses material properties,
 				such as gas atom diffusivity, recrystallization kinetics,
 				and gas re-solution rate.
-			\item Many of material properties used by DART are still unknown.
+			\item Many of material properties used by DART are currently unknown.
 			\item These properties can be gleaned
 				from lower-length-scale studies
 				or through parameter optimization using experimental data.
@@ -147,42 +147,73 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-% TODO: might be better in the intro
-%
-% \begin{frame}{Xe gas bubble re-solution}
-% \begin{itemize}
-% 	\item Xe gas bubbles act as a sink for individual Xe atoms,
-% 		trapping them and causing the bubbles to grow after absorption.
-% 	\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
-% 		into the fuel matrix through fission-product-induced cascades
-% 		and thermal spikes---a process known as re-solution.
-% 	\item The relative rates of re-solution
-% 		affect the overall size and number density of the bubbles,
-% 		in turn impacting bubble evolution and subsequent fuel swelling.
-% 	\item There is no model for Xe re-solution rate in U-Mo yet.
-% \end{itemize}
-% \end{frame}
-
-\section{Grain boundary diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
-
 \begin{frame}{Grain boundary (GB) diffusion in $\gamma$U-Mo}
 	\begin{itemize}
+		\item One of the unknown properties is the grain boundary (GB)
+			diffusion enhancement factor.
 		\item Accurate calculation of fuel swelling requires
-			diffusion coefficients of the related species in the fuel.
-		\item  Furthermore, creep modeling also requires diffusion coefficients
+			diffusion coefficients of the related species in the fuel
+			since these coefficients determine
+			the fission gas (Xe) trapping rate of the bubbles.
+		\item Creep modeling also requires diffusion coefficients
 			to determine creep rates and evaluate the evolving microstructure.
-		\item Therefore, it is essential to understand
-			the diffusion behavior of the $\gamma$U-Mo fuel.
 		\item The diffusion coefficients of the relevant species
 			in $\gamma$U-Mo grain boundaries (GBs) are yet unknown.
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Xe gas bubble re-solution}
+\begin{itemize}
+	\item Xe gas bubbles act as a sink for individual Xe atoms,
+		trapping them and causing the bubbles to grow after absorption.
+	\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
+		into the fuel matrix through fission-product-induced cascades
+		and thermal spikes---a process known as re-solution.
+	\item The relative rates of re-solution
+		affect the overall size and number density of the bubbles,
+		in turn impacting bubble evolution and subsequent fuel swelling.
+	\item There is no physical model for Xe re-solution rate in U-Mo yet.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Other fission-gas-behavior parameters}
+	\begin{itemize}
+		\item There are many other unknown parameters, such as
+			the bubble nucleation probability,
+			the average grain size of high burnup structures
+			and the threshold areal coverage needed for GB interconnection.
+		\item For the parameters that do not have measurement data
+			or atomic-scale simulation results,
+			they are usually estimated by either fitting to measured bubble morphology
+			or by borrowing from other similar fuel systems where the data is available.
+		\item The fission-gas-behavior parameters used in
+			the gas release and swelling subroutine (GRASS) of DART
+			were calibrated in a previous study,
+			using the bubble size distributions
+			measured from irradiated U-10Mo dispersion fuel particles.
+		\item However, this set of parameters needs recalibration
+			because new atomic-scale data have become available
+			since the previous calibration.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Objectives}
+	The objectives of this dissertation are:
+	\begin{itemize}
+		\item Computing the diffusivities of U, Mo, and Xe in $\gamma$U-Mo GBs.
+		\item Investigating the Xe re-solution behavior in the U-10Mo fuel.
+		\item Performing inverse uncertainty quantification (IUQ)
+			of unknown fission-gas-behavior parameters used in DART.
+	\end{itemize}
+\end{frame}
+
+\section{Grain boundary diffusion in \texorpdfstring{$\gamma$}{gamma}U-Mo}
+
 \begin{frame}{Simulation setup}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item Bicrystals for simulations are created
+			\item Bicrystals for molecular dynamics (MD) simulations were created
 				by rotating two halves of the system around a tilt axis.
 			\item Two GBs: one in the middle and one at the edge.
 			\item GB region is defined using atomic trajectories.
@@ -215,13 +246,13 @@ North Carolina State University}
 \begin{frame}{Explored GBs}
 	\begin{itemize}
 		\item Three compositions: $\gamma$U-7Mo, $\gamma$U-10Mo, and $\gamma$U-12Mo
-			are examined.
+			were examined.
 		\item The temperature of the simulated GBs ranged from 600 K to 1200 K
 			with an interval of 100 K.
-			The dimensions of the supercells are at least
+			The dimensions of the supercells were at least
 			$50 \times 200 \times 50$ \AA$^3$.
 			This corresponds to at least 35,000 atoms.
-		\item The following symmetric tilt GBs are studied:
+		\item The following symmetric tilt GBs were studied:
 			\begin{itemize}
 				\item (120)
 				\item (130)
@@ -230,7 +261,7 @@ North Carolina State University}
 				\item (340)
 				\item (350)
 			\end{itemize}
-		\item Other simulated systems are:
+		\item Other simulated systems were:
 			\begin{itemize}
 				\item asymmetric (110)
 				\item asymmetric (130)
@@ -289,30 +320,6 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{GB diffusivities}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-			\item Diffusion behavior is generally Arrhenius.
-			\item The spread in diffusion coefficients due to tilt angles
-				is about one order or magnitude.
-			\item Diffusivity ranges from $10^{-14}$
-				to $10^{-11}$ m$^2$s$^{-1}$.
-			\item The activation energy is about 0.4--0.7 eV for U.
-			\item Diffusion perpendicular to the tilt axis
-				has similar characteristics.
-		\end{itemize}
-	\column{0.5\textwidth}
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=6cm]{diffusion/images/u10mo_U_Dz.pdf}
-			\caption{
-				Diffusion coefficients of U parallel to the GB tilt axis.
-			}
-		\end{figure}
-	\end{columns}
-\end{frame}
-
 \begin{frame}{Symmetric tilt GB diffusivities}
 	\begin{figure}[ht]
 		\centering
@@ -338,10 +345,15 @@ North Carolina State University}
 	\end{figure}
 
 	\begin{itemize}
-		\item Mo diffusivity is lower than that of U.
-		\item Xe diffusivity is the higher than that of other species
-			at high temperatures.
-		\item At low temperatures, all three species have similar coefficients.
+		\item Diffusion behavior is generally Arrhenius.
+			The spread in diffusion coefficients due to tilt angles
+			is about one order or magnitude.
+		\item Diffusivity ranges from $10^{-14}$
+			to $10^{-11}$ m$^2$s$^{-1}$.
+			The activation energy is about 0.4--0.7 eV for U.
+		\item At high temperatures,
+			$D_{\parallel}^{Xe} > D_{\parallel}^U > D_{\parallel}^{Mo}$.
+			At low temperatures, all three species have similar coefficients.
 	\end{itemize}
 \end{frame}
 
@@ -401,9 +413,6 @@ North Carolina State University}
 \end{frame}
 
 \begin{frame}{Comparison with literature}
-	% NOTE: From Beeler: you are plotting self diffusion,
-	% but you are making comparisons to interstitial diffusion in the text?
-	% Be careful about the comparisons here
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
@@ -541,7 +550,6 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-% NOTE: From Beeler: this slide is not needed
 \begin{frame}{Two diffusion regimes}
 	\begin{figure}[ht]
 		\centering
@@ -566,6 +574,9 @@ North Carolina State University}
 		\item Arrhenius fits are thus separated
 			into two different diffusion regimes.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusions}
 \end{frame}
 
 \section{Re-solution of Xe gas bubbles in U-10Mo}
@@ -1027,27 +1038,10 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-\section{IUQ of U-10Mo fission-gas-behavior parameters}
-
-\begin{frame}{Quantifying unknown DART parameters}
-	\begin{itemize}
-		\item The key challenge in simulating fission gas swelling
-			with a mechanistic model is
-			obtaining key material properties related to gas bubble behavior,
-			as many of them cannot be measured experimentally.
-		\item For the parameters that do not have measurement data
-			or atomic-scale simulation results,
-			they are usually estimated by either fitting to measured bubble morphology
-			or by borrowing from other similar fuel systems where the data is available.
-		\item The fission-gas-behavior parameters used in the GRASS module of DART
-			were calibrated in a previous study,
-			using the bubble size distributions
-			measured from irradiated U-10Mo dispersion fuel particles.
-		\item However, this set of parameters needs recalibration
-			because new atomic-scale data have become available
-			since the previous calibration.
-	\end{itemize}
+\begin{frame}{Conclusions}
 \end{frame}
+
+\section{IUQ of U-10Mo fission-gas-behavior parameters}
 
 \begin{frame}{Inverse uncertainty quantification (IUQ)}
 	\begin{columns}
@@ -1084,12 +1078,15 @@ North Carolina State University}
 		\begin{itemize}
 			\item \textit{RERTR5-V6018G} had a burnup of $36 \%$
 				after $116$ effective full power days (EFPD).
-				The fission density was $F_d = \num{2.31e21}$ fsn/cm$^3$,
+				The fission density was $F_d = \num{2.31e21}$ fsn/cm$^3$ (low $F_d$),
 				with a fission rate density of $\num{2.3e14}$ fsn/cm$^3$/s
 				and a fuel temperature of $116.3^{\circ}$ C.
-			\item \textit{RERTR12-L1P755} had $F_d = \num{5.34e21}$ fsn/cm$^3$,
+			\item \textit{RERTR12-L1P755} had
+				$F_d = \num{5.34e21}$ fsn/cm$^3$ (high $F_d$),
 				with a life-averaged fission rate and temperature of
 				$\num{6.86e14}$ fsn/cm$^3$/s and $133.6^{\circ}$ C.
+			\item DART simulations were performed to simulate
+				these operational conditions.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}
@@ -1097,15 +1094,20 @@ North Carolina State University}
 			\includegraphics[width=0.7\textwidth]{iuq2/images/mvn_expt.pdf}
 			\caption{
 				Experimentally observed fuel swelling
-				of \textit{RERTR5-V6018G} at $F_d = \num{2.32e21}$ fsn/cm$^3$
-				and \textit{RERTR12-L1P755} at $F_d = \num{5.34e21}$ fsn/cm$^3$
+				of \textit{RERTR5-V6018G} at $F_d = \num{2.32e21}$ fsn/cm$^3$ (low $F_d$)
+				and \textit{RERTR12-L1P755} at $F_d = \num{5.34e21}$ fsn/cm$^3$ (high $F_d$)
 				with a measurement uncertainty of $2.64 \%$.
+				(Kim et al.
+				{\color{blue}\url{https://doi.org/10.1016/j.jnucmat.2013.01.291}}.
+				Rice et al.
+				{\color{blue}\url{https://doi.org/10.2172/1173078}}.
+				Robinson et al.
+				{\color{blue}\url{https://doi.org/10.1016/j.jnucmat.2020.152703}}.)
 			}
 		\end{figure}
 	\end{columns}
 \end{frame}
 
-% FIX: update table
 \begin{frame}{Fission-gas-behavior parameters}
 	\begin{table}[ht]
 	\centering
@@ -1141,8 +1143,9 @@ North Carolina State University}
 
 	\begin{itemize}
 		\item 3200 different combinations of the parameters
-			were used to simulate swelling
+			were used in DART to simulate swelling
 			for the operational conditions of the experiments.
+			We performed IUQ with the resulting data sets.
 	\end{itemize}
 \end{frame}
 
@@ -1296,7 +1299,6 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
-% NOTE: From Beeler: did you define MCMC?
 \begin{frame}{Markov chain Monte Carlo sampling}
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -1410,6 +1412,9 @@ North Carolina State University}
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Conclusions}
+\end{frame}
+
 \section{Conclusions}
 
 \begin{frame}{Conclusions}
@@ -1417,45 +1422,50 @@ North Carolina State University}
 \end{frame}
 
 \begin{frame}{Contributions}
-	With the application of various computational methods,
-	we quantified crucial material properties of U-Mo fuel.
-	This will assist the higher-length-scale models
-	in making more robust predictions.
 	Overall, this dissertation achieves the following:
 	\begin{itemize}
-		\item Fully quantifies GB diffusion coefficients of U, Mo, and Xe
-			in $\gamma$U-Mo for various composition, temperatures,
-			and GB orientations.
-			The findings also provide insight into GB anisotropy.
-		\item Provides a mathematical model for Xe re-solution rate,
+		\item Fully quantifies the GB diffusion coefficients
+			of U, Mo, and Xe in $\gamma$U-Mo
+			for various compositions, temperatures, and GB orientations.
+			The findings also provide insight into the anisotropy of GB diffusion.
+		\item Provides a mathematical model for the re-solution rate of Xe gas bubbles,
 			taking into account both bubble size and pressure.
-			This work considered
-			both homogeneous and heterogeneous re-solution rate.
-		\item Performs IUQ on still unknown fission-gas-behavior parameters.
-			Three influential parameters are identified
-			and subsequently optimized for better meso-scale simulation
-			of U-Mo fuel.
+			The model also considers
+			both the heterogeneous and the homogeneous mechanisms of re-solution.
+			This is the most robust and thorough study
+			of re-solution of any nuclear fuel up to date.
+		\item Performs IUQ on still unknown fission-gas-behavior parameters of U-Mo
+			as implemented in DART.
+			A few significant parameters are identified and subsequently optimized
+			for better meso-scale simulation of the U-Mo fuel.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Future work}
 	\begin{itemize}
-		\item Further investigation is needed to evaluate
-			the relative dominance of homogeneous and heterogeneous mechanisms.
-			The two-temperature model will be employed to quantify
-			the amount of energy transferred
-			from the electronic subsystem to the ionic subsystem.
-		\item The IUQ process will be expanded to incorporate new data,
-			which takes into account variations in fission rate and grain size.
-			Surrogate models will be developed for new data,
-			enabling a refined IUQ to better quantify parameter distributions
-			pertient to a wide range of reactor conditions.
-		\item Machine-learned interatomic potentials describing U, Mo
-			and other elements, such as Al and Zr,
-			will be developed and evaluated.
-			Successful implementation of this will enable MD simulations
-			of U-Mo fuel with liners and/or claddings.
+		\item \textit{Assessment of blistering mechanism in U-Mo:}
+			The blisters are observed as a raised region on the fuel-plate surface,
+			resulting from the plastic deformation of the aluminium cladding
+			due to large fission gas pore pressure in the fuel meat.
+			Verifying the possible causes of fuel blistering
+			can provide the fuel developers with a better understanding
+			of the fuel behavior under extreme conditions.
+		\item \textit{Incorporation of cladding elements in the U-Mo potential:}
+			Fuel-cladding interactions need to be understood well for fuel evaluation.
+			An accurate MLIP of U, Mo, and Al/Zr would be extremely helpful
+			for atomistic simulations of the U-Mo fuel with liners and/or claddings.
+		\item \textit{IUQ of fission-gas-behavior parameters:}
+			The IUQ work should be extended
+			to incorporate quantities of interest other than fuel swelling.
+			This may help quantify some parameters that seemed noninfluential in our study.
+			Also, more DART simulations of swelling at different operational conditions
+			can be performed to enable the evaluation of model bias.
 	\end{itemize}
+\end{frame}
+
+\section*{Publications}
+
+\begin{frame}{Publications}
 \end{frame}
 
 \section*{Thanks}
@@ -1465,50 +1475,4 @@ North Carolina State University}
 	\emph{Thank you!}
 \end{frame}
 
-% TODO: add a reference
-
 \end{document}
-
-% NOTE: From Beeler: is this slide really necessary?
-
-% \begin{frame}{Bayesian framework for IUQ}
-% 	\begin{columns}
-% 	\column{0.4\textwidth}
-% 		\begin{itemize}
-% 			\item $y^E$ is the observation
-% 				and $y^R$ is the reality.
-% 				$y^M$ is the model with a bias $\delta(x)$.
-% 			\item $\epsilon$ is the measurement error
-% 				and assumed to be Gaussian.
-% 			\item To get posterior distributions of parameters $\theta^*$,
-% 				Bayes' theorem can be used.
-% 			\item Since the error is related to $y^E$ and $y^M$,
-% 				the likelihood can be described in terms of the error.
-% 		\end{itemize}
-% 	\column{0.6\textwidth}
-% 		\begin{align}
-% 			\bm{y}^R(\bm{x})
-% 			&= \bm{y}^M(\bm{x}, \bm{\theta}^*) + \delta(\bm{x}) \\
-% 			\bm{y}^E(\bm{x})
-% 			&= \bm{y}^R(\bm{x}) + \bm{\epsilon} \\
-% 			\bm{y}^E(\bm{x})
-% 			&= \bm{y}^M(\bm{x}, \bm{\theta}^*)
-% 				+ \delta(\bm{x}) + \bm{\epsilon} \\
-% 			\bm{\epsilon}
-% 			&= \bm{y}^E(\bm{x}) - \bm{y}^M(\bm{x}, \bm{\theta}^*)
-% 				- \delta(\bm{x}) \\
-% 			\bm{\epsilon}
-% 			&\sim \mathcal{N} (\bm{\mu}, \bm{\Sigma}_{exp}) \\
-% 			p(\bm{\theta}^* | \bm{y}^E, \bm{y}^M)
-% 			&\propto p(\bm{\theta}^*)
-% 				\cdot p(\bm{y}^E, \bm{y}^M | \bm{\theta}^*) \\
-% 			\propto p(\bm{\theta}^*)
-% 				&\cdot \frac{1}{\sqrt{|\bm{\Sigma}|}}
-% 				\exp \bigg[-\frac{1}{2} \bm{\epsilon}^T
-% 				\bm{\Sigma}^{-1} \bm{\epsilon} \bigg] \\
-% 			\bm{\Sigma}
-% 			&= \bm{\Sigma}_{exp}
-% 				+ \bm{\Sigma}_{bias} + \bm{\Sigma}_{code}
-% 		\end{align}
-% 	\end{columns}
-% \end{frame}
