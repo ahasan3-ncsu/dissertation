@@ -75,12 +75,12 @@ The analysis was based on two data sets generated from $6,400$ DART simulations,
 one for simulating the low $F_d$ conditions of \textit{RERTR5-V6018G}
 and another for simulating the high $F_d$ conditions of \textit{RERTR12-L1P755}.
 GP and NN surrogate models were built to emulate the data sets.
-The NN surrogates were then used for global sensitivity analysis.
+The GP surrogates were then used for global sensitivity analysis.
 It was observed that the parameter \texttt{rResolBulk}
 is the most influential parameter at low fission density,
 whereas \texttt{dGrainHBS} is the major driver of variance in swelling
 at high fission density.
-MCMC sampling with the NN surrogates then led to
+MCMC sampling with the GP surrogates then led to
 converged posterior probability distributions for all the parameters.
 Only the parameter \texttt{dGrainHBS} has a well-defined
 Gaussian-like posterior distribution.
