@@ -1,6 +1,11 @@
 \documentclass[10pt]{beamer}
-\usepackage{booktabs, subcaption, multirow}
+\usepackage{booktabs, subcaption, multirow, xspace}
 \usepackage{amsmath, amssymb, bm, siunitx}
+
+% Ion shorthand
+\usepackage[version=4]{mhchem}
+\newcommand{\Y}{\ce{_{39}^{97}Y}\xspace}
+\newcommand{\I}{\ce{_{53}^{136}I}\xspace}
 
 \usetheme{CambridgeUS}
 \usecolortheme{beaver}
@@ -606,8 +611,15 @@ North Carolina State University}
 	\column{0.5\textwidth}
 		\begin{itemize}
 			\item Binary collision approximation (BCA) simulations
-				of two representative fission fragments (FFs) Y and I
+				of two representative fission fragments (FFs) \Y and \I
 				were performed using RustBCA.
+		\end{itemize}
+		\begin{align}
+			\ce{
+				_0^1n + _{92}^{235}U -> _{39}^{97}Y + _{53}^{136}I + Q
+			}
+		\end{align}
+		\begin{itemize}
 			\item Peak electronic stopping power is just shy of $20$ keV/nm
 				for both FFs.
 			\item Nuclear stopping power has a characteristic Bragg peak
@@ -626,7 +638,7 @@ North Carolina State University}
 				\includegraphics[width=\textwidth]{resol2/images/I_stopping.pdf}
 			\end{subfigure}
 			\caption{
-				Nuclear and electronic stopping powers of (Top) Y and (Bottom) I.
+				Nuclear and electronic stopping powers of (Top) \Y and (Bottom) \I.
 			}
 		\end{figure}
 	\end{columns}
@@ -736,7 +748,7 @@ North Carolina State University}
 				\includegraphics[width=0.5\textwidth]{resol2/images/surf_grid.pdf}
 			\end{subfigure}
 			\caption{
-				(Top) Trajectories of $100$ Y ions in U-10Mo.
+				(Top) Trajectories of $100$ \Y ions in U-10Mo.
 				(Bottom) Surface discretization
 				of fission fragment information across volume.
 			}
@@ -784,9 +796,9 @@ North Carolina State University}
 				{resol2/images/I_a.pdf}
 		\end{subfigure}
 		\caption{
-			(Top, left to right) Y ion
+			(Top, left to right) \Y ion
 			incidence probability per unit surface area, energy, and angle.
-			(Bottom, left to right) I ion
+			(Bottom, left to right) \I ion
 			incidence probability per unit surface area, energy, and angle.
 		}
 	\end{figure}
@@ -822,7 +834,7 @@ North Carolina State University}
 			\end{subfigure}
 			\caption{
 				(Top) BCA simulation of a $64$ nm radius bubble
-				with a $5$ MeV Y ion.
+				with a $5$ MeV \Y ion.
 				(Bottom) Xe recoil distribution.
 			}
 		\end{figure}
@@ -833,9 +845,11 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item In BCA simulations, ion energy and off-centered distance
-				were varied.
-			\item $5,000$ simulations were performed for each configuration.
+			\item In BCA simulations, ion energy ($E$)
+				and off-centered distance ($\ell$) were varied.
+			\item $5,000$ simulations were performed for each configuration
+				with the \texttt{SPHEREINCUBOID} geometry in RustBCA.
+			\item The results are denoted by $\chi(E, \ell)$.
 			\item Interpolation can be used to obtain local FF-bubble behavior
 				for any energy and off-centered distance.
 		\end{itemize}
@@ -861,6 +875,7 @@ North Carolina State University}
 			\caption{
 				Re-solved bubble fraction
 				as a function of energy and off-centered distance.
+				Error bars show $2\sigma$ deviations.
 			}
 		\end{figure}
 	\end{columns}
@@ -870,7 +885,11 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item With the ion profiles and local re-solution behavior,
+				it is possible to calculate the re-solved bubble fraction
+				due to a FF originating at an arbitrary $(x, w)$.
+			\item Probability, energy and angle are combined with
+				a probabilistic interpretation of a FF-bubble interaction.
 		\end{itemize}
 		{\scriptsize
 			\begin{align}
@@ -895,7 +914,12 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item Re-solution of a bubble at $(x, w)$ due to a FF at the origin
+				can be calculated for all $(x, w)$.
+			\item If the positions of the bubble and the FF are swapped,
+				we would get the same $\xi$ profiles.
+			\item The re-solution rate can then be calculated
+				using a discretized version of the model we described before.
 		\end{itemize}
 		{\scriptsize
 			\begin{align}
@@ -920,7 +944,7 @@ North Carolina State University}
 			\end{subfigure}
 			\caption{
 				(Top) $\xi$ and (Bottom) $\xi \Delta V$
-				for Y incident on a bubble of radius $64$ nm.
+				for \Y incident on a bubble of radius $64$ nm.
 			}
 		\end{figure}
 	\end{columns}
@@ -930,10 +954,16 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item Summing up $\xi \Delta V$ for both \Y and \I
+				provide the overall re-solution rate.
+			\item The probability of an interaction between a FF
+				and a larger bubble is higher.
 		\end{itemize}
 		\begin{align}
-			b / \dot{F} = a R_b^k + c
+			b / \dot{F} &= a R_b^k + c \\
+			a &= \num{8.43e-25} \\
+			k &= -0.926 \\
+			c &= \num{3.46e-26}
 		\end{align}
 	\column{0.5\textwidth}
 		\begin{figure}
@@ -950,7 +980,11 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item The number of re-solved Xe atoms is almost an invariant
+				with respect to the Xe number density in the bubble.
+			\item $\chi$ and $n$ are thus inversely proportional:
+				$\chi/\chi_{eq} = n_{eq}/n$.
+			\item Pressure effects can be incorporated as follows.
 		\end{itemize}
 		\begin{align}
 			b &\propto \xi \propto \chi \\
@@ -973,7 +1007,14 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item asdf
+			\item The re-solution in UO$_2$ is dominated
+				by the heterogeneous mechanism
+				and the re-solution in UC happens entirely through
+				the homogeneous mechanism.
+			\item The re-solution rates in UO$_2$, UC and U-10Mo
+				are within one order of magnitude.
+			\item The re-solution rate used in DART is higher for smaller bubbles
+				and much lower for larger bubbles than the rate we calculated.
 		\end{itemize}
 	\column{0.5\textwidth}
 		\begin{figure}
