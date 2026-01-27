@@ -577,6 +577,24 @@ North Carolina State University}
 \end{frame}
 
 \begin{frame}{Conclusions}
+	\begin{itemize}
+		\item It was observed that the GB width increases almost linearly
+			from around 6 \r{A} to around 12 \r{A} with temperature
+			in the range $600$ K -- $1200$ K.
+		\item The GB diffusion coefficients are typically
+			on the order of $10^{-14}$ to $10^{-11}$ m$^2$s$^{-1}$.
+		\item The U GB diffusivity is always higher than the Mo GB diffusivity
+			for any GB at a given temperature.
+			There is also a significant negative correlation between
+			the GB diffusivities and the concentration of Mo in the alloy.
+		\item The orientation-averaged diffusion coefficients of U, Mo, and Xe
+			are between three to fifteen orders of magnitude faster
+			than the intrinsic/self-diffusion coefficients
+			of the species in the bulk,
+			and GB diffusion dominates the effective diffusion of the material
+			at lower temperatures.
+		\item Low angle GBs show anisotropic diffusion.
+	\end{itemize}
 \end{frame}
 
 \section{Re-solution of Xe gas bubbles in U-10Mo}
@@ -1039,6 +1057,25 @@ North Carolina State University}
 \end{frame}
 
 \begin{frame}{Conclusions}
+	\begin{itemize}
+		\item Both the homogeneous and heterogeneous re-solution mechanisms
+			were investigated.
+		\item Thermal spikes initiated by electronic stopping
+			was found to be ineffective for re-solving Xe atoms.
+			Thus, heterogeneous re-solution does not occur in U-10Mo.
+		\item Homogeneous re-solution,
+			which is brought about by nuclear stopping,
+			was found to be the only mechanism of re-solution in U-10Mo.
+		\item The re-solution rate was calculated
+			by first profiling FF behavior in the fuel,
+			then evaluating the FF interactions with Xe gas bubbles,
+			and finally putting all the information together in a physical model.
+		\item The computed re-solution rate $b$ is
+			$\num{4.4e-26} \dot{F}$ s$^{-1}$ for the largest intergranular bubble
+			and $\num{8.8e-25} \dot{F}$ s$^{-1}$ for the smallest intragranular bubble,
+			where the unit of $\dot{F}$ is fission/m$^3$/s.
+		\item The re-solution rate is inversely proportional to the Xe number density.
+	\end{itemize}
 \end{frame}
 
 \section{IUQ of U-10Mo fission-gas-behavior parameters}
@@ -1413,13 +1450,31 @@ North Carolina State University}
 \end{frame}
 
 \begin{frame}{Conclusions}
+	\begin{itemize}
+		\item IUQ was performed based on two data sets
+			generated from $6,400$ DART simulations,
+			one for simulating the low $F_d$ conditions of \textit{RERTR5-V6018G}
+			and another for simulating the high $F_d$ conditions
+			of \textit{RERTR12-L1P755}.
+		\item GP and NN surrogates were built to emulate DART predictions.
+		\item Global sensitivity analysis was performed with the GP surrogates.
+			The parameter \texttt{rResolBulk} is
+			the most influential parameter at low fission density,
+			whereas \texttt{dGrainHBS} is the major driver of variance
+			in swelling at high fission density.
+		\item MCMC sampling was performed with the GP surrogates,
+			leading to converged posteriors.
+			\texttt{dGrainHBS} has a well-defined posterior,
+			with a mean value of $\num{3.33e-5}$ cm.
+			The other parameters span the whole range,
+			indicating the prior distributions may have been too narrow.
+		\item Forward propagation showed
+			the swelling predictions with the parameter posteriors
+			match the experimental observation better.
+	\end{itemize}
 \end{frame}
 
 \section{Conclusions}
-
-\begin{frame}{Conclusions}
-	Recap the results
-\end{frame}
 
 \begin{frame}{Contributions}
 	Overall, this dissertation achieves the following:
