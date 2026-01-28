@@ -71,7 +71,7 @@ North Carolina State University}
 			\item US High-Performance Research Reactor (USHPRR) program
 				selected U-10Mo fuel for qualification.
 			\item U-10Mo monolithic fuel design involves
-				a solid U-10Mo fuel meat monded to Al-6061 cladding
+				a solid U-10Mo fuel meat bonded to Al-6061 cladding
 				with a zirconium diffusion barrier.
 			\item The U-Mo dispersion fuel design has also been tested.
 				The dispersion fuel shows breakaway swelling,
@@ -104,7 +104,7 @@ North Carolina State University}
 				in bubble size and number,
 				which increases fuel swelling rate.
 			\item To account for it in the fuel design,
-				fuel swelling needs to be predicted
+				fuel swelling needs to be predictable
 				for different operational conditions.
 		\end{itemize}
 	\column{0.5\textwidth}
@@ -154,7 +154,7 @@ North Carolina State University}
 		\item Accurate calculation of fuel swelling requires
 			diffusion coefficients of the related species in the fuel
 			since these coefficients determine
-			the fission gas (Xe) trapping rate of the bubbles.
+			the fission gas (such as Xe) trapping rate of the bubbles.
 		\item Creep modeling also requires diffusion coefficients
 			to determine creep rates and evaluate the evolving microstructure.
 		\item The diffusion coefficients of the relevant species
@@ -163,17 +163,17 @@ North Carolina State University}
 \end{frame}
 
 \begin{frame}{Xe gas bubble re-solution}
-\begin{itemize}
-	\item Xe gas bubbles act as a sink for individual Xe atoms,
-		trapping them and causing the bubbles to grow after absorption.
-	\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
-		into the fuel matrix through fission-product-induced cascades
-		and thermal spikes---a process known as re-solution.
-	\item The relative rates of re-solution
-		affect the overall size and number density of the bubbles,
-		in turn impacting bubble evolution and subsequent fuel swelling.
-	\item There is no physical model for Xe re-solution rate in U-Mo yet.
-\end{itemize}
+	\begin{itemize}
+		\item Xe gas bubbles act as sinks for individual Xe atoms,
+			trapping them and causing the bubbles to grow after absorption.
+		\item Under irradiation, the Xe atoms in the gas bubble are reintroduced
+			into the fuel matrix through fission-product-induced cascades
+			and thermal spikes---a process known as re-solution.
+		\item The relative rates of re-solution
+			affect the overall size and number density of the bubbles,
+			in turn impacting bubble evolution and subsequent fuel swelling.
+		\item There is no physical model for the Xe re-solution rate in U-Mo yet.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Other fission-gas-behavior parameters}
@@ -187,7 +187,7 @@ North Carolina State University}
 			they are usually estimated by either fitting to measured bubble morphology
 			or by borrowing from other similar fuel systems where the data is available.
 		\item The fission-gas-behavior parameters used in
-			the gas release and swelling subroutine (GRASS) of DART
+			the gas release and swelling subroutine (GRASS) module of DART
 			were calibrated in a previous study,
 			using the bubble size distributions
 			measured from irradiated U-10Mo dispersion fuel particles.
@@ -583,7 +583,7 @@ North Carolina State University}
 			\item In homogeneous re-solution,
 				individual gas atoms are ejected from the gas bubble
 				through collisions with energetic fission fragments
-				or recoil atoms (PKAs).
+				or recoil atoms (e.g., PKAs).
 			\item In heterogeneous re-solution,
 				bubbles are destroyed by the passage of fission tracks
 				where local temperature can be higher than
@@ -810,8 +810,10 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item A specific 3D geometry has been implemented in RustBCA
+			\item A specific 3D geometry \texttt{SPHEREINCUBOID}
+				has been implemented in RustBCA
 				to allow the simulation of gas bubbles in solid materials.
+				{\color{blue} \url{https://github.com/ATM-Jahid/RustBCA}}.
 			\item A constant mean-free-path was used for solid U-10Mo,
 				and an exponentially distributed mean-free-path
 				was used for the Xe gas bubble.
@@ -852,7 +854,7 @@ North Carolina State University}
 			\item $5,000$ simulations were performed for each configuration
 				with the \texttt{SPHEREINCUBOID} geometry in RustBCA.
 			\item The results are denoted by $\chi(E, \ell)$.
-			\item Interpolation can be used to obtain local FF-bubble behavior
+			\item Interpolation can be used to obtain local FF--bubble behavior
 				for any energy and off-centered distance.
 		\end{itemize}
 	\column{0.5\textwidth}
@@ -891,7 +893,7 @@ North Carolina State University}
 				it is possible to calculate the re-solved bubble fraction
 				due to a FF originating at an arbitrary $(x, w)$.
 			\item Probability, energy and angle are combined with
-				a probabilistic interpretation of a FF-bubble interaction.
+				a probabilistic interpretation of a FF--bubble interaction.
 		\end{itemize}
 		{\scriptsize
 			\begin{align}
@@ -946,7 +948,7 @@ North Carolina State University}
 			\end{subfigure}
 			\caption{
 				(Top) $\xi$ and (Bottom) $\xi \Delta V$
-				for \Y incident on a bubble of radius $64$ nm.
+				for a bubble radius of $64$ nm and incident \Y.
 			}
 		\end{figure}
 	\end{columns}
@@ -1152,9 +1154,9 @@ North Carolina State University}
 	\end{table}
 
 	\begin{itemize}
-		\item 3200 different combinations of the parameters
+		\item $3,200$ different combinations of the parameters
 			were used in DART to simulate swelling
-			for the operational conditions of the experiments.
+			for each operational condition of the experiments.
 			We performed IUQ with the resulting data sets.
 	\end{itemize}
 \end{frame}
@@ -1217,7 +1219,7 @@ North Carolina State University}
 				(also called a response surface or an emulator)
 				is thus needed.
 			\item Many machine learning models,
-				such as Gaussian processes and neural networks,
+				such as Gaussian processes (GPs) and neural networks (NNs),
 				can act as a surrogate model.
 		\end{itemize}
 	\column{0.5\textwidth}
@@ -1237,12 +1239,12 @@ North Carolina State University}
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-			\item A GP with a Mat\'ern kernel was found to perform the best
+			\item GPs with a Mat\'ern kernel was found to perform the best
 				with $R^2$ scores of $0.99$ and $0.97$,
 				and mean absolute errors of $0.19 \%$ and $1.94 \%$,
 				for emulating low and high $F_d$, respectively.
-			\item The NN model has $4$ hidden layers with $250$ neurons each.
-				It has $R^2$ scores of $0.98$ and $0.98$,
+			\item The NN models have $4$ hidden layers with $250$ neurons each,
+				and have $R^2$ scores of $0.98$ and $0.98$,
 				and mean absolute errors of $0.27 \%$ and $1.54 \%$
 				for low $F_d$ and high $F_d$.
 			\item We continue with the GP surrogates since they provide
