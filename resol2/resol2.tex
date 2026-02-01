@@ -74,9 +74,6 @@ Even though these TTM parameter values have only been used
 for pure U or U-5at.\%Mo,
 it is assumed that reasonable accuracy can be obtained with these values
 for the U-10Mo system as well.
-To verify our assumption, we computed the thermal conductivity of U-10Mo
-through non-equilibrium MD simulations,
-showing reasonable accuracy compared to experiments.
 
 Electronic pressure effects were included in the model
 to account for the blast force acting on ions
@@ -144,10 +141,12 @@ were processed and binned together
 to obtain electronic and nuclear stopping profiles.
 These profiles are shown in Figure \ref{fig:stopping}.
 At the beginning, the electronic stopping power
-is just shy by $20$ keV/nm for both FFs.
-As expected, % FIX: wrong use of Bragg peak
-the nuclear stopping power has a characteristic Bragg peak \cite{brown2004}
-towards the end of FF trajectory.
+is just shy of $20$ keV/nm for both FFs
+and decreases almost linearly with distance.
+In contrast, the nuclear stopping power remains low
+for the majority of the FF trajectory,
+peaking only at the very end of the path
+as the FF reaches energies where nuclear collisions become more probable.
 The nuclear energy loss of \Y is about $5\%$ of its total initial energy,
 whereas the nuclear energy loss of \I is about $10\%$ of the total.
 
